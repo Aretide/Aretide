@@ -31,6 +31,25 @@ export const SITE_BOOT_LOADER_ENABLED = true;
 /** Fade-out after the mark has finished drawing. Ignored when disabled. */
 export const SITE_BOOT_LOADER_FADE_MS = 180;
 
+/**
+ * Hard ceiling on how long the splash may keep the page hidden.
+ *
+ * waitForPageReady() gates on window.load, which does not fire until every
+ * subresource finishes - analytics, ad pixels, and every image on the page.
+ * Marketing routes are prerendered, so their real content is parseable within
+ * a few hundred ms. Without a ceiling the splash hides content that is already
+ * ready and pushes Largest Contentful Paint out by seconds, because LCP is
+ * measured when content becomes *visible*, not when it is painted underneath
+ * an opaque overlay.
+ *
+ * Also covers a backgrounded tab, where the Web Animations API is paused and
+ * finishRunningAnimations() would otherwise never settle.
+ *
+ * Sized above BOOT_LOAD_MS_DEFAULT so a normal visit still gets the full draw
+ * and only genuinely slow loads are cut short.
+ */
+export const SITE_BOOT_LOADER_MAX_WAIT_MS = 900;
+
 /** Last measured navigation-to-ready time. Milliseconds only - not PHI. */
 export const BOOT_LOAD_MS_STORAGE_KEY = "beema-boot-load-ms";
 
@@ -205,6 +224,36 @@ export function waitForPageReady(
       }
     }),
   ]).then(() => undefined);
+}
+
+/**
+ * Resolves when `promise` settles or `ms` elapses, whichever happens first.
+ *
+ * Deliberately resolves (never rejects) on either path: the splash is
+ * decoration, so a failed boot image or a stalled third-party script must
+ * still reveal the page rather than strand the visitor on the overlay.
+ */
+export function withBootDeadline(
+  promise: Promise<unknown>,
+  ms: number = SITE_BOOT_LOADER_MAX_WAIT_MS,
+): Promise<void> {
+  if (!Number.isFinite(ms) || ms <= 0) {
+    return promise.then(
+      () => undefined,
+      () => undefined,
+    );
+  }
+  return new Promise<void>((resolve) => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      resolve();
+    };
+    const timer = setTimeout(finish, ms);
+    promise.then(finish, finish);
+  });
 }
 
 export function clampBootLoadDurationMs(ms: number): number {

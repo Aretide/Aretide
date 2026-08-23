@@ -35,9 +35,17 @@ describe("gtm", () => {
 
   it("keeps one Google tag loader and required measurement CSP origins", () => {
     expect(rootRoute).not.toContain("GOOGLE_ADS_HEAD_SCRIPT");
+    const scriptSrcElem =
+      "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net";
+    expect(rootRoute).toContain(
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net",
+    );
+    expect(rootRoute).toContain(scriptSrcElem);
     for (const origin of [
       "https://www.google.com",
       "https://googleads.g.doubleclick.net",
+      "https://www.googleadservices.com",
+      "https://td.doubleclick.net",
       "https://ad.doubleclick.net",
     ]) {
       expect(rootRoute).toContain(origin);

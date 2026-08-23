@@ -20,6 +20,7 @@ import {
   isSiteBootLoaderEnabled,
   storeBootLoadMs,
   waitForPageReady,
+  withBootDeadline,
 } from "@/lib/site-boot-loader";
 import { cn } from "@/lib/utils";
 
@@ -132,14 +133,17 @@ export function SiteBootLoader() {
     if (!enabled) return undefined;
     let cancelled = false;
     const overlay = overlayRef.current;
-    void waitForPageReady()
-      .then(async () => {
+    // Bounded by SITE_BOOT_LOADER_MAX_WAIT_MS: waitForPageReady() gates on
+    // window.load, so without a deadline a slow pixel or image keeps already
+    // -prerendered content hidden and drags LCP out with it.
+    void withBootDeadline(
+      waitForPageReady().then(async () => {
         storeBootLoadMs(performance.now());
         if (overlay) await finishRunningAnimations(overlay);
-      })
-      .then(() => {
-        if (!cancelled) setExiting(true);
-      });
+      }),
+    ).then(() => {
+      if (!cancelled) setExiting(true);
+    });
     return () => {
       cancelled = true;
     };

@@ -109,25 +109,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         //     response headers - out of scope for this change; do not treat
         //     either as "fixed" by what's below.
         // The CSP below is intentionally on the permissive side - it allows
-        // every external origin this app currently loads (GTM/gtag.js, Meta
-        // Pixel, Formspree, Nominatim) plus 'unsafe-inline' for script/style
-        // because this is a static SPA with no server to mint per-request
-        // nonces, and both React's SSR'd inline `style` attributes and the
-        // app's inline bootstrap scripts (GTM snippet, gtag stub) rely on it.
-        // Fonts (Outfit/Figtree) are self-hosted now - no fonts.googleapis.com
-        // /fonts.gstatic.com allowance needed. Tighten further (nonces/hashes,
-        // narrower img-src, drop 'unsafe-inline') and test every page + the ad
-        // pixels/GTM/Formspree flows manually before trusting it fully.
+        // every external origin this app currently loads (GTM/gtag.js, Google
+        // Ads, Meta Pixel, Formspree, Nominatim) plus 'unsafe-inline' for
+        // script/style because this is a static SPA with no server to mint
+        // per-request nonces, and both React's SSR'd inline `style` attributes
+        // and the app's inline bootstrap scripts (GTM snippet, gtag stub)
+        // rely on it. Chrome reports Ads script blocks against
+        // script-src-elem even when only script-src is set (elem falls back
+        // to script-src). Keep both directives in lockstep so a later split
+        // cannot drop GTM/Meta. Fonts (Outfit/Figtree) are self-hosted now -
+        // no fonts.googleapis.com / fonts.gstatic.com allowance needed.
+        // Tighten further (nonces/hashes, narrower img-src, drop
+        // 'unsafe-inline') and test every page + the ad pixels/GTM/Formspree
+        // flows manually before trusting it fully.
         {
           httpEquiv: "Content-Security-Policy",
           content:
             "default-src 'self'; " +
-            "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; " +
+            "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net; " +
+            "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net; " +
             "style-src 'self' 'unsafe-inline'; " +
             "font-src 'self' data:; " +
             "img-src 'self' data: https:; " +
-            "connect-src 'self' https://nominatim.openstreetmap.org https://formspree.io https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://stats.g.doubleclick.net https://connect.facebook.net https://www.facebook.com; " +
-            "frame-src https://www.googletagmanager.com; " +
+            "connect-src 'self' https://nominatim.openstreetmap.org https://formspree.io https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://td.doubleclick.net https://ad.doubleclick.net https://stats.g.doubleclick.net https://connect.facebook.net https://www.facebook.com; " +
+            "frame-src https://www.googletagmanager.com https://td.doubleclick.net https://www.google.com https://googleads.g.doubleclick.net https://www.googleadservices.com; " +
             "form-action 'self' https://formspree.io; " +
             "base-uri 'self'; " +
             "object-src 'none'",

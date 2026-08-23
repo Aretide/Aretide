@@ -16,6 +16,7 @@ import {
   HEX_OUTLINE_VIEWBOX,
   SITE_BOOT_LOADER_ENABLED,
   SITE_BOOT_LOADER_FADE_MS,
+  SITE_BOOT_LOADER_MAX_WAIT_MS,
   clampBootLoadDurationMs,
   finishRunningAnimations,
   isDocumentLoadComplete,
@@ -25,6 +26,7 @@ import {
   waitForFontsReady,
   waitForPageReady,
   waitForWindowLoad,
+  withBootDeadline,
 } from "@/lib/site-boot-loader";
 
 const rootRoute = readFileSync(
@@ -219,5 +221,31 @@ describe("site boot loader", () => {
     );
     expect(reducedBlock).toContain(".site-boot-loader");
     expect(reducedBlock).toContain("transition: none");
+  });
+
+  it("never lets the splash outlive its deadline", async () => {
+    // The whole point: window.load can be gated on analytics and images, so
+    // the overlay must reveal the page on a timer even if nothing settles.
+    expect(SITE_BOOT_LOADER_MAX_WAIT_MS).toBeGreaterThan(BOOT_LOAD_MS_DEFAULT);
+    expect(loaderSrc).toContain("withBootDeadline");
+
+    const started = Date.now();
+    await withBootDeadline(new Promise(() => {}), 20);
+    expect(Date.now() - started).toBeLessThan(SITE_BOOT_LOADER_MAX_WAIT_MS);
+  });
+
+  it("reveals the page as soon as the real load settles, and on failure", async () => {
+    const order: string[] = [];
+    await withBootDeadline(
+      Promise.resolve().then(() => order.push("ready")),
+      5_000,
+    );
+    order.push("revealed");
+    expect(order).toEqual(["ready", "revealed"]);
+
+    // A rejected boot image must reveal the page, never strand the visitor.
+    await expect(
+      withBootDeadline(Promise.reject(new Error("boot image 404")), 5_000),
+    ).resolves.toBeUndefined();
   });
 });
