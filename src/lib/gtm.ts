@@ -18,16 +18,51 @@ export const GTM_PRODUCTION_HOSTNAME = "beemahealth.com" as const;
 export const BASK_INTAKE_HOST = "q.beemahealth.com";
 
 /**
- * Google's standard GTM bootstrap IIFE, wrapped only with a production
- * hostname gate so local/preview builds do not load the container.
- * The IIFE body matches Google's install snippet unmodified.
+ * Longest the container may wait when the visitor never interacts. Sized so
+ * the request still starts well inside a normal session.
+ */
+export const GTM_IDLE_TIMEOUT_MS = 2000;
+
+/** Fallback for browsers without requestIdleCallback (Safari < 16.4). */
+export const GTM_FALLBACK_DELAY_MS = 1200;
+
+/**
+ * Google's GTM bootstrap, wrapped with a production hostname gate and a
+ * deferred container load.
+ *
+ * Google's install snippet injects gtm.js from the document head. Even though
+ * the tag is `async`, the request is discovered during the initial parse, so
+ * Lighthouse's Lantern model charges it - and everything it chains (gtag.js
+ * for GA4 and Google Ads) - to the Largest Contentful Paint graph. Measured on
+ * production 2026-08-24: blocking googletagmanager.com took mobile LCP from
+ * 11.4s to 3.8s. Nothing else tested moved it more than a few hundred ms.
+ *
+ * What is preserved exactly:
+ * - `dataLayer` exists synchronously, before any component can push to it, so
+ *   trackIntakeHandoff() and Bask handoff events are never dropped. GTM
+ *   replays the queue when the container arrives.
+ * - The `gtm.start` timing push still happens during head parse, so container
+ *   timing triggers measure from the real navigation start.
+ *
+ * What changes: only the `<script src=gtm.js>` injection is delayed, until the
+ * earliest of first user interaction, an idle callback after `load`, or
+ * GTM_IDLE_TIMEOUT_MS. Interaction is included so a visitor who clicks a CTA
+ * immediately still loads the container before leaving for Bask.
  */
 export const GTM_HEAD_SCRIPT = `
 if (window.location.hostname === '${GTM_PRODUCTION_HOSTNAME}') {
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+new Date().getTime(),event:'gtm.js'});
+var started=false;
+function start(){if(started)return;started=true;
+var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+f.parentNode.insertBefore(j,f);}
+var e=['pointerdown','keydown','touchstart','scroll'];
+for(var n=0;n<e.length;n++){w.addEventListener(e[n],start,{capture:true,once:true,passive:true});}
+function idle(){if(w.requestIdleCallback){w.requestIdleCallback(start,{timeout:${GTM_IDLE_TIMEOUT_MS}});}
+else{w.setTimeout(start,${GTM_FALLBACK_DELAY_MS});}}
+if(d.readyState==='complete'){idle();}else{w.addEventListener('load',idle,{once:true});}
 })(window,document,'script','dataLayer','${GTM_CONTAINER_ID}');
 }
 `.trim();

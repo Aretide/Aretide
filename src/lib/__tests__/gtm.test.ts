@@ -57,11 +57,117 @@ describe("gtm", () => {
       `window.location.hostname === '${GTM_PRODUCTION_HOSTNAME}'`,
     );
     expect(GTM_HEAD_SCRIPT).toContain(GTM_CONTAINER_ID);
-    // Google's standard IIFE body (unmodified) must still be present.
+    // Google's install-snippet essentials must still be present.
     expect(GTM_HEAD_SCRIPT).toContain("gtm.start");
     expect(GTM_HEAD_SCRIPT).toContain(
       "https://www.googletagmanager.com/gtm.js?id=",
     );
+  });
+
+  describe("deferred container load", () => {
+    type Listener = (...args: unknown[]) => void;
+
+    function runSnippet(hostname: string = GTM_PRODUCTION_HOSTNAME) {
+      const inserted: { src: string; async: boolean }[] = [];
+      const listeners = new Map<string, Listener[]>();
+      const idleCallbacks: Listener[] = [];
+      const timeouts: { fn: Listener; ms: number }[] = [];
+      const firstScript = {
+        parentNode: {
+          insertBefore: (node: { src: string; async: boolean }) => {
+            inserted.push(node);
+          },
+        },
+      };
+      const doc = {
+        readyState: "loading" as DocumentReadyState,
+        getElementsByTagName: () => [firstScript],
+        createElement: () => ({ src: "", async: false }),
+      };
+      const win = {
+        location: { hostname },
+        dataLayer: undefined as unknown[] | undefined,
+        addEventListener: (type: string, fn: Listener) => {
+          listeners.set(type, [...(listeners.get(type) ?? []), fn]);
+        },
+        requestIdleCallback: (fn: Listener) => {
+          idleCallbacks.push(fn);
+        },
+        setTimeout: (fn: Listener, ms: number) => {
+          timeouts.push({ fn, ms });
+          return 0;
+        },
+      };
+      // The snippet only ever touches the `window` / `document` identifiers.
+      new Function("window", "document", GTM_HEAD_SCRIPT)(win, doc);
+      const fire = (type: string) =>
+        (listeners.get(type) ?? []).forEach((fn) => fn());
+      return { win, inserted, fire, idleCallbacks, timeouts };
+    }
+
+    it("creates dataLayer and pushes gtm.start before the container loads", () => {
+      const { win, inserted } = runSnippet();
+
+      expect(win.dataLayer).toHaveLength(1);
+      expect(win.dataLayer?.[0]).toMatchObject({ event: "gtm.js" });
+      expect(inserted).toHaveLength(0);
+    });
+
+    it("loads the container on idle after window load", () => {
+      const { inserted, fire, idleCallbacks } = runSnippet();
+
+      fire("load");
+      expect(inserted).toHaveLength(0);
+
+      idleCallbacks.forEach((fn) => fn());
+      expect(inserted).toHaveLength(1);
+      expect(inserted[0]?.async).toBe(true);
+      expect(inserted[0]?.src).toBe(
+        `https://www.googletagmanager.com/gtm.js?id=${GTM_CONTAINER_ID}`,
+      );
+    });
+
+    it("loads the container on first interaction, before window load", () => {
+      const { inserted, fire } = runSnippet();
+
+      fire("pointerdown");
+
+      expect(inserted).toHaveLength(1);
+    });
+
+    it("injects the container script exactly once", () => {
+      const { inserted, fire, idleCallbacks } = runSnippet();
+
+      fire("pointerdown");
+      fire("keydown");
+      fire("scroll");
+      fire("load");
+      idleCallbacks.forEach((fn) => fn());
+
+      expect(inserted).toHaveLength(1);
+    });
+
+    it("falls back to a timer when requestIdleCallback is missing", () => {
+      const { inserted, fire, timeouts, win } = runSnippet();
+      delete (win as { requestIdleCallback?: unknown }).requestIdleCallback;
+
+      fire("load");
+      expect(timeouts).toHaveLength(1);
+
+      timeouts.forEach(({ fn }) => fn());
+      expect(inserted).toHaveLength(1);
+    });
+
+    it("does nothing at all off the production hostname", () => {
+      const { win, inserted, fire, idleCallbacks } = runSnippet("localhost");
+
+      fire("pointerdown");
+      fire("load");
+      idleCallbacks.forEach((fn) => fn());
+
+      expect(win.dataLayer).toBeUndefined();
+      expect(inserted).toHaveLength(0);
+    });
   });
 
   it("recognizes production vs non-production hosts", () => {

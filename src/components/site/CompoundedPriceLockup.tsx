@@ -541,7 +541,7 @@ function TirzValueTeaser({ className }: { className?: string }) {
           {formatUsd(tirz.monthlyUsd)}
         </span>{" "}
         → {formatUsd(m12.monthlyUsd)}/mo), or {formatUsd(m6.monthlyUsd)}/mo on 6
-        months. New patients can start with the {starterPackTitle(pack)} at{" "}
+        months. New patients can start with the Tirzepatide {starterPackTitle(pack)} at{" "}
         {formatUsd(pack.totalUsd)} ({formatUsd(pack.monthlyEquivalentUsd)}/mo){" "}
         for {pack.dosePathLabel}. {STARTER_PACK_INTAKE_HINT} Your provider
         decides which option, if any, fits - prescribing is never guaranteed.
