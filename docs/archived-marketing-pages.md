@@ -24,7 +24,7 @@ For Step 1, marketing pages were stubbed with redirects to `/` and nav links wer
 | `/switch` | Switch to Beema Health | Redirect → `/` (not in Step 1) | [routes/switch.tsx](archived-marketing/routes/switch.tsx) |
 | `/insurance` | Insurance & Pharmacy | Redirect → `/` (not in Step 1) | [routes/insurance.tsx](archived-marketing/routes/insurance.tsx) |
 | `/clinicians` | Clinicians | Redirect → `/` (not in Step 1) | [routes/clinicians.tsx](archived-marketing/routes/clinicians.tsx) |
-| `/learn` | Learn | Redirect → `/` (footer + mobile menu only; not in Step 1) | [routes/learn.tsx](archived-marketing/routes/learn.tsx) |
+| `/learn` | Learn | **Was** Redirect → `/` in the archive period. **Live again** as a new educational library (not a restore of archived posts). See [docs/features/learn.md](features/learn.md). | [routes/learn.tsx](archived-marketing/routes/learn.tsx) |
 
 ### Navigation (header)
 

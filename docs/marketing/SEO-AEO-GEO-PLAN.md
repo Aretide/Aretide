@@ -1,9 +1,9 @@
 # SEO / AEO / GEO & Marketing Growth Plan
 
-**Goal:** Rank at or near the top of search — classic Google results, answer boxes / AI Overviews (AEO), and generative engines like ChatGPT, Perplexity, and Gemini (GEO) — for weight-loss-drug and GLP‑1 telehealth queries, and convert that traffic through the qualify → intake funnel.
+**Goal:** Rank at or near the top of search - classic Google results, answer boxes / AI Overviews (AEO), and generative engines like ChatGPT, Perplexity, and Gemini (GEO) - for weight-loss-drug and GLP-1 telehealth queries, and convert that traffic through Bask **intake**.
 
-**Status:** Draft plan — created July 2026. Owner: TBD.
-**Companion docs:** `docs/features/landing-pages.md`, `docs/features/analytics.md`, `docs/HIPAA.md`.
+**Status:** Living plan. Drafted July 2026. **Learn library shipped August 2026** - see `docs/features/learn.md`. Do not follow B1's original MDX/`learn.$slug.tsx` sketch; the live model is TypeScript articles under `/learn/{vertical}/{slug}/`.
+**Companion docs:** `docs/features/learn.md`, `docs/features/landing-pages.md`, `docs/features/treatment-pages.md`, `docs/features/analytics.md`, `docs/HIPAA.md`.
 
 ---
 
@@ -44,13 +44,13 @@ Realistic organic timeline: long-tail rankings in 3–6 months, mid-tail in 6–
 | G2 | ~~robots.txt has no `Sitemap:` directive and doesn't block funnel/portal/staff routes.~~ **Done July 2026** — see A2. | `public/robots.txt` | ✅ |
 | G3 | Canonical links are relative (`href: "/pricing"`). Google wants absolute canonicals; relative ones are unreliable. No `og:url` anywhere. | every route with `head()` | High |
 | G4 | `og:image` / `twitter:image` are relative paths — social/AI crawlers need absolute URLs; card previews currently break off-site. | `src/routes/__root.tsx` | Med |
-| G5 | `/learn` content hub was **removed** (redirects home). No blog = no content engine = no long-tail rankings. This is the biggest strategic gap. | `src/routes/learn.tsx` | Critical |
+| G5 | ~~`/learn` content hub was **removed** (redirects home).~~ **Done August 2026** - live educational library at `/learn/` with weight-loss, TRT, and HRT hubs. Architecture and inventory: `docs/features/learn.md`. | `src/routes/learn.index.tsx`, `src/content/learn/` | ✅ |
 | G6 | `lp.$slug.tsx` has no `head()` at all — no title, no description, and critically no `noindex`. Paid LPs duplicating organic pages can trigger duplicate-content problems. | `src/routes/lp.$slug.tsx` | High |
 | G7 | ~~`clinicians.tsx`, `insurance.tsx`, `switch.tsx`, and `learn.tsx` all **redirect to `/`** (MVP removals) yet are still listed in the sitemap.~~ **Done July 2026** — `public/sitemap.xml` lists only live marketing pages (redirecting routes and unshipped `/pricing` excluded). | `public/sitemap.xml` | ✅ |
 | G8 | Structured data is FAQ-only. Missing: `Organization`/`MedicalOrganization`, `WebSite`, `MedicalWebPage`, `Physician`, `Product`/`Offer` (pricing), `BreadcrumbList`. AI engines lean heavily on schema. | site-wide | High |
 | G9 | **Brand + domain decided (July 2026): Beema Health at beemahealth.com** (domain purchased). Production still serves from beemahealth until cutover — see the migration checklist below. ~~Internal docs/copy still referenced the pre-rebrand legal name~~ **Done August 2026** — legacy-name cleanup across docs/copy completed; no remaining references. | site-wide | Cutover pending |
 | G10 | Google Fonts loaded from CDN render-blocking; hurts LCP/CWV. | `__root.tsx` | Med |
-| G11 | ~~No `llms.txt`~~ (**shipped July 2026** — `public/llms.txt`); still missing: author/medical-reviewer bylines and an editorial policy page — table stakes for YMYL E-E-A-T and GEO. | site-wide | High |
+| G11 | ~~No `llms.txt`~~ (**shipped July 2026** - `public/llms.txt`). Learn articles are **unsigned on purpose** (`docs/features/learn.md`) - not a named medical reviewer, unlike Ro Health Guide. A public editorial-policy page and real clinician bylines remain a YMYL gap until someone actually reviews the pages. | site-wide | High |
 
 > **Domain cutover checklist (beemahealth → beemahealth.com):** hosting stays on GitHub Pages — the new domain is just a `public/CNAME` + DNS change. Do the cutover **before** link building and PR start, so all future equity accrues to beemahealth.com. In one release: update `public/CNAME`, `robots.txt` Sitemap line, `llms.txt` URLs, sitemap `BASE_URL` (`VITE_SITE_URL`), and absolute canonicals (A3). Then: verify beemahealth.com in Google Search Console + Bing Webmaster Tools and submit the sitemap. For the old domain: GitHub Pages can't 301 one domain to another, so either (a) put beemahealth's DNS on free Cloudflare with a bulk redirect rule `beemahealth/* → beemahealth.com/$1` (301) and file a Search Console change-of-address — the clean option; or (b) if GSC shows beemahealth has negligible indexed pages/backlinks/traffic, skip formal migration but still keep a redirect on the old domain so shared links don't 404.
 
@@ -58,7 +58,7 @@ Realistic organic timeline: long-tail rankings in 3–6 months, mid-tail in 6–
 
 Only static, prerendered marketing pages get indexed — everything else is a crawl/index exclusion, and user-behavior measurement there belongs to Google Analytics, not search:
 
-- **Indexed (each with its own prerendered static page and unique meta):** `/`, `/weight-loss`, `/how-it-works`, `/pricing`, `/about`, `/faq`, `/safety`, `/contact`, `/legal/*` — plus `/learn` articles once the content hub returns.
+- **Indexed (each with its own prerendered static page and unique meta):** `/`, `/weight-loss`, `/how-it-works`, `/about`, `/faq`, `/safety`, `/contact`, `/legal/*`, `/semaglutide`, `/tirzepatide`, `/glp-1`, `/glp-1-houston`, `/recipes` plus recipe details, `/learn/` plus hubs and every published learn article (see `public/sitemap.xml` and `docs/features/learn.md`). `/pricing` is archived (redirects home).
 - **Never indexed:** `/login`, `/qualify`, `/intake`, `/consent`, `/submitted`, `/eligibility`, `/dashboard/*`, `/staff/*`, `/admin/*`, `/verify-email/*`, `/lp/*` (paid landing pages — `noindex`, they convert, they don't compete).
 
 ### Bask integration note
@@ -101,7 +101,7 @@ export function pageHead(opts: { title: string; description: string; path: strin
 ### A7. GEO plumbing (G11)
 - ✅ `public/llms.txt` shipped July 2026 — canonical markdown summary of who we are, treatments, care model, and key page links for LLM crawlers. Keep it in lockstep with site facts: any pricing/treatment/domain change must update `llms.txt` in the same PR.
 - ✅ **Guardrail (July 2026):** `src/lib/__tests__/sitemap.test.ts` fails the suite if `llms.txt` links any URL not in the sitemap (this caught a dead `/pricing` link) or any off-origin URL. All page links use the trailing-slash canonical form.
-- `llms-full.txt` (full page content inline) — optional; revisit when `/learn` articles exist and are worth inlining.
+- `llms-full.txt` (full page content inline) - optional. `/learn/` articles now exist (`docs/features/learn.md`); `public/llms.txt` already lists every published learn URL. Revisit inlining only if crawlers need more than titles + key facts.
 - OG image: replace the bare logo mark with a branded 1200×630 card.
 
 ### A8. Register with the engines (do immediately after A1/A3)
@@ -121,13 +121,14 @@ GitHub Pages (static) stays — including after the beemahealth.com cutover, whi
 
 ## 3. Workstream B — Content engine (the core organic play)
 
-### B1. Rebuild `/learn` as a real content hub
-Currently `learn.tsx` redirects home. Rebuild as file-based prerendered content:
+### B1. Rebuild `/learn` as a real content hub - ✅ shipped August 2026
 
-- Route: `learn.tsx` (index) + `learn.$slug.tsx` (articles).
-- Content source: markdown/MDX files in `src/content/learn/` with frontmatter (`title`, `description`, `publishedAt`, `updatedAt`, `author`, `medicalReviewer`, `faq[]`). Compiled at build time so every article is prerendered static HTML — no CMS dependency, versioned in git, and the LP builder stays separate for paid pages.
-- Every article renders: byline + medical-reviewer credential block, "Medically reviewed on <date>", inline citations to primary sources (FDA labels, NEJM/JAMA trials — SURMOUNT, STEP), and JSON-LD from A5.
-- Add articles to the sitemap automatically from the content directory.
+Live library: `docs/features/learn.md`. TypeScript articles under `/learn/{vertical}/{slug}/`, not MDX.
+
+- Routes: `/learn/`, `/learn/{vertical}/`, `/learn/{vertical}/{slug}/`, plus four legacy long-form guides that kept their canonical URLs.
+- Content: TypeScript modules in `src/content/learn/articles/` globbed by `registry.ts`. Unpublished `_` fixtures stay out of the sitemap and `llms.txt`.
+- Articles are **unsigned** educational copy (`reviewedByClinicalLead: false`). Do not add a medical-reviewer byline until a clinician has actually reviewed the page. Citations are primary sources (FDA, DailyMed, NEJM/JAMA trials). JSON-LD is MedicalWebPage + Article + BreadcrumbList + FAQPage when FAQs exist.
+- Sitemap entries come from `getLearnSitemapEntries()`. `public/llms.txt` lists every published learn URL.
 
 ### B2. Keyword architecture (hub-and-spoke clusters)
 
@@ -260,7 +261,7 @@ Source: https://www.fda.gov/news-events/press-announcements/fda-intends-take-act
 
 **Ops answers LegitScript also expects (not website marketing copy, but certification Qs):** protocols for identifying and documenting medical necessity for compounded medications, and how patient-specific clinical documentation is provided to the fulfilling pharmacy. Site copy should stay consistent with those protocols (provider review of intake / history; no price-as-necessity framing).
 
-**Code / copy checkpoints (current):** meta and hero language on `/`, `/weight-loss`, and root layout must describe **compounded-only** offerings (no branded product names as Beema options); no “affordable alternatives” or “Proven GLP‑1 pathways” framing. Treatment pages and legal terms already carry not-FDA-approved / not-the-same-product language. When `/learn` educational pages ship, FAQs and trial sections must never say compounded products use the “same active ingredient,” must wall off branded trial data from compounded CTAs, and must not imply Beema sells branded drugs.
+**Code / copy checkpoints (current):** meta and hero language on `/`, `/weight-loss`, and root layout must describe **compounded-only** offerings (no branded product names as Beema options); no "affordable alternatives" or "Proven GLP-1 pathways" framing. Treatment pages, legal terms, and the live `/learn/` library already carry not-FDA-approved / not-the-same-product language. Learn FAQs and trial sections must never say compounded products use the "same active ingredient," must wall off branded trial data from compounded CTAs, and must not imply Beema sells branded drugs. Helpers: `src/lib/compounded-disclosure.ts`, `src/lib/learn-trust-copy.ts`. Feature doc: `docs/features/learn.md`.
 
 See also the **Compliance** section in `docs/features/treatment-pages.md` (living rules for treatment marketing pages), `docs/features/legitscript.md` (certification + seal), and product-imagery notes in `src/lib/treatment-imagery.ts` / `docs/features/homepage.md`.
 
@@ -308,7 +309,7 @@ OCR's guidance on tracking technologies makes third-party pixels on pages handli
 - Keyword research pass to finalize the first 30 article briefs (Ahrefs/Semrush).
 
 **Months 1–3 — Engine on**
-- `/learn` rebuilt; publish 8–12 articles/month starting with Cluster 2 (switching) and cost/comparison queries — fastest to rank, highest intent.
+- `/learn` is live (August 2026). Next: refresh and expand from paid-search keywords, not a second rebuild. Inventory and add-article checklist: `docs/features/learn.md`.
 - Launch Google Ads on high-intent + branded terms → LP pages (**LegitScript cleared** — ads ready).
 - First digital-PR campaign. Start review generation. Baseline GEO audit (the 20-prompt spreadsheet).
 

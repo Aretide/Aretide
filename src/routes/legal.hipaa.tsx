@@ -26,7 +26,7 @@ export const Route = createFileRoute("/legal/hipaa")({
       {
         name: "description",
         content:
-          "Beema Health Notice of Privacy Practices for Protected Health Information (PHI) under HIPAA.",
+          "Beema Health Notice of Privacy Practices for Protected Health Information under HIPAA, covering how patient information is used, shared, and safeguarded.",
       },
     ],
     links: [{ rel: "canonical", href: canonicalUrl("/legal/hipaa") }],

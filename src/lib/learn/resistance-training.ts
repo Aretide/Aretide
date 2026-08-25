@@ -7,7 +7,7 @@ export const RESISTANCE_TRAINING_PATH = "/learn/resistance-training/" as const;
 export const RESISTANCE_TRAINING_DATE_MODIFIED = "2026-08-12" as const;
 
 export const RESISTANCE_TRAINING_TITLE =
-  "Resistance Training for Muscle Maintenance and Growth" as const;
+  "Resistance Training for Muscle Growth" as const;
 
 export const RESISTANCE_TRAINING_DESCRIPTION =
   "Evidence-based guide to weekly volume, effort, protein, and creatine for maintaining and building muscle. Educational only, not medical advice." as const;

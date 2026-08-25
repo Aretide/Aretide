@@ -4,13 +4,13 @@
  */
 
 export const INITIAL_RESEARCH_PATH = "/learn/initial-research/" as const;
-export const INITIAL_RESEARCH_DATE_MODIFIED = "2026-08-03" as const;
+export const INITIAL_RESEARCH_DATE_MODIFIED = "2026-08-24" as const;
 
 export const INITIAL_RESEARCH_TITLE =
-  "Traditional Weight Loss vs. GLP-1-Assisted Weight Loss" as const;
+  "Traditional vs GLP-1 Weight Loss: Evidence" as const;
 
 export const INITIAL_RESEARCH_DESCRIPTION =
-  "An evidence-based educational guide comparing traditional lifestyle weight loss with GLP-1 medications, including trial data, lean-mass findings, regain after stopping, dosing overview, cost context, and FAQs." as const;
+  "An evidence-based comparison of lifestyle weight loss and GLP-1 medications: trial data, lean mass, regain after stopping, and cost context." as const;
 
 export type TocItem = { id: string; title: string };
 
@@ -37,7 +37,7 @@ export const INITIAL_RESEARCH_FAQ: readonly { q: string; a: string }[] = [
   },
   {
     q: "How do compounded medications differ from brand-name?",
-    a: "Compounded drugs are prepared by pharmacies rather than manufactured and FDA-approved as finished products. They have not undergone FDA review for safety, effectiveness, or quality and are not therapeutically equivalent to branded products, even when they use the same active ingredient.",
+    a: "Compounded drugs are prepared by pharmacies rather than manufactured and FDA-approved as finished products. They have not undergone FDA review for safety, effectiveness, or quality. They are not FDA-approved and are not therapeutically equivalent to branded products.",
   },
   {
     q: "How does telehealth prescribing work?",
@@ -81,11 +81,11 @@ export const INITIAL_RESEARCH_REFERENCES: readonly InitialResearchReference[] =
     {
       label:
         "Sardeli AV, et al. Resistance Training Prevents Muscle Loss Induced by Caloric Restriction in Obese Elderly Individuals: A Systematic Review and Meta-Analysis. Nutrients. 2018.",
-      href: "https://doi.org/10.3390/nu10080960",
+      href: "https://doi.org/10.3390/nu10040423",
     },
     {
       label:
-        "Mechanisms of GLP-1 Receptor Agonist-Induced Weight Loss: A Review of Central and Peripheral Pathways. The American Journal of Medicine. 2025.",
+        "Moiz A, et al. Mechanisms of GLP-1 receptor agonist-induced weight loss: a review of central and peripheral pathways. The American Journal of Medicine. 2025.",
       href: "https://doi.org/10.1016/j.amjmed.2025.01.021",
     },
     {
@@ -120,7 +120,7 @@ export const INITIAL_RESEARCH_REFERENCES: readonly InitialResearchReference[] =
     },
     {
       label:
-        "Impact of Semaglutide on Body Composition in Adults With Overweight or Obesity: Exploratory Analysis of STEP 1. Journal of the Endocrine Society. 2021.",
+        "Wilding JPH, et al. Impact of semaglutide on body composition in adults with overweight or obesity: exploratory analysis of STEP 1. Journal of the Endocrine Society. 2021.",
       href: "https://doi.org/10.1210/jendso/bvab048.030",
     },
     {
@@ -130,12 +130,12 @@ export const INITIAL_RESEARCH_REFERENCES: readonly InitialResearchReference[] =
     },
     {
       label:
-        "Effect of glucagon-like peptide-1 receptor agonists and co-agonists on body composition: Systematic review and network meta-analysis. Metabolism. 2024.",
+        "Karakasis P, et al. Effect of glucagon-like peptide-1 receptor agonists and co-agonists on body composition: systematic review and network meta-analysis. Metabolism. 2024.",
       href: "https://doi.org/10.1016/j.metabol.2024.156113",
     },
     {
       label:
-        "Prado CM, et al. Changes in lean body mass with GLP-1-based therapies and mitigation strategies. Diabetes, Obesity and Metabolism. 2024.",
+        "Neeland IJ, Linge J, Birkenfeld AL. Changes in lean body mass with GLP-1-based therapies and mitigation strategies. Diabetes, Obesity and Metabolism. 2024.",
       href: "https://doi.org/10.1111/dom.15728",
     },
     {
@@ -155,27 +155,27 @@ export const INITIAL_RESEARCH_REFERENCES: readonly InitialResearchReference[] =
     },
     {
       label: "GoodRx (2025), average U.S. gym-membership cost data.",
-      href: "https://www.goodrx.com/healthcare-access/health-technology/average-cost-of-gym-membership",
+      href: "https://www.goodrx.com/well-being/movement-exercise/average-gym-membership-cost",
     },
     {
       label:
-        "Healthline: How Much Does a Dietitian Cost? (dietitian and meal-plan cost context).",
-      href: "https://www.healthline.com/nutrition/how-much-does-a-dietitian-cost",
+        "ConsumerAffairs. How much does a dietitian cost? (2026). Consultation and follow-up cost ranges.",
+      href: "https://www.consumeraffairs.com/health/how-much-does-a-dietitian-cost.html",
     },
     {
       label:
-        "NovoCare Wegovy savings / self-pay information; LillyDirect Zepbound self-pay pricing.",
-      href: "https://www.novocare.com/obesity/products/wegovy/letting-us-help.html",
+        "NovoCare. Wegovy (semaglutide) cost, coverage, and self-pay pricing.",
+      href: "https://www.novocare.com/patient/medicines/wegovy.html",
     },
     {
       label:
-        "U.S. Food and Drug Administration. Status of Compounded GLP-1 Drugs (compounding policy and warning-letter context).",
-      href: "https://www.fda.gov/drugs/human-drug-compounding/status-compounded-glp-1-drugs",
+        "U.S. Food and Drug Administration. FDA's concerns with unapproved GLP-1 drugs used for weight loss.",
+      href: "https://www.fda.gov/drugs/drug-alerts-and-statements/fdas-concerns-unapproved-glp-1-drugs-used-weight-loss",
     },
     {
       label:
         "U.S. Food and Drug Administration. Compounding and GLP-1 shortage-resolution determinations (2024-2026).",
-      href: "https://www.fda.gov/drugs/drug-safety-and-availability/fda-clarifies-policies-compounders-outsourcing-facilities-and-state-licensed-pharmacies",
+      href: "https://www.fda.gov/drugs/drug-alerts-and-statements/fda-clarifies-policies-compounders-national-glp-1-supply-begins-stabilize",
     },
     {
       label:
@@ -184,12 +184,17 @@ export const INITIAL_RESEARCH_REFERENCES: readonly InitialResearchReference[] =
     },
     {
       label:
-        "Wharton S, et al. Gastrointestinal tolerability of once-weekly semaglutide 2.4 mg (STEP 1-3 pooled analysis). Diabetes, Obesity and Metabolism. 2022.",
-      href: "https://doi.org/10.1111/dom.14683",
+        "Wharton S, Calanna S, Davies M, et al. Gastrointestinal tolerability of once-weekly semaglutide 2.4 mg in adults with overweight or obesity. Diabetes, Obesity and Metabolism. 2021.",
+      href: "https://doi.org/10.1111/dom.14551",
     },
     {
       label:
-        "Eli Lilly / NEJM 2022 SURMOUNT-1 adverse-event data (Jastreboff et al.).",
+        "Jastreboff AM, et al. Tirzepatide once weekly for the treatment of obesity (SURMOUNT-1), adverse-event data. N Engl J Med. 2022.",
       href: "https://doi.org/10.1056/NEJMoa2206038",
+    },
+    {
+      label:
+        "Eli Lilly. Lilly lowers the price of Zepbound (tirzepatide) single-dose vials (self-pay pricing effective December 1, 2025).",
+      href: "https://investor.lilly.com/news-releases/news-release-details/lilly-lowers-price-zepboundr-tirzepatide-single-dose-vials",
     },
   ];

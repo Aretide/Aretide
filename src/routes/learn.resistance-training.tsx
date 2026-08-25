@@ -56,6 +56,7 @@ import {
   RESISTANCE_TRAINING_TOC,
 } from "@/lib/learn/resistance-training";
 import { cn } from "@/lib/utils";
+import { citationRel } from "@/lib/outbound-links";
 
 const PAGE_TITLE = `${RESISTANCE_TRAINING_TITLE} | Beema Health`;
 const BREADCRUMB_SHORT = "Resistance training";
@@ -2251,7 +2252,7 @@ Then:    increase load and rebuild within 8-12 repetitions`}
                         <a
                           href={ref.href}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel={citationRel(ref.href)}
                           className="text-foreground underline decoration-primary/40 underline-offset-2 transition-colors hover:text-primary hover:decoration-primary"
                         >
                           {ref.label}

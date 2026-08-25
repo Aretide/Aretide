@@ -40,10 +40,15 @@ list is maintained in `public/sitemap.xml` and guarded by
 | FAQ | `/faq` | Live - in the About header dropdown |
 | Recipes | `/recipes` | Live (recipe hub) - in the Resources header/footer nav |
 | Recipe detail | `/recipes/$slug` | Live |
-| Learn | `/learn` | Live (educational hub) - in the Resources header/footer nav |
+| Learn | `/learn` | Live (educational verticals index) - in the Resources header/footer nav. Spec: [docs/features/learn.md](../../docs/features/learn.md) |
+| Learn weight-loss hub | `/learn/weight-loss` | Live (educational; commercial pages stay at `/weight-loss`, `/semaglutide`, `/tirzepatide`) |
+| Learn TRT hub | `/learn/trt` | Live educational stub - Beema does not offer TRT today |
+| Learn HRT hub | `/learn/hrt` | Live educational stub - Beema does not offer HRT today |
+| Learn article | `/learn/{vertical}/{slug}` | Live when a file exists under `src/content/learn/articles/` |
 | Learn article | `/learn/initial-research` | Live |
 | Learn article | `/learn/resistance-training` | Live |
 | Learn article | `/learn/rest-intervals` | Live |
+| Learn article | `/learn/semaglutide-vs-tirzepatide` | Live |
 | Safety | `/safety` | Live |
 | Contact | `/contact` | Live - in the About header dropdown |
 | Pricing | `/pricing` | Archived (redirect → `/`) |

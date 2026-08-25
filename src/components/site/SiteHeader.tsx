@@ -51,7 +51,7 @@ const RESOURCE_ITEMS: NavItem[] = [
   {
     label: "Learn",
     to: "/learn/",
-    description: "Evidence-based guides",
+    description: "GLP-1 and hormone education",
   },
 ];
 

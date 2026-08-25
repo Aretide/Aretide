@@ -7,7 +7,7 @@ export const REST_INTERVALS_PATH = "/learn/rest-intervals/" as const;
 export const REST_INTERVALS_DATE_MODIFIED = "2026-08-13" as const;
 
 export const REST_INTERVALS_TITLE =
-  "Rest Intervals Between Sets for Muscle, Strength, and Power" as const;
+  "Rest Between Sets: Muscle, Strength, Power" as const;
 
 export const REST_INTERVALS_DESCRIPTION =
   "How long to rest between sets for muscle, strength, and power, based on current evidence. Educational only, not medical advice." as const;

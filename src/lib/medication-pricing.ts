@@ -362,3 +362,30 @@ export function dualCompoundedFaqPricingParagraph(): string {
   const tirz = COMPOUNDED_TIRZEPATIDE_PRICING;
   return `Beema Health uses transparent all-inclusive cash-pay pricing with no platform membership fee. ${compoundedMonthlyPricingSentence("Compounded semaglutide", sema)} ${compoundedMonthlyPricingSentence("Compounded tirzepatide", tirz)} Each listed rate covers provider care, medication, supplies, and expedited shipping; dose adjustments within the same medication do not change the monthly price. A prescription is never guaranteed: a licensed clinician decides whether treatment is appropriate. Full plan selectors with per-month rates live on the Semaglutide and Tirzepatide pages.`;
 }
+
+/** Whitelist of every USD amount the pricing module can explain. */
+export function listKnownPricingUsdAmounts(): number[] {
+  const amounts = new Set<number>();
+  const add = (n: number) => amounts.add(roundMoney(n));
+  add(PROMO_CODE_DISCOUNT_USD);
+  for (const pricing of [
+    COMPOUNDED_SEMAGLUTIDE_PRICING,
+    COMPOUNDED_TIRZEPATIDE_PRICING,
+  ] as const satisfies readonly CompoundedMedicationPricing[]) {
+    add(pricing.monthlyUsd);
+    add(promoFirstMonthUsd(pricing));
+    for (const plan of pricing.plans) {
+      add(plan.monthlyUsd);
+      add(plan.totalUsd);
+      add(plan.savingsUsd);
+      add(planMonthlyWithCouponUsd(plan));
+      add(planTotalWithCouponUsd(plan));
+    }
+    if (hasStarterPack(pricing)) {
+      add(pricing.starterPack.totalUsd);
+      add(pricing.starterPack.monthlyEquivalentUsd);
+    }
+  }
+  add(semaThreeMonthPromoTotalUsd());
+  return [...amounts].sort((a, b) => a - b);
+}

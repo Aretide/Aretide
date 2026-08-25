@@ -3,6 +3,9 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { SITE_URL, canonicalUrl } from "../seo";
 import { RECIPES, recipePath } from "../recipes";
+import { getLearnSitemapEntries } from "@/content/learn/sitemap";
+import { listAllArticles } from "@/content/learn/registry";
+import { learnPath } from "@/content/learn/types";
 
 const sitemapXml = readFileSync(
   resolve(__dirname, "../../../public/sitemap.xml"),
@@ -39,11 +42,7 @@ const EXPECTED_PATHS = [
   "/about/",
   "/safety/",
   "/faq/",
-  "/learn/",
-  "/learn/initial-research/",
-  "/learn/resistance-training/",
-  "/learn/rest-intervals/",
-  "/learn/semaglutide-vs-tirzepatide/",
+  ...getLearnSitemapEntries().map((entry) => entry.path),
   "/contact/",
   "/legal/privacy/",
   "/legal/terms/",
@@ -87,6 +86,29 @@ describe("public/sitemap.xml", () => {
     for (const lastmod of lastmods) {
       expect(lastmod).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
+  });
+
+  it("includes learn hubs and discovered articles with dateModified lastmod", () => {
+    const entries = [
+      ...sitemapXml.matchAll(
+        /<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g,
+      ),
+    ].map((match) => ({ loc: match[1], lastmod: match[2] }));
+    const byPath = new Map(
+      entries.map((entry) => [entry.loc.slice(SITE_URL.length), entry.lastmod]),
+    );
+
+    for (const expected of getLearnSitemapEntries()) {
+      expect(byPath.get(expected.path), expected.path).toBe(expected.lastmod);
+    }
+
+    for (const article of listAllArticles()) {
+      const path = learnPath(article.vertical, article.slug);
+      expect(byPath.get(path), path).toBe(article.dateModified);
+    }
+
+    expect(sitemapXml).not.toContain("_glob-fixture");
+    expect(EXPECTED_PATHS).not.toContain("/learn/weight-loss/_glob-fixture/");
   });
 
   it("lists exactly the recipe hub plus all recipe details below treatment priority", () => {
@@ -364,7 +386,8 @@ describe("public/llms.txt", () => {
     expect(llmsTxt).toContain(
       "13 practical recipes organized around gradually adding fiber, smaller portions, and protein-rich eating",
     );
-    expect(llmsTxt).not.toMatch(
+    const recipeBlock = llmsTxt.split("## Common questions")[0];
+    expect(recipeBlock).not.toMatch(
       /Zepbound|Wegovy|Ozempic|Mounjaro|online eligibility check/i,
     );
     expect(llmsTxt).toContain("online intake");

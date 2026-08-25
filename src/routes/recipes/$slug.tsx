@@ -66,7 +66,7 @@ export const Route = createFileRoute("/recipes/$slug")({
     if (!recipe) return {};
     return {
       meta: [
-        { title: `${recipe.title} | Beema Health Recipes` },
+        { title: recipe.title },
         { name: "description", content: recipe.description },
         { property: "og:title", content: recipe.title },
         { property: "og:description", content: recipe.description },
@@ -83,7 +83,7 @@ export const Route = createFileRoute("/recipes/$slug")({
         { name: "twitter:card", content: "summary_large_image" },
         {
           name: "twitter:title",
-          content: `${recipe.title} | Beema Health Recipes`,
+          content: recipe.title,
         },
         {
           name: "twitter:description",

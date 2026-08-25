@@ -6,21 +6,32 @@
  */
 
 import { SUPPORT_EMAIL } from "@/lib/contact-info";
+import {
+  COMPOUNDED_SEMAGLUTIDE_PRICING,
+  COMPOUNDED_TIRZEPATIDE_PRICING,
+  PROMO_CODE_DISCOUNT_USD,
+  formatUsd,
+  promoFirstMonthUsd,
+} from "@/lib/medication-pricing";
+
+const semaPromo = COMPOUNDED_SEMAGLUTIDE_PRICING;
+const tirzStarterPack = COMPOUNDED_TIRZEPATIDE_PRICING.starterPack;
+if (!tirzStarterPack) {
+  throw new Error("Tirzepatide starter pack is required for promo teasers");
+}
 
 /**
  * Dual-med pricing line shown next to marketing CTAs.
  * Homepage / nav stay high-level; full 3/6/12 plan math lives on the
  * Semaglutide and Tirzepatide pages. Numbers live in `medication-pricing.ts`.
  */
-export const FIRST_MONTH_PROMO_LINE =
-  "Semaglutide from $99 first month on a 3-month plan · Tirzepatide starter from $199/mo · one-time $100 off codes" as const;
+export const FIRST_MONTH_PROMO_LINE = `Semaglutide from ${formatUsd(promoFirstMonthUsd(semaPromo))} first month on a 3-month plan · Tirzepatide starter from ${formatUsd(tirzStarterPack.monthlyEquivalentUsd)}/mo · one-time ${formatUsd(PROMO_CODE_DISCOUNT_USD)} off codes`;
 
 /**
  * Short label for tight UI (nav chip, button microcopy).
  * Keep in sync with {@link FIRST_MONTH_PROMO_LINE}.
  */
-export const FIRST_MONTH_PROMO_SHORT =
-  "Sema from $99 · Tirz starter from $199/mo" as const;
+export const FIRST_MONTH_PROMO_SHORT = `Sema from ${formatUsd(promoFirstMonthUsd(semaPromo))} · Tirz starter from ${formatUsd(tirzStarterPack.monthlyEquivalentUsd)}/mo`;
 
 /**
  * Primary waitlist CTA button label sitewide (nav, hero, footer, mid-page).

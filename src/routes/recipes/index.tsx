@@ -35,7 +35,7 @@ export const Route = createFileRoute("/recipes/")({
       { title: "Practical Recipe Collection | Beema Health" },
       {
         name: "description",
-        content: `Explore ${RECIPES.length} practical recipes organized around gradually adding fiber, smaller portions, and protein-rich eating, with estimated nutrition and make-ahead guidance.`,
+        content: `Explore ${RECIPES.length} practical recipes built around added fiber, smaller portions, and protein-rich eating, with make-ahead guidance.`,
       },
       {
         property: "og:title",

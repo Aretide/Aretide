@@ -683,9 +683,9 @@ describe("recipe compliance and SEO markup", () => {
   });
 
   it("derives public recipe counts from the published collection", () => {
-    expect(hubRoute).toContain(
-      "Explore ${RECIPES.length} practical recipes organized around",
-    );
+    // Asserts the count is interpolated from the collection, not the exact
+    // marketing sentence, which is copy that gets tuned for SERP length.
+    expect(hubRoute).toContain("Explore ${RECIPES.length} practical recipes");
     expect(hubRoute).toContain("getRecipesByCategory(key).length} recipes");
     expect(homepageResource).toContain(
       "{RECIPES.length} breakfast, lunch, dinner, and light-meal ideas",

@@ -61,6 +61,7 @@ import {
   RESISTANCE_TRAINING_TITLE,
 } from "@/lib/learn/resistance-training";
 import { cn } from "@/lib/utils";
+import { citationRel } from "@/lib/outbound-links";
 
 const PAGE_TITLE = `${INITIAL_RESEARCH_TITLE} | Beema Health`;
 
@@ -1027,7 +1028,7 @@ function InitialResearchPage() {
                         and $449/month for all other approved doses
                       </Strong>{" "}
                       (reduced from a prior $499) as of December 1, 2025
-                      <Cite n={22} />.
+                      <Cite n={[22, 29]} />.
                     </li>
                   </ArticleUl>
                 </AccordionContent>
@@ -1216,7 +1217,7 @@ function InitialResearchPage() {
                         <a
                           href={ref.href}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel={citationRel(ref.href)}
                           className="text-foreground underline decoration-primary/40 underline-offset-2 transition-colors hover:text-primary hover:decoration-primary"
                         >
                           {ref.label}

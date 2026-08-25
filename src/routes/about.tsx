@@ -56,7 +56,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Health isn't a destination, it's a lifelong journey. The story behind Beema Health's bee, infinity wings, and hexagon, and what they mean for your care.",
+          "The story behind the Beema Health bee, infinity wings, and hexagon, and what they mean for your care. Licensed providers in all 50 US states.",
       },
       { property: "og:title", content: "About | Beema Health" },
       {

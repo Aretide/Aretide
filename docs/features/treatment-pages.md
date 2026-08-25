@@ -1,6 +1,8 @@
 # Treatment pages
 
-Each medication Beema offers gets its own indexable, SEO-focused landing page (`/tirzepatide`, `/semaglutide`) — this targets each drug's search terms without diluting them, and gives each page its own FAQPage/BreadcrumbList JSON-LD. Beema’s patient-facing offering is **compounded only** (compounded semaglutide and compounded tirzepatide). Do not add branded-medication pages (Wegovy, Zepbound, Ozempic, Mounjaro) or describe those brands as Beema offerings. `/weight-loss` sits alongside the compounded pages as a broader overview targeting head-term searches ("medical weight loss," "GLP-1 weight loss program") — see below.
+Each medication Beema offers gets its own indexable, SEO-focused landing page (`/tirzepatide`, `/semaglutide`) - this targets each drug's search terms without diluting them, and gives each page its own FAQPage/BreadcrumbList JSON-LD. Beema's patient-facing offering is **compounded only** (compounded semaglutide and compounded tirzepatide). Do not add branded-medication pages (Wegovy, Zepbound, Ozempic, Mounjaro) or describe those brands as Beema offerings. `/weight-loss` sits alongside the compounded pages as a broader overview targeting head-term searches ("medical weight loss," "GLP-1 weight loss program") - see below.
+
+Educational (not commercial) companions live at `/learn/`. Program pages pull those guides from `src/content/learn/money-page-guides.ts`. Learn copy is unsigned; do not treat it as clinician-reviewed. Spec: `docs/features/learn.md`.
 
 ## Compliance (LegitScript + FDA)
 
@@ -21,7 +23,7 @@ Product photography: the site defaults to branded Beema-wordmark vial imagery vi
 | `/tirzepatide` | `src/routes/tirzepatide.tsx` | Compounded tirzepatide landing page |
 | `/semaglutide` | `src/routes/semaglutide.tsx` | Compounded semaglutide landing page |
 | `/glp-1` | `src/routes/glp-1.tsx` | National cash-pay GLP-1 category page (not in primary nav/footer). Shares `Glp1LandingPage` with city landers. |
-| `/glp-1-houston` | `src/routes/glp-1-houston.tsx` | Houston cash-pay GLP-1 ads landing. Linked from homepage TreatmentShowcase. Future cities: `/glp-1-{city}` under the same template - see "City GLP-1 pages" below |
+| `/glp-1-houston` | `src/routes/glp-1-houston.tsx` | Houston cash-pay GLP-1 ads landing. Future cities: `/glp-1-{city}` under the same template - see "City GLP-1 pages" below |
 | `/weight-loss` | `src/routes/weight-loss.tsx` | Program overview page - linked from nav/footer, see below |
 
 Shared building blocks (pricing card, comparison table, FAQ accordion, breadcrumb) live in `src/components/site/TreatmentPageBlocks.tsx`. Copy/data (steps, FAQ items, eligibility bullets) stays local to each route file - do not extract it into a shared data file, the two pages are meant to have genuinely distinct copy.
@@ -65,7 +67,7 @@ Hover/tap behavior is the same shared pair as the other menus:
 - **Desktop** - `DesktopNav` / `DesktopNavDropdown`. Click a trigger to open, click it again (or outside / Escape) to close, hover another trigger to switch. The open panel fades and slides in (opacity + translate only - no Radix DropdownMenu; that Popper flicker is why these stay in-flow). Only one panel is open at a time; sibling labels dim while a menu is open.
 - **Mobile** - `MobileNavDropdown`, a tap-to-expand disclosure inside the mobile menu (see `docs/features/homepage.md` for the `CircleRevealMenu` shell it lives in). Local `expanded` state collapses it back down every time the mobile menu reopens; the reveal/collapse is animated (Motion `AnimatePresence` + height/opacity), matching the site's other transitions.
 
-Add new **medication** pages to `WEIGHT_LOSS_ITEMS` (and to `SiteFooter.tsx`'s Care column, above the program links) rather than adding a new top-level nav entry. Keep `/weight-loss` and `/glp-1` in the footer Care column, not in the header. Keep `/how-it-works` in Resources (header + footer), not in Weight Loss or Care. Do **not** add city/geo GLP-1 ads landers (`/glp-1-houston`, future `/glp-1-{city}`) to primary nav or footer - those stay ad/SEO entry points plus contextual in-page links (homepage TreatmentShowcase today).
+Add new **medication** pages to `WEIGHT_LOSS_ITEMS` (and to `SiteFooter.tsx`'s Care column, above the program links) rather than adding a new top-level nav entry. Keep `/weight-loss` and `/glp-1` in the footer Care column, not in the header. Keep `/how-it-works` in Resources (header + footer), not in Weight Loss or Care. Do **not** add city/geo GLP-1 ads landers (`/glp-1-houston`, future `/glp-1-{city}`) to primary nav or footer - those stay ad/SEO entry points.
 
 ## Nav: "Resources" dropdown
 
@@ -95,7 +97,7 @@ Keep city pages out of the Weight Loss dropdown so nav does not grow with every 
 
 ## Medication cards
 
-`TreatmentShowcase.tsx` (homepage) and `TreatmentLineup.tsx` (`/weight-loss` page) each render one card per medication. Both cards are full-card `<Link>`s (not nested interactive elements) pointing at that medication's own page (`/tirzepatide/`, `/semaglutide/`) - never at `/weight-loss/` itself (that would be a self-link on the `/weight-loss` page and redundant elsewhere). CTA copy is `Explore {treatment.name}` (e.g. "Explore Compounded Tirzepatide"). These two files still duplicate their own local `TREATMENTS` array (pre-existing pattern) - add a new medication to both when it gets its own page. The homepage TreatmentShowcase also links contextually to `/glp-1-houston/` ("Explore GLP-1 care for Houston").
+`TreatmentShowcase.tsx` (homepage) and `TreatmentLineup.tsx` (`/weight-loss` page) each render one card per medication. Both cards are full-card `<Link>`s (not nested interactive elements) pointing at that medication's own page (`/tirzepatide/`, `/semaglutide/`) - never at `/weight-loss/` itself (that would be a self-link on the `/weight-loss` page and redundant elsewhere). CTA copy is `Explore {treatment.name}` (e.g. "Explore Compounded Tirzepatide"). These two files still duplicate their own local `TREATMENTS` array (pre-existing pattern) - add a new medication to both when it gets its own page. The homepage TreatmentShowcase also links to `/glp-1/` ("Explore GLP-1 care").
 
 ## Structured data
 

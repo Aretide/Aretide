@@ -6,8 +6,8 @@
 |-----|------|
 | `/` | Homepage (organic + brand). See `docs/features/homepage.md`. |
 | `/glp-1` | National cash-pay GLP-1 category page (`<Glp1LandingPage market="national" />`). Footer Care column only - not in the header. |
-| `/glp-1-houston` | Houston cash-pay GLP-1 ads landing (`market="houston"`). Ad/SEO entry plus a contextual homepage TreatmentShowcase link. Keep out of primary nav and footer. |
-| `/semaglutide`, `/tirzepatide`, `/weight-loss` | SEO treatment landers. See `docs/features/treatment-pages.md`. |
+| `/glp-1-houston` | Houston cash-pay GLP-1 ads landing (`market="houston"`). Ad/SEO entry. Keep out of primary nav and footer. |
+| `/semaglutide`, `/tirzepatide`, `/weight-loss` | SEO treatment landers. See `docs/features/treatment-pages.md`. Educational companions for paid keywords are wired from `src/content/learn/money-page-guides.ts` (`docs/features/learn.md`). |
 
 The two GLP-1 URLs share one layout (`src/components/site/Glp1LandingPage.tsx`). Market copy, canonicals, and JSON-LD live in `src/lib/glp-1-landing.ts`. Each page self-canonicalizes. Never canonicalize Houston (or a future city) to `/glp-1/`. Future cities: add a market in `glp-1-landing.ts` plus a thin route file (`/glp-1-austin`, …).
 
@@ -40,5 +40,6 @@ Do not add extra URLs to `criticalBootImageUrls` - competing preloads delay Larg
 | `src/lib/boot-assets.ts` | LCP vs warmup photo lists for the first-visit splash |
 | `src/components/brand/SiteBootLoader.tsx` | Branded overlay (root shell, first document load) |
 | `src/lib/cta-ids.ts` | `resolveCta()` → Bask intake |
+| `src/content/learn/money-page-guides.ts` | Learn articles listed on `/semaglutide/`, `/tirzepatide/`, `/glp-1/`, `/glp-1-houston/`, `/weight-loss/` |
 | `src/routes/lp.$slug.tsx` | **Legacy** CRM slug route - not a live ads lander |
 | `src/routes/staff.landing-pages.tsx` | **Legacy** staff CRUD UI |

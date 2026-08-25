@@ -64,13 +64,16 @@ import { Route as LearnSemaglutideVsTirzepatideRouteImport } from './routes/lear
 import { Route as LearnRestIntervalsRouteImport } from './routes/learn.rest-intervals'
 import { Route as LearnResistanceTrainingRouteImport } from './routes/learn.resistance-training'
 import { Route as LearnInitialResearchRouteImport } from './routes/learn.initial-research'
+import { Route as LearnVerticalRouteImport } from './routes/learn/$vertical'
 import { Route as DashboardRefillsRouteImport } from './routes/dashboard.refills'
 import { Route as DashboardOrdersRouteImport } from './routes/dashboard.orders'
 import { Route as DashboardIntakeRouteImport } from './routes/dashboard.intake'
 import { Route as DashboardDocumentsRouteImport } from './routes/dashboard.documents'
 import { Route as DashboardAccountRouteImport } from './routes/dashboard.account'
 import { Route as StaffQuestionnairesIndexRouteImport } from './routes/staff.questionnaires.index'
+import { Route as LearnVerticalIndexRouteImport } from './routes/learn/$vertical.index'
 import { Route as StaffQuestionnairesSlugRouteImport } from './routes/staff.questionnaires.$slug'
+import { Route as LearnVerticalSlugRouteImport } from './routes/learn/$vertical.$slug'
 import { Route as StaffQuestionnairesSlugIndexRouteImport } from './routes/staff.questionnaires.$slug.index'
 import { Route as StaffQuestionnairesSlugVersionsVersionIdRouteImport } from './routes/staff.questionnaires.$slug.versions.$versionId'
 
@@ -352,6 +355,11 @@ const LearnInitialResearchRoute = LearnInitialResearchRouteImport.update({
   path: '/initial-research',
   getParentRoute: () => LearnRoute,
 } as any)
+const LearnVerticalRoute = LearnVerticalRouteImport.update({
+  id: '/$vertical',
+  path: '/$vertical',
+  getParentRoute: () => LearnRoute,
+} as any)
 const DashboardRefillsRoute = DashboardRefillsRouteImport.update({
   id: '/refills',
   path: '/refills',
@@ -383,10 +391,20 @@ const StaffQuestionnairesIndexRoute =
     path: '/',
     getParentRoute: () => StaffQuestionnairesRoute,
   } as any)
+const LearnVerticalIndexRoute = LearnVerticalIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LearnVerticalRoute,
+} as any)
 const StaffQuestionnairesSlugRoute = StaffQuestionnairesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => StaffQuestionnairesRoute,
+} as any)
+const LearnVerticalSlugRoute = LearnVerticalSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => LearnVerticalRoute,
 } as any)
 const StaffQuestionnairesSlugIndexRoute =
   StaffQuestionnairesSlugIndexRouteImport.update({
@@ -434,6 +452,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/intake': typeof DashboardIntakeRoute
   '/dashboard/orders': typeof DashboardOrdersRoute
   '/dashboard/refills': typeof DashboardRefillsRoute
+  '/learn/$vertical': typeof LearnVerticalRouteWithChildren
   '/learn/initial-research': typeof LearnInitialResearchRoute
   '/learn/resistance-training': typeof LearnResistanceTrainingRoute
   '/learn/rest-intervals': typeof LearnRestIntervalsRoute
@@ -462,7 +481,9 @@ export interface FileRoutesByFullPath {
   '/recipes/': typeof RecipesIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/verify-email/': typeof VerifyEmailIndexRoute
+  '/learn/$vertical/$slug': typeof LearnVerticalSlugRoute
   '/staff/questionnaires/$slug': typeof StaffQuestionnairesSlugRouteWithChildren
+  '/learn/$vertical/': typeof LearnVerticalIndexRoute
   '/staff/questionnaires/': typeof StaffQuestionnairesIndexRoute
   '/staff/questionnaires/$slug/': typeof StaffQuestionnairesSlugIndexRoute
   '/staff/questionnaires/$slug/versions/$versionId': typeof StaffQuestionnairesSlugVersionsVersionIdRoute
@@ -523,6 +544,8 @@ export interface FileRoutesByTo {
   '/recipes': typeof RecipesIndexRoute
   '/staff': typeof StaffIndexRoute
   '/verify-email': typeof VerifyEmailIndexRoute
+  '/learn/$vertical/$slug': typeof LearnVerticalSlugRoute
+  '/learn/$vertical': typeof LearnVerticalIndexRoute
   '/staff/questionnaires': typeof StaffQuestionnairesIndexRoute
   '/staff/questionnaires/$slug': typeof StaffQuestionnairesSlugIndexRoute
   '/staff/questionnaires/$slug/versions/$versionId': typeof StaffQuestionnairesSlugVersionsVersionIdRoute
@@ -561,6 +584,7 @@ export interface FileRoutesById {
   '/dashboard/intake': typeof DashboardIntakeRoute
   '/dashboard/orders': typeof DashboardOrdersRoute
   '/dashboard/refills': typeof DashboardRefillsRoute
+  '/learn/$vertical': typeof LearnVerticalRouteWithChildren
   '/learn/initial-research': typeof LearnInitialResearchRoute
   '/learn/resistance-training': typeof LearnResistanceTrainingRoute
   '/learn/rest-intervals': typeof LearnRestIntervalsRoute
@@ -589,7 +613,9 @@ export interface FileRoutesById {
   '/recipes/': typeof RecipesIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/verify-email/': typeof VerifyEmailIndexRoute
+  '/learn/$vertical/$slug': typeof LearnVerticalSlugRoute
   '/staff/questionnaires/$slug': typeof StaffQuestionnairesSlugRouteWithChildren
+  '/learn/$vertical/': typeof LearnVerticalIndexRoute
   '/staff/questionnaires/': typeof StaffQuestionnairesIndexRoute
   '/staff/questionnaires/$slug/': typeof StaffQuestionnairesSlugIndexRoute
   '/staff/questionnaires/$slug/versions/$versionId': typeof StaffQuestionnairesSlugVersionsVersionIdRoute
@@ -629,6 +655,7 @@ export interface FileRouteTypes {
     | '/dashboard/intake'
     | '/dashboard/orders'
     | '/dashboard/refills'
+    | '/learn/$vertical'
     | '/learn/initial-research'
     | '/learn/resistance-training'
     | '/learn/rest-intervals'
@@ -657,7 +684,9 @@ export interface FileRouteTypes {
     | '/recipes/'
     | '/staff/'
     | '/verify-email/'
+    | '/learn/$vertical/$slug'
     | '/staff/questionnaires/$slug'
+    | '/learn/$vertical/'
     | '/staff/questionnaires/'
     | '/staff/questionnaires/$slug/'
     | '/staff/questionnaires/$slug/versions/$versionId'
@@ -718,6 +747,8 @@ export interface FileRouteTypes {
     | '/recipes'
     | '/staff'
     | '/verify-email'
+    | '/learn/$vertical/$slug'
+    | '/learn/$vertical'
     | '/staff/questionnaires'
     | '/staff/questionnaires/$slug'
     | '/staff/questionnaires/$slug/versions/$versionId'
@@ -755,6 +786,7 @@ export interface FileRouteTypes {
     | '/dashboard/intake'
     | '/dashboard/orders'
     | '/dashboard/refills'
+    | '/learn/$vertical'
     | '/learn/initial-research'
     | '/learn/resistance-training'
     | '/learn/rest-intervals'
@@ -783,7 +815,9 @@ export interface FileRouteTypes {
     | '/recipes/'
     | '/staff/'
     | '/verify-email/'
+    | '/learn/$vertical/$slug'
     | '/staff/questionnaires/$slug'
+    | '/learn/$vertical/'
     | '/staff/questionnaires/'
     | '/staff/questionnaires/$slug/'
     | '/staff/questionnaires/$slug/versions/$versionId'
@@ -1217,6 +1251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnInitialResearchRouteImport
       parentRoute: typeof LearnRoute
     }
+    '/learn/$vertical': {
+      id: '/learn/$vertical'
+      path: '/$vertical'
+      fullPath: '/learn/$vertical'
+      preLoaderRoute: typeof LearnVerticalRouteImport
+      parentRoute: typeof LearnRoute
+    }
     '/dashboard/refills': {
       id: '/dashboard/refills'
       path: '/refills'
@@ -1259,12 +1300,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffQuestionnairesIndexRouteImport
       parentRoute: typeof StaffQuestionnairesRoute
     }
+    '/learn/$vertical/': {
+      id: '/learn/$vertical/'
+      path: '/'
+      fullPath: '/learn/$vertical/'
+      preLoaderRoute: typeof LearnVerticalIndexRouteImport
+      parentRoute: typeof LearnVerticalRoute
+    }
     '/staff/questionnaires/$slug': {
       id: '/staff/questionnaires/$slug'
       path: '/$slug'
       fullPath: '/staff/questionnaires/$slug'
       preLoaderRoute: typeof StaffQuestionnairesSlugRouteImport
       parentRoute: typeof StaffQuestionnairesRoute
+    }
+    '/learn/$vertical/$slug': {
+      id: '/learn/$vertical/$slug'
+      path: '/$slug'
+      fullPath: '/learn/$vertical/$slug'
+      preLoaderRoute: typeof LearnVerticalSlugRouteImport
+      parentRoute: typeof LearnVerticalRoute
     }
     '/staff/questionnaires/$slug/': {
       id: '/staff/questionnaires/$slug/'
@@ -1305,7 +1360,22 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface LearnVerticalRouteChildren {
+  LearnVerticalSlugRoute: typeof LearnVerticalSlugRoute
+  LearnVerticalIndexRoute: typeof LearnVerticalIndexRoute
+}
+
+const LearnVerticalRouteChildren: LearnVerticalRouteChildren = {
+  LearnVerticalSlugRoute: LearnVerticalSlugRoute,
+  LearnVerticalIndexRoute: LearnVerticalIndexRoute,
+}
+
+const LearnVerticalRouteWithChildren = LearnVerticalRoute._addFileChildren(
+  LearnVerticalRouteChildren,
+)
+
 interface LearnRouteChildren {
+  LearnVerticalRoute: typeof LearnVerticalRouteWithChildren
   LearnInitialResearchRoute: typeof LearnInitialResearchRoute
   LearnResistanceTrainingRoute: typeof LearnResistanceTrainingRoute
   LearnRestIntervalsRoute: typeof LearnRestIntervalsRoute
@@ -1314,6 +1384,7 @@ interface LearnRouteChildren {
 }
 
 const LearnRouteChildren: LearnRouteChildren = {
+  LearnVerticalRoute: LearnVerticalRouteWithChildren,
   LearnInitialResearchRoute: LearnInitialResearchRoute,
   LearnResistanceTrainingRoute: LearnResistanceTrainingRoute,
   LearnRestIntervalsRoute: LearnRestIntervalsRoute,

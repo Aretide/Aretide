@@ -82,6 +82,7 @@ Read the relevant doc(s):
 | **Analytics & event tracking** | **`docs/features/analytics.md`** |
 | **Landing pages** | **`docs/features/landing-pages.md`** |
 | **Treatment pages + CTA → Bask intake** | **`docs/features/treatment-pages.md`** |
+| **Learn library (`/learn/`)** | **`docs/features/learn.md`** |
 | **Homepage / hero** | **`docs/features/homepage.md`** |
 | **SEO / GEO audits & tooling** | **`claude-seo` Claude Code plugin** - see "SEO tooling" below |
 | Legacy in-repo Django / old funnel routes (not live product) | **`docs/BACKEND-DEFERRED.md`** - only if the user asks |
@@ -308,6 +309,7 @@ Rules are **summaries**. This file, `docs/features/legitscript.md`, and `docs/IN
 - [docs/HIPAA.md](docs/HIPAA.md) - HIPAA compliance checklist for agents
 - [docs/features/legitscript.md](docs/features/legitscript.md) - LegitScript + launched architecture (Bask intake)
 - [docs/features/treatment-pages.md](docs/features/treatment-pages.md) - treatment SEO pages + CTA → Bask
+- [docs/features/learn.md](docs/features/learn.md) - educational `/learn/` library (unsigned; sitemap + `llms.txt`)
 - [docs/INPUT_VALIDATION_TESTS.md](docs/INPUT_VALIDATION_TESTS.md) - marketing-site validation tests
 - [src/lib/design-tokens.ts](src/lib/design-tokens.ts) - semantic color scheme
 - [src/styles.css](src/styles.css) - raw brand oklch palette

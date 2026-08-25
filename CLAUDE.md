@@ -54,6 +54,7 @@ Before writing any code for a new feature, run `/start-feature` (branch setup) t
 | **Analytics & tracking** | `docs/features/analytics.md` |
 | **Landing pages** | `docs/features/landing-pages.md` |
 | **Treatment pages + CTA → Bask** | `docs/features/treatment-pages.md` |
+| **Learn library (`/learn/`)** | `docs/features/learn.md` |
 | **BMI calculator** | `docs/features/bmi-calculator.md` |
 | **Homepage / hero** | `docs/features/homepage.md` |
 | **SEO / GEO audits & tooling** | `claude-seo` plugin - see "SEO tooling" below |

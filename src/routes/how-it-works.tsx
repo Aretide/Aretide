@@ -36,7 +36,7 @@ import { RECIPES } from "@/lib/recipes";
 
 const TITLE = "How it works | Beema Health";
 const DESCRIPTION =
-  "From medical intake to prescription delivery: how Beema Health telehealth care works, step by step.";
+  "From online intake to prescription delivery, step by step. Licensed providers in all 50 states review every intake, and prescribing is never guaranteed.";
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({

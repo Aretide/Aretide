@@ -44,6 +44,7 @@ import { SUPPORT_EMAIL } from "@/lib/contact-info";
 import { CompoundedPriceLockup } from "@/components/site/CompoundedPriceLockup";
 import { bootImagePreloadLinks } from "@/lib/boot-assets";
 import { resolveVialImagery } from "@/lib/treatment-imagery";
+import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 import {
   CLINICAL_PROVIDER_GROUP,
   SEAN_ARORA_PROVIDER,
@@ -53,7 +54,7 @@ const VIAL_IMAGERY = resolveVialImagery("tirzepatide");
 
 const TITLE = "Compounded Tirzepatide for Weight Loss | Beema Health";
 const STARTER = COMPOUNDED_TIRZEPATIDE_PRICING.starterPack!;
-const DESCRIPTION = `Compounded tirzepatide for medical weight loss, reviewed by licensed providers. ${STARTER.months}-month starter pack from $${STARTER.monthlyEquivalentUsd}/mo ($${STARTER.totalUsd} total), plus multi-month maintenance plans. Prescribing is never guaranteed.`;
+const DESCRIPTION = `Compounded tirzepatide reviewed by licensed providers in all 50 states. ${STARTER.months}-month starter pack from $${STARTER.monthlyEquivalentUsd}/mo. Prescribing is never guaranteed.`;
 
 const FAQ_ITEMS: TreatmentFaqItem[] = [
   {
@@ -524,6 +525,7 @@ function TirzepatidePage() {
           </div>
         </div>
       </Section>
+      <MoneyPageGuides path="/tirzepatide/" />
     </MarketingLayout>
   );
 }

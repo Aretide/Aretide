@@ -112,13 +112,14 @@ describe("GLP-1 market landing pages", () => {
     expect(houstonRoute).not.toContain("redirect");
   });
 
-  it("points the homepage Houston link at the Houston route", () => {
+  it("points the homepage category link at the national route", () => {
     const showcase = readFileSync(
       resolve(__dirname, "../../components/home/TreatmentShowcase.tsx"),
       "utf-8",
     );
-    expect(showcase).toContain('to="/glp-1-houston/"');
-    expect(showcase).toContain("Explore GLP-1 care for Houston");
-    expect(showcase).not.toContain('to="/glp-1/"');
+    expect(showcase).toContain('to="/glp-1/"');
+    expect(showcase).toContain("Explore GLP-1 care");
+    expect(showcase).not.toContain("Explore GLP-1 care for Houston");
+    expect(showcase).not.toContain('to="/glp-1-houston/"');
   });
 });

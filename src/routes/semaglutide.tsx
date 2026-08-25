@@ -42,12 +42,14 @@ import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
   COMPOUNDED_SEMAGLUTIDE_PRICING,
   compoundedMonthlyPricingSentence,
+  promoFirstMonthUsd,
 } from "@/lib/medication-pricing";
 import { patientQuestionsGuidance } from "@/lib/marketing-copy";
 import { SUPPORT_EMAIL } from "@/lib/contact-info";
 import { CompoundedPriceLockup } from "@/components/site/CompoundedPriceLockup";
 import { bootImagePreloadLinks } from "@/lib/boot-assets";
 import { resolveVialImagery } from "@/lib/treatment-imagery";
+import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
 const VIAL_IMAGERY = resolveVialImagery("semaglutide");
 
@@ -153,7 +155,10 @@ export const Route = createFileRoute("/semaglutide")({
             serviceType: "Medical weight-loss telehealth service",
             reviewedByClinicalLead: true,
             dateModified: "2026-07-31",
-            offer: { introPrice: 99, recurringPrice: 199 },
+            offer: {
+              introPrice: promoFirstMonthUsd(COMPOUNDED_SEMAGLUTIDE_PRICING),
+              recurringPrice: COMPOUNDED_SEMAGLUTIDE_PRICING.monthlyUsd,
+            },
           }),
         ),
       },
@@ -519,6 +524,7 @@ function SemaglutidePage() {
           </div>
         </div>
       </Section>
+      <MoneyPageGuides path="/semaglutide/" />
     </MarketingLayout>
   );
 }

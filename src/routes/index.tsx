@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Medical weight-loss care reviewed by a licensed provider. Compounded semaglutide and compounded tirzepatide when clinically appropriate and legally available. Compounded medications are not FDA-approved.",
+          "Medical weight-loss care reviewed by licensed providers in all 50 states. Compounded semaglutide and tirzepatide when clinically appropriate and available.",
       },
     ],
     links: [

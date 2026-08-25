@@ -30,6 +30,7 @@ export const CTA_IDS = {
   learn_resistance_training: "learn_resistance_training",
   learn_rest_intervals: "learn_rest_intervals",
   learn_sema_vs_tirz: "learn_sema_vs_tirz",
+  learn_weight_loss: "learn_weight_loss",
   recipes_hub: "recipes_hub",
   recipe_detail: "recipe_detail",
   landing_page: "landing_page",
@@ -108,6 +109,10 @@ const CTA_OVERRIDES: Partial<Record<CtaId, CtaTarget>> = {
   },
   recipe_detail: {
     label: "Start an online visit",
+    to: DEFAULT_CTA_TARGET.to,
+  },
+  learn_weight_loss: {
+    label: "See if a provider-reviewed plan could be right for you",
     to: DEFAULT_CTA_TARGET.to,
   },
 };

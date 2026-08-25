@@ -56,6 +56,7 @@ import {
 } from "@/lib/learn/semaglutide-vs-tirzepatide";
 import { INITIAL_RESEARCH_PATH } from "@/lib/learn/initial-research";
 import { cn } from "@/lib/utils";
+import { citationRel } from "@/lib/outbound-links";
 
 const PAGE_TITLE = `${SEMA_VS_TIRZ_TITLE} | Beema Health`;
 
@@ -701,7 +702,7 @@ function SemaVsTirzPage() {
                   <a
                     href={ref.href}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel={citationRel(ref.href)}
                     className="text-primary underline-offset-2 hover:underline"
                   >
                     {ref.label}

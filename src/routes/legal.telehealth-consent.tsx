@@ -19,7 +19,7 @@ export const Route = createFileRoute("/legal/telehealth-consent")({
       {
         name: "description",
         content:
-          "Informed consent for receiving weight-management care via telehealth through Beema Health.",
+          "Informed consent for receiving weight-management care by telehealth through Beema Health, including what an online visit covers and its limitations.",
       },
     ],
     links: [

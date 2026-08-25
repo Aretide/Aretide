@@ -30,6 +30,7 @@ import { LegitScriptSeal } from "@/components/site/LegitScriptSeal";
 import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
+import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 import {
   COMPOUNDED_SEMAGLUTIDE_PRICING,
   COMPOUNDED_TIRZEPATIDE_PRICING,
@@ -300,6 +301,9 @@ export function Glp1LandingPage({ market }: { market: Glp1Market }) {
           </div>
         </div>
       </Section>
+      <MoneyPageGuides
+        path={market === "houston" ? "/glp-1-houston/" : "/glp-1/"}
+      />
     </MarketingLayout>
   );
 }

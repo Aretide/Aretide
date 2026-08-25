@@ -56,6 +56,7 @@ import {
   REST_INTERVALS_TOC,
 } from "@/lib/learn/rest-intervals";
 import { cn } from "@/lib/utils";
+import { citationRel } from "@/lib/outbound-links";
 
 const PAGE_TITLE = `${REST_INTERVALS_TITLE} | Beema Health`;
 const BREADCRUMB_SHORT = "Rest intervals";
@@ -1448,7 +1449,7 @@ function RestIntervalsPage() {
                         <a
                           href={ref.href}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel={citationRel(ref.href)}
                           className="text-foreground underline decoration-primary/40 underline-offset-2 transition-colors hover:text-primary hover:decoration-primary"
                         >
                           {ref.label}

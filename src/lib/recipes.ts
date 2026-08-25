@@ -323,7 +323,7 @@ const RECIPE_DATA = [
     imageSlug: "pear-chia-oatmeal",
     title: "Pear-Chia Oatmeal with Cinnamon Cottage Cream",
     description:
-      "Warm oats and pear with chia, topped by a cool cinnamon protein cream.",
+      "Warm oats and pear with chia, topped by a cool cinnamon protein cream. A fiber-forward breakfast recipe, about 13 minutes total.",
     category: "fiber",
     meal: "breakfast",
     servings: "1 serving",
@@ -359,7 +359,7 @@ const RECIPE_DATA = [
     slug: "smoky-red-lentil-carrot-soup",
     title: "Smoky Red Lentil & Carrot Soup",
     description:
-      "A velvety one-pot soup with red lentils, sweet carrots, cumin, and smoked paprika.",
+      "A velvety one-pot soup with red lentils, sweet carrots, cumin, and smoked paprika. A fiber-forward lunch recipe, about 42 minutes total.",
     category: "fiber",
     meal: "lunch",
     servings: "4 servings",
@@ -400,7 +400,7 @@ const RECIPE_DATA = [
     slug: "turkey-black-bean-stuffed-sweet-potatoes",
     title: "Turkey & Black Bean Stuffed Sweet Potatoes",
     description:
-      "Crisp-skinned sweet potatoes filled with cumin turkey, black beans, spinach, and salsa.",
+      "Crisp-skinned sweet potatoes filled with cumin turkey, black beans, spinach, and salsa. A fiber-forward dinner recipe, about 65 minutes total.",
     category: "fiber",
     meal: "dinner",
     servings: "4 servings",
@@ -440,7 +440,7 @@ const RECIPE_DATA = [
     slug: "apple-blackberry-oat-bran-breakfast-bake",
     title: "Apple-Blackberry Oat-Bran Breakfast Bake",
     description:
-      "A soft, spoonable oat-bran bake loaded with fruit but balanced by egg and cottage cheese.",
+      "A soft, spoonable oat-bran bake loaded with fruit but balanced by egg and cottage cheese. A fiber-forward light meal recipe, about 42 minutes total.",
     category: "fiber",
     meal: "light-meal",
     servings: "4 servings",
@@ -487,7 +487,7 @@ const RECIPE_DATA = [
     slug: "roasted-pepper-egg-feta-mini-frittatas",
     title: "Roasted Pepper, Egg & Feta Mini Frittatas",
     description:
-      "Two compact, tender egg cakes with sweet pepper, spinach, and briny feta.",
+      "Two compact, tender egg cakes with sweet pepper, spinach, and briny feta. A smaller-portion breakfast recipe, about 28 minutes total.",
     category: "smallVolume",
     meal: "breakfast",
     servings: "3 servings (2 mini frittatas each)",
@@ -534,7 +534,7 @@ const RECIPE_DATA = [
     slug: "lemon-herb-chicken-hummus-cucumber-boats",
     title: "Lemon-Herb Chicken Hummus Cucumber Boats",
     description:
-      "Cool cucumber carries a concentrated chicken-and-hummus filling with almost no fuss.",
+      "Cool cucumber carries a concentrated chicken-and-hummus filling with almost no fuss. A smaller-portion lunch recipe, about 15 minutes total.",
     category: "smallVolume",
     meal: "lunch",
     servings: "2 servings",
@@ -569,7 +569,7 @@ const RECIPE_DATA = [
     slug: "miso-ginger-turkey-rice-cup",
     title: "Miso-Ginger Turkey Rice Cup",
     description:
-      "A compact savory bowl with glossy turkey, edamame, and just enough rice.",
+      "A compact savory bowl with glossy turkey, edamame, and just enough rice. A smaller-portion dinner recipe, about 30 minutes total.",
     category: "smallVolume",
     meal: "dinner",
     servings: "4 servings",
@@ -616,7 +616,7 @@ const RECIPE_DATA = [
     slug: "vanilla-lemon-ricotta-berry-bowl",
     title: "Vanilla-Lemon Ricotta Berry Bowl",
     description:
-      "A spoonable, cheesecake-like bowl with whey protein and a bright berry finish.",
+      "A spoonable, cheesecake-like bowl with whey protein and a bright berry finish. A smaller-portion light meal recipe, about 5 minutes total.",
     category: "smallVolume",
     meal: "light-meal",
     servings: "1 serving",
@@ -651,7 +651,7 @@ const RECIPE_DATA = [
     slug: "herbed-turkey-cottage-cheese-breakfast-scramble",
     title: "Herbed Turkey & Cottage Cheese Breakfast Scramble",
     description:
-      "Soft curds, browned turkey, and fresh chives in a breakfast that puts protein first.",
+      "Soft curds, browned turkey, and fresh chives in a breakfast that puts protein first. A protein-rich breakfast recipe, about 16 minutes total.",
     category: "highProtein",
     meal: "breakfast",
     servings: "1 serving",
@@ -690,7 +690,7 @@ const RECIPE_DATA = [
     slug: "charred-lemon-chicken-quinoa-bowl",
     title: "Charred Lemon Chicken Quinoa Bowl",
     description:
-      "Smoky-edged chicken, warm quinoa, chickpeas, and a bright herb vinaigrette.",
+      "Smoky-edged chicken, warm quinoa, chickpeas, and a bright herb vinaigrette. A protein-rich lunch recipe, about 38 minutes total.",
     category: "highProtein",
     meal: "lunch",
     servings: "4 servings",
@@ -740,7 +740,7 @@ const RECIPE_DATA = [
     imageSlug: "mustard-rosemary-pork-white-bean-mash",
     title: "Mustard-Rosemary Pork Tenderloin with White Bean Mash",
     description:
-      "A restaurant-style lean roast with a silky, fiber-rich bean puree and crisp green beans.",
+      "A restaurant-style lean roast with a silky, fiber-rich bean puree and crisp green beans. A protein-rich dinner recipe, about 43 minutes total.",
     category: "highProtein",
     meal: "dinner",
     servings: "4 servings",
@@ -782,7 +782,7 @@ const RECIPE_DATA = [
     slug: "smoky-turkey-taco-stuffed-peppers",
     title: "Smoky Turkey Taco-Stuffed Peppers",
     description:
-      "Lean turkey, black beans, and salsa baked into sweet pepper shells.",
+      "Lean turkey, black beans, and salsa baked into sweet pepper shells. A protein-rich light meal recipe, about 40 minutes total.",
     category: "highProtein",
     meal: "light-meal",
     servings: "4 servings",
@@ -823,7 +823,7 @@ const RECIPE_DATA = [
     slug: "chicken-and-beef-fajitas",
     title: "Chicken and Beef Fajitas",
     description:
-      "Crisp-tender peppers and onion with warm chicken and steak strips, tucked into low-carb tortillas.",
+      "Crisp-tender peppers and onion with warm chicken and steak strips, tucked into low-carb tortillas. A protein-rich recipe, about 30 minutes total.",
     category: "highProtein",
     meal: ["lunch", "dinner"],
     servings: "4 servings (2 fajitas each)",

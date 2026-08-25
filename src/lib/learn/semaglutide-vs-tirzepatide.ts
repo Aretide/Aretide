@@ -15,10 +15,10 @@ export const SEMA_VS_TIRZ_PATH = "/learn/semaglutide-vs-tirzepatide/" as const;
 export const SEMA_VS_TIRZ_DATE_MODIFIED = "2026-08-17" as const;
 
 export const SEMA_VS_TIRZ_TITLE =
-  "Semaglutide vs. Tirzepatide: Trial Data & Cost" as const;
+  "Semaglutide vs Tirzepatide: Data and Cost" as const;
 
 export const SEMA_VS_TIRZ_DESCRIPTION =
-  "A cited, side-by-side comparison of semaglutide and tirzepatide for weight loss: mechanism, head-to-head trial results, side-effect rates, dosing, and cost. Educational only, not medical advice." as const;
+  "A cited comparison of semaglutide and tirzepatide for weight loss: mechanism, head-to-head trial results, side-effect rates, dosing, and cost." as const;
 
 export type SemaVsTirzTocItem = { id: string; title: string };
 
@@ -73,7 +73,7 @@ export type SemaVsTirzReference = {
 export const SEMA_VS_TIRZ_REFERENCES: readonly SemaVsTirzReference[] = [
   {
     label:
-      "Mechanisms of GLP-1 Receptor Agonist-Induced Weight Loss: A Review of Central and Peripheral Pathways. The American Journal of Medicine. 2025.",
+      "Moiz A, et al. Mechanisms of GLP-1 receptor agonist-induced weight loss: a review of central and peripheral pathways. The American Journal of Medicine. 2025.",
     href: "https://doi.org/10.1016/j.amjmed.2025.01.021",
   },
   {

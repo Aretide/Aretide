@@ -14,6 +14,7 @@ import {
   getPlan,
   hasStarterPack,
   isPromoEligibleMonths,
+  listKnownPricingUsdAmounts,
   planMonthlyWithCouponUsd,
   planTotalWithCouponUsd,
   promoFirstMonthUsd,
@@ -73,6 +74,13 @@ describe("medication-pricing", () => {
   it("still exposes promoFirstMonthUsd as monthly minus $100 for legacy teasers", () => {
     expect(promoFirstMonthUsd(COMPOUNDED_SEMAGLUTIDE_PRICING)).toBe(99);
     expect(promoFirstMonthUsd(COMPOUNDED_TIRZEPATIDE_PRICING)).toBe(197);
+  });
+
+  it("lists every USD amount teasers and FAQs may quote", () => {
+    const amounts = listKnownPricingUsdAmounts();
+    for (const n of [99, 100, 199, 297, 497, 597]) {
+      expect(amounts).toContain(n);
+    }
   });
 
   it("formats money without trailing zeros", () => {

@@ -104,10 +104,10 @@ export function TreatmentShowcase() {
         </p>
         <p className="mt-4">
           <Link
-            to="/glp-1-houston/"
+            to="/glp-1/"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-foreground underline-offset-4 hover:underline"
           >
-            Explore GLP-1 care for Houston
+            Explore GLP-1 care
             <ArrowRight className="size-4" aria-hidden />
           </Link>
         </p>

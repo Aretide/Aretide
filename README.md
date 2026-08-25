@@ -83,6 +83,7 @@ Full local dev guide (identical setup on every machine): **[docs/LOCAL-DEV.md](d
 | Which table owns each patient field (no duplicates) | [backend/DATABASE.md — Canonical field ownership](backend/DATABASE.md#canonical-field-ownership-no-duplicates) |
 | Deploy backend (Heroku vs AWS) | [backend/HOSTING.md](backend/HOSTING.md) |
 | Deploy frontend (GitHub Pages) | [docs/DEPLOY-FRONTEND.md](docs/DEPLOY-FRONTEND.md) |
+| Learn library (`/learn/`) | [docs/features/learn.md](docs/features/learn.md) |
 | Restore removed marketing pages (pricing, nav, etc.) | [docs/archived-marketing-pages.md](docs/archived-marketing-pages.md) |
 
 ---
@@ -121,7 +122,7 @@ Beema Health/
 | File | Contents |
 |------|----------|
 | [Starting Point/launchPlan.md](Starting%20Point/launchPlan.md) | **20-step MVP launch plan** — turnkey partner first; Steps 1–12 required to launch; offerings, unit economics, risks in appendices |
-| [docs/archived-marketing-pages.md](docs/archived-marketing-pages.md) | **Removed marketing site** — nav links, page content, and step-by-step restore instructions for `/pricing`, `/switch`, `/insurance`, `/clinicians`, `/safety`, `/faq`, `/learn`, full `/how-it-works` |
+| [docs/archived-marketing-pages.md](docs/archived-marketing-pages.md) | **Historical archive** of the pre-launch Lovable marketing site. `/learn` is live again as a new library - [docs/features/learn.md](docs/features/learn.md) - not a restore of those archived posts. |
 
 ### Development
 
@@ -138,7 +139,7 @@ Beema Health/
 | [src/lib/api/client.ts](src/lib/api/client.ts) | API client — calls Django when `VITE_API_URL` is set |
 | [src/lib/safety-flags.ts](src/lib/safety-flags.ts) | Client-side safety flag logic (mirrored in backend) |
 
-**Key frontend routes:** Marketing pages (`/`, `/how-it-works`, treatment pages, legal, etc.) — see [src/routes/README.md](src/routes/README.md). Live **intake** / checkout / portal are on Bask (not in-repo `/qualify` → `/intake` → `/dashboard`).
+**Key frontend routes:** Marketing pages (`/`, `/how-it-works`, treatment pages, `/learn/`, legal, etc.) - see [src/routes/README.md](src/routes/README.md) and [docs/features/learn.md](docs/features/learn.md). Live **intake** / checkout / portal are on Bask (not in-repo `/qualify` → `/intake` → `/dashboard`).
 
 ### Configuration
 

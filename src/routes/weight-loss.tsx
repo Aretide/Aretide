@@ -37,10 +37,11 @@ import {
   dualCompoundedShortPricingLine,
 } from "@/lib/medication-pricing";
 import { RECIPES } from "@/lib/recipes";
+import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
 const TITLE = "Weight Loss | Beema Health";
 const DESCRIPTION =
-  "Provider-reviewed medical weight-loss care with compounded semaglutide and compounded tirzepatide prescribed by a licensed provider when clinically appropriate and legally available. Compounded medications are not FDA-approved.";
+  "Medical weight-loss care with compounded semaglutide and tirzepatide, reviewed by licensed providers in all 50 states. Prescribing is never guaranteed.";
 
 export const Route = createFileRoute("/weight-loss")({
   head: () => ({
@@ -355,6 +356,7 @@ function WeightLossPage() {
           </div>
         </div>
       </Section>
+      <MoneyPageGuides path="/weight-loss/" />
     </MarketingLayout>
   );
 }
