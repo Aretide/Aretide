@@ -1,0 +1,1 @@
+"""Local patient email campaigns. PII is encrypted at rest."""

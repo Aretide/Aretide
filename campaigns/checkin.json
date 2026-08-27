@@ -1,0 +1,22 @@
+{
+  "id": "checkin",
+  "label": "Check-in",
+  "description": "Follow-up for active patients after intake.",
+  "anchor": "enrolled_at",
+  "cta_url": "https://hive.beemahealth.com",
+  "cta_label": "Open patient portal",
+  "steps": [
+    {
+      "id": "week1",
+      "delay": "7d",
+      "subject": "Checking in on your Beema Health care",
+      "body": "Hi {first_name}, this is a check-in from Beema Health. If you have questions about {interest}, you can reach us from the patient portal:"
+    },
+    {
+      "id": "week4",
+      "delay": "28d",
+      "subject": "Your monthly Beema Health check-in",
+      "body": "A quick reminder that your clinician is available in the patient portal if you need support with {interest}:"
+    }
+  ]
+}

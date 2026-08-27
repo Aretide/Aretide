@@ -37,6 +37,18 @@ backend/staticfiles/
 backend/media/
 backend/dev.db
 
+# Root Python bytecode (abandoned-checkout mailer)
+__pycache__/
+*.pyc
+
+# Patient mailer (PHI - never commit)
+patients.json
+abandoned_checkout.json
+abandoned_yk_challenge.bin
+abandoned_pii.wrap
+mailer_yk_challenge.bin
+mailer_pii.wrap
+
 # OS / editor
 .idea/
 .vscode/

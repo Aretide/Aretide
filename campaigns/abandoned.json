@@ -1,0 +1,76 @@
+{
+  "id": "abandoned",
+  "label": "Abandoned checkout",
+  "description": "People who started a visit and did not finish checkout.",
+  "anchor": "abandoned_at",
+  "cta_url": "https://hive.beemahealth.com",
+  "cta_label": "Continue",
+  "steps": [
+    {
+      "id": "10m",
+      "delay": "10m",
+      "subject": "Finish your Beema Health visit",
+      "body": "You started a visit with Beema Health a few minutes ago and it is still unfinished. If you are still interested in {interest}, complete your visit now:"
+    },
+    {
+      "id": "15m",
+      "delay": "15m",
+      "subject": "Your Beema Health visit is still open",
+      "body": "You started a visit about 15 minutes ago and have not finished it. If you are still interested in {interest}, continue here:"
+    },
+    {
+      "id": "30m",
+      "delay": "30m",
+      "subject": "Continue your Beema Health visit",
+      "body": "It has been about 30 minutes since you started your Beema Health visit. If you are still interested in {interest}, complete it today:"
+    },
+    {
+      "id": "45m",
+      "delay": "45m",
+      "subject": "Your Beema Health visit is waiting",
+      "body": "You started a visit less than an hour ago and it is still open. If you are still interested in {interest}, continue when you have a minute:"
+    },
+    {
+      "id": "1h",
+      "delay": "1h",
+      "subject": "Finish your Beema Health visit",
+      "body": "We noticed that you started your visit with Beema Health but did not finish it. If you are still interested in {interest}, complete your visit today:"
+    },
+    {
+      "id": "3h",
+      "delay": "3h",
+      "subject": "Your Beema Health visit is still open",
+      "body": "You started a visit with Beema Health earlier today and it is still unfinished. If you are still interested in {interest}, you can continue here:"
+    },
+    {
+      "id": "24h",
+      "delay": "24h",
+      "subject": "Complete your Beema Health visit",
+      "body": "It has been about a day since you started your Beema Health visit. If you are still interested in {interest}, complete your visit today:"
+    },
+    {
+      "id": "48h",
+      "delay": "48h",
+      "subject": "Continue your Beema Health visit",
+      "body": "Your Beema Health visit is still unfinished. If you are still interested in {interest}, continue when you have a few minutes:"
+    },
+    {
+      "id": "72h",
+      "delay": "72h",
+      "subject": "Your Beema Health visit is waiting",
+      "body": "Just a reminder that you started a visit with Beema Health and it is still open. If you are still interested in {interest}, complete it when you are ready:"
+    },
+    {
+      "id": "7d",
+      "delay": "7d",
+      "subject": "A reminder to finish your Beema Health visit",
+      "body": "It has been a week since you started your visit. If you would still like to continue with Beema Health for {interest}, you can pick it back up here:"
+    },
+    {
+      "id": "14d",
+      "delay": "14d",
+      "subject": "Last reminder: finish your Beema Health visit",
+      "body": "This is our last reminder about the visit you started. If you would still like care for {interest}, you can continue here. If your plans have changed, you can ignore this email."
+    }
+  ]
+}

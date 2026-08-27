@@ -1,0 +1,28 @@
+{
+  "id": "marketing",
+  "label": "Marketing",
+  "description": "Education and offers for people who opted into updates.",
+  "anchor": "enrolled_at",
+  "cta_url": "https://beemahealth.com/weight-loss/",
+  "cta_label": "Learn more",
+  "steps": [
+    {
+      "id": "day0",
+      "delay": "0m",
+      "subject": "Welcome to Beema Health",
+      "body": "Hi {first_name}, thanks for your interest in {interest}. When you are ready, you can start an online visit here:"
+    },
+    {
+      "id": "day3",
+      "delay": "3d",
+      "subject": "How Beema Health care works",
+      "body": "A licensed clinician reviews your visit, then decides if treatment is appropriate. If you still want {interest}, you can start here:"
+    },
+    {
+      "id": "day10",
+      "delay": "10d",
+      "subject": "Still considering weight-loss care?",
+      "body": "If now is a better time, you can start or continue your Beema Health visit for {interest}:"
+    }
+  ]
+}
