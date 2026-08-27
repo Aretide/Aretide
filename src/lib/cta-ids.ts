@@ -10,6 +10,12 @@ export const CTA_IDS = {
   pricing_footer: "pricing_footer",
   weight_loss_hero: "weight_loss_hero",
   weight_loss_footer: "weight_loss_footer",
+  sexual_health_hero: "sexual_health_hero",
+  sexual_health_footer: "sexual_health_footer",
+  hair_hero: "hair_hero",
+  hair_footer: "hair_footer",
+  wellness_hero: "wellness_hero",
+  wellness_footer: "wellness_footer",
   glp1_hero: "glp1_hero",
   glp1_mid: "glp1_mid",
   glp1_footer: "glp1_footer",
@@ -154,6 +160,23 @@ const CTA_OVERRIDES: Partial<Record<CtaId, CtaTarget>> = {
     label: "Get Started",
     to: `${BASK_INTAKE_BASE}/sermorelin`,
   },
+  /**
+   * Category hub pages (2026-08-27) mix 2 products each, so there's no
+   * single correct Bask intake path - these default to one product in the
+   * category rather than falling through to DEFAULT_CTA_TARGET (the
+   * weight-loss intake), which would be actively wrong here, not just
+   * unverified. Pick is arbitrary and should be revisited once Bask
+   * confirms whether a category-level intake exists.
+   */
+  sexual_health_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/ed` },
+  sexual_health_footer: {
+    label: "Get Started",
+    to: `${BASK_INTAKE_BASE}/ed`,
+  },
+  hair_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/hairloss` },
+  hair_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/hairloss` },
+  wellness_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/nad` },
+  wellness_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/nad` },
 };
 
 /** CTA search params: stable cta_id plus Bask attribution handoff keys. */

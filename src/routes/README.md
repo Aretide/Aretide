@@ -40,6 +40,9 @@ list is maintained in `public/sitemap.xml` and guarded by
 | Compounded ED Treatment | `/ed` | Live |
 | Compounded NAD+ | `/nad-plus` | Live |
 | Compounded Sermorelin | `/sermorelin` | Live |
+| Sexual Health (hub) | `/sexual-health` | Live - footer Care group, category overview for `/ed` + `/trt` |
+| Hair (hub) | `/hair` | Live - footer Care group, category overview for `/hairloss` |
+| Wellness (hub) | `/wellness` | Live - footer Care group, category overview for `/nad-plus` + `/sermorelin` |
 | How it works | `/how-it-works` | Live - in the Resources header/footer nav |
 | About | `/about` | Live - in the About header dropdown |
 | FAQ | `/faq` | Live - in the About header dropdown |

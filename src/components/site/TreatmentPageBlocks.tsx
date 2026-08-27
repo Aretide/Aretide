@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { CheckCircle2, type LucideIcon } from "lucide-react";
+import { ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -39,7 +39,10 @@ import {
   STARTER_PACK_INTAKE_HINT,
   type CompoundedMedicationPricing,
 } from "@/lib/medication-pricing";
-import type { SimpleCompoundedPricing } from "@/lib/simple-treatment-pricing";
+import {
+  formatSimpleStartingAt,
+  type SimpleCompoundedPricing,
+} from "@/lib/simple-treatment-pricing";
 
 /**
  * Shared building blocks for the per-medication treatment pages
@@ -423,5 +426,70 @@ export function SimpleTreatmentPricingCard({
         pharmacy fulfillment, and state requirements.
       </p>
     </SurfaceCard>
+  );
+}
+
+export type CategoryLineupItem = {
+  id: string;
+  name: string;
+  /** e.g. "Once-daily oral", "Weekly injection, if prescribed". */
+  form: string;
+  pricing: SimpleCompoundedPricing;
+  icon: LucideIcon;
+  /** Own indexable landing page for this specific medication. */
+  to: string;
+};
+
+/**
+ * Card grid for a category hub page (/sexual-health, /hair, /wellness),
+ * linking out to each category's specific medication pages. Deliberately
+ * separate from TreatmentLineup.tsx (the /weight-loss version): that
+ * component is hardcoded to the two GLP-1 medications' photo imagery and
+ * `CompoundedPriceLockup`. This uses `TreatmentHeroArt`-style icon art and
+ * the simpler pricing shape instead, since none of these products have
+ * photography or promo-code pricing.
+ */
+export function SimpleCategoryLineup({
+  items,
+}: {
+  items: readonly CategoryLineupItem[];
+}) {
+  return (
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+      {items.map((item) => (
+        <Link
+          key={item.id}
+          to={item.to}
+          aria-label={`Explore ${item.name}`}
+          className="group flex flex-col overflow-hidden rounded-3xl bg-primary-soft shadow-lift outline-none transition-shadow hover:shadow-lift focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden">
+            <div
+              aria-hidden
+              className="bg-mesh-glow pointer-events-none absolute inset-0 opacity-70"
+            />
+            <HexMotif className="pointer-events-none absolute -left-6 -top-6 w-24 text-primary/15" />
+            <HexBadge className="relative z-10 size-16">
+              <item.icon className="size-7" aria-hidden />
+            </HexBadge>
+          </div>
+          <div className="space-y-2 px-6 pb-4 pt-5 md:px-8">
+            <h3 className="text-xl font-bold text-foreground md:text-2xl">
+              {item.name}
+            </h3>
+            <p className="text-lg font-semibold text-foreground">
+              {formatSimpleStartingAt(item.pricing)}
+            </p>
+            <p className="text-sm font-medium text-foreground/80">
+              {item.form}
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5 px-6 pb-6 text-sm font-semibold text-accent-foreground md:px-8">
+            <span>Explore {item.name}</span>
+            <ArrowRight className="size-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }

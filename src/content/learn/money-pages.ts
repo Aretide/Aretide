@@ -49,6 +49,18 @@ export const LEARN_MONEY_PAGES: Readonly<Record<string, LearnMoneyPage>> = {
     href: "/sermorelin/",
     label: "Compounded sermorelin",
   },
+  "/sexual-health/": {
+    href: "/sexual-health/",
+    label: "Sexual health program",
+  },
+  "/hair/": {
+    href: "/hair/",
+    label: "Hair loss program",
+  },
+  "/wellness/": {
+    href: "/wellness/",
+    label: "Wellness program",
+  },
   "/how-it-works/": {
     href: "/how-it-works/",
     label: "How care works",

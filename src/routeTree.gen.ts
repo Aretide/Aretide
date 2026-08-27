@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WellnessRouteImport } from './routes/wellness'
 import { Route as WeightLossRouteImport } from './routes/weight-loss'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
@@ -18,6 +19,7 @@ import { Route as TheCombRouteImport } from './routes/the-comb'
 import { Route as SwitchRouteImport } from './routes/switch'
 import { Route as SubmittedRouteImport } from './routes/submitted'
 import { Route as StaffRouteImport } from './routes/staff'
+import { Route as SexualHealthRouteImport } from './routes/sexual-health'
 import { Route as SermorelinRouteImport } from './routes/sermorelin'
 import { Route as SemaglutideRouteImport } from './routes/semaglutide'
 import { Route as SafetyRouteImport } from './routes/safety'
@@ -30,6 +32,7 @@ import { Route as IntakeRouteImport } from './routes/intake'
 import { Route as InsuranceRouteImport } from './routes/insurance'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as HairlossRouteImport } from './routes/hairloss'
+import { Route as HairRouteImport } from './routes/hair'
 import { Route as Glp1HoustonRouteImport } from './routes/glp-1-houston'
 import { Route as Glp1RouteImport } from './routes/glp-1'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -82,6 +85,11 @@ import { Route as LearnVerticalSlugRouteImport } from './routes/learn/$vertical.
 import { Route as StaffQuestionnairesSlugIndexRouteImport } from './routes/staff.questionnaires.$slug.index'
 import { Route as StaffQuestionnairesSlugVersionsVersionIdRouteImport } from './routes/staff.questionnaires.$slug.versions.$versionId'
 
+const WellnessRoute = WellnessRouteImport.update({
+  id: '/wellness',
+  path: '/wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WeightLossRoute = WeightLossRouteImport.update({
   id: '/weight-loss',
   path: '/weight-loss',
@@ -125,6 +133,11 @@ const SubmittedRoute = SubmittedRouteImport.update({
 const StaffRoute = StaffRouteImport.update({
   id: '/staff',
   path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SexualHealthRoute = SexualHealthRouteImport.update({
+  id: '/sexual-health',
+  path: '/sexual-health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SermorelinRoute = SermorelinRouteImport.update({
@@ -185,6 +198,11 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
 const HairlossRoute = HairlossRouteImport.update({
   id: '/hairloss',
   path: '/hairloss',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HairRoute = HairRouteImport.update({
+  id: '/hair',
+  path: '/hair',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Glp1HoustonRoute = Glp1HoustonRouteImport.update({
@@ -461,6 +479,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
   '/glp-1-houston': typeof Glp1HoustonRoute
+  '/hair': typeof HairRoute
   '/hairloss': typeof HairlossRoute
   '/how-it-works': typeof HowItWorksRoute
   '/insurance': typeof InsuranceRoute
@@ -473,6 +492,7 @@ export interface FileRoutesByFullPath {
   '/safety': typeof SafetyRoute
   '/semaglutide': typeof SemaglutideRoute
   '/sermorelin': typeof SermorelinRoute
+  '/sexual-health': typeof SexualHealthRoute
   '/staff': typeof StaffRouteWithChildren
   '/submitted': typeof SubmittedRoute
   '/switch': typeof SwitchRoute
@@ -482,6 +502,7 @@ export interface FileRoutesByFullPath {
   '/verify-email': typeof VerifyEmailRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/weight-loss': typeof WeightLossRoute
+  '/wellness': typeof WellnessRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/intake': typeof DashboardIntakeRoute
@@ -534,6 +555,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
   '/glp-1-houston': typeof Glp1HoustonRoute
+  '/hair': typeof HairRoute
   '/hairloss': typeof HairlossRoute
   '/how-it-works': typeof HowItWorksRoute
   '/insurance': typeof InsuranceRoute
@@ -545,6 +567,7 @@ export interface FileRoutesByTo {
   '/safety': typeof SafetyRoute
   '/semaglutide': typeof SemaglutideRoute
   '/sermorelin': typeof SermorelinRoute
+  '/sexual-health': typeof SexualHealthRoute
   '/submitted': typeof SubmittedRoute
   '/switch': typeof SwitchRoute
   '/the-comb': typeof TheCombRoute
@@ -552,6 +575,7 @@ export interface FileRoutesByTo {
   '/trt': typeof TrtRoute
   '/waitlist': typeof WaitlistRoute
   '/weight-loss': typeof WeightLossRoute
+  '/wellness': typeof WellnessRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/intake': typeof DashboardIntakeRoute
@@ -603,6 +627,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
   '/glp-1-houston': typeof Glp1HoustonRoute
+  '/hair': typeof HairRoute
   '/hairloss': typeof HairlossRoute
   '/how-it-works': typeof HowItWorksRoute
   '/insurance': typeof InsuranceRoute
@@ -615,6 +640,7 @@ export interface FileRoutesById {
   '/safety': typeof SafetyRoute
   '/semaglutide': typeof SemaglutideRoute
   '/sermorelin': typeof SermorelinRoute
+  '/sexual-health': typeof SexualHealthRoute
   '/staff': typeof StaffRouteWithChildren
   '/submitted': typeof SubmittedRoute
   '/switch': typeof SwitchRoute
@@ -624,6 +650,7 @@ export interface FileRoutesById {
   '/verify-email': typeof VerifyEmailRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/weight-loss': typeof WeightLossRoute
+  '/wellness': typeof WellnessRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/documents': typeof DashboardDocumentsRoute
   '/dashboard/intake': typeof DashboardIntakeRoute
@@ -679,6 +706,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/glp-1'
     | '/glp-1-houston'
+    | '/hair'
     | '/hairloss'
     | '/how-it-works'
     | '/insurance'
@@ -691,6 +719,7 @@ export interface FileRouteTypes {
     | '/safety'
     | '/semaglutide'
     | '/sermorelin'
+    | '/sexual-health'
     | '/staff'
     | '/submitted'
     | '/switch'
@@ -700,6 +729,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/waitlist'
     | '/weight-loss'
+    | '/wellness'
     | '/dashboard/account'
     | '/dashboard/documents'
     | '/dashboard/intake'
@@ -752,6 +782,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/glp-1'
     | '/glp-1-houston'
+    | '/hair'
     | '/hairloss'
     | '/how-it-works'
     | '/insurance'
@@ -763,6 +794,7 @@ export interface FileRouteTypes {
     | '/safety'
     | '/semaglutide'
     | '/sermorelin'
+    | '/sexual-health'
     | '/submitted'
     | '/switch'
     | '/the-comb'
@@ -770,6 +802,7 @@ export interface FileRouteTypes {
     | '/trt'
     | '/waitlist'
     | '/weight-loss'
+    | '/wellness'
     | '/dashboard/account'
     | '/dashboard/documents'
     | '/dashboard/intake'
@@ -820,6 +853,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/glp-1'
     | '/glp-1-houston'
+    | '/hair'
     | '/hairloss'
     | '/how-it-works'
     | '/insurance'
@@ -832,6 +866,7 @@ export interface FileRouteTypes {
     | '/safety'
     | '/semaglutide'
     | '/sermorelin'
+    | '/sexual-health'
     | '/staff'
     | '/submitted'
     | '/switch'
@@ -841,6 +876,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/waitlist'
     | '/weight-loss'
+    | '/wellness'
     | '/dashboard/account'
     | '/dashboard/documents'
     | '/dashboard/intake'
@@ -895,6 +931,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   Glp1Route: typeof Glp1Route
   Glp1HoustonRoute: typeof Glp1HoustonRoute
+  HairRoute: typeof HairRoute
   HairlossRoute: typeof HairlossRoute
   HowItWorksRoute: typeof HowItWorksRoute
   InsuranceRoute: typeof InsuranceRoute
@@ -907,6 +944,7 @@ export interface RootRouteChildren {
   SafetyRoute: typeof SafetyRoute
   SemaglutideRoute: typeof SemaglutideRoute
   SermorelinRoute: typeof SermorelinRoute
+  SexualHealthRoute: typeof SexualHealthRoute
   StaffRoute: typeof StaffRouteWithChildren
   SubmittedRoute: typeof SubmittedRoute
   SwitchRoute: typeof SwitchRoute
@@ -916,6 +954,7 @@ export interface RootRouteChildren {
   VerifyEmailRoute: typeof VerifyEmailRouteWithChildren
   WaitlistRoute: typeof WaitlistRoute
   WeightLossRoute: typeof WeightLossRoute
+  WellnessRoute: typeof WellnessRoute
   LegalHipaaRoute: typeof LegalHipaaRoute
   LegalIntakeAcknowledgmentsRoute: typeof LegalIntakeAcknowledgmentsRoute
   LegalPhysicianCodeOfConductRoute: typeof LegalPhysicianCodeOfConductRoute
@@ -931,6 +970,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wellness': {
+      id: '/wellness'
+      path: '/wellness'
+      fullPath: '/wellness'
+      preLoaderRoute: typeof WellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/weight-loss': {
       id: '/weight-loss'
       path: '/weight-loss'
@@ -992,6 +1038,13 @@ declare module '@tanstack/react-router' {
       path: '/staff'
       fullPath: '/staff'
       preLoaderRoute: typeof StaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sexual-health': {
+      id: '/sexual-health'
+      path: '/sexual-health'
+      fullPath: '/sexual-health'
+      preLoaderRoute: typeof SexualHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sermorelin': {
@@ -1076,6 +1129,13 @@ declare module '@tanstack/react-router' {
       path: '/hairloss'
       fullPath: '/hairloss'
       preLoaderRoute: typeof HairlossRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hair': {
+      id: '/hair'
+      path: '/hair'
+      fullPath: '/hair'
+      preLoaderRoute: typeof HairRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/glp-1-houston': {
@@ -1576,6 +1636,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   Glp1Route: Glp1Route,
   Glp1HoustonRoute: Glp1HoustonRoute,
+  HairRoute: HairRoute,
   HairlossRoute: HairlossRoute,
   HowItWorksRoute: HowItWorksRoute,
   InsuranceRoute: InsuranceRoute,
@@ -1588,6 +1649,7 @@ const rootRouteChildren: RootRouteChildren = {
   SafetyRoute: SafetyRoute,
   SemaglutideRoute: SemaglutideRoute,
   SermorelinRoute: SermorelinRoute,
+  SexualHealthRoute: SexualHealthRoute,
   StaffRoute: StaffRouteWithChildren,
   SubmittedRoute: SubmittedRoute,
   SwitchRoute: SwitchRoute,
@@ -1597,6 +1659,7 @@ const rootRouteChildren: RootRouteChildren = {
   VerifyEmailRoute: VerifyEmailRouteWithChildren,
   WaitlistRoute: WaitlistRoute,
   WeightLossRoute: WeightLossRoute,
+  WellnessRoute: WellnessRoute,
   LegalHipaaRoute: LegalHipaaRoute,
   LegalIntakeAcknowledgmentsRoute: LegalIntakeAcknowledgmentsRoute,
   LegalPhysicianCodeOfConductRoute: LegalPhysicianCodeOfConductRoute,

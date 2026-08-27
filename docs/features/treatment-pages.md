@@ -20,11 +20,30 @@ Added 2026-08-27, first pass. These are **not** GLP-1 medications, so the §F1.1
 
 **CTA URLs are unverified against Bask.** `CTA_OVERRIDES` in `cta-ids.ts` points each product's hero/footer CTA at `https://q.beemahealth.com/start-online-visit/{trt|hairloss|ed|nad|sermorelin}`, mirroring the only known-good pattern (`/start-online-visit/weightloss`). This is an assumption, not a confirmed Bask route - verify before relying on these in production.
 
-**Nav:** the header dropdown that used to be scoped to weight-loss medications only is renamed `TREATMENT_ITEMS` / "Treatments" (was `WEIGHT_LOSS_ITEMS` / "Weight Loss") in `SiteHeader.tsx`, since it now lists all 7 medication pages, not just the two GLP-1s. All 5 new pages are also in the footer Care column.
+**Nav:** superseded 2026-08-27 by category-based nav (see "Nav: category dropdowns" below) - the single flat "Treatments" dropdown this section originally described lasted about a day before being reorganized by category, Good Life Meds style. All 7 medication pages are still in the footer Care column, now grouped under their category's hub link.
 
 **`/learn/trt` was rewritten**, not left alone: that hub previously stated flatly "Beema does not offer TRT today." Since compounded enclomiphene is now real and live, the hub instead explains the distinction - it's an educational overview of injectable/gel/patch testosterone therapy, and Beema's actual offering (enclomiphene) works differently and lives on `/trt`. Same fix applied to the `what-is-trt` learn article and `public/llms.txt`. `/learn/hrt`'s "not currently offered" language is untouched - HRT is still not a Beema program.
 
 Educational (not commercial) companions live at `/learn/`. Program pages pull those guides from `src/content/learn/money-page-guides.ts`. Learn copy is unsigned; do not treat it as clinician-reviewed. Spec: `docs/features/learn.md`.
+
+## Category hub pages (`/sexual-health`, `/hair`, `/wellness`)
+
+Added 2026-08-27, alongside the nav reorganization below. Mirrors the pre-existing `/weight-loss` pattern exactly: a broader, non-brand overview page targeting head-term searches ("hair loss treatment," "sexual health treatment online"), linking down into the category's specific medication pages, which stay the bottom-funnel conversion targets.
+
+| Hub | Route | Links to |
+|---|---|---|
+| Weight Loss | `/weight-loss` | `/semaglutide`, `/tirzepatide` (pre-existing) |
+| Sexual Health | `/sexual-health` | `/ed`, `/trt` |
+| Hair | `/hair` | `/hairloss` (today - designed to grow, see below) |
+| Wellness | `/wellness` | `/nad-plus`, `/sermorelin` |
+
+**Why Hair gets a full hub despite having one product today:** more hair-loss formulations are planned, so `/hair` and its nav dropdown (`HAIR_ITEMS` in `SiteHeader.tsx`) exist now to grow into, rather than retrofitting a hub later once a second hair product ships. Add new hair-loss medication pages to `HAIR_ITEMS`, the `/hair` route's `LINEUP` array, and the footer Care column.
+
+**Compliance note (Sexual Health specifically):** ED and TRT are different treatments for different concerns. `/sexual-health`'s copy explicitly says so ("Two different treatments, reviewed separately" / "one is never assumed to need the other") so that bucketing TRT alongside ED for nav/audience reasons doesn't read as implying TRT is an ED treatment or vice versa.
+
+**Structured data:** each hub carries `BreadcrumbList` + `serviceJsonLd()` only, matching `/weight-loss` - no visible FAQ content on any of the 4 hubs, so no `FAQPage` (see the Structured data section below for why that pairing matters).
+
+**Shared building block:** `SimpleCategoryLineup` in `TreatmentPageBlocks.tsx` renders each hub's card grid (icon art + name + price + link), deliberately separate from `TreatmentLineup.tsx` (the `/weight-loss`-only version hardcoded to GLP-1 photo imagery and `CompoundedPriceLockup`).
 
 ## Compliance (LegitScript + FDA)
 
@@ -46,12 +65,15 @@ Product photography: the site defaults to branded Beema-wordmark vial imagery vi
 | `/semaglutide` | `src/routes/semaglutide.tsx` | Compounded semaglutide landing page |
 | `/glp-1` | `src/routes/glp-1.tsx` | National cash-pay GLP-1 category page (not in primary nav/footer). Shares `Glp1LandingPage` with city landers. |
 | `/glp-1-houston` | `src/routes/glp-1-houston.tsx` | Houston cash-pay GLP-1 ads landing. Future cities: `/glp-1-{city}` under the same template - see "City GLP-1 pages" below |
-| `/weight-loss` | `src/routes/weight-loss.tsx` | Program overview page - linked from nav/footer, see below |
+| `/weight-loss` | `src/routes/weight-loss.tsx` | Category hub - linked from footer, see below |
 | `/trt` | `src/routes/trt.tsx` | Compounded enclomiphene (TRT) landing page |
 | `/hairloss` | `src/routes/hairloss.tsx` | Compounded hairloss landing page (oral + topical plans) |
 | `/ed` | `src/routes/ed.tsx` | Compounded ED landing page (standard + combo plans) |
 | `/nad-plus` | `src/routes/nad-plus.tsx` | Compounded NAD+ landing page |
 | `/sermorelin` | `src/routes/sermorelin.tsx` | Compounded sermorelin landing page |
+| `/sexual-health` | `src/routes/sexual-health.tsx` | Category hub for `/ed` + `/trt` - linked from footer, see "Category hub pages" above |
+| `/hair` | `src/routes/hair.tsx` | Category hub for `/hairloss` (designed to grow) - linked from footer |
+| `/wellness` | `src/routes/wellness.tsx` | Category hub for `/nad-plus` + `/sermorelin` - linked from footer |
 
 Shared building blocks (pricing card, comparison table, FAQ accordion, breadcrumb) live in `src/components/site/TreatmentPageBlocks.tsx`. Copy/data (steps, FAQ items, eligibility bullets) stays local to each route file - do not extract it into a shared data file, each page is meant to have genuinely distinct copy.
 
@@ -77,24 +99,33 @@ Previously `/weight-loss` was kept as a deliberate orphan (no internal links any
 
 As of the 2026-07-30 SEO pass, that decision was reversed: `/weight-loss` is real, unique, non-duplicate content (its own hero, benefits, "who this is for" section, and CTA - not a stub) that targets broader, higher-volume, non-brand search intent than the drug pages can. It is now:
 
-- Linked from the footer Care column (`COLUMNS[0].links` in `SiteFooter.tsx`), not from the header Treatments dropdown
+- Linked from the footer Care column (`COLUMNS[0].links` in `SiteFooter.tsx`), not from the header's Weight Loss dropdown
 - Linked contextually from `/semaglutide` and `/tirzepatide` ("Learn about our weight-loss program")
 - Down-ranked in `public/sitemap.xml` to priority `0.7` (below the two drug pages at `0.9`, which remain the primary conversion targets, and `/how-it-works` at `0.8`)
 
 If a future change needs to re-orphan or retire this page, that's a deliberate call to make with the team, not a default to restore - update this doc and the `COLUMNS` comments together with the code.
 
-## Nav: "Treatments" dropdown (renamed from "Weight Loss" 2026-08-27)
+## Nav: category dropdowns (Weight Loss / Sexual Health / Hair / Wellness)
 
-`SiteHeader.tsx` renders "Treatments" as a dropdown of every medication page. `TREATMENT_ITEMS` (renamed from `WEIGHT_LOSS_ITEMS`) is Compounded Tirzepatide, Compounded Semaglutide, TRT (Enclomiphene), Hairloss Treatment, ED Treatment, NAD+, and Sermorelin. It was renamed because "Weight Loss" stopped being an accurate label once non-weight-loss products joined the list.
+Reorganized 2026-08-27, Good Life Meds style, replacing the previous same-day flat "Treatments" dropdown (one list of all 7 medications). `SiteHeader.tsx` now renders four medication dropdowns, each scoped to one category's *specific medication pages only* - the category's hub page stays out of the header (see below):
 
-`/weight-loss` stays live for SEO and for people who want the program overview. It is **not** in the header. Link it from the site footer Care column and from in-page copy. `/how-it-works` is in the **Resources** header dropdown and footer Resources column (care-process overview, not a medication page). On `/tirzepatide`, `/semaglutide`, `/glp-1`, and `/glp-1-houston`, the hero "How it works" / "How care works" button is an on-page jump (`hash="how-it-works"`) to `<HowItWorksSteps />` on that same page, not a navigation to `/how-it-works/`.
+| Dropdown | `NavItem[]` const | Items |
+|---|---|---|
+| Weight Loss | `WEIGHT_LOSS_ITEMS` | Compounded Tirzepatide, Compounded Semaglutide |
+| Sexual Health | `SEXUAL_HEALTH_ITEMS` | ED Treatment, TRT (Enclomiphene) |
+| Hair | `HAIR_ITEMS` | Hairloss Treatment (designed to grow - see "Category hub pages" above) |
+| Wellness | `WELLNESS_ITEMS` | NAD+, Sermorelin |
+
+Add a new medication page to the matching category's `*_ITEMS` array (and to that category's hub-page `LINEUP` array, and the footer Care column) rather than adding a new top-level nav entry or reviving the flat list. A genuinely new category (not Weight Loss/Sexual Health/Hair/Wellness) is a deliberate call to make with the team, not a default - it adds a 7th top-level dropdown next to Resources and About, which is real nav-crowding cost.
+
+Every category's hub page (`/weight-loss`, `/sexual-health`, `/hair`, `/wellness`) stays **out of the header** - linked from the site footer Care column and from in-page copy only, matching the pre-existing `/weight-loss` decision. `/how-it-works` is in the **Resources** header dropdown and footer Resources column (care-process overview, not a medication page). On `/tirzepatide`, `/semaglutide`, `/glp-1`, and `/glp-1-houston`, the hero "How it works" / "How care works" button is an on-page jump (`hash="how-it-works"`) to `<HowItWorksSteps />` on that same page, not a navigation to `/how-it-works/`.
 
 Hover/tap behavior is the same shared pair as the other menus:
 
 - **Desktop** - `DesktopNav` / `DesktopNavDropdown`. Click a trigger to open, click it again (or outside / Escape) to close, hover another trigger to switch. The open panel fades and slides in (opacity + translate only - no Radix DropdownMenu; that Popper flicker is why these stay in-flow). Only one panel is open at a time; sibling labels dim while a menu is open.
 - **Mobile** - `MobileNavDropdown`, a tap-to-expand disclosure inside the mobile menu (see `docs/features/homepage.md` for the `CircleRevealMenu` shell it lives in). Local `expanded` state collapses it back down every time the mobile menu reopens; the reveal/collapse is animated (Motion `AnimatePresence` + height/opacity), matching the site's other transitions.
 
-Add new **medication** pages to `TREATMENT_ITEMS` (and to `SiteFooter.tsx`'s Care column, above the program links) rather than adding a new top-level nav entry. Keep `/weight-loss` and `/glp-1` in the footer Care column, not in the header. Keep `/how-it-works` in Resources (header + footer), not in Treatments or Care. Do **not** add city/geo GLP-1 ads landers (`/glp-1-houston`, future `/glp-1-{city}`) to primary nav or footer - those stay ad/SEO entry points.
+Keep `/glp-1` in the footer Care column, not in the header - it's a national cash-pay category page distinct from the four medication-category hubs above. Do **not** add city/geo GLP-1 ads landers (`/glp-1-houston`, future `/glp-1-{city}`) to primary nav or footer - those stay ad/SEO entry points.
 
 ## Nav: "Resources" dropdown
 
@@ -120,20 +151,20 @@ Google Ads can expand beyond Houston. Live shape:
 | `/glp-1-houston` | Houston ads LP (`<Glp1LandingPage market="houston" />`) |
 | `/glp-1-austin`, … | Future city LPs: add a market to `src/lib/glp-1-landing.ts` and a thin route file |
 
-Keep city pages out of the Treatments dropdown so nav does not grow with every market. Ads land on the city URL. The national hub is linked from the footer Care column (`GLP-1 Care` → `/glp-1/`); city landers stay out of nav/footer. Shared sections live in `Glp1LandingPage`; only market copy, canonicals, and JSON-LD differ. Each page self-canonicalizes - never canonicalize a city page to `/glp-1/`.
+Keep city pages out of the category dropdowns so nav does not grow with every market. Ads land on the city URL. The national hub is linked from the footer Care column (`GLP-1 Care` → `/glp-1/`); city landers stay out of nav/footer. Shared sections live in `Glp1LandingPage`; only market copy, canonicals, and JSON-LD differ. Each page self-canonicalizes - never canonicalize a city page to `/glp-1/`.
 
 ## Medication cards
 
-`TreatmentShowcase.tsx` (homepage) and `TreatmentLineup.tsx` (`/weight-loss` page) each render one card per medication. Both cards are full-card `<Link>`s (not nested interactive elements) pointing at that medication's own page (`/tirzepatide/`, `/semaglutide/`) - never at `/weight-loss/` itself (that would be a self-link on the `/weight-loss` page and redundant elsewhere). CTA copy is `Explore {treatment.name}` (e.g. "Explore Compounded Tirzepatide"). These two files still duplicate their own local `TREATMENTS` array (pre-existing pattern) - add a new medication to both when it gets its own page. The homepage TreatmentShowcase also links to `/glp-1/` ("Explore GLP-1 care").
+`TreatmentShowcase.tsx` (homepage) and `TreatmentLineup.tsx` (`/weight-loss` page) each render one card per GLP-1 medication only - not updated for the 5 new product lines or 3 new hubs, which is deliberate for now: the homepage stays focused on the flagship GLP-1 offering, and each new hub's own `SimpleCategoryLineup` (see "Category hub pages" above) is the equivalent for its category. Both GLP-1 cards are full-card `<Link>`s (not nested interactive elements) pointing at that medication's own page (`/tirzepatide/`, `/semaglutide/`) - never at `/weight-loss/` itself. CTA copy is `Explore {treatment.name}` (e.g. "Explore Compounded Tirzepatide"). These two files still duplicate their own local `TREATMENTS` array (pre-existing pattern) - add a new GLP-1 medication to both when it gets its own page. The homepage TreatmentShowcase also links to `/glp-1/` ("Explore GLP-1 care"). Whether the homepage should surface the other 3 categories too is an open homepage-design question, not answered by this change.
 
 ## Structured data
 
-All three treatment-adjacent pages now carry page-specific JSON-LD alongside the sitewide `MedicalOrganization`/`WebSite` schema (`ORGANIZATION_JSONLD`/`WEBSITE_JSONLD` in `src/lib/seo.ts`, rendered in the root layout):
+Every treatment-adjacent page carries page-specific JSON-LD alongside the sitewide `MedicalOrganization`/`WebSite` schema (`ORGANIZATION_JSONLD`/`WEBSITE_JSONLD` in `src/lib/seo.ts`, rendered in the root layout):
 
-- `/tirzepatide`, `/semaglutide` — `BreadcrumbList` + `FAQPage` (unchanged; matches the visible `TreatmentBreadcrumb` and FAQ accordion on each page)
+- `/tirzepatide`, `/semaglutide`, `/trt`, `/hairloss`, `/ed`, `/nad-plus`, `/sermorelin` — `BreadcrumbList` + `FAQPage` + `serviceJsonLd()` (each has a visible FAQ accordion that matches its JSON-LD)
 - `/glp-1` — `BreadcrumbList` + `FAQPage` + `serviceJsonLd()` (national cash-pay GLP-1 category page; visible FAQ matches JSON-LD; canonical `https://beemahealth.com/glp-1/`)
 - `/glp-1-houston` — `BreadcrumbList` + `FAQPage` + `serviceJsonLd()` (Houston cash-pay GLP-1 ads + local SEO page; visible FAQ matches JSON-LD; canonical `https://beemahealth.com/glp-1-houston/`)
-- `/weight-loss` — `BreadcrumbList` + `serviceJsonLd()` (a `Service` describing the program itself; no visible FAQ content, so no `FAQPage`)
+- `/weight-loss`, `/sexual-health`, `/hair`, `/wellness` — `BreadcrumbList` + `serviceJsonLd()` (each a `Service` describing the category program itself; no visible FAQ content on any of the 4 hubs, so no `FAQPage`)
 - `/how-it-works`, `/safety` — `BreadcrumbList` + `medicalWebPageJsonLd()` (a `MedicalWebPage` describing the informational content; no visible FAQ content, so no `FAQPage`)
 
 `breadcrumbJsonLd()`, `faqPageJsonLd()`, `serviceJsonLd()`, and `medicalWebPageJsonLd()` all live in `src/lib/seo.ts`. Never add `FAQPage` JSON-LD without a matching visible FAQ accordion on the page — Google's structured-data guidelines require the two to match, and `faqPageJsonLd()`'s docstring says the same.
@@ -179,10 +210,13 @@ const cta = resolveCta(CTA_IDS.tirzepatide_hero);
 | `src/lib/boot-assets.ts` | LCP vs warmup photo lists for the first-visit splash |
 | `src/components/brand/SiteBootLoader.tsx` | Branded overlay (root shell, first document load) |
 | `src/components/site/TreatmentPageBlocks.tsx` | Shared breadcrumb, pricing card, comparison table, FAQ accordion |
-| `src/lib/medication-pricing.ts` | Single source of truth for pricing — never hardcode `$` amounts elsewhere |
+| `src/lib/medication-pricing.ts` | Single source of truth for GLP-1 pricing — never hardcode `$` amounts elsewhere |
+| `src/lib/simple-treatment-pricing.ts` | Single source of truth for the 5 non-GLP-1 products' pricing (Monthly/Quarterly, no promo code) |
+| `src/routes/trt.tsx`, `hairloss.tsx`, `ed.tsx`, `nad-plus.tsx`, `sermorelin.tsx` | The 5 non-GLP-1 treatment pages |
+| `src/routes/sexual-health.tsx`, `hair.tsx`, `wellness.tsx` | The 3 new category hub pages (`/weight-loss` is the pre-existing 4th) |
 | `src/lib/cta-ids.ts` | `CTA_IDS`, `resolveCta()` — the CTA switchboard |
 | `src/lib/seo.ts` | `faqPageJsonLd()`, `breadcrumbJsonLd()`, `serviceJsonLd()`, `medicalWebPageJsonLd()`, `canonicalUrl()` |
-| `src/components/site/SiteHeader.tsx`, `SiteFooter.tsx` | Weight Loss, Resources, and About dropdowns (`DesktopNavDropdown` / `MobileNavDropdown`); footer Care + Resources + Trust columns (Trust includes the Google review ask) |
+| `src/components/site/SiteHeader.tsx`, `SiteFooter.tsx` | Weight Loss / Sexual Health / Hair / Wellness / Resources / About dropdowns (`DesktopNavDropdown` / `MobileNavDropdown`); footer Care + Resources + Trust columns (Trust includes the Google review ask) |
 | `src/lib/google-business.ts` | GBP listing URL (`sameAs`) vs write-review URL (footer + `/contact/`) |
 | `src/lib/marketing-copy.ts` | `FIRST_MONTH_PROMO_LINE` — the one-time, 3-month-only promo code promoted alongside pricing |
 | `src/components/home/TreatmentShowcase.tsx`, `src/components/site/TreatmentLineup.tsx` | Medication cards (home / `/weight-loss`) |

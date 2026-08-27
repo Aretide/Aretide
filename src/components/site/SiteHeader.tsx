@@ -17,27 +17,51 @@ type NavItem = { label: string; to: string; description?: string };
 
 /**
  * Trailing-slash paths - match sitemap.xml / canonicalUrl / GitHub Pages 200
- * URLs. Primary nav is three dropdowns: Weight Loss, Resources, and About.
- * See docs/features/treatment-pages.md.
+ * URLs. Primary nav is six dropdowns: Weight Loss, Sexual Health, Hair,
+ * Wellness, Resources, and About. See docs/features/treatment-pages.md.
  */
 const NAV: NavItem[] = [
   // { label: "Pricing", to: "/pricing/" }, // disabled - pricing model not finalized yet
 ];
 
-/** Weight Loss dropdown - medications only. /weight-loss stays in the site
- * footer Care column, not here. */
 /**
- * Renamed from WEIGHT_LOSS_ITEMS (2026-08-27): this dropdown now spans every
- * medication page, not only weight loss - "Weight Loss" as a label would
- * misdescribe the TRT/hairloss/ED/NAD+/sermorelin entries added alongside
- * the compounded GLP-1 pages. See docs/features/treatment-pages.md.
+ * ---------------------------------------------------------------------
+ * Treatment dropdowns (2026-08-27: reorganized by category, Good Life Meds
+ * style, replacing the earlier flat `TREATMENT_ITEMS` list)
+ * ---------------------------------------------------------------------
+ * Each category dropdown lists that category's individual medication pages
+ * only - the category's own overview/hub page (`/weight-loss`,
+ * `/sexual-health`, `/hair`, `/wellness`) stays out of the header and lives
+ * in the footer Care column instead, matching the pre-existing
+ * `/weight-loss` convention. See docs/features/treatment-pages.md.
  */
-const TREATMENT_ITEMS: NavItem[] = [
+const WEIGHT_LOSS_ITEMS: NavItem[] = [
   { label: "Compounded Tirzepatide", to: "/tirzepatide/" },
   { label: "Compounded Semaglutide", to: "/semaglutide/" },
-  { label: "TRT (Enclomiphene)", to: "/trt/" },
-  { label: "Hairloss Treatment", to: "/hairloss/" },
+];
+
+/**
+ * TRT (compounded enclomiphene) sits here, not in its own dropdown or in
+ * Wellness - same audience/purchase journey as ED. Hub page copy at
+ * /sexual-health keeps the two clearly distinct (TRT is not an ED
+ * treatment).
+ */
+const SEXUAL_HEALTH_ITEMS: NavItem[] = [
   { label: "ED Treatment", to: "/ed/" },
+  { label: "TRT (Enclomiphene)", to: "/trt/" },
+];
+
+/**
+ * Only one product today, but designed to grow - more hair-loss
+ * formulations are coming, so this stays its own category dropdown (and
+ * `/hair` its own hub page) rather than folding into another category or a
+ * plain link.
+ */
+const HAIR_ITEMS: NavItem[] = [
+  { label: "Hairloss Treatment", to: "/hairloss/" },
+];
+
+const WELLNESS_ITEMS: NavItem[] = [
   { label: "NAD+", to: "/nad-plus/" },
   { label: "Sermorelin", to: "/sermorelin/" },
 ];
@@ -155,11 +179,14 @@ function DesktopNav() {
   }, []);
 
   const menus = [
+    { id: "weight-loss", label: "Weight Loss", items: WEIGHT_LOSS_ITEMS },
     {
-      id: "treatments",
-      label: "Treatments",
-      items: TREATMENT_ITEMS,
+      id: "sexual-health",
+      label: "Sexual Health",
+      items: SEXUAL_HEALTH_ITEMS,
     },
+    { id: "hair", label: "Hair", items: HAIR_ITEMS },
+    { id: "wellness", label: "Wellness", items: WELLNESS_ITEMS },
     { id: "resources", label: "Resources", items: RESOURCE_ITEMS },
     { id: "about", label: "About", items: ABOUT_ITEMS },
   ] as const;
@@ -526,8 +553,23 @@ export function SiteHeader() {
             </div>
             <div className="flex flex-1 flex-col justify-center gap-1 px-8">
               <MobileNavDropdown
-                label="Treatments"
-                items={TREATMENT_ITEMS}
+                label="Weight Loss"
+                items={WEIGHT_LOSS_ITEMS}
+                onNavigate={() => setOpen(false)}
+              />
+              <MobileNavDropdown
+                label="Sexual Health"
+                items={SEXUAL_HEALTH_ITEMS}
+                onNavigate={() => setOpen(false)}
+              />
+              <MobileNavDropdown
+                label="Hair"
+                items={HAIR_ITEMS}
+                onNavigate={() => setOpen(false)}
+              />
+              <MobileNavDropdown
+                label="Wellness"
+                items={WELLNESS_ITEMS}
                 onNavigate={() => setOpen(false)}
               />
               <MobileNavDropdown
