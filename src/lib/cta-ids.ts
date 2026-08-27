@@ -20,6 +20,16 @@ export const CTA_IDS = {
   semaglutide_hero: "semaglutide_hero",
   semaglutide_footer: "semaglutide_footer",
   semaglutide_bmi: "semaglutide_bmi",
+  trt_hero: "trt_hero",
+  trt_footer: "trt_footer",
+  hairloss_hero: "hairloss_hero",
+  hairloss_footer: "hairloss_footer",
+  ed_hero: "ed_hero",
+  ed_footer: "ed_footer",
+  nad_hero: "nad_hero",
+  nad_footer: "nad_footer",
+  sermorelin_hero: "sermorelin_hero",
+  sermorelin_footer: "sermorelin_footer",
   how_it_works: "how_it_works",
   faq: "faq",
   safety: "safety",
@@ -101,6 +111,16 @@ const DEFAULT_CTA_TARGET: CtaTarget = {
   to: "https://q.beemahealth.com/start-online-visit/weightloss",
 };
 
+/**
+ * Bask intake base for the 5 non-GLP-1 product lines added 2026-08-27.
+ * ASSUMED URL SHAPE, not yet confirmed against Bask's actual routing -
+ * mirrors the only known-good pattern (DEFAULT_CTA_TARGET's
+ * `/start-online-visit/weightloss`). Verify each `/start-online-visit/{slug}`
+ * path resolves on Bask before this branch merges; a wrong slug silently
+ * misroutes every conversion for that product.
+ */
+const BASK_INTAKE_BASE = "https://q.beemahealth.com/start-online-visit";
+
 /** Per-CTA overrides for context-specific, compliant labels. */
 const CTA_OVERRIDES: Partial<Record<CtaId, CtaTarget>> = {
   recipes_hub: {
@@ -114,6 +134,25 @@ const CTA_OVERRIDES: Partial<Record<CtaId, CtaTarget>> = {
   learn_weight_loss: {
     label: "See if a provider-reviewed plan could be right for you",
     to: DEFAULT_CTA_TARGET.to,
+  },
+  trt_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/trt` },
+  trt_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/trt` },
+  hairloss_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/hairloss` },
+  hairloss_footer: {
+    label: "Get Started",
+    to: `${BASK_INTAKE_BASE}/hairloss`,
+  },
+  ed_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/ed` },
+  ed_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/ed` },
+  nad_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/nad` },
+  nad_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/nad` },
+  sermorelin_hero: {
+    label: "Get Started",
+    to: `${BASK_INTAKE_BASE}/sermorelin`,
+  },
+  sermorelin_footer: {
+    label: "Get Started",
+    to: `${BASK_INTAKE_BASE}/sermorelin`,
   },
 };
 

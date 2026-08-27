@@ -284,19 +284,19 @@ export const WEIGHT_LOSS_HUB_SOURCES = [
 export const TRT_HUB_META = {
   title: "TRT Education | Beema Health Learn",
   h1: "Testosterone replacement therapy: an educational overview",
-  eyebrow: "Educational only - not a Beema product",
+  eyebrow: "Educational overview",
   description:
-    "Educational overview of testosterone replacement therapy, including who guidelines consider, how diagnosis works, and key risks. Beema does not offer TRT today.",
+    "Educational overview of testosterone replacement therapy, including who guidelines consider, how diagnosis works, and key risks. Beema's live TRT offering is compounded enclomiphene, a related but distinct treatment - see the TRT page for details.",
   ogDescription:
-    "Unsigned education on TRT and hypogonadism. Beema's live clinical offering is medical weight-loss care, not testosterone replacement.",
+    "Unsigned education on TRT and hypogonadism. Beema's live TRT offering is compounded enclomiphene, which works differently than the injectable, gel, or patch testosterone described on this page.",
 } as const;
 
 export const TRT_HUB_SECTIONS = [
   {
     id: "status",
-    heading: "Beema does not offer TRT today",
+    heading: "What Beema actually offers",
     body: [
-      "This hub exists so people searching for testosterone replacement therapy have a cited, honest page. Beema Health's live clinical offering is telehealth medical weight-loss. We are not currently prescribing testosterone, selling TRT plans, or running a TRT intake. Any future program would need its own clinical, pharmacy, and advertising review. Do not treat this page as a waitlist with hidden pricing.",
+      "This hub is a general educational overview of testosterone replacement therapy as described in clinical guidelines - typically intramuscular injections, transdermal gels, or patches that replace testosterone directly. Beema Health's live TRT offering is different: compounded enclomiphene, an oral medication that encourages the body to produce more of its own testosterone rather than replacing it. See Beema's TRT page for enclomiphene-specific care, pricing, and eligibility. A licensed provider decides, case by case, whether enclomiphene or any treatment is appropriate; prescribing is never guaranteed.",
     ],
   },
   {
@@ -329,17 +329,17 @@ export const TRT_HUB_FAQS: readonly LearnFaq[] = [
   {
     question: "Does Beema currently offer a TRT intake?",
     answer:
-      "No. Beema does not currently offer testosterone replacement therapy. There is no TRT intake, no TRT pricing, and no TRT reviews on this site.",
+      "Beema offers compounded enclomiphene, a related but distinct treatment that encourages the body to produce more of its own testosterone rather than replacing it directly, unlike the injectable, gel, or patch testosterone described on this page. See Beema's TRT page for enclomiphene-specific care, pricing, and eligibility. A licensed provider decides, case by case, whether it's appropriate; prescribing is never guaranteed.",
   },
   {
     question: "Is TRT the same as a GLP-1 weight-loss program?",
     answer:
-      "No. They are different medicines, different diagnoses, and different monitoring. Beema's live program is medical weight-loss, not testosterone replacement.",
+      "No. They are different medicines, different diagnoses, and different monitoring. Beema's compounded enclomiphene program is separate from its GLP-1 weight-loss care.",
   },
   {
     question: "Where should I go if I need testosterone evaluated?",
     answer:
-      "Talk with a licensed clinician, often in endocrinology, urology, or primary care, who can interpret morning testosterone assays and your history. This page cannot refer you to a Beema TRT clinician because that service is not offered.",
+      "Talk with a licensed clinician, often in endocrinology, urology, or primary care, who can interpret morning testosterone assays and your history. If you're specifically interested in Beema's compounded enclomiphene program, see Beema's TRT page - a licensed provider there reviews your intake and independently decides whether it may be appropriate.",
   },
 ];
 

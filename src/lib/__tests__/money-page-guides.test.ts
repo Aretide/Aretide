@@ -91,10 +91,11 @@ describe("money page guides", () => {
     }
   });
 
-  it("keeps guide sets weight-loss only until the other verticals launch", () => {
-    // Beema currently offers compounded semaglutide and compounded tirzepatide.
-    // TRT, HRT, ED, hair loss and peptides are education-only until launch, so
-    // a program page must not link to them as if they were purchasable.
+  it("keeps guide sets weight-loss only for now", () => {
+    // TRT, hairloss, ED, NAD+, and sermorelin launched 2026-08-27 with their
+    // own money pages (see src/routes/trt.tsx etc.), but this pass didn't
+    // configure MONEY_PAGE_GUIDES entries for them - no learn articles exist
+    // for those verticals yet to link. HRT remains unlaunched entirely.
     const nonWeightLoss = MONEY_PAGE_GUIDES.flatMap((set) =>
       set.articles.filter((a) => a.vertical !== "weight-loss"),
     );

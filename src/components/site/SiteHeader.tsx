@@ -26,9 +26,20 @@ const NAV: NavItem[] = [
 
 /** Weight Loss dropdown - medications only. /weight-loss stays in the site
  * footer Care column, not here. */
-const WEIGHT_LOSS_ITEMS: NavItem[] = [
+/**
+ * Renamed from WEIGHT_LOSS_ITEMS (2026-08-27): this dropdown now spans every
+ * medication page, not only weight loss - "Weight Loss" as a label would
+ * misdescribe the TRT/hairloss/ED/NAD+/sermorelin entries added alongside
+ * the compounded GLP-1 pages. See docs/features/treatment-pages.md.
+ */
+const TREATMENT_ITEMS: NavItem[] = [
   { label: "Compounded Tirzepatide", to: "/tirzepatide/" },
   { label: "Compounded Semaglutide", to: "/semaglutide/" },
+  { label: "TRT (Enclomiphene)", to: "/trt/" },
+  { label: "Hairloss Treatment", to: "/hairloss/" },
+  { label: "ED Treatment", to: "/ed/" },
+  { label: "NAD+", to: "/nad-plus/" },
+  { label: "Sermorelin", to: "/sermorelin/" },
 ];
 
 /**
@@ -145,9 +156,9 @@ function DesktopNav() {
 
   const menus = [
     {
-      id: "weight-loss",
-      label: "Weight Loss",
-      items: WEIGHT_LOSS_ITEMS,
+      id: "treatments",
+      label: "Treatments",
+      items: TREATMENT_ITEMS,
     },
     { id: "resources", label: "Resources", items: RESOURCE_ITEMS },
     { id: "about", label: "About", items: ABOUT_ITEMS },
@@ -515,8 +526,8 @@ export function SiteHeader() {
             </div>
             <div className="flex flex-1 flex-col justify-center gap-1 px-8">
               <MobileNavDropdown
-                label="Weight Loss"
-                items={WEIGHT_LOSS_ITEMS}
+                label="Treatments"
+                items={TREATMENT_ITEMS}
                 onNavigate={() => setOpen(false)}
               />
               <MobileNavDropdown

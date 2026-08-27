@@ -8,6 +8,7 @@ import {
   COMPOUNDED_TIRZEPATIDE_PRICING,
   PROMO_CODE_DISCOUNT_USD,
 } from "@/lib/medication-pricing";
+import { listKnownSimpleTreatmentPricingUsdAmounts } from "@/lib/simple-treatment-pricing";
 
 /**
  * llms.txt is what answer engines are pointed at as Beema's fact sheet, so a
@@ -59,6 +60,9 @@ describe("llms.txt", () => {
       }
     }
     known.add(String(PROMO_CODE_DISCOUNT_USD));
+    for (const n of listKnownSimpleTreatmentPricingUsdAmounts()) {
+      known.add(String(n));
+    }
     const quoted = [...llms.matchAll(/\$([\d,]+(?:\.\d+)?)/g)].map((m) =>
       m[1]!.replace(/,/g, ""),
     );
@@ -122,13 +126,15 @@ describe("llms.txt", () => {
     expect(missing).toEqual([]);
   });
 
-  it("states the service area and that unlaunched verticals are not for sale", () => {
+  it("states the service area and that the unlaunched HRT vertical is not for sale", () => {
+    // TRT launched 2026-08-27 as compounded enclomiphene; HRT remains the
+    // only vertical that's education-only.
     expect(llms).toMatch(/all 50 US states/i);
     expect(llms).toMatch(/United States only/i);
     expect(llms).toMatch(/not an international service/i);
     expect(llms).toMatch(/clinically appropriate/i);
     expect(llms).not.toMatch(/clinically indicated/i);
-    expect(llms).toMatch(/not purchasable Beema programs today/i);
+    expect(llms).toMatch(/not a purchasable Beema program today/i);
   });
 
   it("uses no em or en dashes", () => {

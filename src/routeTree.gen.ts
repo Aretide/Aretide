@@ -12,24 +12,29 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WeightLossRouteImport } from './routes/weight-loss'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as TrtRouteImport } from './routes/trt'
 import { Route as TirzepatideRouteImport } from './routes/tirzepatide'
 import { Route as TheCombRouteImport } from './routes/the-comb'
 import { Route as SwitchRouteImport } from './routes/switch'
 import { Route as SubmittedRouteImport } from './routes/submitted'
 import { Route as StaffRouteImport } from './routes/staff'
+import { Route as SermorelinRouteImport } from './routes/sermorelin'
 import { Route as SemaglutideRouteImport } from './routes/semaglutide'
 import { Route as SafetyRouteImport } from './routes/safety'
 import { Route as QualifyRouteImport } from './routes/qualify'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as NadPlusRouteImport } from './routes/nad-plus'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as IntakeRouteImport } from './routes/intake'
 import { Route as InsuranceRouteImport } from './routes/insurance'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as HairlossRouteImport } from './routes/hairloss'
 import { Route as Glp1HoustonRouteImport } from './routes/glp-1-houston'
 import { Route as Glp1RouteImport } from './routes/glp-1'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EligibilityRouteImport } from './routes/eligibility'
+import { Route as EdRouteImport } from './routes/ed'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ConsentRouteImport } from './routes/consent'
@@ -92,6 +97,11 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
   path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrtRoute = TrtRouteImport.update({
+  id: '/trt',
+  path: '/trt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TirzepatideRoute = TirzepatideRouteImport.update({
   id: '/tirzepatide',
   path: '/tirzepatide',
@@ -117,6 +127,11 @@ const StaffRoute = StaffRouteImport.update({
   path: '/staff',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SermorelinRoute = SermorelinRouteImport.update({
+  id: '/sermorelin',
+  path: '/sermorelin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SemaglutideRoute = SemaglutideRouteImport.update({
   id: '/semaglutide',
   path: '/semaglutide',
@@ -135,6 +150,11 @@ const QualifyRoute = QualifyRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NadPlusRoute = NadPlusRouteImport.update({
+  id: '/nad-plus',
+  path: '/nad-plus',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -162,6 +182,11 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HairlossRoute = HairlossRouteImport.update({
+  id: '/hairloss',
+  path: '/hairloss',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Glp1HoustonRoute = Glp1HoustonRouteImport.update({
   id: '/glp-1-houston',
   path: '/glp-1-houston',
@@ -180,6 +205,11 @@ const FaqRoute = FaqRouteImport.update({
 const EligibilityRoute = EligibilityRouteImport.update({
   id: '/eligibility',
   path: '/eligibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EdRoute = EdRouteImport.update({
+  id: '/ed',
+  path: '/ed',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -426,24 +456,29 @@ export interface FileRoutesByFullPath {
   '/consent': typeof ConsentRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/ed': typeof EdRoute
   '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
   '/glp-1-houston': typeof Glp1HoustonRoute
+  '/hairloss': typeof HairlossRoute
   '/how-it-works': typeof HowItWorksRoute
   '/insurance': typeof InsuranceRoute
   '/intake': typeof IntakeRoute
   '/learn': typeof LearnRouteWithChildren
   '/login': typeof LoginRoute
+  '/nad-plus': typeof NadPlusRoute
   '/pricing': typeof PricingRoute
   '/qualify': typeof QualifyRoute
   '/safety': typeof SafetyRoute
   '/semaglutide': typeof SemaglutideRoute
+  '/sermorelin': typeof SermorelinRoute
   '/staff': typeof StaffRouteWithChildren
   '/submitted': typeof SubmittedRoute
   '/switch': typeof SwitchRoute
   '/the-comb': typeof TheCombRoute
   '/tirzepatide': typeof TirzepatideRoute
+  '/trt': typeof TrtRoute
   '/verify-email': typeof VerifyEmailRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/weight-loss': typeof WeightLossRoute
@@ -494,22 +529,27 @@ export interface FileRoutesByTo {
   '/clinicians': typeof CliniciansRoute
   '/consent': typeof ConsentRoute
   '/contact': typeof ContactRoute
+  '/ed': typeof EdRoute
   '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
   '/glp-1-houston': typeof Glp1HoustonRoute
+  '/hairloss': typeof HairlossRoute
   '/how-it-works': typeof HowItWorksRoute
   '/insurance': typeof InsuranceRoute
   '/intake': typeof IntakeRoute
   '/login': typeof LoginRoute
+  '/nad-plus': typeof NadPlusRoute
   '/pricing': typeof PricingRoute
   '/qualify': typeof QualifyRoute
   '/safety': typeof SafetyRoute
   '/semaglutide': typeof SemaglutideRoute
+  '/sermorelin': typeof SermorelinRoute
   '/submitted': typeof SubmittedRoute
   '/switch': typeof SwitchRoute
   '/the-comb': typeof TheCombRoute
   '/tirzepatide': typeof TirzepatideRoute
+  '/trt': typeof TrtRoute
   '/waitlist': typeof WaitlistRoute
   '/weight-loss': typeof WeightLossRoute
   '/dashboard/account': typeof DashboardAccountRoute
@@ -558,24 +598,29 @@ export interface FileRoutesById {
   '/consent': typeof ConsentRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/ed': typeof EdRoute
   '/eligibility': typeof EligibilityRoute
   '/faq': typeof FaqRoute
   '/glp-1': typeof Glp1Route
   '/glp-1-houston': typeof Glp1HoustonRoute
+  '/hairloss': typeof HairlossRoute
   '/how-it-works': typeof HowItWorksRoute
   '/insurance': typeof InsuranceRoute
   '/intake': typeof IntakeRoute
   '/learn': typeof LearnRouteWithChildren
   '/login': typeof LoginRoute
+  '/nad-plus': typeof NadPlusRoute
   '/pricing': typeof PricingRoute
   '/qualify': typeof QualifyRoute
   '/safety': typeof SafetyRoute
   '/semaglutide': typeof SemaglutideRoute
+  '/sermorelin': typeof SermorelinRoute
   '/staff': typeof StaffRouteWithChildren
   '/submitted': typeof SubmittedRoute
   '/switch': typeof SwitchRoute
   '/the-comb': typeof TheCombRoute
   '/tirzepatide': typeof TirzepatideRoute
+  '/trt': typeof TrtRoute
   '/verify-email': typeof VerifyEmailRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/weight-loss': typeof WeightLossRoute
@@ -629,24 +674,29 @@ export interface FileRouteTypes {
     | '/consent'
     | '/contact'
     | '/dashboard'
+    | '/ed'
     | '/eligibility'
     | '/faq'
     | '/glp-1'
     | '/glp-1-houston'
+    | '/hairloss'
     | '/how-it-works'
     | '/insurance'
     | '/intake'
     | '/learn'
     | '/login'
+    | '/nad-plus'
     | '/pricing'
     | '/qualify'
     | '/safety'
     | '/semaglutide'
+    | '/sermorelin'
     | '/staff'
     | '/submitted'
     | '/switch'
     | '/the-comb'
     | '/tirzepatide'
+    | '/trt'
     | '/verify-email'
     | '/waitlist'
     | '/weight-loss'
@@ -697,22 +747,27 @@ export interface FileRouteTypes {
     | '/clinicians'
     | '/consent'
     | '/contact'
+    | '/ed'
     | '/eligibility'
     | '/faq'
     | '/glp-1'
     | '/glp-1-houston'
+    | '/hairloss'
     | '/how-it-works'
     | '/insurance'
     | '/intake'
     | '/login'
+    | '/nad-plus'
     | '/pricing'
     | '/qualify'
     | '/safety'
     | '/semaglutide'
+    | '/sermorelin'
     | '/submitted'
     | '/switch'
     | '/the-comb'
     | '/tirzepatide'
+    | '/trt'
     | '/waitlist'
     | '/weight-loss'
     | '/dashboard/account'
@@ -760,24 +815,29 @@ export interface FileRouteTypes {
     | '/consent'
     | '/contact'
     | '/dashboard'
+    | '/ed'
     | '/eligibility'
     | '/faq'
     | '/glp-1'
     | '/glp-1-houston'
+    | '/hairloss'
     | '/how-it-works'
     | '/insurance'
     | '/intake'
     | '/learn'
     | '/login'
+    | '/nad-plus'
     | '/pricing'
     | '/qualify'
     | '/safety'
     | '/semaglutide'
+    | '/sermorelin'
     | '/staff'
     | '/submitted'
     | '/switch'
     | '/the-comb'
     | '/tirzepatide'
+    | '/trt'
     | '/verify-email'
     | '/waitlist'
     | '/weight-loss'
@@ -830,24 +890,29 @@ export interface RootRouteChildren {
   ConsentRoute: typeof ConsentRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  EdRoute: typeof EdRoute
   EligibilityRoute: typeof EligibilityRoute
   FaqRoute: typeof FaqRoute
   Glp1Route: typeof Glp1Route
   Glp1HoustonRoute: typeof Glp1HoustonRoute
+  HairlossRoute: typeof HairlossRoute
   HowItWorksRoute: typeof HowItWorksRoute
   InsuranceRoute: typeof InsuranceRoute
   IntakeRoute: typeof IntakeRoute
   LearnRoute: typeof LearnRouteWithChildren
   LoginRoute: typeof LoginRoute
+  NadPlusRoute: typeof NadPlusRoute
   PricingRoute: typeof PricingRoute
   QualifyRoute: typeof QualifyRoute
   SafetyRoute: typeof SafetyRoute
   SemaglutideRoute: typeof SemaglutideRoute
+  SermorelinRoute: typeof SermorelinRoute
   StaffRoute: typeof StaffRouteWithChildren
   SubmittedRoute: typeof SubmittedRoute
   SwitchRoute: typeof SwitchRoute
   TheCombRoute: typeof TheCombRoute
   TirzepatideRoute: typeof TirzepatideRoute
+  TrtRoute: typeof TrtRoute
   VerifyEmailRoute: typeof VerifyEmailRouteWithChildren
   WaitlistRoute: typeof WaitlistRoute
   WeightLossRoute: typeof WeightLossRoute
@@ -887,6 +952,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/trt': {
+      id: '/trt'
+      path: '/trt'
+      fullPath: '/trt'
+      preLoaderRoute: typeof TrtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tirzepatide': {
       id: '/tirzepatide'
       path: '/tirzepatide'
@@ -922,6 +994,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sermorelin': {
+      id: '/sermorelin'
+      path: '/sermorelin'
+      fullPath: '/sermorelin'
+      preLoaderRoute: typeof SermorelinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/semaglutide': {
       id: '/semaglutide'
       path: '/semaglutide'
@@ -948,6 +1027,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nad-plus': {
+      id: '/nad-plus'
+      path: '/nad-plus'
+      fullPath: '/nad-plus'
+      preLoaderRoute: typeof NadPlusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -985,6 +1071,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hairloss': {
+      id: '/hairloss'
+      path: '/hairloss'
+      fullPath: '/hairloss'
+      preLoaderRoute: typeof HairlossRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/glp-1-houston': {
       id: '/glp-1-houston'
       path: '/glp-1-houston'
@@ -1011,6 +1104,13 @@ declare module '@tanstack/react-router' {
       path: '/eligibility'
       fullPath: '/eligibility'
       preLoaderRoute: typeof EligibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ed': {
+      id: '/ed'
+      path: '/ed'
+      fullPath: '/ed'
+      preLoaderRoute: typeof EdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -1471,24 +1571,29 @@ const rootRouteChildren: RootRouteChildren = {
   ConsentRoute: ConsentRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  EdRoute: EdRoute,
   EligibilityRoute: EligibilityRoute,
   FaqRoute: FaqRoute,
   Glp1Route: Glp1Route,
   Glp1HoustonRoute: Glp1HoustonRoute,
+  HairlossRoute: HairlossRoute,
   HowItWorksRoute: HowItWorksRoute,
   InsuranceRoute: InsuranceRoute,
   IntakeRoute: IntakeRoute,
   LearnRoute: LearnRouteWithChildren,
   LoginRoute: LoginRoute,
+  NadPlusRoute: NadPlusRoute,
   PricingRoute: PricingRoute,
   QualifyRoute: QualifyRoute,
   SafetyRoute: SafetyRoute,
   SemaglutideRoute: SemaglutideRoute,
+  SermorelinRoute: SermorelinRoute,
   StaffRoute: StaffRouteWithChildren,
   SubmittedRoute: SubmittedRoute,
   SwitchRoute: SwitchRoute,
   TheCombRoute: TheCombRoute,
   TirzepatideRoute: TirzepatideRoute,
+  TrtRoute: TrtRoute,
   VerifyEmailRoute: VerifyEmailRouteWithChildren,
   WaitlistRoute: WaitlistRoute,
   WeightLossRoute: WeightLossRoute,

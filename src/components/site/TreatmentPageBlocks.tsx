@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, type LucideIcon } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -23,7 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { SurfaceCard } from "@/components/site/primitives";
+import { HexBadge, HexMotif, SurfaceCard } from "@/components/site/primitives";
 import { CompoundedPriceLockup } from "@/components/site/CompoundedPriceLockup";
 import { cn } from "@/lib/utils";
 import {
@@ -39,11 +39,13 @@ import {
   STARTER_PACK_INTAKE_HINT,
   type CompoundedMedicationPricing,
 } from "@/lib/medication-pricing";
+import type { SimpleCompoundedPricing } from "@/lib/simple-treatment-pricing";
 
 /**
  * Shared building blocks for the per-medication treatment pages
- * (/tirzepatide, /semaglutide). Kept together like site/primitives.tsx -
- * small, page-agnostic pieces; copy/data stays local to each route file.
+ * (/tirzepatide, /semaglutide, and the 5 non-GLP-1 money pages). Kept
+ * together like site/primitives.tsx - small, page-agnostic pieces; copy/data
+ * stays local to each route file.
  */
 
 /** Visible two-level breadcrumb (Home / <medication>). Keep in sync with the
@@ -317,5 +319,109 @@ export function TreatmentFaqSection({
         </AccordionItem>
       ))}
     </Accordion>
+  );
+}
+
+/**
+ * Branded hero visual for the 5 non-GLP-1 treatment pages (TRT, hairloss,
+ * ED, NAD+, sermorelin). No product photography exists for these lines, and
+ * a fabricated "photorealistic" pill/vial photo would risk misrepresenting
+ * real packaging - a deceptive-imagery problem well beyond a stock-photo
+ * placeholder. This renders a flat, on-brand illustration (hex badge + icon
+ * + wordmark) instead of a photo. Swap for real product photography later by
+ * replacing this component's usage in each route, the same way
+ * treatment-imagery.ts's VIAL_IMAGERY_MODE switchboard works for sema/tirz.
+ */
+export function TreatmentHeroArt({
+  icon: Icon,
+  label,
+  className,
+}: {
+  icon: LucideIcon;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-4xl bg-primary-soft shadow-lift",
+        className,
+      )}
+    >
+      <div
+        aria-hidden
+        className="bg-mesh-glow pointer-events-none absolute inset-0 opacity-70"
+      />
+      <HexMotif className="pointer-events-none absolute -left-8 -top-8 w-32 text-primary/15" />
+      <HexMotif className="pointer-events-none absolute -bottom-10 -right-10 w-40 text-primary/15" />
+      <HexBadge className="relative z-10 size-24">
+        <Icon className="size-11" aria-hidden />
+      </HexBadge>
+      <p className="relative z-10 mt-5 text-sm font-bold uppercase tracking-[0.2em] text-primary">
+        Beema
+      </p>
+      <p className="relative z-10 mt-1 max-w-[70%] text-center text-base font-semibold text-foreground">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+/**
+ * Pricing card for the 5 non-GLP-1 treatment pages. Deliberately separate
+ * from TreatmentPricingCard: no promo code, no starter pack, and an optional
+ * quarterly plan instead of the 1/3/6/12-month tier selector. See
+ * simple-treatment-pricing.ts for why these products use a different shape.
+ */
+export function SimpleTreatmentPricingCard({
+  label,
+  pricing,
+  className,
+}: {
+  /** e.g. "TRT", "hairloss", "ED" - used in the disclosure sentence. */
+  label: string;
+  pricing: SimpleCompoundedPricing;
+  className?: string;
+}) {
+  return (
+    <SurfaceCard
+      className={cn(
+        "border-primary/30 bg-primary-soft/30 text-left",
+        className,
+      )}
+    >
+      <p className="text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+        Transparent pricing
+      </p>
+      <div className="mt-5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <span className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          {formatUsd(pricing.monthlyUsd)}
+        </span>
+        <span className="text-sm text-muted-foreground">/mo</span>
+      </div>
+      {pricing.quarterly ? (
+        <p className="mt-2 text-sm text-muted-foreground">
+          or{" "}
+          <span className="font-bold text-foreground">
+            {formatUsd(pricing.quarterly.totalUsd)}
+          </span>{" "}
+          billed quarterly (about{" "}
+          {formatUsd(pricing.quarterly.monthlyEquivalentUsd)}/mo) -{" "}
+          <span className="font-semibold text-foreground">
+            Save {formatUsd(pricing.quarterly.savingsUsd)}
+          </span>{" "}
+          vs. paying monthly
+        </p>
+      ) : (
+        <p className="mt-2 text-sm text-muted-foreground">Billed monthly.</p>
+      )}
+      <p className="mt-6 max-w-md text-xs leading-relaxed text-muted-foreground">
+        All-inclusive cash-pay pricing for {label}: provider care, medication,
+        supplies, and expedited shipping are included. No separate platform
+        membership fee. Dose does not change the monthly rate. Treatment
+        availability may vary based on clinical appropriateness, prescription,
+        pharmacy fulfillment, and state requirements.
+      </p>
+    </SurfaceCard>
   );
 }

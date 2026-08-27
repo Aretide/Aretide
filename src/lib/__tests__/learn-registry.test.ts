@@ -188,13 +188,16 @@ describe("learn copy has no em or en dashes", () => {
     }
   });
 
-  it("does not invent a live TRT or HRT product", () => {
+  it("does not invent a live HRT product, and describes the real TRT offering accurately", () => {
     const trtHub = read("src/content/learn/hubs.ts");
-    expect(trtHub).toMatch(/does not offer TRT today/i);
+    // TRT went live 2026-08-27 as compounded enclomiphene (see /trt) - a
+    // different mechanism than the injectable/gel/patch testosterone this
+    // hub describes, so the hub must say so rather than claim the
+    // injectable/gel/patch category itself is Beema's offering.
+    expect(trtHub).toMatch(/compounded enclomiphene/i);
     expect(trtHub).toMatch(
       /does not currently offer menopausal hormone therapy/i,
     );
-    expect(trtHub).not.toMatch(/start TRT intake/i);
     expect(trtHub).not.toMatch(/buy GLP-1 online/i);
   });
 });

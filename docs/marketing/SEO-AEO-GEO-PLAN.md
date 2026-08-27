@@ -265,6 +265,30 @@ Source: https://www.fda.gov/news-events/press-announcements/fda-intends-take-act
 
 See also the **Compliance** section in `docs/features/treatment-pages.md` (living rules for treatment marketing pages), `docs/features/legitscript.md` (certification + seal), and product-imagery notes in `src/lib/treatment-imagery.ts` / `docs/features/homepage.md`.
 
+### F1.2 Non-GLP-1 compounded product marketing rules (TRT, hairloss, ED, NAD+, sermorelin)
+
+Added 2026-08-27 alongside `/trt`, `/hairloss`, `/ed`, `/nad-plus`, and `/sermorelin`. §F1.1 above was written specifically for compounded semaglutide/tirzepatide (the Feb 2026 FDA action named GLP-1 drugs) - it does not verbatim cover these 5 products, none of which are GLP-1s. The **general** FDA/FTC compounding-marketing principles it embodies still apply broadly, so this section restates them for these 5 products with accurate, product-specific framing rather than copy-pasting GLP-1 language.
+
+**Universal rules for all 5 products (same spirit as §F1.1, generalized):**
+
+1. Never claim a compounded formulation is **generic**, **the same as**, **equivalent to**, or **interchangeable with** any FDA-approved branded or generic product, even one sharing an active ingredient (e.g. never say "generic Viagra," "same as Rogaine," "same as Cialis").
+2. Never state a compounded product is **clinically proven** to produce results for the patient.
+3. **Price is never the clinical justification** - transparency about cash pricing is fine, but never frame low price as the reason compounding is appropriate.
+4. No outcome guarantees. Prescribing is never guaranteed. A licensed provider decides case-by-case whether any treatment, dose, or formulation is appropriate.
+5. Every page states plainly that its formulation(s) are **not FDA-approved**.
+
+**Product-specific compounding rationale (state accurately, don't invent history you can't verify):**
+
+| Product | Route | Compounding rationale to state |
+|---|---|---|
+| TRT | `/trt` | Compounded **enclomiphene** works differently than injectable/gel/patch testosterone - it encourages the body's own production rather than replacing testosterone directly. Never call it "testosterone replacement" in a way that implies Beema sells injectable T; never imply it's a controlled substance. |
+| Hairloss | `/hairloss` | Multi-ingredient oral/topical formulations, individualized per patient, not sold as a single fixed commercial product. Never claim equivalence to Rogaine (minoxidil) or Propecia (finasteride) brand products. |
+| ED | `/ed` | Personalized doses and/or ingredient combinations (e.g. tadalafil + sildenafil in one dose) not sold as a single commercial product. Never call it "generic Viagra/Cialis" or claim equivalence to the branded or generic commercial product. |
+| NAD+ | `/nad-plus` | No FDA-approved commercial NAD+ drug product exists to draw an equivalence claim against - keep claims to what NAD+ is (a coenzyme) and that the injection is compounded and not FDA-approved. No wellness/outcome claims (energy, anti-aging, etc.). |
+| Sermorelin | `/sermorelin` | Not currently sold as an FDA-approved commercial drug product, which is the stated reason it's available only through compounding pharmacies. Don't assert unverifiable specific regulatory history (e.g. a discontinued brand name) unless independently confirmed. |
+
+**Before publishing new claims on any of these 5 pages, run the `legitscript-compliance` skill** to check the specific wording against LegitScript's 9 certification standards - the same verification step used for the GLP-1 pages, applied per-product since the underlying compounding rationale differs.
+
 ### F2. Google Ads
 - **Search campaigns** on high-intent terms: "semaglutide online prescription", "tirzepatide telehealth", "GLP‑1 online doctor", competitor-adjacent and "switch/transfer" terms, plus branded defense.
 - Expected CPCs in this category commonly run **$8–$30+**; healthcare search averages ~$66 per lead (LocaliQ benchmark). Model CAC accordingly: at a $15 avg CPC and 10% LP→qualify conversion, a qualified lead ≈ $150 before intake completion.

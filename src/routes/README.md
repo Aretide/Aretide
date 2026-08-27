@@ -35,6 +35,11 @@ list is maintained in `public/sitemap.xml` and guarded by
 | GLP-1 Care in Houston | `/glp-1-houston` | Live (Houston ads + local SEO lander; not in primary nav) |
 | Compounded Tirzepatide | `/tirzepatide` | Live |
 | Compounded Semaglutide | `/semaglutide` | Live |
+| TRT (Compounded Enclomiphene) | `/trt` | Live |
+| Compounded Hairloss Treatment | `/hairloss` | Live |
+| Compounded ED Treatment | `/ed` | Live |
+| Compounded NAD+ | `/nad-plus` | Live |
+| Compounded Sermorelin | `/sermorelin` | Live |
 | How it works | `/how-it-works` | Live - in the Resources header/footer nav |
 | About | `/about` | Live - in the About header dropdown |
 | FAQ | `/faq` | Live - in the About header dropdown |
@@ -42,7 +47,7 @@ list is maintained in `public/sitemap.xml` and guarded by
 | Recipe detail | `/recipes/$slug` | Live |
 | Learn | `/learn` | Live (educational verticals index) - in the Resources header/footer nav. Spec: [docs/features/learn.md](../../docs/features/learn.md) |
 | Learn weight-loss hub | `/learn/weight-loss` | Live (educational; commercial pages stay at `/weight-loss`, `/semaglutide`, `/tirzepatide`) |
-| Learn TRT hub | `/learn/trt` | Live educational stub - Beema does not offer TRT today |
+| Learn TRT hub | `/learn/trt` | Live educational overview - Beema's live TRT offering is compounded enclomiphene at `/trt`, distinct from the injectable/gel/patch testosterone this hub describes |
 | Learn HRT hub | `/learn/hrt` | Live educational stub - Beema does not offer HRT today |
 | Learn article | `/learn/{vertical}/{slug}` | Live when a file exists under `src/content/learn/articles/` |
 | Learn article | `/learn/initial-research` | Live |

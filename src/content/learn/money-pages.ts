@@ -29,6 +29,26 @@ export const LEARN_MONEY_PAGES: Readonly<Record<string, LearnMoneyPage>> = {
     href: "/glp-1-houston/",
     label: "GLP-1 care for Houston",
   },
+  "/trt/": {
+    href: "/trt/",
+    label: "TRT (compounded enclomiphene)",
+  },
+  "/hairloss/": {
+    href: "/hairloss/",
+    label: "Compounded hairloss treatment",
+  },
+  "/ed/": {
+    href: "/ed/",
+    label: "Compounded ED treatment",
+  },
+  "/nad-plus/": {
+    href: "/nad-plus/",
+    label: "Compounded NAD+",
+  },
+  "/sermorelin/": {
+    href: "/sermorelin/",
+    label: "Compounded sermorelin",
+  },
   "/how-it-works/": {
     href: "/how-it-works/",
     label: "How care works",

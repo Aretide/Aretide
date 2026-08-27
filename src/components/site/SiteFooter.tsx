@@ -31,6 +31,11 @@ const COLUMNS = [
     links: [
       { label: "Compounded Tirzepatide", to: "/tirzepatide/" },
       { label: "Compounded Semaglutide", to: "/semaglutide/" },
+      { label: "TRT (Enclomiphene)", to: "/trt/" },
+      { label: "Hairloss Treatment", to: "/hairloss/" },
+      { label: "ED Treatment", to: "/ed/" },
+      { label: "NAD+", to: "/nad-plus/" },
+      { label: "Sermorelin", to: "/sermorelin/" },
       { label: "GLP-1 Care", to: "/glp-1/" },
       { label: "Weight Loss Program", to: "/weight-loss/" },
       // { label: "Pricing", to: "/pricing/" }, // disabled - pricing model not finalized yet

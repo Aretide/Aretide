@@ -274,20 +274,30 @@ describe("editorial standards", () => {
     ).toBeGreaterThan(4);
   });
 
-  it("states plainly that unlaunched verticals are not purchasable", () => {
-    // Beema sells compounded semaglutide and compounded tirzepatide today.
-    // TRT and HRT education must not read as an offer.
-    for (const vertical of ["trt", "hrt"] as const) {
-      const inVertical = articles.filter((a) => a.vertical === vertical);
-      expect(inVertical.length).toBeGreaterThan(0);
-      for (const a of inVertical) {
-        expect(
-          articleProse(a),
-          `${learnPath(a.vertical, a.slug)} does not say Beema has no such program yet`,
-        ).toMatch(
-          /does not (?:currently )?offer|not a Beema product|education(?:al)? only/i,
-        );
-      }
+  it("states plainly that the unlaunched HRT vertical is not purchasable", () => {
+    // Beema does not sell menopausal hormone therapy - HRT education must
+    // not read as an offer. TRT launched 2026-08-27 as compounded
+    // enclomiphene (see the next test), so it's checked separately.
+    const inVertical = articles.filter((a) => a.vertical === "hrt");
+    expect(inVertical.length).toBeGreaterThan(0);
+    for (const a of inVertical) {
+      expect(
+        articleProse(a),
+        `${learnPath(a.vertical, a.slug)} does not say Beema has no such program yet`,
+      ).toMatch(
+        /does not (?:currently )?offer|not a Beema product|education(?:al)? only/i,
+      );
+    }
+  });
+
+  it("distinguishes Beema's real TRT offering (compounded enclomiphene) from the injectable/gel/patch category the TRT vertical educates on", () => {
+    const inVertical = articles.filter((a) => a.vertical === "trt");
+    expect(inVertical.length).toBeGreaterThan(0);
+    for (const a of inVertical) {
+      expect(
+        articleProse(a),
+        `${learnPath(a.vertical, a.slug)} does not mention Beema's actual enclomiphene offering`,
+      ).toMatch(/enclomiphene/i);
     }
   });
 });
