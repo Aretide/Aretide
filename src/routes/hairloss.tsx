@@ -120,7 +120,7 @@ export const Route = createFileRoute("/hairloss")({
             description: SERVICE_DESCRIPTION,
             path: "/hairloss",
             serviceType: "Hairloss treatment telehealth service",
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: "2026-08-27",
             offer: {
               introPrice: HAIRLOSS_ORAL_PRICING.monthlyUsd,
@@ -372,9 +372,6 @@ function HairlossPage() {
           {CLINICAL_PROVIDER_GROUP}. Licensed clinicians make every treatment
           decision independently, the clinician assigned to your care may vary
           by state licensure and availability.
-        </p>
-        <p className="mt-2 max-w-2xl text-xs leading-relaxed text-muted-foreground">
-          Medically reviewed on August 27, 2026.
         </p>
       </Section>
 

@@ -149,7 +149,7 @@ export const Route = createFileRoute("/tirzepatide")({
             description: DESCRIPTION,
             path: "/tirzepatide",
             serviceType: "Medical weight-loss telehealth service",
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: "2026-07-31",
             offer: {
               introPrice: STARTER.monthlyEquivalentUsd,
@@ -494,9 +494,6 @@ function TirzepatidePage() {
             network. Every licensed provider makes treatment decisions
             independently.
           </span>
-        </p>
-        <p className="mt-1.5 max-w-2xl text-xs text-muted-foreground/70">
-          Medically reviewed on July 31, 2026.
         </p>
         <div className="mt-8">
           <TreatmentFaqSection items={FAQ_ITEMS} />

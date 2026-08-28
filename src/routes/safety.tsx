@@ -65,7 +65,7 @@ export const Route = createFileRoute("/safety")({
             name: "Safety & Eligibility",
             description: DESCRIPTION,
             path: "/safety",
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: "2026-07-31",
           }),
         ),
@@ -162,9 +162,6 @@ function SafetyPage() {
                 through Beema. Licensed clinicians make all medical decisions
                 independently. The clinician assigned to your care may vary
                 based on state licensure and availability.
-              </p>
-              <p className="mt-2 text-xs text-muted-foreground/80">
-                Medically reviewed on July 31, 2026
               </p>
             </div>
           </div>

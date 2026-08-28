@@ -90,8 +90,8 @@ export function pageHead(opts: { title: string; description: string; path: strin
 ### A5. Site-wide structured data (G8)
 - ✅ **Shipped July 2026:** `MedicalOrganization` + `WebSite` JSON-LD on the homepage (`ORGANIZATION_JSONLD` / `WEBSITE_JSONLD` in `src/lib/seo.ts`, rendered by `index.tsx`). Deliberately minimal — only verified facts. **Add when available:** `sameAs` (social profiles) and `contactPoint` (blocked on fixing the invalid `support@beemahealth` address in site copy).
 - `pricing.tsx`: `Product` + `Offer` with real prices (from `veya-data.ts`).
-- Treatment pages: `MedicalWebPage` + `Drug`/`MedicalTherapy` where accurate, with `lastReviewed` and `reviewedBy` (→ `Physician` with NPI-verifiable name).
-- Article pages (Workstream B): `MedicalWebPage`/`Article` + `author` + `reviewedBy` + `BreadcrumbList` + per-article `FAQPage`.
+- Treatment pages: `MedicalWebPage`/`Service` + `Drug`/`MedicalTherapy` where accurate, with `BreadcrumbList` + `FAQPage`. **No `reviewedBy` / `lastReviewed`** — see the sitewide policy note in B1 below.
+- Article pages (Workstream B): `MedicalWebPage`/`Article` + `author` + `BreadcrumbList` + per-article `FAQPage`. No `reviewedBy`.
 
 ### A6. Core Web Vitals (G10)
 - Self-host Outfit/Figtree as woff2 in `public/fonts/` with `font-display: swap` (also removes a third-party request — minor privacy win).
@@ -127,7 +127,7 @@ Live library: `docs/features/learn.md`. TypeScript articles under `/learn/{verti
 
 - Routes: `/learn/`, `/learn/{vertical}/`, `/learn/{vertical}/{slug}/`, plus four legacy long-form guides that kept their canonical URLs.
 - Content: TypeScript modules in `src/content/learn/articles/` globbed by `registry.ts`. Unpublished `_` fixtures stay out of the sitemap and `llms.txt`.
-- Articles are **unsigned** educational copy (`reviewedByClinicalLead: false`). Do not add a medical-reviewer byline until a clinician has actually reviewed the page. Citations are primary sources (FDA, DailyMed, NEJM/JAMA trials). JSON-LD is MedicalWebPage + Article + BreadcrumbList + FAQPage when FAQs exist.
+- Articles are **unsigned** educational copy (`reviewedByClinicalLead: false`). **Sitewide policy (2026-08-28): do not claim "medically reviewed" anywhere on the site, visible or in JSON-LD** - Beema is LegitScript-certified, which is a separate, distinct claim from a content medical-review claim, and the two must never be conflated or implied either way. Every `serviceJsonLd()`/`medicalWebPageJsonLd()` call sitewide passes `reviewedByClinicalLead: false`; no page shows a "medically reviewed on [date]" line. Citations are primary sources (FDA, DailyMed, NEJM/JAMA trials). JSON-LD is MedicalWebPage + Article + BreadcrumbList + FAQPage when FAQs exist.
 - Sitemap entries come from `getLearnSitemapEntries()`. `public/llms.txt` lists every published learn URL.
 
 ### B2. Keyword architecture (hub-and-spoke clusters)

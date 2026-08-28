@@ -83,7 +83,7 @@ export const Route = createFileRoute("/about")({
             name: "About Beema Health",
             description: DESCRIPTION,
             path: "/about",
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: "2026-07-30",
           }),
         ),

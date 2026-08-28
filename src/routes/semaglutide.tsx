@@ -153,7 +153,7 @@ export const Route = createFileRoute("/semaglutide")({
             description: SERVICE_DESCRIPTION,
             path: "/semaglutide",
             serviceType: "Medical weight-loss telehealth service",
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: "2026-07-31",
             offer: {
               introPrice: promoFirstMonthUsd(COMPOUNDED_SEMAGLUTIDE_PRICING),
@@ -452,9 +452,6 @@ function SemaglutidePage() {
           {CLINICAL_PROVIDER_GROUP}. Licensed clinicians make every treatment
           decision independently, the clinician assigned to your care may vary
           by state licensure and availability.
-        </p>
-        <p className="mt-2 max-w-2xl text-xs leading-relaxed text-muted-foreground">
-          Medically reviewed on July 31, 2026.
         </p>
       </Section>
 

@@ -2,7 +2,7 @@
 
 **Live:** `/learn/` is the educational (not commercial) library on the marketing site. Hubs: `/learn/weight-loss/`, `/learn/trt/`, `/learn/hrt/`. Weight-loss CTAs go to Bask **intake** via `resolveCta()`. Compounded-medication rules: `docs/features/treatment-pages.md` and `docs/features/legitscript.md`.
 
-This library is **unsigned educational copy**. MedicalWebPage JSON-LD sets `reviewedByClinicalLead: false`. Articles do not show a clinician byline, "medically reviewed by," or a review date. That is intentional: do not attach `reviewedBy` or a named reviewer until a licensed clinician has actually reviewed that page.
+This library is **unsigned educational copy**. MedicalWebPage JSON-LD sets `reviewedByClinicalLead: false`. Articles do not show a clinician byline, "medically reviewed by," or a review date. This is now a sitewide policy (2026-08-28), not just a learn-library choice: **no page anywhere on the site claims "medically reviewed," visible or in JSON-LD.** Beema is LegitScript-certified, a separate and distinct claim from a content medical-review claim - never conflate the two or imply either way. Do not attach `reviewedBy` or a named reviewer to any page.
 
 Visible disclaimer (`LEARN_DISCLAIMER_BODY` in `src/lib/learn-trust-copy.ts`, rendered by `LearnDisclaimer`): the content is general information only, not medical advice, not a diagnosis, and not a treatment plan. Completing intake does not guarantee a prescription.
 

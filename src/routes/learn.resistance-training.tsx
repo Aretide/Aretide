@@ -94,7 +94,7 @@ export const Route = createFileRoute("/learn/resistance-training")({
             name: RESISTANCE_TRAINING_TITLE,
             description: RESISTANCE_TRAINING_DESCRIPTION,
             path: RESISTANCE_TRAINING_PATH,
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: RESISTANCE_TRAINING_DATE_MODIFIED,
           }),
         ),

@@ -68,7 +68,7 @@ export const Route = createFileRoute("/how-it-works")({
             name: "How Beema Health Telehealth Care Works",
             description: DESCRIPTION,
             path: "/how-it-works",
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: "2026-08-20",
           }),
         ),

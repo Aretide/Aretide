@@ -129,6 +129,10 @@ const BASK_INTAKE_BASE = "https://q.beemahealth.com/start-online-visit";
 
 /** Per-CTA overrides for context-specific, compliant labels. */
 const CTA_OVERRIDES: Partial<Record<CtaId, CtaTarget>> = {
+  home_hero: {
+    label: "Get Started with Weight Loss",
+    to: DEFAULT_CTA_TARGET.to,
+  },
   recipes_hub: {
     label: "See if a GLP-1 treatment plan could be right for you",
     to: DEFAULT_CTA_TARGET.to,

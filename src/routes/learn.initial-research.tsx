@@ -98,7 +98,7 @@ export const Route = createFileRoute("/learn/initial-research")({
             name: INITIAL_RESEARCH_TITLE,
             description: INITIAL_RESEARCH_DESCRIPTION,
             path: INITIAL_RESEARCH_PATH,
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: INITIAL_RESEARCH_DATE_MODIFIED,
           }),
         ),

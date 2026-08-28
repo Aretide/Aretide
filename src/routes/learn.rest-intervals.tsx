@@ -94,7 +94,7 @@ export const Route = createFileRoute("/learn/rest-intervals")({
             name: REST_INTERVALS_TITLE,
             description: REST_INTERVALS_DESCRIPTION,
             path: REST_INTERVALS_PATH,
-            reviewedByClinicalLead: true,
+            reviewedByClinicalLead: false,
             dateModified: REST_INTERVALS_DATE_MODIFIED,
           }),
         ),

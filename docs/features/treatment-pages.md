@@ -54,6 +54,7 @@ Canonical long-form rules live in `docs/marketing/SEO-AEO-GEO-PLAN.md` **§F1.1*
 3. **Price ≠ medical necessity.** Lower price alone does not establish that a compounded drug is not essentially a copy of a commercial product.
 4. **Required sentence** (reuse verbatim where the page explains compounded status): "Compounded {drug} is not FDA-approved and is considered only when legally available and clinically appropriate."
 5. No outcome guarantees; prescribing is never guaranteed; provider decides case-by-case.
+6. **No "medically reviewed" claims anywhere (2026-08-28).** Beema is LegitScript-certified - a separate, distinct claim from a content medical-review claim - and the two must never be conflated or implied either way. Do not show a "medically reviewed on [date]" line, and pass `reviewedByClinicalLead: false` on every `serviceJsonLd()`/`medicalWebPageJsonLd()` call sitewide (not just treatment pages - see `docs/features/learn.md`).
 
 Product photography: the site defaults to branded Beema-wordmark vial imagery via `VIAL_IMAGERY_MODE` in `src/lib/treatment-imagery.ts` (`"branded"`). Unbranded colour vials (no wordmark) remain on the switchboard if product wants them back. See `docs/features/legitscript.md` and `docs/features/homepage.md`.
 
