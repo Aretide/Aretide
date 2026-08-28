@@ -170,7 +170,7 @@ export const LEARN_INDEX_META = {
 
 export const LEARN_INDEX_INTRO = [
   "This library is for people who want to read before they talk to a clinician. Articles are unsigned educational pieces with citations. They are not a diagnosis, a prescription, or a promise of results.",
-  `Beema Health's live clinical offerings include telehealth medical weight loss, TRT (compounded enclomiphene), hairloss treatment, ED treatment, NAD+, and sermorelin care. ${LEARN_USA_ONLY_SENTENCE} ${LEARN_FIFTY_STATE_SENTENCE} Providers review intake and, when clinically appropriate and legally available, may prescribe compounded semaglutide or compounded tirzepatide for weight loss. ${COMPOUNDED_DISCLOSURE} Completing intake does not guarantee a prescription.`,
+  `Beema Health's live clinical offerings include online medical weight loss, TRT (compounded enclomiphene), hairloss treatment, ED treatment, NAD+, and sermorelin care. ${LEARN_USA_ONLY_SENTENCE} ${LEARN_FIFTY_STATE_SENTENCE} Providers review intake and, when clinically appropriate and legally available, may prescribe compounded semaglutide or compounded tirzepatide for weight loss. ${COMPOUNDED_DISCLOSURE} Completing intake does not guarantee a prescription.`,
   "Testosterone replacement therapy (TRT) has its own educational hub describing the broader category of injectable, gel, and patch testosterone - Beema's own live TRT offering, compounded enclomiphene, works differently and has its own page. Menopausal hormone therapy (HRT) also has its own hub so that search topic has a home; that hub describes the medicine, not a Beema product you can start today.",
 ] as const;
 

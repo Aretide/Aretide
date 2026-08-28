@@ -213,7 +213,7 @@ export function HomeHero() {
           />
 
           <h1 className="mt-4 pr-[6.75rem] text-[clamp(2rem,4.5vw,4rem)] font-bold leading-[1.1] tracking-tight text-foreground lg:pr-0">
-            <LineReveal delay={0}>Telehealth care </LineReveal>
+            <LineReveal delay={0}>Online care </LineReveal>
             <LineReveal delay={0.1}>
               {"that's "}
               <span className="text-grad-brand">human</span>

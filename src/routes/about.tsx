@@ -47,7 +47,7 @@ import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import { US_STATES } from "@/lib/us-states";
 
 const DESCRIPTION =
-  "The story behind Beema Health's bee, infinity wings, and hexagon, the values behind our telehealth medical care, and the physician leading our clinical program.";
+  "The story behind Beema Health's bee, infinity wings, and hexagon, the values behind our online medical care, and the physician leading our clinical program.";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

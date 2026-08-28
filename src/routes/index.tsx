@@ -19,11 +19,11 @@ import { FinalCTASection } from "@/components/home/FinalCTASection";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Beema Health | Telehealth medical care" },
+      { title: "Beema Health | Online medical care" },
       {
         name: "description",
         content:
-          "Telehealth medical care reviewed by licensed providers in all 50 states: GLP-1 weight loss, TRT, hairloss, ED, NAD+, and sermorelin, when clinically appropriate and available.",
+          "Online medical care reviewed by licensed providers in all 50 states: GLP-1 weight loss, TRT, hairloss, ED, NAD+, and sermorelin, when clinically appropriate and available.",
       },
     ],
     links: [

@@ -138,16 +138,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "object-src 'none'",
         },
         { name: "referrer", content: "strict-origin-when-cross-origin" },
-        { title: "Beema Health | Telehealth medical care" },
+        { title: "Beema Health | Online medical care" },
         {
           name: "description",
           content:
-            "Telehealth medical care reviewed by licensed providers: GLP-1 weight loss, TRT, hairloss, ED, NAD+, and sermorelin. Compounded medications are not FDA-approved.",
+            "Online medical care reviewed by licensed providers: GLP-1 weight loss, TRT, hairloss, ED, NAD+, and sermorelin. Compounded medications are not FDA-approved.",
         },
         { name: "author", content: "Beema Health" },
         {
           property: "og:title",
-          content: "Beema Health | Telehealth medical care",
+          content: "Beema Health | Online medical care",
         },
         {
           property: "og:description",
@@ -163,12 +163,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { name: "twitter:card", content: "summary_large_image" },
         {
           name: "twitter:title",
-          content: "Beema Health | Telehealth medical care",
+          content: "Beema Health | Online medical care",
         },
         {
           name: "twitter:description",
           content:
-            "Telehealth medical care with licensed providers, transparent pricing, and support across weight loss, hormone, and wellness treatments.",
+            "Online medical care with licensed providers, transparent pricing, and support across weight loss, hormone, and wellness treatments.",
         },
         { name: "twitter:image", content: absoluteUrl("/og-card.jpg") },
         {
