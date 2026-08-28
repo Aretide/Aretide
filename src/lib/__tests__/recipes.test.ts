@@ -638,8 +638,10 @@ describe("recipe compliance and SEO markup", () => {
   });
 
   it("keeps discovery contextual and clearly free to everyone", () => {
-    expect(header).toContain('label: "Resources"');
-    expect(header).toContain('label: "About"');
+    // Resources + About merged into one "More" header dropdown 2026-08-27 -
+    // see docs/features/treatment-pages.md. Footer keeps separate
+    // Resources/Trust columns, checked below.
+    expect(header).toContain('label: "More"');
     expect(header).not.toContain('to: "/the-comb/"');
     expect(header).toContain('to: "/recipes/"');
     expect(header).toContain('to: "/how-it-works/"');

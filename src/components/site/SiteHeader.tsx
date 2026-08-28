@@ -17,8 +17,8 @@ type NavItem = { label: string; to: string; description?: string };
 
 /**
  * Trailing-slash paths - match sitemap.xml / canonicalUrl / GitHub Pages 200
- * URLs. Primary nav is six dropdowns: Weight Loss, Sexual Health, Hair,
- * Wellness, Resources, and About. See docs/features/treatment-pages.md.
+ * URLs. Primary nav is five dropdowns: Weight Loss, Sexual Health, Hair,
+ * Wellness, and More. See docs/features/treatment-pages.md.
  */
 const NAV: NavItem[] = [
   // { label: "Pricing", to: "/pricing/" }, // disabled - pricing model not finalized yet
@@ -67,12 +67,20 @@ const WELLNESS_ITEMS: NavItem[] = [
 ];
 
 /**
- * Free content library plus the care-process overview. Add new no-account
- * resource hubs here and in SiteFooter COLUMNS. Do not brand this dropdown -
- * keep the label literal so it does not compete with Hive (the patient
- * portal at hive.beemahealth.com).
+ * Free content library, the care-process overview, and the company cluster
+ * (About/FAQ/Contact), combined into one "More" dropdown (2026-08-27) so the
+ * 4 treatment-category dropdowns (Weight Loss / Sexual Health / Hair /
+ * Wellness) can stay the header's "main groups" without competing for space
+ * against 2 more utility dropdowns. Previously two separate dropdowns
+ * (`RESOURCE_ITEMS` / "Resources" and `ABOUT_ITEMS` / "About") - merged, not
+ * removed, so every item here is still one click away from any page. The
+ * footer's separate Resources and Trust columns are untouched.
+ *
+ * Do not brand this dropdown - keep the label literal ("More") so it does
+ * not compete with Hive (the patient portal at hive.beemahealth.com). Add
+ * new no-account resource hubs here and in SiteFooter COLUMNS.
  */
-const RESOURCE_ITEMS: NavItem[] = [
+const MORE_ITEMS: NavItem[] = [
   {
     label: "How it works",
     to: "/how-it-works/",
@@ -88,10 +96,6 @@ const RESOURCE_ITEMS: NavItem[] = [
     to: "/learn/",
     description: "GLP-1 and hormone education",
   },
-];
-
-/** Company cluster - keep FAQ / About / Contact together, not in Resources. */
-const ABOUT_ITEMS: NavItem[] = [
   { label: "About us", to: "/about/" },
   { label: "FAQ", to: "/faq/" },
   { label: "Contact us", to: "/contact/" },
@@ -187,8 +191,7 @@ function DesktopNav() {
     },
     { id: "hair", label: "Hair", items: HAIR_ITEMS },
     { id: "wellness", label: "Wellness", items: WELLNESS_ITEMS },
-    { id: "resources", label: "Resources", items: RESOURCE_ITEMS },
-    { id: "about", label: "About", items: ABOUT_ITEMS },
+    { id: "more", label: "More", items: MORE_ITEMS },
   ] as const;
 
   return (
@@ -573,13 +576,8 @@ export function SiteHeader() {
                 onNavigate={() => setOpen(false)}
               />
               <MobileNavDropdown
-                label="Resources"
-                items={RESOURCE_ITEMS}
-                onNavigate={() => setOpen(false)}
-              />
-              <MobileNavDropdown
-                label="About"
-                items={ABOUT_ITEMS}
+                label="More"
+                items={MORE_ITEMS}
                 onNavigate={() => setOpen(false)}
               />
               {NAV.map((item) => (

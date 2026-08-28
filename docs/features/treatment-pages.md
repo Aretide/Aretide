@@ -116,9 +116,9 @@ Reorganized 2026-08-27, Good Life Meds style, replacing the previous same-day fl
 | Hair | `HAIR_ITEMS` | Hairloss Treatment (designed to grow - see "Category hub pages" above) |
 | Wellness | `WELLNESS_ITEMS` | NAD+, Sermorelin |
 
-Add a new medication page to the matching category's `*_ITEMS` array (and to that category's hub-page `LINEUP` array, and the footer Care column) rather than adding a new top-level nav entry or reviving the flat list. A genuinely new category (not Weight Loss/Sexual Health/Hair/Wellness) is a deliberate call to make with the team, not a default - it adds a 7th top-level dropdown next to Resources and About, which is real nav-crowding cost.
+Add a new medication page to the matching category's `*_ITEMS` array (and to that category's hub-page `LINEUP` array, and the footer Care column) rather than adding a new top-level nav entry or reviving the flat list. A genuinely new category (not Weight Loss/Sexual Health/Hair/Wellness) is a deliberate call to make with the team, not a default - the header only has room for one more slot (see "Nav: 'More' dropdown" below) before it's crowded again.
 
-Every category's hub page (`/weight-loss`, `/sexual-health`, `/hair`, `/wellness`) stays **out of the header** - linked from the site footer Care column and from in-page copy only, matching the pre-existing `/weight-loss` decision. `/how-it-works` is in the **Resources** header dropdown and footer Resources column (care-process overview, not a medication page). On `/tirzepatide`, `/semaglutide`, `/glp-1`, and `/glp-1-houston`, the hero "How it works" / "How care works" button is an on-page jump (`hash="how-it-works"`) to `<HowItWorksSteps />` on that same page, not a navigation to `/how-it-works/`.
+Every category's hub page (`/weight-loss`, `/sexual-health`, `/hair`, `/wellness`) stays **out of the header** - linked from the site footer Care column and from in-page copy only, matching the pre-existing `/weight-loss` decision. `/how-it-works` is in the **More** header dropdown and footer Resources column (care-process overview, not a medication page). On `/tirzepatide`, `/semaglutide`, `/glp-1`, and `/glp-1-houston`, the hero "How it works" / "How care works" button is an on-page jump (`hash="how-it-works"`) to `<HowItWorksSteps />` on that same page, not a navigation to `/how-it-works/`.
 
 Hover/tap behavior is the same shared pair as the other menus:
 
@@ -127,19 +127,17 @@ Hover/tap behavior is the same shared pair as the other menus:
 
 Keep `/glp-1` in the footer Care column, not in the header - it's a national cash-pay category page distinct from the four medication-category hubs above. Do **not** add city/geo GLP-1 ads landers (`/glp-1-houston`, future `/glp-1-{city}`) to primary nav or footer - those stay ad/SEO entry points.
 
-## Nav: "Resources" dropdown
+## Nav: "More" dropdown (merged from "Resources" + "About" 2026-08-27)
 
-`SiteHeader.tsx` also renders **Resources** - the care-process overview plus the free content library (how it works, recipes, and educational guides today; workout and cooking videos later). It uses the same `DesktopNavDropdown` / `MobileNavDropdown` pair as Weight Loss. Keep the label literal so it does not compete with Hive (the patient portal at `hive.beemahealth.com`).
+`SiteHeader.tsx` renders **More** - the free content library plus the care-process overview plus the company cluster, all in one dropdown (`MORE_ITEMS`). It uses the same `DesktopNavDropdown` / `MobileNavDropdown` pair as the category dropdowns. Keep the label literal ("More") so it does not compete with Hive (the patient portal at `hive.beemahealth.com`) and does not imply it's another product category.
 
-Live items in `RESOURCE_ITEMS` today: `/how-it-works/`, `/recipes/`, and `/learn/`. The matching footer column is titled "Resources". Add workout videos, cooking videos, and other no-account resources there (and in the footer column) when they ship - do not add coming-soon placeholders to the live nav.
+This was two separate dropdowns (Resources: how it works, recipes, learn; About: about us, FAQ, contact us) until the 4 new category dropdowns (Weight Loss/Sexual Health/Hair/Wellness) pushed the header to 6 total - merging these two back down to keep the 4 treatment categories as the header's "main groups" without adding more utility dropdowns alongside them. Nothing was removed: every item is still one click away, just under one label instead of two. The **footer keeps its separate Resources and Trust columns** unchanged - this merge is a header-only consolidation.
+
+Live items in `MORE_ITEMS` today: `/how-it-works/`, `/recipes/`, `/learn/`, `/about/`, `/faq/`, `/contact/`. Add workout videos, cooking videos, and other no-account resources here (and in the footer Resources column) when they ship - do not add coming-soon placeholders to the live nav. Add Safety or other trust pages here only if they need a persistent header slot; today Safety stays in the footer Trust column plus in-page treatment links. The footer Trust column also has an external "Leave a Google review" link (`GOOGLE_REVIEW_URL` in `src/lib/google-business.ts`) - the write-review URL, not the listing URL used in Organization `sameAs`.
 
 `/the-comb/` is a retired branded overview that redirects home. Do not relink it.
 
 The homepage `FreeResourcesSection` is the in-page spotlight for the same library (headline: "Free resources to help you get started").
-
-## Nav: "About" dropdown
-
-`ABOUT_ITEMS` is the company cluster: About us, FAQ, and Contact us. Keep these out of Resources (that dropdown is the free content library) and out of Weight Loss (that dropdown is the program). Add Safety or other trust pages here only if they need a persistent header slot; today Safety stays in the footer Trust column plus in-page treatment links. The Trust column also has an external "Leave a Google review" link (`GOOGLE_REVIEW_URL` in `src/lib/google-business.ts`) - the write-review URL, not the listing URL used in Organization `sameAs`.
 
 ## City GLP-1 pages
 
@@ -216,7 +214,7 @@ const cta = resolveCta(CTA_IDS.tirzepatide_hero);
 | `src/routes/sexual-health.tsx`, `hair.tsx`, `wellness.tsx` | The 3 new category hub pages (`/weight-loss` is the pre-existing 4th) |
 | `src/lib/cta-ids.ts` | `CTA_IDS`, `resolveCta()` — the CTA switchboard |
 | `src/lib/seo.ts` | `faqPageJsonLd()`, `breadcrumbJsonLd()`, `serviceJsonLd()`, `medicalWebPageJsonLd()`, `canonicalUrl()` |
-| `src/components/site/SiteHeader.tsx`, `SiteFooter.tsx` | Weight Loss / Sexual Health / Hair / Wellness / Resources / About dropdowns (`DesktopNavDropdown` / `MobileNavDropdown`); footer Care + Resources + Trust columns (Trust includes the Google review ask) |
+| `src/components/site/SiteHeader.tsx`, `SiteFooter.tsx` | Weight Loss / Sexual Health / Hair / Wellness / More dropdowns (`DesktopNavDropdown` / `MobileNavDropdown`); footer Care + Resources + Trust columns (Trust includes the Google review ask) |
 | `src/lib/google-business.ts` | GBP listing URL (`sameAs`) vs write-review URL (footer + `/contact/`) |
 | `src/lib/marketing-copy.ts` | `FIRST_MONTH_PROMO_LINE` — the one-time, 3-month-only promo code promoted alongside pricing |
 | `src/components/home/TreatmentShowcase.tsx`, `src/components/site/TreatmentLineup.tsx` | Medication cards (home / `/weight-loss`) |
