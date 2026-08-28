@@ -235,6 +235,12 @@ function NadPlusPage() {
         />
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
+            Every cell in your body uses a molecule called NAD+ to make energy.
+            Your natural NAD+ levels tend to go down as you get older. Some
+            people choose NAD+ injections as part of a wellness routine, though
+            no specific benefit is proven or guaranteed for any individual.
+          </p>
+          <p>
             NAD+ (nicotinamide adenine dinucleotide) is a coenzyme the body
             produces naturally and uses in cellular energy processes. Beema's
             compounded NAD+ injections are prepared by a licensed compounding
@@ -246,6 +252,11 @@ function NadPlusPage() {
             appropriate option for you is a decision your licensed provider
             makes individually.
           </p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/nad-plus/" hash="faq">
+              View FAQ <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
       </Section>
 
@@ -370,7 +381,7 @@ function NadPlusPage() {
         </p>
       </Section>
 
-      <Section className="bg-muted/40 pt-0">
+      <Section id="faq" className="scroll-mt-20 bg-muted/40 pt-0">
         <SectionHeading
           align="left"
           title="Frequently asked questions"

@@ -235,6 +235,12 @@ function SermorelinPage() {
         />
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
+            A gland in your brain called the pituitary makes growth hormone, and
+            your natural growth hormone levels tend to go down as you get older.
+            Sermorelin signals your pituitary gland to release more of your own
+            growth hormone, instead of giving you growth hormone directly.
+          </p>
+          <p>
             Sermorelin is a growth-hormone-releasing hormone analog. It is not
             currently sold as an FDA-approved commercial drug product, which is
             why it's available today only through licensed compounding
@@ -247,6 +253,11 @@ function SermorelinPage() {
             appropriate option for you is a decision your licensed provider
             makes individually.
           </p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/sermorelin/" hash="faq">
+              View FAQ <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
       </Section>
 
@@ -371,7 +382,7 @@ function SermorelinPage() {
         </p>
       </Section>
 
-      <Section className="bg-muted/40 pt-0">
+      <Section id="faq" className="scroll-mt-20 bg-muted/40 pt-0">
         <SectionHeading
           align="left"
           title="Frequently asked questions"

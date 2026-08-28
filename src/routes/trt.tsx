@@ -239,6 +239,14 @@ function TrtPage() {
         />
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
+            Testosterone is a hormone that plays a role in energy, mood, muscle,
+            and sex drive in men. If a lab test shows your testosterone is low,
+            enclomiphene signals your brain to tell your body to make more
+            testosterone on its own. That's different from a testosterone shot,
+            which puts testosterone directly into your body instead of asking
+            your body to make its own.
+          </p>
+          <p>
             Enclomiphene is an oral medication that works differently than
             injectable testosterone: instead of replacing testosterone directly,
             it works on a different part of your hormone system to encourage
@@ -251,6 +259,11 @@ function TrtPage() {
             appropriate. Whether it's an appropriate option for you is a
             decision your licensed provider makes individually.
           </p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/trt/" hash="faq">
+              View FAQ <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
       </Section>
 
@@ -375,7 +388,7 @@ function TrtPage() {
         </p>
       </Section>
 
-      <Section className="bg-muted/40 pt-0">
+      <Section id="faq" className="scroll-mt-20 bg-muted/40 pt-0">
         <SectionHeading
           align="left"
           title="Frequently asked questions"

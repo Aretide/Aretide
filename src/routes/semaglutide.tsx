@@ -288,6 +288,12 @@ function SemaglutidePage() {
         </motion.div>
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
+            Semaglutide helps you feel full sooner and stay full longer, by
+            slowing down how fast food leaves your stomach. When you feel full
+            longer, it's easier to eat less without feeling hungry all the time.
+            Eating less, over time, can lead to weight loss.
+          </p>
+          <p>
             Semaglutide is a GLP-1 medication used in medical weight-management
             care. Like tirzepatide, it comes in an FDA-approved branded form
             and, separately, as a compounded version made by a licensed
@@ -307,6 +313,11 @@ function SemaglutidePage() {
             </Link>{" "}
             to see the full range of options.
           </p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/semaglutide/" hash="faq">
+              View FAQ <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
       </Section>
 
@@ -466,7 +477,7 @@ function SemaglutidePage() {
         </p>
       </Section>
 
-      <Section className="bg-muted/40 pt-0">
+      <Section id="faq" className="scroll-mt-20 bg-muted/40 pt-0">
         <SectionHeading
           align="left"
           title="Frequently asked questions"

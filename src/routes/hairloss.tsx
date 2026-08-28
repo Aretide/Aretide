@@ -237,6 +237,14 @@ function HairlossPage() {
         />
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
+            Hair loss medicines usually work in one of two ways: some increase
+            blood flow to your scalp, so hair follicles get more oxygen and
+            nutrients, and others block a hormone that can shrink hair follicles
+            over time. Depending on what your provider prescribes, these
+            medicines may help slow hair loss and support the hair you still
+            have.
+          </p>
+          <p>
             Beema offers two compounded formulation types: an oral, once-daily
             option and a topical option applied directly to the scalp. Both are
             prepared by a licensed compounding pharmacy specifically for you,
@@ -249,6 +257,11 @@ function HairlossPage() {
             any, may be appropriate for you is a decision your licensed provider
             makes individually.
           </p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/hairloss/" hash="faq">
+              View FAQ <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
       </Section>
 
@@ -365,7 +378,7 @@ function HairlossPage() {
         </p>
       </Section>
 
-      <Section className="bg-muted/40 pt-0">
+      <Section id="faq" className="scroll-mt-20 bg-muted/40 pt-0">
         <SectionHeading
           align="left"
           title="Frequently asked questions"

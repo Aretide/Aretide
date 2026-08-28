@@ -286,6 +286,12 @@ function TirzepatidePage() {
         </motion.div>
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
+            Tirzepatide helps you feel full sooner and stay full longer, and it
+            may also help your body respond better to the food you eat. When you
+            feel full longer, it's easier to eat less without feeling hungry all
+            the time. Eating less, over time, can lead to weight loss.
+          </p>
+          <p>
             Tirzepatide is a GLP-1/GIP medication used in medical
             weight-management care. It's available both as an FDA-approved
             branded medication and, separately, as a compounded version prepared
@@ -305,6 +311,11 @@ function TirzepatidePage() {
             </Link>{" "}
             to see the full range of options.
           </p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/tirzepatide/" hash="faq">
+              View FAQ <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
       </Section>
 
@@ -454,7 +465,7 @@ function TirzepatidePage() {
         </p>
       </Section>
 
-      <Section className="bg-muted/40 pt-0">
+      <Section id="faq" className="scroll-mt-20 bg-muted/40 pt-0">
         <SectionHeading
           align="left"
           title="Frequently asked questions"

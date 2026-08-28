@@ -236,6 +236,13 @@ function EdPage() {
         />
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
+            These medicines work by relaxing blood vessels so more blood can
+            flow to the penis. That can make it easier to get and keep an
+            erection when you're sexually aroused. They don't cause arousal by
+            themselves - you still need to be sexually stimulated for them to
+            work.
+          </p>
+          <p>
             Beema offers two compounded options: a single-ingredient Standard
             formulation (sildenafil or tadalafil) and a Combo formulation
             combining both active ingredients into one dose, a combination not
@@ -250,6 +257,11 @@ function EdPage() {
             appropriate for you is a decision your licensed provider makes
             individually.
           </p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/ed/" hash="faq">
+              View FAQ <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </div>
       </Section>
 
@@ -368,7 +380,7 @@ function EdPage() {
         </p>
       </Section>
 
-      <Section className="bg-muted/40 pt-0">
+      <Section id="faq" className="scroll-mt-20 bg-muted/40 pt-0">
         <SectionHeading
           align="left"
           title="Frequently asked questions"
