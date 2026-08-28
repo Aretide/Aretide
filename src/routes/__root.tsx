@@ -138,21 +138,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "object-src 'none'",
         },
         { name: "referrer", content: "strict-origin-when-cross-origin" },
-        { title: "Beema Health | Medical weight-loss care" },
+        { title: "Beema Health | Telehealth medical care" },
         {
           name: "description",
           content:
-            "Medical weight-loss care reviewed by a licensed provider. Compounded semaglutide and compounded tirzepatide when clinically appropriate and legally available. Compounded medications are not FDA-approved.",
+            "Telehealth medical care reviewed by licensed providers: GLP-1 weight loss, TRT, hairloss, ED, NAD+, and sermorelin. Compounded medications are not FDA-approved.",
         },
         { name: "author", content: "Beema Health" },
         {
           property: "og:title",
-          content: "Beema Health | Medical weight-loss care",
+          content: "Beema Health | Telehealth medical care",
         },
         {
           property: "og:description",
           content:
-            "USA physicians, licensed pharmacies, clear pricing, and thoughtful medical care that doesn't stop at the first prescription.",
+            "USA physicians, licensed pharmacies, clear pricing, and thoughtful medical care across weight loss, hormone, sexual health, hair, and wellness treatments.",
         },
         { property: "og:type", content: "website" },
         { property: "og:site_name", content: "Beema Health" },
@@ -163,12 +163,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         { name: "twitter:card", content: "summary_large_image" },
         {
           name: "twitter:title",
-          content: "Beema Health | Medical weight-loss care",
+          content: "Beema Health | Telehealth medical care",
         },
         {
           name: "twitter:description",
           content:
-            "Medical weight-loss care with licensed providers, transparent pricing, and support designed for success.",
+            "Telehealth medical care with licensed providers, transparent pricing, and support across weight loss, hormone, and wellness treatments.",
         },
         { name: "twitter:image", content: absoluteUrl("/og-card.jpg") },
         {

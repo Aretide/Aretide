@@ -11,6 +11,7 @@ import { HowItWorksSteps } from "@/components/site/HowItWorksSteps";
 import { HomeHero } from "@/components/home/HomeHero";
 import { TrustSignals } from "@/components/home/TrustSignals";
 import { TreatmentShowcase } from "@/components/home/TreatmentShowcase";
+import { WellnessLineupSection } from "@/components/home/WellnessLineupSection";
 import { FreeResourcesSection } from "@/components/home/FreeResourcesSection";
 import { MissionSection } from "@/components/home/MissionSection";
 import { FinalCTASection } from "@/components/home/FinalCTASection";
@@ -18,11 +19,11 @@ import { FinalCTASection } from "@/components/home/FinalCTASection";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Beema Health | Medical weight-loss care" },
+      { title: "Beema Health | Telehealth medical care" },
       {
         name: "description",
         content:
-          "Medical weight-loss care reviewed by licensed providers in all 50 states. Compounded semaglutide and tirzepatide when clinically appropriate and available.",
+          "Telehealth medical care reviewed by licensed providers in all 50 states: GLP-1 weight loss, TRT, hairloss, ED, NAD+, and sermorelin, when clinically appropriate and available.",
       },
     ],
     links: [
@@ -70,6 +71,7 @@ function HomePage() {
         <TrustSignals />
         <HowItWorksSteps />
         <TreatmentShowcase />
+        <WellnessLineupSection />
         <FreeResourcesSection />
         <MissionSection />
         <FinalCTASection />
