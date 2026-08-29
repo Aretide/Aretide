@@ -14,11 +14,13 @@ import { SOCIAL_LINKS } from "@/lib/social-links";
 import { cn } from "@/lib/utils";
 
 type NavItem = { label: string; to: string; description?: string };
+/** Two-column grouping for a dropdown (e.g. Hair's For Men / For Women). */
+type NavSection = { heading: string; items: readonly NavItem[] };
 
 /**
  * Trailing-slash paths - match sitemap.xml / canonicalUrl / GitHub Pages 200
- * URLs. Primary nav is five dropdowns: Weight Loss, Sexual Health, Hair,
- * Wellness, and More. See docs/features/treatment-pages.md.
+ * URLs. Primary nav is four dropdowns: Weight Loss, Sexual Health, Hair, and
+ * More. See docs/features/treatment-pages.md.
  */
 const NAV: NavItem[] = [
   // { label: "Pricing", to: "/pricing/" }, // disabled - pricing model not finalized yet
@@ -31,9 +33,9 @@ const NAV: NavItem[] = [
  * ---------------------------------------------------------------------
  * Each category dropdown lists that category's individual medication pages
  * only - the category's own overview/hub page (`/weight-loss`,
- * `/sexual-health`, `/hair`, `/wellness`) stays out of the header and lives
- * in the footer Care column instead, matching the pre-existing
- * `/weight-loss` convention. See docs/features/treatment-pages.md.
+ * `/sexual-health`, `/hair`) stays out of the header and lives in the
+ * footer Care column instead, matching the pre-existing `/weight-loss`
+ * convention. See docs/features/treatment-pages.md.
  */
 const WEIGHT_LOSS_ITEMS: NavItem[] = [
   { label: "Compounded Tirzepatide", to: "/tirzepatide/" },
@@ -41,29 +43,54 @@ const WEIGHT_LOSS_ITEMS: NavItem[] = [
 ];
 
 /**
- * TRT (compounded enclomiphene) sits here, not in its own dropdown or in
- * Wellness - same audience/purchase journey as ED. Hub page copy at
- * /sexual-health keeps the two clearly distinct (TRT is not an ED
- * treatment).
+ * TRT is paused (2026-08-28) - Beema is not selling it, so it's out of the
+ * nav entirely for now (not even commented items, since a disabled link
+ * inside a live dropdown is confusing). When it returns, it goes back here
+ * (same audience/purchase journey as ED) - see docs/features/
+ * treatment-pages.md for the pause and the "don't call it TRT" naming rule.
+ * ED is 3 separate products on one /ed page - see ed.tsx.
+ *
+ * Sectioned For Men / For Women like Hair (2026-08-29), but only "For Men"
+ * has items today - women's ED/sexual-health products are coming soon but
+ * don't exist yet, so there's no "For Women" section to show. Add it (same
+ * shape as HAIR_SECTIONS) once a women's product actually ships - don't add
+ * an empty/coming-soon section header before then.
  */
-const SEXUAL_HEALTH_ITEMS: NavItem[] = [
-  { label: "ED Treatment", to: "/ed/" },
-  { label: "TRT (Enclomiphene)", to: "/trt/" },
+const SEXUAL_HEALTH_SECTIONS: NavSection[] = [
+  {
+    heading: "For Men",
+    items: [
+      { label: "Tadalafil", to: "/ed/" },
+      { label: "Sildenafil", to: "/ed/" },
+      { label: "Tadalafil + Sildenafil Combo", to: "/ed/" },
+    ],
+  },
 ];
 
 /**
- * Only one product today, but designed to grow - more hair-loss
- * formulations are coming, so this stays its own category dropdown (and
- * `/hair` its own hub page) rather than folding into another category or a
- * plain link.
+ * Sectioned For Men / For Women, Good Life Meds style (screenshot ref in
+ * conversation, 2026-08-28) - all 6 items live on the one /hairloss page,
+ * organized into Men/Women sections there too. "Oral Minoxidil" is the same
+ * product/page for both sexes and deliberately listed in both columns,
+ * matching the reference site's own pattern.
  */
-const HAIR_ITEMS: NavItem[] = [
-  { label: "Hairloss Treatment", to: "/hairloss/" },
-];
-
-const WELLNESS_ITEMS: NavItem[] = [
-  { label: "NAD+", to: "/nad-plus/" },
-  { label: "Sermorelin", to: "/sermorelin/" },
+const HAIR_SECTIONS: NavSection[] = [
+  {
+    heading: "For Men",
+    items: [
+      { label: "Oral Minoxidil", to: "/hairloss/" },
+      { label: "Finasteride", to: "/hairloss/" },
+      { label: "Topical Spray", to: "/hairloss/" },
+    ],
+  },
+  {
+    heading: "For Women",
+    items: [
+      { label: "Oral Minoxidil", to: "/hairloss/" },
+      { label: "Oral Hair Compound", to: "/hairloss/" },
+      { label: "Topical Spray", to: "/hairloss/" },
+    ],
+  },
 ];
 
 /**
@@ -187,10 +214,9 @@ function DesktopNav() {
     {
       id: "sexual-health",
       label: "Sexual Health",
-      items: SEXUAL_HEALTH_ITEMS,
+      sections: SEXUAL_HEALTH_SECTIONS,
     },
-    { id: "hair", label: "Hair", items: HAIR_ITEMS },
-    { id: "wellness", label: "Wellness", items: WELLNESS_ITEMS },
+    { id: "hair", label: "Hair", sections: HAIR_SECTIONS },
     { id: "more", label: "More", items: MORE_ITEMS },
   ] as const;
 
@@ -205,7 +231,8 @@ function DesktopNav() {
           key={menu.id}
           id={menu.id}
           label={menu.label}
-          items={menu.items}
+          items={"items" in menu ? menu.items : undefined}
+          sections={"sections" in menu ? menu.sections : undefined}
           open={openId === menu.id}
           dimmed={openId !== null && openId !== menu.id}
           reduceMotion={!!reduceMotion}
@@ -233,6 +260,7 @@ function DesktopNavDropdown({
   id,
   label,
   items,
+  sections,
   footerItems,
   open,
   dimmed,
@@ -242,7 +270,10 @@ function DesktopNavDropdown({
 }: {
   id: string;
   label: string;
-  items: readonly NavItem[];
+  /** Flat item list. Ignored when `sections` is set. */
+  items?: readonly NavItem[];
+  /** Two-column For Men / For Women style grouping - see HAIR_SECTIONS. */
+  sections?: readonly NavSection[];
   footerItems?: readonly NavItem[];
   open: boolean;
   dimmed: boolean;
@@ -250,7 +281,8 @@ function DesktopNavDropdown({
   onOpen: () => void;
   onToggle: () => void;
 }) {
-  const hasDescriptions = items.some((item) => item.description);
+  const flatItems = items ?? [];
+  const hasDescriptions = flatItems.some((item) => item.description);
   const menuId = `${id}-menu`;
 
   return (
@@ -293,29 +325,63 @@ function DesktopNavDropdown({
             }}
             className={cn(
               "absolute left-0 top-full z-50 pt-2",
-              hasDescriptions ? "min-w-[16rem]" : "min-w-[14rem]",
+              sections
+                ? sections.length > 1
+                  ? "min-w-[24rem]"
+                  : "min-w-[14rem]"
+                : hasDescriptions
+                  ? "min-w-[16rem]"
+                  : "min-w-[14rem]",
             )}
           >
             <div className="overflow-hidden rounded-xl border border-border bg-popover p-1.5 text-popover-foreground shadow-soft">
-              {items.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  role="menuitem"
+              {sections ? (
+                <div
                   className={cn(
-                    "block rounded-lg px-3 py-2 text-sm text-foreground outline-none transition-colors duration-150 hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent",
-                    !hasDescriptions && "whitespace-nowrap",
+                    "grid gap-1",
+                    sections.length > 1 ? "grid-cols-2" : "grid-cols-1",
                   )}
-                  onClick={onToggle}
                 >
-                  {item.label}
-                  {item.description ? (
-                    <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
-                      {item.description}
-                    </span>
-                  ) : null}
-                </Link>
-              ))}
+                  {sections.map((section) => (
+                    <div key={section.heading}>
+                      <p className="px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        {section.heading}
+                      </p>
+                      {section.items.map((item) => (
+                        <Link
+                          key={item.label}
+                          to={item.to}
+                          role="menuitem"
+                          className="block whitespace-nowrap rounded-lg px-3 py-2 text-sm text-foreground outline-none transition-colors duration-150 hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent"
+                          onClick={onToggle}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                flatItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.to}
+                    role="menuitem"
+                    className={cn(
+                      "block rounded-lg px-3 py-2 text-sm text-foreground outline-none transition-colors duration-150 hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent",
+                      !hasDescriptions && "whitespace-nowrap",
+                    )}
+                    onClick={onToggle}
+                  >
+                    {item.label}
+                    {item.description ? (
+                      <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
+                        {item.description}
+                      </span>
+                    ) : null}
+                  </Link>
+                ))
+              )}
               {footerItems && footerItems.length > 0 ? (
                 <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border px-3 py-2">
                   {footerItems.map((item) => (
@@ -348,11 +414,13 @@ function DesktopNavDropdown({
 function MobileNavDropdown({
   label,
   items,
+  sections,
   footerItems,
   onNavigate,
 }: {
   label: string;
-  items: readonly NavItem[];
+  items?: readonly NavItem[];
+  sections?: readonly NavSection[];
   footerItems?: readonly NavItem[];
   onNavigate: () => void;
 }) {
@@ -388,21 +456,39 @@ function MobileNavDropdown({
             className="overflow-hidden"
           >
             <div className="flex flex-col gap-1 pb-1 pl-3">
-              {items.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={onNavigate}
-                  className="rounded-xl px-1 py-2 text-base font-medium text-ink-foreground/75 transition-colors hover:text-primary"
-                >
-                  {item.label}
-                  {item.description ? (
-                    <span className="mt-0.5 block text-sm font-normal text-ink-foreground/55">
-                      {item.description}
-                    </span>
-                  ) : null}
-                </Link>
-              ))}
+              {sections
+                ? sections.map((section) => (
+                    <div key={section.heading} className="mb-2">
+                      <p className="px-1 pb-1 pt-1 text-xs font-semibold uppercase tracking-wide text-ink-foreground/50">
+                        {section.heading}
+                      </p>
+                      {section.items.map((item) => (
+                        <Link
+                          key={item.label}
+                          to={item.to}
+                          onClick={onNavigate}
+                          className="block rounded-xl px-1 py-2 text-base font-medium text-ink-foreground/75 transition-colors hover:text-primary"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))
+                : (items ?? []).map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.to}
+                      onClick={onNavigate}
+                      className="rounded-xl px-1 py-2 text-base font-medium text-ink-foreground/75 transition-colors hover:text-primary"
+                    >
+                      {item.label}
+                      {item.description ? (
+                        <span className="mt-0.5 block text-sm font-normal text-ink-foreground/55">
+                          {item.description}
+                        </span>
+                      ) : null}
+                    </Link>
+                  ))}
               {footerItems && footerItems.length > 0 ? (
                 <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-ink-foreground/15 pt-2">
                   {footerItems.map((item) => (
@@ -562,17 +648,12 @@ export function SiteHeader() {
               />
               <MobileNavDropdown
                 label="Sexual Health"
-                items={SEXUAL_HEALTH_ITEMS}
+                sections={SEXUAL_HEALTH_SECTIONS}
                 onNavigate={() => setOpen(false)}
               />
               <MobileNavDropdown
                 label="Hair"
-                items={HAIR_ITEMS}
-                onNavigate={() => setOpen(false)}
-              />
-              <MobileNavDropdown
-                label="Wellness"
-                items={WELLNESS_ITEMS}
+                sections={HAIR_SECTIONS}
                 onNavigate={() => setOpen(false)}
               />
               <MobileNavDropdown

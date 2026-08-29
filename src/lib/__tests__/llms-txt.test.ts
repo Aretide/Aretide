@@ -126,15 +126,15 @@ describe("llms.txt", () => {
     expect(missing).toEqual([]);
   });
 
-  it("states the service area and that the unlaunched HRT vertical is not for sale", () => {
-    // TRT launched 2026-08-27 as compounded enclomiphene; HRT remains the
-    // only vertical that's education-only.
+  it("states the service area and that unlaunched/paused verticals are not for sale", () => {
+    // TRT, NAD+, and sermorelin paused 2026-08-28 (not selling them for now);
+    // HRT remains permanently education-only.
     expect(llms).toMatch(/all 50 US states/i);
     expect(llms).toMatch(/United States only/i);
     expect(llms).toMatch(/not an international service/i);
     expect(llms).toMatch(/clinically appropriate/i);
     expect(llms).not.toMatch(/clinically indicated/i);
-    expect(llms).toMatch(/not a purchasable Beema program today/i);
+    expect(llms).toMatch(/not purchasable Beema programs today/i);
   });
 
   it("uses no em or en dashes", () => {

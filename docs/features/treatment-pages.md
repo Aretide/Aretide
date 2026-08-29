@@ -1,47 +1,49 @@
 # Treatment pages
 
-Each medication Beema offers gets its own indexable, SEO-focused landing page (`/tirzepatide`, `/semaglutide`, and as of 2026-08-27 `/trt`, `/hairloss`, `/ed`, `/nad-plus`, `/sermorelin`) - this targets each drug's search terms without diluting them, and gives each page its own FAQPage/BreadcrumbList JSON-LD. Beema's patient-facing offering is **compounded only** across every product line. Do not add branded-medication pages (Wegovy, Zepbound, Ozempic, Mounjaro, or any branded ED/TRT/hairloss product) or describe those brands as Beema offerings. `/weight-loss` sits alongside the compounded GLP-1 pages as a broader overview targeting head-term searches ("medical weight loss," "GLP-1 weight loss program") - see below.
+Each medication Beema offers gets its own indexable, SEO-focused landing page (`/tirzepatide`, `/semaglutide`, `/hairloss`, `/ed`) - this targets each drug's search terms without diluting them, and gives each page its own FAQPage/BreadcrumbList JSON-LD. Beema's patient-facing offering is **compounded only** across every product line. Do not add branded-medication pages (Wegovy, Zepbound, Ozempic, Mounjaro, or any branded ED/hairloss product) or describe those brands as Beema offerings. `/weight-loss` sits alongside the compounded GLP-1 pages as a broader overview targeting head-term searches ("medical weight loss," "GLP-1 weight loss program") - see below.
 
-## The 5 non-GLP-1 product lines (TRT, hairloss, ED, NAD+, sermorelin)
+## The non-GLP-1 product lines (TRT, hairloss, ED, NAD+, sermorelin)
 
-Added 2026-08-27, first pass. These are **not** GLP-1 medications, so the §F1.1 compliance rules below (written specifically for compounded semaglutide/tirzepatide) do not apply to them verbatim - see `docs/marketing/SEO-AEO-GEO-PLAN.md` §F1.2 for their parallel, product-accurate compliance framing.
+Added 2026-08-27, first pass, restructured 2026-08-28/29. These are **not** GLP-1 medications, so the §F1.1 compliance rules below (written specifically for compounded semaglutide/tirzepatide) do not apply to them verbatim - see `docs/marketing/SEO-AEO-GEO-PLAN.md` §F1.2 for their parallel, product-accurate compliance framing.
 
-| Product | Route | What Beema actually sells | Plans |
-|---|---|---|---|
-| TRT | `/trt` | Compounded **enclomiphene** - an oral SERM that encourages the body to produce its own testosterone. Not injectable testosterone, not a controlled substance. | Monthly only (no quarterly SKU in the cost sheet) |
-| Hairloss | `/hairloss` | Compounded oral and topical multi-ingredient formulations | Oral and Topical, each Monthly or Quarterly |
-| ED | `/ed` | Compounded single-ingredient (Standard) and combined (Combo) sildenafil/tadalafil formulations | Standard and Combo, each Monthly or Quarterly |
-| NAD+ | `/nad-plus` | Compounded NAD+ injections | Monthly only |
-| Sermorelin | `/sermorelin` | Compounded sermorelin injections | Monthly only |
+**Only Hairloss and ED are live.** TRT, NAD+, and sermorelin are **paused** (2026-08-28) - Beema is not selling them right now. Their routes (`/trt`, `/nad-plus`, `/sermorelin`) redirect home, matching the site's existing archived-route convention (see `docs/archived-marketing-pages.md` / `/the-comb`, `/pricing`), and are unlinked everywhere and disallowed in `robots.txt`. Full page content and pricing consts stay in git history / `simple-treatment-pricing.ts` (unused by any live route) so restoring them later is a revert, not a rebuild. **When TRT returns, do not market it as "TRT"** - enclomiphene is pharmacologically distinct from testosterone replacement therapy (it stimulates the body's own production rather than replacing testosterone directly). Write a "TRT vs enclomiphene" learn article before relaunching it, and name the route/nav something other than "TRT".
 
-**Pricing model:** these 5 products use `src/lib/simple-treatment-pricing.ts`, deliberately separate from `medication-pricing.ts` (see that file's docstring - the GLP-1 pricing shape has 1/3/6/12-month tiers, a promo code, and a starter pack, none of which these products have). First-pass prices were set at roughly 1.5x landed cost (pharmacy + dispense + shipping + doctor's fee) from an internal cost sheet, charm-rounded. **NAD+ and sermorelin have no cost-sheet entry at all** - their prices are telehealth market-rate estimates, not cost-derived; revisit both once real pharmacy costs exist. `SimpleTreatmentPricingCard` in `TreatmentPageBlocks.tsx` renders these plans; it does not share code with `TreatmentPricingCard` (GLP-1-only) or `CompoundedPriceLockup` (GLP-1-only, hardcodes tirz/sema cross-references).
+| Product | Route | Status | What Beema actually sells | Plans |
+|---|---|---|---|---|
+| Hairloss | `/hairloss` | **Live** | 6 compounded formulations, split For Men / For Women (oral minoxidil shared by both; finasteride, women's oral compound, and 2 distinct topical sprays) | Oral minoxidil and both topical sprays have Monthly + Quarterly; finasteride and the women's oral compound are Monthly only |
+| ED | `/ed` | **Live** | 3 compounded formulations: single-ingredient tadalafil, single-ingredient sildenafil, and a tadalafil+sildenafil combo. A second combo SKU exists in the pharmacy catalog but has no pricing yet and is not sold | All three have Monthly + Quarterly |
+| TRT | `/trt` | **Paused** | Compounded **enclomiphene** - an oral SERM that encourages the body to produce its own testosterone. Not injectable testosterone, not a controlled substance | Monthly only (no quarterly SKU in the cost sheet) |
+| NAD+ | `/nad-plus` | **Paused** | Compounded NAD+ injections | Monthly only |
+| Sermorelin | `/sermorelin` | **Paused** | Compounded sermorelin injections | Monthly only |
 
-**Imagery:** no product photography exists for any of these 5 lines. Rather than fabricate photorealistic pill/vial photos (a real risk of misrepresenting actual packaging, separate from LegitScript concerns), each page uses `TreatmentHeroArt` - a flat, on-brand illustration (hex badge + lucide icon + "Beema" wordmark) in place of a photo. Swap for real photography later by changing each route's hero, the same way `VIAL_IMAGERY_MODE` in `treatment-imagery.ts` works for sema/tirz.
+**Pricing model:** these products use `src/lib/simple-treatment-pricing.ts`, deliberately separate from `medication-pricing.ts` (see that file's docstring - the GLP-1 pricing shape has 1/3/6/12-month tiers, a promo code, and a starter pack, none of which these products have). First-pass prices were set at roughly 1.5x landed cost (pharmacy + dispense + shipping + doctor's fee) from an internal cost sheet, charm-rounded. **NAD+, sermorelin, and hairloss finasteride have no cost-sheet entry at all** - their prices are telehealth market-rate estimates, not cost-derived; revisit once real pharmacy costs exist. Tadalafil and sildenafil share a price (landed costs were materially identical in the cost sheet). `SimpleTreatmentPricingCard` in `TreatmentPageBlocks.tsx` renders these plans; it does not share code with `TreatmentPricingCard` (GLP-1-only) or `CompoundedPriceLockup` (GLP-1-only, hardcodes tirz/sema cross-references).
 
-**CTA URLs are unverified against Bask.** `CTA_OVERRIDES` in `cta-ids.ts` points each product's hero/footer CTA at `https://q.beemahealth.com/start-online-visit/{trt|hairloss|ed|nad|sermorelin}`, mirroring the only known-good pattern (`/start-online-visit/weightloss`). This is an assumption, not a confirmed Bask route - verify before relying on these in production.
+**Imagery:** no product photography exists for any of these lines. Rather than fabricate photorealistic pill/vial photos (a real risk of misrepresenting actual packaging, separate from LegitScript concerns), each page uses `TreatmentHeroArt` - a flat, on-brand illustration (hex badge + lucide icon + "Beema" wordmark) in place of a photo. Swap for real photography later by changing each route's hero, the same way `VIAL_IMAGERY_MODE` in `treatment-imagery.ts` works for sema/tirz.
 
-**Nav:** superseded 2026-08-27 by category-based nav (see "Nav: category dropdowns" below) - the single flat "Treatments" dropdown this section originally described lasted about a day before being reorganized by category, Good Life Meds style. All 7 medication pages are still in the footer Care column, now grouped under their category's hub link.
+**CTA URLs are unverified against Bask.** `CTA_OVERRIDES` in `cta-ids.ts` points each product's hero/footer CTA at `https://q.beemahealth.com/start-online-visit/{hairloss|ed|...}`, mirroring the only known-good pattern (`/start-online-visit/weightloss`). This is an assumption, not a confirmed Bask route - verify before relying on these in production.
 
-**`/learn/trt` was rewritten**, not left alone: that hub previously stated flatly "Beema does not offer TRT today." Since compounded enclomiphene is now real and live, the hub instead explains the distinction - it's an educational overview of injectable/gel/patch testosterone therapy, and Beema's actual offering (enclomiphene) works differently and lives on `/trt`. Same fix applied to the `what-is-trt` learn article and `public/llms.txt`. `/learn/hrt`'s "not currently offered" language is untouched - HRT is still not a Beema program.
+**Nav:** see "Nav: category dropdowns" below for the current (2026-08-29) shape - sectioned dropdowns for Hair and Sexual Health, flat for Weight Loss, no dropdown for the paused Wellness category. All live medication pages are also in the footer Care column, grouped under their category's hub link.
+
+**`/learn/trt` needs a rewrite** (not yet done as of this pause) - it currently explains the compounded-enclomiphene distinction and links to `/trt`, which now redirects home. Once rewritten, it should explain TRT vs. enclomiphene for education without pointing at a live commercial page, and a dedicated "TRT vs enclomiphene" article should be added. `/learn/hrt`'s "not currently offered" language is untouched - HRT is still not a Beema program.
 
 Educational (not commercial) companions live at `/learn/`. Program pages pull those guides from `src/content/learn/money-page-guides.ts`. Learn copy is unsigned; do not treat it as clinician-reviewed. Spec: `docs/features/learn.md`.
 
-## Category hub pages (`/sexual-health`, `/hair`, `/wellness`)
+## Category hub pages (`/sexual-health`, `/hair`; `/wellness` paused)
 
 Added 2026-08-27, alongside the nav reorganization below. Mirrors the pre-existing `/weight-loss` pattern exactly: a broader, non-brand overview page targeting head-term searches ("hair loss treatment," "sexual health treatment online"), linking down into the category's specific medication pages, which stay the bottom-funnel conversion targets.
 
-| Hub | Route | Links to |
-|---|---|---|
-| Weight Loss | `/weight-loss` | `/semaglutide`, `/tirzepatide` (pre-existing) |
-| Sexual Health | `/sexual-health` | `/ed`, `/trt` |
-| Hair | `/hair` | `/hairloss` (today - designed to grow, see below) |
-| Wellness | `/wellness` | `/nad-plus`, `/sermorelin` |
+| Hub | Route | Status | Links to |
+|---|---|---|---|
+| Weight Loss | `/weight-loss` | Live (pre-existing) | `/semaglutide`, `/tirzepatide` |
+| Sexual Health | `/sexual-health` | Live | `/ed` only for now (TRT paused - see above) |
+| Hair | `/hair` | Live | `/hairloss` (designed to grow, see below) |
+| Wellness | `/wellness` | **Paused** (redirects home) | Would link `/nad-plus`, `/sermorelin` - both paused |
 
-**Why Hair gets a full hub despite having one product today:** more hair-loss formulations are planned, so `/hair` and its nav dropdown (`HAIR_ITEMS` in `SiteHeader.tsx`) exist now to grow into, rather than retrofitting a hub later once a second hair product ships. Add new hair-loss medication pages to `HAIR_ITEMS`, the `/hair` route's `LINEUP` array, and the footer Care column.
+**Why Hair gets a full hub despite having one product page today:** more hair-loss formulations are planned, so `/hair` and its nav dropdown (`HAIR_SECTIONS` in `SiteHeader.tsx`) exist now to grow into, rather than retrofitting a hub later once a second hair product ships. Add new hair-loss medication pages to `HAIR_SECTIONS`, the `/hair` route's `LINEUP` array, and the footer Care column.
 
-**Compliance note (Sexual Health specifically):** ED and TRT are different treatments for different concerns. `/sexual-health`'s copy explicitly says so ("Two different treatments, reviewed separately" / "one is never assumed to need the other") so that bucketing TRT alongside ED for nav/audience reasons doesn't read as implying TRT is an ED treatment or vice versa.
+**Compliance note (Sexual Health specifically):** when TRT returns, remember ED and TRT are different treatments for different concerns - the hub's copy should say so explicitly (it did, before the pause) so that bucketing them together for nav/audience reasons doesn't read as implying one is the other.
 
-**Structured data:** each hub carries `BreadcrumbList` + `serviceJsonLd()` only, matching `/weight-loss` - no visible FAQ content on any of the 4 hubs, so no `FAQPage` (see the Structured data section below for why that pairing matters).
+**Structured data:** each hub carries `BreadcrumbList` + `serviceJsonLd()` only, matching `/weight-loss` - no visible FAQ content on any hub, so no `FAQPage` (see the Structured data section below for why that pairing matters).
 
 **Shared building block:** `SimpleCategoryLineup` in `TreatmentPageBlocks.tsx` renders each hub's card grid (icon art + name + price + link), deliberately separate from `TreatmentLineup.tsx` (the `/weight-loss`-only version hardcoded to GLP-1 photo imagery and `CompoundedPriceLockup`).
 
@@ -67,14 +69,14 @@ Product photography: the site defaults to branded Beema-wordmark vial imagery vi
 | `/glp-1` | `src/routes/glp-1.tsx` | National cash-pay GLP-1 category page (not in primary nav/footer). Shares `Glp1LandingPage` with city landers. |
 | `/glp-1-houston` | `src/routes/glp-1-houston.tsx` | Houston cash-pay GLP-1 ads landing. Future cities: `/glp-1-{city}` under the same template - see "City GLP-1 pages" below |
 | `/weight-loss` | `src/routes/weight-loss.tsx` | Category hub - linked from footer, see below |
-| `/trt` | `src/routes/trt.tsx` | Compounded enclomiphene (TRT) landing page |
-| `/hairloss` | `src/routes/hairloss.tsx` | Compounded hairloss landing page (oral + topical plans) |
-| `/ed` | `src/routes/ed.tsx` | Compounded ED landing page (standard + combo plans) |
-| `/nad-plus` | `src/routes/nad-plus.tsx` | Compounded NAD+ landing page |
-| `/sermorelin` | `src/routes/sermorelin.tsx` | Compounded sermorelin landing page |
-| `/sexual-health` | `src/routes/sexual-health.tsx` | Category hub for `/ed` + `/trt` - linked from footer, see "Category hub pages" above |
+| `/hairloss` | `src/routes/hairloss.tsx` | Compounded hairloss landing page (6 SKUs, For Men / For Women sections) |
+| `/ed` | `src/routes/ed.tsx` | Compounded ED landing page (tadalafil, sildenafil, combo) |
+| `/sexual-health` | `src/routes/sexual-health.tsx` | Category hub for `/ed` (TRT paused, see above) - linked from footer, see "Category hub pages" above |
 | `/hair` | `src/routes/hair.tsx` | Category hub for `/hairloss` (designed to grow) - linked from footer |
-| `/wellness` | `src/routes/wellness.tsx` | Category hub for `/nad-plus` + `/sermorelin` - linked from footer |
+| `/trt` | `src/routes/trt.tsx` | **Paused** - redirect-to-home stub, see above |
+| `/nad-plus` | `src/routes/nad-plus.tsx` | **Paused** - redirect-to-home stub, see above |
+| `/sermorelin` | `src/routes/sermorelin.tsx` | **Paused** - redirect-to-home stub, see above |
+| `/wellness` | `src/routes/wellness.tsx` | **Paused** - redirect-to-home stub, see above |
 
 Shared building blocks (pricing card, comparison table, FAQ accordion, breadcrumb) live in `src/components/site/TreatmentPageBlocks.tsx`. Copy/data (steps, FAQ items, eligibility bullets) stays local to each route file - do not extract it into a shared data file, each page is meant to have genuinely distinct copy.
 
@@ -106,20 +108,23 @@ As of the 2026-07-30 SEO pass, that decision was reversed: `/weight-loss` is rea
 
 If a future change needs to re-orphan or retire this page, that's a deliberate call to make with the team, not a default to restore - update this doc and the `COLUMNS` comments together with the code.
 
-## Nav: category dropdowns (Weight Loss / Sexual Health / Hair / Wellness)
+## Nav: category dropdowns (Weight Loss / Sexual Health / Hair)
 
-Reorganized 2026-08-27, Good Life Meds style, replacing the previous same-day flat "Treatments" dropdown (one list of all 7 medications). `SiteHeader.tsx` now renders four medication dropdowns, each scoped to one category's *specific medication pages only* - the category's hub page stays out of the header (see below):
+Reorganized 2026-08-27, Good Life Meds style, replacing the previous same-day flat "Treatments" dropdown (one list of all 7 medications). `SiteHeader.tsx` renders one medication dropdown per **live** category, each scoped to that category's *specific medication pages only* - the category's hub page stays out of the header (see below). Wellness is currently paused entirely (see below) so it has no dropdown right now.
 
-| Dropdown | `NavItem[]` const | Items |
-|---|---|---|
-| Weight Loss | `WEIGHT_LOSS_ITEMS` | Compounded Tirzepatide, Compounded Semaglutide |
-| Sexual Health | `SEXUAL_HEALTH_ITEMS` | ED Treatment, TRT (Enclomiphene) |
-| Hair | `HAIR_ITEMS` | Hairloss Treatment (designed to grow - see "Category hub pages" above) |
-| Wellness | `WELLNESS_ITEMS` | NAD+, Sermorelin |
+| Dropdown | Const | Shape | Items |
+|---|---|---|---|
+| Weight Loss | `WEIGHT_LOSS_ITEMS` | flat `NavItem[]` | Compounded Tirzepatide, Compounded Semaglutide |
+| Sexual Health | `SEXUAL_HEALTH_SECTIONS` | sectioned (2026-08-29) | **For Men**: Tadalafil, Sildenafil, Tadalafil + Sildenafil Combo. No "For Women" section yet - see below |
+| Hair | `HAIR_SECTIONS` | sectioned (2026-08-28) | **For Men**: Oral Minoxidil, Finasteride, Topical Spray. **For Women**: Oral Minoxidil, Oral Hair Compound, Topical Spray |
 
-Add a new medication page to the matching category's `*_ITEMS` array (and to that category's hub-page `LINEUP` array, and the footer Care column) rather than adding a new top-level nav entry or reviving the flat list. A genuinely new category (not Weight Loss/Sexual Health/Hair/Wellness) is a deliberate call to make with the team, not a default - the header only has room for one more slot (see "Nav: 'More' dropdown" below) before it's crowded again.
+**Sectioned dropdowns** (`NavSection = { heading, items }`, an optional `sections` prop alongside the flat `items` prop on both `DesktopNavDropdown` and `MobileNavDropdown`) render a For Men / For Women two-column grid instead of a flat list - `DesktopNavDropdown` collapses to one column when only one section has items (Sexual Health today). Add `sections` to a dropdown only when the category is genuinely split by sex; Weight Loss stays a flat list.
 
-Every category's hub page (`/weight-loss`, `/sexual-health`, `/hair`, `/wellness`) stays **out of the header** - linked from the site footer Care column and from in-page copy only, matching the pre-existing `/weight-loss` decision. `/how-it-works` is in the **More** header dropdown and footer Resources column (care-process overview, not a medication page). On `/tirzepatide`, `/semaglutide`, `/glp-1`, and `/glp-1-houston`, the hero "How it works" / "How care works" button is an on-page jump (`hash="how-it-works"`) to `<HowItWorksSteps />` on that same page, not a navigation to `/how-it-works/`.
+**Do not add an empty/coming-soon "For Women" section** to Sexual Health before a women's product actually ships - matches the sitewide "no coming-soon placeholders in live nav" rule (see the Resources/More section below). Add the second section (same shape as `HAIR_SECTIONS`) the day a women's sexual-health product goes live, not before.
+
+Add a new medication page to the matching category's items/section array (and to that category's hub-page `LINEUP` array, and the footer Care column) rather than adding a new top-level nav entry or reviving the flat list. A genuinely new category (not Weight Loss/Sexual Health/Hair) is a deliberate call to make with the team, not a default - the header only has room for one more slot (see "Nav: 'More' dropdown" below) before it's crowded again.
+
+Every category's hub page (`/weight-loss`, `/sexual-health`, `/hair`) stays **out of the header** - linked from the site footer Care column and from in-page copy only, matching the pre-existing `/weight-loss` decision. `/how-it-works` is in the **More** header dropdown and footer Resources column (care-process overview, not a medication page). On `/tirzepatide`, `/semaglutide`, `/glp-1`, and `/glp-1-houston`, the hero "How it works" / "How care works" button is an on-page jump (`hash="how-it-works"`) to `<HowItWorksSteps />` on that same page, not a navigation to `/how-it-works/`.
 
 Hover/tap behavior is the same shared pair as the other menus:
 
@@ -160,10 +165,10 @@ Keep city pages out of the category dropdowns so nav does not grow with every ma
 
 Every treatment-adjacent page carries page-specific JSON-LD alongside the sitewide `MedicalOrganization`/`WebSite` schema (`ORGANIZATION_JSONLD`/`WEBSITE_JSONLD` in `src/lib/seo.ts`, rendered in the root layout):
 
-- `/tirzepatide`, `/semaglutide`, `/trt`, `/hairloss`, `/ed`, `/nad-plus`, `/sermorelin` — `BreadcrumbList` + `FAQPage` + `serviceJsonLd()` (each has a visible FAQ accordion that matches its JSON-LD)
+- `/tirzepatide`, `/semaglutide`, `/hairloss`, `/ed` — `BreadcrumbList` + `FAQPage` + `serviceJsonLd()` (each has a visible FAQ accordion that matches its JSON-LD). `/trt`, `/nad-plus`, `/sermorelin` carried the same shape before being paused - their JSON-LD is dormant along with the rest of the page (redirect stubs render nothing)
 - `/glp-1` — `BreadcrumbList` + `FAQPage` + `serviceJsonLd()` (national cash-pay GLP-1 category page; visible FAQ matches JSON-LD; canonical `https://beemahealth.com/glp-1/`)
 - `/glp-1-houston` — `BreadcrumbList` + `FAQPage` + `serviceJsonLd()` (Houston cash-pay GLP-1 ads + local SEO page; visible FAQ matches JSON-LD; canonical `https://beemahealth.com/glp-1-houston/`)
-- `/weight-loss`, `/sexual-health`, `/hair`, `/wellness` — `BreadcrumbList` + `serviceJsonLd()` (each a `Service` describing the category program itself; no visible FAQ content on any of the 4 hubs, so no `FAQPage`)
+- `/weight-loss`, `/sexual-health`, `/hair` — `BreadcrumbList` + `serviceJsonLd()` (each a `Service` describing the category program itself; no visible FAQ content on any hub, so no `FAQPage`). `/wellness` carried the same shape before being paused
 - `/how-it-works`, `/safety` — `BreadcrumbList` + `medicalWebPageJsonLd()` (a `MedicalWebPage` describing the informational content; no visible FAQ content, so no `FAQPage`)
 
 `breadcrumbJsonLd()`, `faqPageJsonLd()`, `serviceJsonLd()`, and `medicalWebPageJsonLd()` all live in `src/lib/seo.ts`. Never add `FAQPage` JSON-LD without a matching visible FAQ accordion on the page — Google's structured-data guidelines require the two to match, and `faqPageJsonLd()`'s docstring says the same.
@@ -210,12 +215,13 @@ const cta = resolveCta(CTA_IDS.tirzepatide_hero);
 | `src/components/brand/SiteBootLoader.tsx` | Branded overlay (root shell, first document load) |
 | `src/components/site/TreatmentPageBlocks.tsx` | Shared breadcrumb, pricing card, comparison table, FAQ accordion |
 | `src/lib/medication-pricing.ts` | Single source of truth for GLP-1 pricing — never hardcode `$` amounts elsewhere |
-| `src/lib/simple-treatment-pricing.ts` | Single source of truth for the 5 non-GLP-1 products' pricing (Monthly/Quarterly, no promo code) |
-| `src/routes/trt.tsx`, `hairloss.tsx`, `ed.tsx`, `nad-plus.tsx`, `sermorelin.tsx` | The 5 non-GLP-1 treatment pages |
-| `src/routes/sexual-health.tsx`, `hair.tsx`, `wellness.tsx` | The 3 new category hub pages (`/weight-loss` is the pre-existing 4th) |
+| `src/lib/simple-treatment-pricing.ts` | Single source of truth for the non-GLP-1 products' pricing (Monthly/Quarterly, no promo code). TRT/NAD+/sermorelin consts stay defined but unused while paused |
+| `src/routes/hairloss.tsx`, `ed.tsx` | The 2 live non-GLP-1 treatment pages |
+| `src/routes/trt.tsx`, `nad-plus.tsx`, `sermorelin.tsx`, `wellness.tsx` | Paused - redirect-to-home stubs, full content in git history |
+| `src/routes/sexual-health.tsx`, `hair.tsx` | The 2 live category hub pages (`/weight-loss` is the pre-existing 3rd) |
 | `src/lib/cta-ids.ts` | `CTA_IDS`, `resolveCta()` — the CTA switchboard |
 | `src/lib/seo.ts` | `faqPageJsonLd()`, `breadcrumbJsonLd()`, `serviceJsonLd()`, `medicalWebPageJsonLd()`, `canonicalUrl()` |
-| `src/components/site/SiteHeader.tsx`, `SiteFooter.tsx` | Weight Loss / Sexual Health / Hair / Wellness / More dropdowns (`DesktopNavDropdown` / `MobileNavDropdown`); footer Care + Resources + Trust columns (Trust includes the Google review ask) |
+| `src/components/site/SiteHeader.tsx`, `SiteFooter.tsx` | Weight Loss / Sexual Health / Hair / More dropdowns (`DesktopNavDropdown` / `MobileNavDropdown`, `sections` prop for For Men/Women); footer Care + Resources + Trust columns (Trust includes the Google review ask) |
 | `src/lib/google-business.ts` | GBP listing URL (`sameAs`) vs write-review URL (footer + `/contact/`) |
 | `src/lib/marketing-copy.ts` | `FIRST_MONTH_PROMO_LINE` — the one-time, 3-month-only promo code promoted alongside pricing |
 | `src/components/home/TreatmentShowcase.tsx`, `src/components/site/TreatmentLineup.tsx` | Medication cards (home / `/weight-loss`) |

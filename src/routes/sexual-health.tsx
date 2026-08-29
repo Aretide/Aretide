@@ -28,14 +28,15 @@ import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
-  ED_STANDARD_PRICING,
-  TRT_PRICING,
+  ED_COMBO_PRICING,
+  ED_SILDENAFIL_PRICING,
+  ED_TADALAFIL_PRICING,
   formatSimpleStartingAt,
 } from "@/lib/simple-treatment-pricing";
 import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
 const TITLE = "Sexual Health Treatment | Beema Health";
-const DESCRIPTION = `Compounded ED and TRT care, reviewed by licensed providers in all 50 states. ED from ${formatSimpleStartingAt(ED_STANDARD_PRICING)}, TRT from ${formatSimpleStartingAt(TRT_PRICING)}. Prescribing is never guaranteed.`;
+const DESCRIPTION = `Compounded ED care, reviewed by licensed providers in all 50 states. From ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}. Prescribing is never guaranteed.`;
 
 export const Route = createFileRoute("/sexual-health")({
   head: () => ({
@@ -67,7 +68,7 @@ export const Route = createFileRoute("/sexual-health")({
           serviceJsonLd({
             name: "Sexual Health Telehealth Program",
             description:
-              "Telehealth sexual health program from Beema Health. Licensed providers review every patient and may prescribe compounded ED formulations or compounded enclomiphene (TRT) when clinically appropriate; these compounded medications are not FDA-approved, and prescribing is never guaranteed.",
+              "Telehealth sexual health program from Beema Health. Licensed providers review every patient and may prescribe compounded ED formulations when clinically appropriate; these compounded medications are not FDA-approved, and prescribing is never guaranteed.",
             path: "/sexual-health",
             serviceType: "Sexual health telehealth program",
           }),
@@ -78,22 +79,36 @@ export const Route = createFileRoute("/sexual-health")({
   component: SexualHealthPage,
 });
 
+/**
+ * TRT is paused (2026-08-28, not selling it right now) - this hub is
+ * ED-only until it returns. When it does, it goes back here as its own
+ * lineup entry, not folded into the ED page - see
+ * docs/features/treatment-pages.md.
+ */
 const LINEUP: CategoryLineupItem[] = [
   {
-    id: "ed",
-    name: "ED Treatment",
+    id: "ed-tadalafil",
+    name: "Tadalafil",
     form: "Oral, taken as needed or daily",
-    pricing: ED_STANDARD_PRICING,
+    pricing: ED_TADALAFIL_PRICING,
     icon: Pill,
     to: "/ed/",
   },
   {
-    id: "trt",
-    name: "TRT (Enclomiphene)",
-    form: "Once-daily oral",
-    pricing: TRT_PRICING,
+    id: "ed-sildenafil",
+    name: "Sildenafil",
+    form: "Oral, taken as needed",
+    pricing: ED_SILDENAFIL_PRICING,
     icon: Pill,
-    to: "/trt/",
+    to: "/ed/",
+  },
+  {
+    id: "ed-combo",
+    name: "Tadalafil + Sildenafil Combo",
+    form: "Oral, taken as needed",
+    pricing: ED_COMBO_PRICING,
+    icon: Pill,
+    to: "/ed/",
   },
 ];
 
@@ -105,8 +120,8 @@ const BENEFITS = [
   },
   {
     icon: HeartPulse,
-    title: "Two different treatments, reviewed separately",
-    text: "ED and TRT (compounded enclomiphene) address different concerns. Your provider evaluates each independently based on your intake - one is never assumed to need the other.",
+    title: "Three formulations, one intake",
+    text: "Tadalafil, sildenafil, and a combined formulation. Your provider reviews your intake and recommends which, if any, may be appropriate.",
   },
   {
     icon: Pill,
@@ -149,7 +164,7 @@ function SexualHealthPage() {
                 <LineReveal delay={0.1}>licensed providers</LineReveal>
               </>
             }
-            description={`Beema Health offers two separate compounded programs for men's sexual and hormonal health: ED treatment and TRT (compounded enclomiphene). ED from ${formatSimpleStartingAt(ED_STANDARD_PRICING)}, TRT from ${formatSimpleStartingAt(TRT_PRICING)}. Compounded medications are not FDA-approved.`}
+            description={`Beema Health offers compounded ED treatment, from ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}. Compounded medications are not FDA-approved.`}
           />
           <motion.div
             className="mt-10 text-center"
@@ -179,12 +194,15 @@ function SexualHealthPage() {
       <Section className="bg-muted/40 py-16 md:py-20">
         <SectionHeading
           align="left"
-          eyebrow="Choose your program"
-          title="Two distinct programs, one intake"
-          description="ED and TRT are different treatments for different concerns. Your provider evaluates each independently."
+          eyebrow="Choose your formulation"
+          title="ED formulations"
+          description="Your provider decides which formulation, if any, is clinically appropriate for you. Women's sexual health products are coming soon."
           className="mx-0 max-w-2xl"
         />
-        <div className="mt-10">
+        <h3 className="mt-10 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+          For Men
+        </h3>
+        <div className="mt-4">
           <SimpleCategoryLineup items={LINEUP} />
         </div>
       </Section>
@@ -251,17 +269,16 @@ function SexualHealthPage() {
               Who this is for
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Beema Health is here for adult men considering ED treatment, TRT,
-              or both. During your medical intake, we review your health
-              history, current medications, and any factors that might make a
-              given treatment inadvisable. A licensed provider decides whether
-              either treatment may be appropriate for you; prescribing is never
-              guaranteed.
+              Beema Health is here for adult men considering ED treatment.
+              During your medical intake, we review your health history, current
+              medications, and any factors that might make treatment
+              inadvisable. A licensed provider decides whether treatment may be
+              appropriate for you; prescribing is never guaranteed.
             </p>
             <ul className="mt-5 space-y-2">
               {[
                 "Adult men, 18 and older",
-                "Eligibility considers cardiovascular history, hormone-related history, and current medications",
+                "Eligibility considers cardiovascular history and current medications",
                 "Final approval and formulation selection rests with a licensed provider",
               ].map((t, i) => (
                 <motion.li

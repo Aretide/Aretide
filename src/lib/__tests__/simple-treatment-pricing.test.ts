@@ -1,9 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
   ED_COMBO_PRICING,
-  ED_STANDARD_PRICING,
-  HAIRLOSS_ORAL_PRICING,
-  HAIRLOSS_TOPICAL_PRICING,
+  ED_SILDENAFIL_PRICING,
+  ED_TADALAFIL_PRICING,
+  HAIRLOSS_FINASTERIDE_PRICING,
+  HAIRLOSS_ORAL_MINOXIDIL_PRICING,
+  HAIRLOSS_TOPICAL_MEN_PRICING,
+  HAIRLOSS_TOPICAL_WOMEN_PRICING,
+  HAIRLOSS_WOMENS_COMPOUND_PRICING,
   NAD_PRICING,
   SERMORELIN_PRICING,
   TRT_PRICING,
@@ -12,13 +16,17 @@ import {
 } from "../simple-treatment-pricing";
 
 const ALL_PRICINGS = [
-  ["TRT", TRT_PRICING],
-  ["Hairloss oral", HAIRLOSS_ORAL_PRICING],
-  ["Hairloss topical", HAIRLOSS_TOPICAL_PRICING],
-  ["ED standard", ED_STANDARD_PRICING],
+  ["TRT (paused)", TRT_PRICING],
+  ["Hairloss oral minoxidil", HAIRLOSS_ORAL_MINOXIDIL_PRICING],
+  ["Hairloss finasteride", HAIRLOSS_FINASTERIDE_PRICING],
+  ["Hairloss women's compound", HAIRLOSS_WOMENS_COMPOUND_PRICING],
+  ["Hairloss topical (men)", HAIRLOSS_TOPICAL_MEN_PRICING],
+  ["Hairloss topical (women)", HAIRLOSS_TOPICAL_WOMEN_PRICING],
+  ["ED tadalafil", ED_TADALAFIL_PRICING],
+  ["ED sildenafil", ED_SILDENAFIL_PRICING],
   ["ED combo", ED_COMBO_PRICING],
-  ["NAD+", NAD_PRICING],
-  ["Sermorelin", SERMORELIN_PRICING],
+  ["NAD+ (paused)", NAD_PRICING],
+  ["Sermorelin (paused)", SERMORELIN_PRICING],
 ] as const;
 
 describe("simple-treatment-pricing", () => {
@@ -43,14 +51,21 @@ describe("simple-treatment-pricing", () => {
     }
   });
 
-  it("TRT has no quarterly plan - not a SKU in the cost sheet", () => {
+  it("TRT and single-SKU products have no quarterly plan - not in the cost sheet", () => {
     expect(TRT_PRICING.quarterly).toBeUndefined();
+    expect(HAIRLOSS_FINASTERIDE_PRICING.quarterly).toBeUndefined();
+    expect(HAIRLOSS_WOMENS_COMPOUND_PRICING.quarterly).toBeUndefined();
+  });
+
+  it("tadalafil and sildenafil share the same landed-cost-derived price", () => {
+    expect(ED_SILDENAFIL_PRICING).toEqual(ED_TADALAFIL_PRICING);
   });
 
   it("formatSimpleStartingAt renders whole-dollar monthly rates without cents", () => {
     expect(formatSimpleStartingAt(TRT_PRICING)).toBe("$169/mo");
     expect(formatSimpleStartingAt(NAD_PRICING)).toBe("$149/mo");
     expect(formatSimpleStartingAt(SERMORELIN_PRICING)).toBe("$199/mo");
+    expect(formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)).toBe("$35/mo");
   });
 
   it("simplePricingSentence never mentions a promo code or starter pack", () => {
@@ -64,8 +79,8 @@ describe("simple-treatment-pricing", () => {
 
   it("simplePricingSentence mentions the quarterly plan only when one exists", () => {
     expect(simplePricingSentence("TRT", TRT_PRICING)).not.toMatch(/quarterly/i);
-    expect(simplePricingSentence("Hairloss", HAIRLOSS_ORAL_PRICING)).toMatch(
-      /quarterly/i,
-    );
+    expect(
+      simplePricingSentence("Hairloss", HAIRLOSS_ORAL_MINOXIDIL_PRICING),
+    ).toMatch(/quarterly/i);
   });
 });

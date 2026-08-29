@@ -1,28 +1,31 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Droplet, HeartPulse, Sparkles } from "lucide-react";
+import { ArrowRight, Droplet, HeartPulse } from "lucide-react";
 import { HexBadge, Reveal } from "@/components/site/primitives";
 import {
-  ED_STANDARD_PRICING,
-  HAIRLOSS_ORAL_PRICING,
-  NAD_PRICING,
+  ED_TADALAFIL_PRICING,
+  HAIRLOSS_ORAL_MINOXIDIL_PRICING,
   formatSimpleStartingAt,
 } from "@/lib/simple-treatment-pricing";
 
 /**
  * Homepage isn't only a weight-loss company (2026-08-27) - GLP-1 stays the
  * flagship showcase above (TreatmentShowcase, and every "Get Started" CTA
- * defaults to the GLP-1 intake, see cta-ids.ts DEFAULT_CTA_TARGET), but the
- * other 3 treatment categories need a real homepage presence too, not just
- * a header/footer link. This also fixes a real SEO gap: /sexual-health,
- * /hair, and /wellness had zero homepage inbound links before this.
+ * defaults to the GLP-1 intake, see cta-ids.ts DEFAULT_CTA_TARGET), but
+ * Sexual Health and Hair need a real homepage presence too, not just a
+ * header/footer link. This also fixes a real SEO gap: those hubs had zero
+ * homepage inbound links before this.
+ *
+ * Wellness card removed 2026-08-28 - NAD+ and sermorelin (its only
+ * products) are both paused. Add it back here once either returns. TRT is
+ * also paused, so Sexual Health's description below only mentions ED.
  */
 const CATEGORIES = [
   {
     id: "sexual-health",
     name: "Sexual Health",
-    description: "ED and TRT (compounded enclomiphene) care.",
+    description: "Compounded ED treatment.",
     icon: HeartPulse,
-    priceLine: `From ${formatSimpleStartingAt(ED_STANDARD_PRICING)}`,
+    priceLine: `From ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}`,
     to: "/sexual-health/",
   },
   {
@@ -30,16 +33,8 @@ const CATEGORIES = [
     name: "Hair",
     description: "Compounded oral and topical hairloss treatment.",
     icon: Droplet,
-    priceLine: `From ${formatSimpleStartingAt(HAIRLOSS_ORAL_PRICING)}`,
+    priceLine: `From ${formatSimpleStartingAt(HAIRLOSS_ORAL_MINOXIDIL_PRICING)}`,
     to: "/hair/",
-  },
-  {
-    id: "wellness",
-    name: "Wellness",
-    description: "Compounded NAD+ and sermorelin care.",
-    icon: Sparkles,
-    priceLine: `From ${formatSimpleStartingAt(NAD_PRICING)}`,
-    to: "/wellness/",
   },
 ] as const;
 
@@ -52,12 +47,12 @@ export function WellnessLineupSection() {
             More than weight loss
           </h2>
           <p className="mt-3 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground">
-            Beema also offers compounded treatment for sexual health, hair loss,
-            and wellness, each reviewed by a licensed provider.
+            Beema also offers compounded treatment for sexual health and hair
+            loss, each reviewed by a licensed provider.
           </p>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
           {CATEGORIES.map((category) => (
             <Link
               key={category.id}

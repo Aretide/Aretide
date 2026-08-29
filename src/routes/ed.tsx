@@ -34,7 +34,8 @@ import { Button } from "@/components/ui/button";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
   ED_COMBO_PRICING,
-  ED_STANDARD_PRICING,
+  ED_SILDENAFIL_PRICING,
+  ED_TADALAFIL_PRICING,
   formatSimpleStartingAt,
   simplePricingSentence,
 } from "@/lib/simple-treatment-pricing";
@@ -43,14 +44,14 @@ import { SUPPORT_EMAIL } from "@/lib/contact-info";
 import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
 const TITLE = "Compounded ED Treatment Online | Beema Health";
-const DESCRIPTION = `Compounded sildenafil, tadalafil, and combination ED formulations, reviewed by licensed providers. Nationwide telehealth care from ${formatSimpleStartingAt(ED_STANDARD_PRICING)}. Prescribing is never guaranteed.`;
+const DESCRIPTION = `Compounded tadalafil, sildenafil, and a combination formulation, reviewed by licensed providers. Nationwide telehealth care from ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}. Prescribing is never guaranteed.`;
 const SERVICE_DESCRIPTION =
   "Nationwide telehealth service connecting eligible adult men with independent licensed providers for compounded ED formulation evaluation and ongoing care. Completing intake does not guarantee a prescription.";
 
 const FAQ_ITEMS: TreatmentFaqItem[] = [
   {
-    q: "What's the difference between Standard and Combo?",
-    a: "Standard is a single-ingredient compounded formulation of sildenafil or tadalafil. Combo is a compounded formulation combining both active ingredients into one dose, a combination not sold as a single commercial product. Both are prepared by a licensed compounding pharmacy specifically for you. Your licensed provider reviews your intake and recommends which option, dose, and formulation may be appropriate for your case; prescribing either is never guaranteed.",
+    q: "What's the difference between Tadalafil, Sildenafil, and the Combo?",
+    a: "Tadalafil and sildenafil are each single-ingredient compounded formulations. The Combo formulation combines both active ingredients into one dose, a combination not sold as a single commercial product. All three are prepared by a licensed compounding pharmacy specifically for you. Your licensed provider reviews your intake and recommends which option, dose, and formulation may be appropriate for your case; prescribing any of them is never guaranteed.",
   },
   {
     q: "Is compounded ED treatment the same as generic Viagra or Cialis?",
@@ -62,7 +63,7 @@ const FAQ_ITEMS: TreatmentFaqItem[] = [
   },
   {
     q: "How much does ED treatment cost through Beema?",
-    a: `${simplePricingSentence("Compounded Standard ED treatment through Beema", ED_STANDARD_PRICING)} The Combo option is ${simplePricingSentence("compounded Combo ED treatment", ED_COMBO_PRICING).replace(/^C/, "c")} Both cover your provider consultation, prescription formulation, and expedited shipping. Questions about your plan? ${patientQuestionsGuidance()}`,
+    a: `${simplePricingSentence("Compounded tadalafil or sildenafil through Beema", ED_TADALAFIL_PRICING)} The Combo formulation is ${simplePricingSentence("compounded tadalafil + sildenafil through Beema", ED_COMBO_PRICING).replace(/^C/, "c")} All three cover your provider consultation, prescription formulation, and expedited shipping. Questions about your plan? ${patientQuestionsGuidance()}`,
   },
   {
     q: "Does Beema serve patients nationwide?",
@@ -123,8 +124,8 @@ export const Route = createFileRoute("/ed")({
             reviewedByClinicalLead: false,
             dateModified: "2026-08-27",
             offer: {
-              introPrice: ED_STANDARD_PRICING.monthlyUsd,
-              recurringPrice: ED_STANDARD_PRICING.monthlyUsd,
+              introPrice: ED_TADALAFIL_PRICING.monthlyUsd,
+              recurringPrice: ED_TADALAFIL_PRICING.monthlyUsd,
             },
           }),
         ),
@@ -201,7 +202,7 @@ function EdPage() {
                 </Button>
               </motion.div>
               <p className="mt-6 max-w-md text-2xl font-bold text-foreground">
-                From {formatSimpleStartingAt(ED_STANDARD_PRICING)}
+                From {formatSimpleStartingAt(ED_TADALAFIL_PRICING)}
               </p>
               <p className="mt-2 max-w-md text-xs leading-relaxed text-muted-foreground">
                 Medication eligibility, formulation, and availability are
@@ -243,10 +244,10 @@ function EdPage() {
             work.
           </p>
           <p>
-            Beema offers two compounded options: a single-ingredient Standard
-            formulation (sildenafil or tadalafil) and a Combo formulation
-            combining both active ingredients into one dose, a combination not
-            sold as a single commercial product. Both are prepared by a licensed
+            Beema offers three compounded options: single-ingredient tadalafil,
+            single-ingredient sildenafil, and a Combo formulation that combines
+            both active ingredients into one dose - a combination not sold as a
+            single commercial product. All three are prepared by a licensed
             compounding pharmacy specifically for you.
           </p>
           <p>
@@ -279,13 +280,17 @@ function EdPage() {
           description="Your provider decides which formulation, if any, is clinically appropriate - this is a starting point, not a self-selected order."
           className="mx-0 max-w-2xl"
         />
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
           <SimpleTreatmentPricingCard
-            label="Standard ED treatment"
-            pricing={ED_STANDARD_PRICING}
+            label="tadalafil"
+            pricing={ED_TADALAFIL_PRICING}
           />
           <SimpleTreatmentPricingCard
-            label="Combo ED treatment"
+            label="sildenafil"
+            pricing={ED_SILDENAFIL_PRICING}
+          />
+          <SimpleTreatmentPricingCard
+            label="the tadalafil + sildenafil combo"
             pricing={ED_COMBO_PRICING}
           />
         </div>

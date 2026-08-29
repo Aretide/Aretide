@@ -33,8 +33,11 @@ import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
-  HAIRLOSS_ORAL_PRICING,
-  HAIRLOSS_TOPICAL_PRICING,
+  HAIRLOSS_FINASTERIDE_PRICING,
+  HAIRLOSS_ORAL_MINOXIDIL_PRICING,
+  HAIRLOSS_TOPICAL_MEN_PRICING,
+  HAIRLOSS_TOPICAL_WOMEN_PRICING,
+  HAIRLOSS_WOMENS_COMPOUND_PRICING,
   formatSimpleStartingAt,
   simplePricingSentence,
 } from "@/lib/simple-treatment-pricing";
@@ -43,14 +46,14 @@ import { SUPPORT_EMAIL } from "@/lib/contact-info";
 import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
 const TITLE = "Compounded Hairloss Treatment | Beema Health";
-const DESCRIPTION = `Compounded oral and topical hairloss formulations, reviewed by licensed providers. Nationwide telehealth care from ${formatSimpleStartingAt(HAIRLOSS_ORAL_PRICING)}. Prescribing is never guaranteed.`;
+const DESCRIPTION = `Compounded hairloss formulations for men and women, reviewed by licensed providers. Nationwide telehealth care from ${formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)}. Prescribing is never guaranteed.`;
 const SERVICE_DESCRIPTION =
   "Nationwide telehealth service connecting eligible adults with independent licensed providers for compounded hairloss formulation evaluation and ongoing care. Completing intake does not guarantee a prescription.";
 
 const FAQ_ITEMS: TreatmentFaqItem[] = [
   {
-    q: "What's the difference between the oral and topical options?",
-    a: "Both are compounded formulations prepared by a licensed compounding pharmacy, individualized to you rather than sold as a single fixed commercial product. The oral option is a once-daily pill; the topical option is applied directly to the scalp. Your licensed provider reviews your intake and recommends which formulation, dose, and ingredient combination may be appropriate for your case, and prescribing either is never guaranteed.",
+    q: "What's the difference between the men's and women's options?",
+    a: "Men and women can both be prescribed oral minoxidil. Beyond that, options differ: men have finasteride oral tablets and a topical spray formulated with finasteride; women have a separate oral compound formulation and a topical spray without finasteride (finasteride isn't appropriate for women who are or may become pregnant). All are compounded formulations prepared by a licensed compounding pharmacy, individualized to you rather than sold as a single fixed commercial product. Your licensed provider reviews your intake and recommends which formulation, if any, may be appropriate for your case; prescribing is never guaranteed.",
   },
   {
     q: "Is compounded hairloss treatment FDA-approved?",
@@ -58,11 +61,11 @@ const FAQ_ITEMS: TreatmentFaqItem[] = [
   },
   {
     q: "How does online hairloss care through Beema work?",
-    a: "Care starts with creating a secure account and completing a medical intake covering your health history, hair loss pattern, and goals, at your own pace. A licensed provider reviews your intake and independently decides whether a compounded oral or topical formulation may be appropriate for you; prescribing is never guaranteed. Beema Health's clinical provider network is led by Dr. Sean Arora, MD, though the clinician assigned to your case may vary by state licensure and availability.",
+    a: "Care starts with creating a secure account and completing a medical intake covering your health history, hair loss pattern, and goals, at your own pace. A licensed provider reviews your intake and independently decides whether a compounded formulation may be appropriate for you; prescribing is never guaranteed. Beema Health's clinical provider network is led by Dr. Sean Arora, MD, though the clinician assigned to your case may vary by state licensure and availability.",
   },
   {
     q: "How much does hairloss treatment cost through Beema?",
-    a: `${simplePricingSentence("Compounded oral hairloss treatment through Beema", HAIRLOSS_ORAL_PRICING)} The topical option is ${simplePricingSentence("compounded topical hairloss treatment", HAIRLOSS_TOPICAL_PRICING).replace(/^C/, "c")} Both cover your provider consultation, prescription formulation, and expedited shipping. Questions about your plan? ${patientQuestionsGuidance()}`,
+    a: `${simplePricingSentence("Compounded oral minoxidil through Beema", HAIRLOSS_ORAL_MINOXIDIL_PRICING)} Finasteride (men) is ${simplePricingSentence("compounded finasteride", HAIRLOSS_FINASTERIDE_PRICING).replace(/^C/, "c")} The women's oral compound is ${simplePricingSentence("the women's oral compound", HAIRLOSS_WOMENS_COMPOUND_PRICING).replace(/^T/, "t")} Topical sprays are ${simplePricingSentence("the men's topical spray", HAIRLOSS_TOPICAL_MEN_PRICING).replace(/^T/, "t")} and ${simplePricingSentence("the women's topical spray", HAIRLOSS_TOPICAL_WOMEN_PRICING).replace(/^T/, "t")} All prices cover your provider consultation, prescription formulation, and expedited shipping. Questions about your plan? ${patientQuestionsGuidance()}`,
   },
   {
     q: "Does Beema serve patients nationwide?",
@@ -121,10 +124,10 @@ export const Route = createFileRoute("/hairloss")({
             path: "/hairloss",
             serviceType: "Hairloss treatment telehealth service",
             reviewedByClinicalLead: false,
-            dateModified: "2026-08-27",
+            dateModified: "2026-08-29",
             offer: {
-              introPrice: HAIRLOSS_ORAL_PRICING.monthlyUsd,
-              recurringPrice: HAIRLOSS_ORAL_PRICING.monthlyUsd,
+              introPrice: HAIRLOSS_FINASTERIDE_PRICING.monthlyUsd,
+              recurringPrice: HAIRLOSS_FINASTERIDE_PRICING.monthlyUsd,
             },
           }),
         ),
@@ -165,7 +168,7 @@ function HairlossPage() {
                 title={
                   <>
                     <LineReveal>Compounded Hairloss Treatment, </LineReveal>
-                    <LineReveal delay={0.1}>oral or topical.</LineReveal>
+                    <LineReveal delay={0.1}>for men and women.</LineReveal>
                   </>
                 }
                 description="Beema Health connects eligible adults with independent licensed providers for individualized hairloss care. Completing intake does not guarantee a prescription."
@@ -199,7 +202,7 @@ function HairlossPage() {
                 </Button>
               </motion.div>
               <p className="mt-6 max-w-md text-2xl font-bold text-foreground">
-                From {formatSimpleStartingAt(HAIRLOSS_ORAL_PRICING)}
+                From {formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)}
               </p>
               <p className="mt-2 max-w-md text-xs leading-relaxed text-muted-foreground">
                 Medication eligibility, formulation, and availability are
@@ -245,11 +248,13 @@ function HairlossPage() {
             have.
           </p>
           <p>
-            Beema offers two compounded formulation types: an oral, once-daily
-            option and a topical option applied directly to the scalp. Both are
-            prepared by a licensed compounding pharmacy specifically for you,
-            often combining multiple ingredients into one formulation rather
-            than sold as a single fixed commercial product.
+            Beema offers compounded oral and topical formulations for both men
+            and women, prepared by a licensed compounding pharmacy specifically
+            for you - often combining multiple ingredients into one formulation
+            rather than sold as a single fixed commercial product. Men and women
+            are prescribed different formulations for some products, since some
+            ingredients (like finasteride) aren't appropriate for women who are
+            or may become pregnant.
           </p>
           <p>
             These formulations are not FDA-approved and are considered only when
@@ -279,16 +284,43 @@ function HairlossPage() {
           description="Your provider decides which formulation, if any, is clinically appropriate - this is a starting point, not a self-selected order."
           className="mx-0 max-w-2xl"
         />
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+
+        <h3 className="mt-10 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+          For Men
+        </h3>
+        <div className="mt-4 grid gap-6 md:grid-cols-3">
           <SimpleTreatmentPricingCard
-            label="oral hairloss treatment"
-            pricing={HAIRLOSS_ORAL_PRICING}
+            label="oral minoxidil"
+            pricing={HAIRLOSS_ORAL_MINOXIDIL_PRICING}
           />
           <SimpleTreatmentPricingCard
-            label="topical hairloss treatment"
-            pricing={HAIRLOSS_TOPICAL_PRICING}
+            label="finasteride"
+            pricing={HAIRLOSS_FINASTERIDE_PRICING}
+          />
+          <SimpleTreatmentPricingCard
+            label="the men's topical spray"
+            pricing={HAIRLOSS_TOPICAL_MEN_PRICING}
           />
         </div>
+
+        <h3 className="mt-10 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+          For Women
+        </h3>
+        <div className="mt-4 grid gap-6 md:grid-cols-3">
+          <SimpleTreatmentPricingCard
+            label="oral minoxidil"
+            pricing={HAIRLOSS_ORAL_MINOXIDIL_PRICING}
+          />
+          <SimpleTreatmentPricingCard
+            label="the women's oral compound"
+            pricing={HAIRLOSS_WOMENS_COMPOUND_PRICING}
+          />
+          <SimpleTreatmentPricingCard
+            label="the women's topical spray"
+            pricing={HAIRLOSS_TOPICAL_WOMEN_PRICING}
+          />
+        </div>
+
         <div className="mt-8">
           <SurfaceCard>
             <h3 className="text-lg font-semibold text-foreground">

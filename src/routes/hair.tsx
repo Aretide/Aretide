@@ -28,13 +28,13 @@ import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
-  HAIRLOSS_ORAL_PRICING,
+  HAIRLOSS_FINASTERIDE_PRICING,
   formatSimpleStartingAt,
 } from "@/lib/simple-treatment-pricing";
 import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
 const TITLE = "Hair Loss Treatment | Beema Health";
-const DESCRIPTION = `Compounded hair loss treatment, reviewed by licensed providers in all 50 states. Oral and topical formulations from ${formatSimpleStartingAt(HAIRLOSS_ORAL_PRICING)}. Prescribing is never guaranteed.`;
+const DESCRIPTION = `Compounded hair loss treatment, reviewed by licensed providers in all 50 states. Oral and topical formulations from ${formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)}. Prescribing is never guaranteed.`;
 
 export const Route = createFileRoute("/hair")({
   head: () => ({
@@ -78,16 +78,17 @@ export const Route = createFileRoute("/hair")({
 });
 
 /**
- * Only one product today - this array is designed to grow. Add new
- * hair-loss formulations here (and to HAIR_ITEMS in SiteHeader.tsx) as they
- * ship, rather than folding them into the existing hairloss.tsx page.
+ * One card pointing at /hairloss, which itself now lists all 6 Men/Women
+ * SKUs (2026-08-28) - this hub stays a single-card pointer rather than
+ * duplicating that whole catalog here. Add future non-hairloss hair
+ * products as their own lineup entries when they ship.
  */
 const LINEUP: CategoryLineupItem[] = [
   {
     id: "hairloss",
     name: "Compounded Hairloss Treatment",
-    form: "Oral or topical, your provider decides",
-    pricing: HAIRLOSS_ORAL_PRICING,
+    form: "For men and women, your provider decides",
+    pricing: HAIRLOSS_FINASTERIDE_PRICING,
     icon: Droplet,
     to: "/hairloss/",
   },
@@ -145,7 +146,7 @@ function HairPage() {
                 <LineReveal delay={0.1}>licensed providers</LineReveal>
               </>
             }
-            description={`Beema Health offers compounded oral and topical hairloss formulations, from ${formatSimpleStartingAt(HAIRLOSS_ORAL_PRICING)}. Compounded medications are not FDA-approved.`}
+            description={`Beema Health offers compounded oral and topical hairloss formulations, from ${formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)}. Compounded medications are not FDA-approved.`}
           />
           <motion.div
             className="mt-10 text-center"

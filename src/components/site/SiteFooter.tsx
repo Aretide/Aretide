@@ -27,9 +27,10 @@ import { TRUST_SIGNALS } from "@/lib/trust-signals";
  *
  * Care column is grouped by category (2026-08-27), each category's hub page
  * first followed by its specific medication pages - mirrors the header's
- * Weight Loss / Sexual Health / Hair / Wellness dropdowns. Hub pages
- * (`/weight-loss`, `/sexual-health`, `/hair`, `/wellness`) live only here in
- * the footer, not in the header dropdowns - see SiteHeader.tsx.
+ * Weight Loss / Sexual Health / Hair dropdowns. Hub pages (`/weight-loss`,
+ * `/sexual-health`, `/hair`) live only here in the footer, not in the
+ * header dropdowns - see SiteHeader.tsx. TRT, NAD+, Sermorelin, and the
+ * Wellness hub are paused (2026-08-28) - see docs/features/treatment-pages.md.
  */
 const COLUMNS = [
   {
@@ -41,12 +42,10 @@ const COLUMNS = [
       { label: "GLP-1 Care", to: "/glp-1/" },
       { label: "Sexual Health", to: "/sexual-health/" },
       { label: "ED Treatment", to: "/ed/" },
-      { label: "TRT (Enclomiphene)", to: "/trt/" },
       { label: "Hair Loss Care", to: "/hair/" },
       { label: "Hairloss Treatment", to: "/hairloss/" },
-      { label: "Wellness", to: "/wellness/" },
-      { label: "NAD+", to: "/nad-plus/" },
-      { label: "Sermorelin", to: "/sermorelin/" },
+      // TRT, NAD+, Sermorelin, and the Wellness hub are paused (2026-08-28) -
+      // not linked anywhere while inaccessible. See docs/features/treatment-pages.md.
       // { label: "Pricing", to: "/pricing/" }, // disabled - pricing model not finalized yet
     ],
   },
