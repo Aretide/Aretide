@@ -1,0 +1,70 @@
+{
+  "url": "https://beemahealth.com/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/><link rel=\"preload\" as=\"image\" href=\"https://static.legitscript.com/seals/51697885.png\"/><link rel=\"preload\" as=\"image\" href=\"/assets/hero-BNY-NrJE.jpg\" fetchPriority=\"high\"/><link rel=\"preload\" as=\"image\" href=\"/assets/compounded-semaglutide-vial-B2uWDbuC.webp\"/><link rel=\"stylesheet\" href=\"/assets...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/>...",
+  "is_spa": false,
+  "extracted_text": "Weight-loss care that's human and built for success.\nUSA physicians, licensed and certified USA 503A pharmacies, transparent cash pricing, including a tirzepatide 3-month starter pack from $199/mo. No bait-and-switch, no surprises, and thoughtful medical care that doesn't stop at the first prescription.\nCompassionate medical care\nFrom first contact to long-term success\nBuilt on clear standards\nHIPAA-compliant & encrypted\nEnd-to-end encrypted, always.\nLicensed providers, verified per state\nVerifi...",
+  "publication_date": "2026-01-01",
+  "accessibility_tree": null,
+  "headers": {
+    "Connection": "keep-alive",
+    "Content-Length": "17908",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "Last-Modified": "Tue, 25 Aug 2026 21:05:27 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "W/\"6a8e0397-16cff\"",
+    "expires": "Wed, 26 Aug 2026 18:01:25 GMT",
+    "Cache-Control": "max-age=600",
+    "Content-Encoding": "gzip",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "8022:36270E:BCC560:D2B63A:6A8F279C",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 26 Aug 2026 17:51:25 GMT",
+    "Via": "1.1 varnish",
+    "X-Served-By": "cache-den-kden1300062-DEN",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1787766685.092354,VS0,VE59",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "1e1c3e344d60aeb571bc95a9dd37f09a6db7301a"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 2,
+    "processed_count": 2,
+    "total_bytes": 1173,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 966,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Country",
+          "MedicalOrganization"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 207,
+        "valid": true,
+        "types": [
+          "WebSite"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,394 @@
+{
+  "summary": {
+    "health_score": 84,
+    "business_type": "Telehealth medical weight-loss (HIPAA-aligned, no physical clinic, all 50 US states, LegitScript certified)",
+    "top_findings": [
+      "Primary CTA is cut off below the fold on /glp-1-houston/ mobile - a direct conversion-path defect on the only route into the Bask intake funnel",
+      "LegitScript trust seal is missing from /semaglutide/ and /tirzepatide/, the two actual purchase-decision pages for a compounded, non-FDA-approved medication",
+      "Zero question-shaped H2/H3 headings on the four highest commercial-intent pages; existing FAQ answers sit only in JSON-LD, not in visible heading tags AI passage-rankers weight heavily",
+      "/glp-1-houston/ and /learn/weight-loss/glp-1-in-houston/ target near-identical 'GLP-1 Houston' keyword phrasing with no differentiating modifier - latent cannibalization risk once the domain gains authority",
+      "Named, NPI-verified physician reviewer (Dr. Sean Arora, MD) exists in JSON-LD on 7 pages but is never shown as visible body text - the site's strongest E-E-A-T asset is invisible to human readers"
+    ],
+    "quick_wins": [
+      "Add the existing LegitScript seal component to /semaglutide/ and /tirzepatide/",
+      "Wrap existing FAQ accordion questions in <h3> tags on /semaglutide/ and /tirzepatide/",
+      "Add a one-line visible 'Reviewed by Dr. Sean Arora, MD' byline on the 7 pages that already carry it in schema",
+      "Fix the robots.txt comment that still says retired stub paths 301-redirect when they now 404",
+      "Retitle /learn/weight-loss/glp-1-in-houston/ away from the bare 'GLP-1 Houston' exact-match phrase toward its real differentiated angle"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 86,
+      "what_works": [
+        "Valid, CI-guarded sitemap.xml (123 URLs) with exact route-parity enforcement in src/lib/__tests__/sitemap.test.ts",
+        "Clean, self-referencing canonicals on every sampled page including the full Houston/Texas geo-cluster",
+        "Single-hop redirects everywhere (trailing-slash, www, http to https) with no chains",
+        "Correct mobile viewport and lang meta; real 404s (no soft-404s) on disallowed/retired paths",
+        "robots.txt correctly allows all major search and AI crawlers, blocks only the Bask-adjacent funnel and retired stub paths, and is independently confirmed in sync with the sitemap"
+      ],
+      "findings": [
+        {
+          "title": "robots.txt comment says retired stub paths 301-redirect to home; live behavior is a bare 404",
+          "severity": "Medium",
+          "description": "public/robots.txt comments /pricing, /clinicians, /insurance, /switch, /the-comb as '301 -> home' but live curl checks return 404 for all five.",
+          "recommendation": "Either restore the documented 301-to-home redirects if these paths still carry inbound link equity, or update the stale comment to describe them as retired 404s."
+        },
+        {
+          "title": "No HSTS possible on GitHub Pages custom-domain hosting",
+          "severity": "Medium",
+          "description": "A user's very first http:// request to beemahealth.com is unencrypted until the 301 lands, since GitHub Pages cannot send a real Strict-Transport-Security header and <meta> cannot express HSTS.",
+          "recommendation": "Only fixable by fronting the domain with a header-capable proxy/CDN (e.g. Cloudflare in proxy mode). Backlog infra item, not urgent since no PHI crosses this boundary."
+        },
+        {
+          "title": "9 of 18 spot-checked sitemap lastmod dates are stale relative to their route file's last commit",
+          "severity": "Medium",
+          "description": "Homepage, both treatment pages, how-it-works, weight-loss, about, recipes, and two legal pages show sitemap lastmod dates 5-30 days older than their last-touched commit; 3 confirmed diffs were meta-description-only edits, an ambiguous case under the site's own 'content-significant' rule.",
+          "recommendation": "Define 'content-significant' concretely in the sitemap header comment (e.g. meta/title changes count, UI/tracking-only commits do not), then reconcile the 9 stale rows against that definition."
+        },
+        {
+          "title": "Broader HTTP security headers (X-Content-Type-Options, X-Frame-Options, Permissions-Policy) are architecturally unavailable on this hosting tier",
+          "severity": "Low",
+          "description": "Best-effort mitigated via a meta-tag CSP, already documented in src/routes/__root.tsx with clear rationale.",
+          "recommendation": "No action needed now; revisit only if/when the team fronts the domain with a header-capable CDN."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 79,
+      "what_works": [
+        "Learn library and treatment pages clear a materially higher content-quality bar than typical templated GLP-1 content: real, attributable citations (FDA labels via DailyMed, peer-reviewed trials like SURMOUNT-1/STEP)",
+        "Symptom-cluster articles (nausea, bloating, fatigue, dizziness, body aches, constipation, hair loss, acne) are genuinely differentiated by mechanism and citation, not templated/spun",
+        "Compliance/compounded-drug disclosure copy is consistent and accurate across every sampled page, matching required verbatim language",
+        "Every CTA correctly routes externally to Bask intake with zero internal /qualify, /intake, /consent, /dashboard links found - confirms no false in-house-funnel implication",
+        "Learn article reviewedBy omission is confirmed intentional and test-guarded (unsigned educational content per docs/features/learn.md) - correctly not flagged as a gap"
+      ],
+      "findings": [
+        {
+          "title": "Named medical reviewer exists only in JSON-LD, never visible on the page",
+          "severity": "Medium",
+          "description": "reviewedBy (Dr. Sean Arora, MD, NPI-verified) appears in structured data on /about/, /how-it-works/, /safety/, /semaglutide/, /tirzepatide/, /glp-1/, and /glp-1-houston/, but zero occurrences of the name or 'medically reviewed' were found in visible body copy on any of the seven pages.",
+          "recommendation": "Add a small, visible attribution line ('Reviewed by Dr. Sean Arora, MD') near the top of these pages, matching what the schema already asserts."
+        },
+        {
+          "title": "Freshness dates exist in schema but were not confirmed visible on the page",
+          "severity": "Low",
+          "description": "Sampled article JSON-LD carries current dateModified values, but no human-readable 'Updated: [date]' text was found near the H1/byline in the one article checked closely.",
+          "recommendation": "Consider surfacing a small visible 'Updated: [date]' near Learn article titles; verify across more articles before treating as sitewide."
+        },
+        {
+          "title": "One sampled article (stopping-mounjaro) runs slightly under the blog-post topical-coverage floor",
+          "severity": "Low",
+          "description": "Approximately 1,452 words versus a 1,500-word floor used as a topical-coverage guide, not a ranking target.",
+          "recommendation": "If genuine subtopics are missing (rebound timing, switching options, red-flag criteria) that peer articles cover, close that specific gap; otherwise leave as-is and do not pad word count."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 78,
+      "what_works": [
+        "Titles and meta descriptions are unique and specific per page across every sample checked, including the Houston vs Texas geo-cluster (not templated find-replace)",
+        "Consistent H1/H2 hierarchy with clear, specific subheads across Learn articles",
+        "BreadcrumbList present on every content page checked",
+        "Internal linking from informational articles to commercial pages is contextual, not aggressive - no mid-paragraph CTA stuffing found"
+      ],
+      "findings": [
+        {
+          "title": "Zero question-shaped H2/H3 headings on the four highest commercial-intent pages",
+          "severity": "High",
+          "description": "Homepage, /semaglutide/, /tirzepatide/, and /glp-1/ have no headings phrased the way a user would type a query. FAQ questions on the treatment pages exist verbatim in FAQPage JSON-LD and as accordion labels but carry no heading tag at all in the DOM, confirmed via a full <h1>-<h6> regex scan.",
+          "recommendation": "Wrap existing FAQ accordion questions in <h3> tags on /semaglutide/ and /tirzepatide/. Add 1-2 question-shaped H2s on /glp-1/ and the homepage where none currently exist."
+        },
+        {
+          "title": "Commercial pages open with brand/process copy before the concrete, citable fact",
+          "severity": "Medium",
+          "description": "The first passage on /semaglutide/ is brand-voice copy, not a self-contained answer to 'what is compounded semaglutide' or its price - the concrete facts appear several sections later.",
+          "recommendation": "Add a 1-2 sentence definitional lede directly under the H1 and before the pricing widget that states the mechanism and current base price in 40-60 words."
+        },
+        {
+          "title": "/glp-1-for-weight-loss/ pillar under-links its own drug-comparison spokes",
+          "severity": "Medium",
+          "description": "The natural category pillar for the medication-family cluster does not link out to ozempic, wegovy, mounjaro, zepbound, saxenda, semaglutide-weight-loss, or tirzepatide-online, even though its own H2 is the exact place readers would want those links.",
+          "recommendation": "Add the seven brand/molecule articles as outbound links from /glp-1-for-weight-loss/ under its existing 'Which medicines sit in the conversation' section."
+        },
+        {
+          "title": "glp-1-side-effects hub links only 6 of 14 symptom-specific spoke articles",
+          "severity": "Medium",
+          "description": "Pages are not orphaned (all reachable via the flat /learn/weight-loss/ index), but the natural topical hub relies on the category index instead of contextual topical links, weakening relevance signal flow.",
+          "recommendation": "Expand glp-1-side-effects to link all 14 symptom-specific spokes, grouped by symptom category (GI, systemic, interactions)."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 91,
+      "what_works": [
+        "Homepage MedicalOrganization + WebSite JSON-LD is well-built: correct @context, appropriate MedicalOrganization over LocalBusiness (no physical location), clean @id cross-referencing, valid E.164 phone, no placeholders",
+        "Live-verified during report aggregation: /glp-1/, /glp-1-houston/, and a sampled /learn/weight-loss/ article all carry full, correct schema (Service + BreadcrumbList + FAQPage with a named Physician reviewedBy on the commercial pages; MedicalWebPage + BreadcrumbList + FAQPage on the learn article) - two Medium findings from the initial source-code-only pass were resolved as non-issues by this live check",
+        "Prescription-service pricing correctly modeled as Service + Offer rather than a shoppable Product, avoiding a Merchant Center policy violation for prescription-gated goods",
+        "Recipe schema's omission of nutrition/aggregateRating/reviewedBy is confirmed current and enforced by a live test (src/lib/__tests__/recipes.test.ts) - correctly not a gap",
+        "Single source of truth for schema generation (src/lib/seo.ts, src/lib/recipe-seo.ts) with no duplicate or conflicting primary types across page types"
+      ],
+      "findings": [
+        {
+          "title": "FAQPage schema no longer produces a Google SERP feature",
+          "severity": "Info",
+          "description": "Google retired FAQ rich results for all sites (May 2026); existing FAQPage blocks are harmless and syntactically correct but are no longer a ranking lever.",
+          "recommendation": "Leave existing FAQPage blocks in place; do not invest further effort adding FAQPage to new pages expecting a Google rich result."
+        },
+        {
+          "title": "Legal pages (privacy, terms, refund, shipping, physician code of conduct, HIPAA, telehealth consent) appear to carry no JSON-LD",
+          "severity": "Low",
+          "description": "None of the seven legal routes appeared in any schema-builder caller list gathered this session.",
+          "recommendation": "Low priority. A minimal WebPage block would be a completeness improvement but has no material SEO upside for policy pages."
+        },
+        {
+          "title": "reviewedByClinicalLead flag usage per call site not individually verified",
+          "severity": "Info",
+          "description": "The mechanism exists and is gated to a real NPI-sourced Physician object, but which specific calls pass true vs false/omitted was not exhaustively checked.",
+          "recommendation": "Spot-check in a follow-up pass that the flag is only true on pages that visibly disclose the named reviewer on-page."
+        }
+      ]
+    },
+    {
+      "name": "Performance (Core Web Vitals)",
+      "score": 88,
+      "what_works": [
+        "CLS is a non-issue: 0-0.001 across every page tested, driven by explicit image width/height attributes and no late-injected layout shifts",
+        "Lighthouse mobile performance scores land 86-91 across 5 sampled pages (devtools-throttled, the credible reading - see caveat below)",
+        "LCP passes on all 5 pages at 2.1-2.5s, right at the 'Good' ceiling",
+        "Font loading is clean: self-hosted woff2, no FOIT/FOUT swap issue",
+        "No unexpected third-party origins found beyond documented GA4/Google Ads/Meta Pixel/LegitScript"
+      ],
+      "findings": [
+        {
+          "title": "LCP element render delay (2.0-2.4s) dominates LCP on every page, driven by render-blocking CSS and 27 eagerly-fired modulepreload hints",
+          "severity": "Medium",
+          "description": "The LCP element on the homepage is a hero text paragraph, not the hero image - a 2+ second delay for plain text indicates the render path is contended, not that a resource is slow to fetch. A 26.5KB render-blocking stylesheet plus 27 eager route-chunk preloads compete with fonts/CSS before first paint.",
+          "recommendation": "Inline or defer non-critical CSS so above-fold text can paint before the full stylesheet loads. Audit whether all 27 modulepreloaded chunks need eager preloading on every route."
+        },
+        {
+          "title": "Hydration/main-thread cost is large relative to paint time - TTI is 4-5x LCP on every page",
+          "severity": "Medium",
+          "description": "TTI lands at 10.3-11.5s versus 2.1-2.5s LCP on all 5 pages; the homepage shows 7,154 main-thread tasks totaling 5.68s of task time post-paint. This is the profile that tends to hurt real-world INP even though lab TBT (110-170ms) looks fine.",
+          "recommendation": "Profile the hydration path to identify what's running in the 8-9s tail; consider deferring non-essential third-party script execution and confirming route code-splitting isn't over-eagerly loading unneeded components."
+        },
+        {
+          "title": "JS bundle weight is heavy for a statically-prerendered site (~1.15-1.18MB script transfer on every page)",
+          "severity": "Medium",
+          "description": "32-37 script requests per page regardless of page-specific content, ~330-350KB estimated unused. Google Ads and GA4 gtag.js appear to load as two separate script tags rather than the single shared loader docs/features/analytics.md describes.",
+          "recommendation": "Confirm in src/lib/ad-conversions.ts whether the two gtag/js requests are intentional and consolidate if not; target unused JS via more aggressive route-level code splitting."
+        },
+        {
+          "title": "compounded-semaglutide-vial and tirzepatide-vial images are served at full 1024x606/1024x1024 source resolution into a 372x372 display slot",
+          "severity": "Low",
+          "description": "Already WebP and lazy-loaded (does not affect LCP), but wastes an estimated 63KB per image.",
+          "recommendation": "Generate and serve a properly-sized responsive variant via srcset/sizes or a build-time resize step."
+        },
+        {
+          "title": "Default Lighthouse simulate-mode throttling produces a false-positive 9.6-10.9s LCP reading that contradicts the same report's own trace-observed data",
+          "severity": "Info",
+          "description": "Root cause is a Lantern network-simulation artifact mis-modeling early third-party beacon requests as blocking the main JS bundle. Documented so it isn't mistaken for a hidden regression by anyone re-running Lighthouse with CLI defaults.",
+          "recommendation": "Do not trust simulate-mode LCP scores from ad hoc Lighthouse runs on this site without cross-checking lcp-breakdown-insight or a devtools-throttled run."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness (GEO)",
+      "score": 76,
+      "what_works": [
+        "Fully static/prerendered site (confirmed is_spa: false) removes an entire class of GEO risk that many competitor telehealth SPAs have - no JS-dependency gap for non-JS AI crawlers",
+        "llms.txt is live, accurate, and its pricing summary matches the live Service JSON-LD offers block with no factual drift found",
+        "Learn articles have strong citability structure: direct-answer openers with concrete statistics, numbered Sources sections citing real peer-reviewed trials and FDA/NIDDK",
+        "Named, NPI-verified physician reviewedBy on transactional pages is a real, differentiated authority signal most compounded-GLP-1 competitors will not have structured",
+        "robots.txt correctly allows all major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot, etc.) with no sitewide blocks"
+      ],
+      "findings": [
+        {
+          "title": "Zero question-shaped H2/H3 headings on the four highest-intent commercial pages",
+          "severity": "High",
+          "description": "Same underlying gap as the On-Page finding: AI Overview/Perplexity passage-ranking favors visible headings phrased like the query, not just JSON-LD FAQ text.",
+          "recommendation": "See On-Page SEO recommendation - wrap FAQ questions in heading tags and add question-shaped H2s to /glp-1/ and the homepage."
+        },
+        {
+          "title": "LegitScript certification is only surfaced as extractable text on /learn/ articles, not on the three primary commercial pages",
+          "severity": "Medium",
+          "description": "The seal image exists on /semaglutide/, /tirzepatide/, and /glp-1/ but AI text-extraction cannot read an image; the compliant text disclosure only appears at the bottom of Learn articles.",
+          "recommendation": "Add a short, compliant LegitScript trust line as actual extractable text on /semaglutide/, /tirzepatide/, and /glp-1/, reusing the wording already approved for Learn articles."
+        },
+        {
+          "title": "llms.txt's 'Primary pages for citation' line undersells the Learn library for informational queries",
+          "severity": "Medium",
+          "description": "The file's own 'Common questions' table already correctly routes 18 informational queries to specific Learn articles, but the top-line framing only names the 4 commercial pages.",
+          "recommendation": "Reframe the 'Primary pages for citation' line to split by intent: commercial/pricing to the treatment pages, informational/mechanism to the Common questions table below."
+        },
+        {
+          "title": "Commercial pages open with brand/process copy before the concrete, quotable fact",
+          "severity": "Medium",
+          "description": "Same underlying issue as the On-Page finding - reduces passage-extraction quality for AI answer engines.",
+          "recommendation": "See On-Page SEO recommendation."
+        },
+        {
+          "title": "Brand entity sameAs signals skew toward weaker-correlation platforms; no YouTube or LinkedIn",
+          "severity": "Medium",
+          "description": "sameAs includes Google Business Profile, Facebook, Instagram, TikTok, Reddit, and X, but omits YouTube (the single strongest brand-mention correlate with AI citation) and LinkedIn.",
+          "recommendation": "If a YouTube channel exists or is planned, add it to sameAs and produce even minimal video content. Add a LinkedIn company page to sameAs if one exists but isn't linked. Do not chase Wikipedia pre-scale."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 82,
+      "what_works": [
+        "LegitScript seal and hero images ship explicit width/height and are preloaded/priority-hinted, eliminating CLS risk from these elements",
+        "Most product imagery is already WebP with correct lazy-loading below the fold",
+        "No horizontal scroll or layout-shift issues found on any of the five visually audited pages"
+      ],
+      "findings": [
+        {
+          "title": "compounded-semaglutide-vial and tirzepatide-vial images are oversized for their display slot",
+          "severity": "Low",
+          "description": "Served at 1024x606/1024x1024 source resolution into a 372x372 slot, wasting roughly 63KB per image.",
+          "recommendation": "Generate a properly-sized responsive variant (srcset/sizes or build-time resize)."
+        },
+        {
+          "title": "Preloaded hero image is JPEG rather than WebP/AVIF",
+          "severity": "Low",
+          "description": "Not the LCP-blocking factor and already small (53KB), so this is a minor byte-savings opportunity only.",
+          "recommendation": "Optional: convert to WebP/AVIF for pipeline consistency. Not a priority."
+        }
+      ]
+    }
+  ],
+  "supplementary_categories": [
+    {
+      "name": "Visual / Mobile / Accessibility",
+      "score": 78,
+      "note": "Not part of the weighted health score; folds partly into On-Page and Images above but reported separately for full detail.",
+      "findings": [
+        {
+          "title": "Primary CTA cut off below the fold on /glp-1-houston/ mobile",
+          "severity": "High",
+          "description": "The 'Get Started' button renders at top:776px/height:56px against an 812px viewport, 20px past the fold. Caused by a centered LegitScript seal stacked above the H1 on this page, unlike the homepage's beside-headline placement.",
+          "recommendation": "Move the LegitScript seal inline beside the headline (homepage pattern), or relocate/shrink it, so the CTA is guaranteed visible pre-scroll on this and any future geo-landing pages using the same hero pattern."
+        },
+        {
+          "title": "Breadcrumb 'Home' link tap target fails WCAG 2.2 minimum (38x20px vs 24x24px floor)",
+          "severity": "Medium",
+          "description": "Likely a sitewide shared-component issue across treatment/geo/FAQ/learn pages.",
+          "recommendation": "Increase the breadcrumb link's clickable area to at least 24x24px, ideally matching the 44x44px header icon buttons."
+        },
+        {
+          "title": "Two semantic color tokens fail WCAG AA 4.5:1 for normal text at solid-fill contrast",
+          "severity": "Medium",
+          "description": "text-destructive/background (4.19:1) and success-foreground/success-fill (3.66:1) both fail 4.5:1, though most real usage is lower-opacity tinted surfaces which likely pass.",
+          "recommendation": "Audit Button/Badge/Alert variants for solid-fill destructive/success usage on normal-size text and adjust tokens if found."
+        },
+        {
+          "title": "Outline/secondary button borders may fail WCAG 1.4.11 non-text contrast (1.26:1 vs 3:1 required)",
+          "severity": "Medium",
+          "description": "Shadow may compensate but was not conclusively verified from static screenshots.",
+          "recommendation": "Verify in-browser whether shadow alone sufficiently delineates button boundaries; increase --border contrast for interactive elements specifically if not."
+        }
+      ]
+    },
+    {
+      "name": "Search Experience (SXO)",
+      "score": 75,
+      "note": "Persona-weighted search-experience score, not part of the technical health score.",
+      "findings": [
+        {
+          "title": "LegitScript trust seal missing from the two actual purchase-decision pages",
+          "severity": "High",
+          "description": "Present on homepage, program hubs, and Learn articles, but absent from /semaglutide/ and /tirzepatide/ - exactly where a first-time buyer decides whether to trust a compounded, non-FDA-approved medication purchase.",
+          "recommendation": "Add the LegitScript seal component to /semaglutide/ and /tirzepatide/, near the pricing table or safety section."
+        },
+        {
+          "title": "'Best GLP-1 for weight loss' article's honest no-single-winner framing may format-mismatch the Comparison-Page SERP archetype",
+          "severity": "Medium",
+          "description": "Directional finding, not SERP-verified - the clinically honest framing is a real trust asset and should not be changed for SEO alone.",
+          "recommendation": "Add a lightweight 'if you're prioritizing X, most clinicians lean toward Y' quick-answer block near the top without diluting the honest thesis."
+        }
+      ]
+    },
+    {
+      "name": "Content Architecture / Cannibalization",
+      "score": 80,
+      "note": "Feeds into Content Quality and On-Page above; reported separately for full detail.",
+      "findings": [
+        {
+          "title": "/glp-1-houston/ and /learn/weight-loss/glp-1-in-houston/ target near-identical 'GLP-1 Houston' keyword phrasing",
+          "severity": "High",
+          "description": "Unlike the well-differentiated Houston-vs-Texas split elsewhere in the geo cluster, these two specific pages have almost no differentiating modifier. Low practical exposure today since the domain doesn't yet rank for the term, but this is exactly the setup that produces silent cannibalization once it gains authority.",
+          "recommendation": "Retitle the informational spoke's H1/title toward its real differentiated angle (telehealth vs. driving to a clinic) rather than the bare 'GLP-1 Houston' phrase, so it doesn't compete 1:1 with the commercial pillar."
+        }
+      ]
+    },
+    {
+      "name": "Backlinks",
+      "score": null,
+      "note": "INSUFFICIENT DATA - not scored. No Moz/Bing/DataForSEO credentials configured; Common Crawl returned zero data for beemahealth.com (domain not found in the current release, consistent with a newly-launched, LegitScript-certified-in-August-2026 brand, not a quality signal). Do not read as a weak backlink profile - it is unmeasured.",
+      "findings": [
+        {
+          "title": "No known-backlinks inventory exists to feed the verification crawler",
+          "severity": "Medium",
+          "description": "No tracked list of press mentions, directory listings, or partner links exists in the repo, so even the free Tier-0 verification capability had nothing to check.",
+          "recommendation": "Compile a short list of every existing external mention of beemahealth.com and add a free Moz API key (2,500 rows/month, no cost) to unlock real DA/PA and referring-domain data for the next audit."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Conversion and Trust Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Fix /glp-1-houston/ mobile hero so the LegitScript seal doesn't push the CTA below the fold (Visual, High)",
+          "Add the LegitScript seal to /semaglutide/ and /tirzepatide/ (SXO, High)",
+          "Reconcile robots.txt comment vs live 404 behavior on retired stub paths (Technical, Medium, 5-minute fix)"
+        ]
+      },
+      {
+        "name": "Phase 2: On-Page and AI-Citability Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Wrap FAQ accordion questions in <h3> tags on /semaglutide/ and /tirzepatide/; add question-shaped H2s to /glp-1/ and the homepage (On-Page + GEO, High)",
+          "Add a visible 'Reviewed by Dr. Sean Arora, MD' byline on the 7 pages that already carry it in schema (Content, Medium)",
+          "Add a 1-2 sentence definitional lede with concrete facts under the H1 on /semaglutide/ and /tirzepatide/ (On-Page + GEO, Medium)",
+          "Add extractable LegitScript trust text (not just the seal image) to /semaglutide/, /tirzepatide/, and /glp-1/ (GEO, Medium)",
+          "Retitle /learn/weight-loss/glp-1-in-houston/ away from the exact-match 'GLP-1 Houston' phrase (Content Architecture, High)"
+        ]
+      },
+      {
+        "name": "Phase 3: Performance and Internal Linking",
+        "timeframe": "Month 2",
+        "items": [
+          "Defer/inline the render-blocking stylesheet and reduce eager modulepreload chunks on high-traffic pages (Performance, Medium)",
+          "Profile and trim the post-paint hydration tail; verify GA4/Google Ads gtag.js loader consolidation (Performance, Medium)",
+          "Build out /glp-1-for-weight-loss/ pillar links to its 7 drug-comparison spokes; expand glp-1-side-effects hub to link all 14 symptom spokes (On-Page, Medium)",
+          "Resize/serve responsive variants of the compounded-medication vial images (Images, Low)",
+          "Reconcile stale sitemap lastmod dates against a documented 'content-significant' definition (Sitemap, Medium)"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring and Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Add a free Moz API key to unlock real backlink data; compile a tracked list of known external mentions",
+          "Add a YouTube channel (if planned) and LinkedIn company page to Organization sameAs",
+          "Re-check Common Crawl domain presence quarterly",
+          "Once GA4/GSC/PSI credentials exist, replace this audit's lab-only Performance and structural GEO/SXO estimates with real field data",
+          "Spot-check reviewedByClinicalLead flag usage per call site and WCAG contrast on Button/Badge solid-fill variants"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

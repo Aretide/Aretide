@@ -1,0 +1,94 @@
+{
+  "url": "https://beemahealth.com/learn/weight-loss/best-glp-1-for-weight-loss/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/><link rel=\"preload\" as=\"image\" href=\"https://static.legitscript.com/seals/51697885.png\"/><link rel=\"stylesheet\" href=\"/assets/styles-CyFOEV89.css\" data-precedence=\"default\"/><title>Best GLP-1 for Weight Loss: How Clinicians Compare Options</title><meta http-equiv=\"Content-Security-Policy\" content=\"d...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/>...",
+  "is_spa": false,
+  "extracted_text": "There is no single best GLP-1 for every adult\nThere is no single best GLP-1 for every adult. Head-to-head, SURMOUNT-5 found a higher average percent weight loss with tirzepatide than with semaglutide. Plenty of people still do better on semaglutide, cannot take a dual agonist, or should take nothing. A clinician weighs your history, not a ranking table. This page will not call Beema's compounded options the winner, and it will not run a Zepbound-versus-compounded price contest.\nThis article will...",
+  "publication_date": "2026-08-24",
+  "accessibility_tree": null,
+  "headers": {
+    "Connection": "keep-alive",
+    "Content-Length": "18044",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "x-origin-cache": "HIT",
+    "Last-Modified": "Tue, 25 Aug 2026 21:05:27 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "W/\"6a8e0397-1323b\"",
+    "expires": "Wed, 26 Aug 2026 18:04:35 GMT",
+    "Cache-Control": "max-age=600",
+    "Content-Encoding": "gzip",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "E8C0:30B105:E2E025:ECDE6A:6A8F285A",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 26 Aug 2026 17:54:35 GMT",
+    "Via": "1.1 varnish",
+    "X-Served-By": "cache-den-kden1300058-DEN",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1787766876.537846,VS0,VE70",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "6a0aae10bc26d0a320d75c40f38fbf5f1061e820"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 4,
+    "processed_count": 4,
+    "total_bytes": 5722,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 966,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Country",
+          "MedicalOrganization"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 546,
+        "valid": true,
+        "types": [
+          "BreadcrumbList",
+          "ListItem"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 3,
+        "size_bytes": 1440,
+        "valid": true,
+        "types": [
+          "Article",
+          "CreativeWork",
+          "MedicalWebPage"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 4,
+        "size_bytes": 2770,
+        "valid": true,
+        "types": [
+          "Answer",
+          "FAQPage",
+          "Question"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

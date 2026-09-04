@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   breadcrumbJsonLd,
@@ -35,7 +35,7 @@ import {
   HexBadge,
   HexMotif,
   InfinityMotif,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -43,6 +43,7 @@ import {
 import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
 import { trackPageViewed } from "@/lib/analytics";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import { US_STATES } from "@/lib/us-states";
 
@@ -123,6 +124,7 @@ const PILLARS = [
 
 function AboutPage() {
   const cta = resolveCta(CTA_IDS.about);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -145,6 +147,7 @@ function AboutPage() {
 
   return (
     <MarketingLayout>
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       {/* Hero */}
       <Section className="bg-grad-hero relative overflow-hidden">
         <div
@@ -514,17 +517,16 @@ function AboutPage() {
                 Complete your medical intake online. No payment required, and no
                 prescription is guaranteed.
               </p>
-              <MagneticButton className="mt-8">
+              <HoverLiftButton className="mt-8">
                 <Button
-                  asChild
+                  type="button"
                   size="xl"
                   className="bg-ink text-ink-foreground hover:bg-ink/85"
+                  onClick={() => setGetStartedOpen(true)}
                 >
-                  <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
-                    {cta.label} <ArrowRight />
-                  </Link>
+                  {cta.label} <ArrowRight />
                 </Button>
-              </MagneticButton>
+              </HoverLiftButton>
             </div>
           </div>
         </motion.div>

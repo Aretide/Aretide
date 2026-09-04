@@ -33,13 +33,25 @@ export const LEARN_MONEY_PAGES: Readonly<Record<string, LearnMoneyPage>> = {
     href: "/trt/",
     label: "TRT (compounded enclomiphene)",
   },
-  "/hairloss/": {
-    href: "/hairloss/",
-    label: "Compounded hairloss treatment",
+  "/oral-finasteride/": {
+    href: "/oral-finasteride/",
+    label: "Oral finasteride",
   },
   "/ed/": {
     href: "/ed/",
-    label: "Compounded ED treatment",
+    label: "Generic ED treatment",
+  },
+  "/tadalafil/": {
+    href: "/tadalafil/",
+    label: "Tadalafil (generic Cialis)",
+  },
+  "/sildenafil/": {
+    href: "/sildenafil/",
+    label: "Sildenafil (generic Viagra)",
+  },
+  "/ed-mints/": {
+    href: "/ed-mints/",
+    label: "ED Mints",
   },
   "/nad-plus/": {
     href: "/nad-plus/",
@@ -53,8 +65,8 @@ export const LEARN_MONEY_PAGES: Readonly<Record<string, LearnMoneyPage>> = {
     href: "/sexual-health/",
     label: "Sexual health program",
   },
-  "/hair/": {
-    href: "/hair/",
+  "/hair-loss/": {
+    href: "/hair-loss/",
     label: "Hair loss program",
   },
   "/wellness/": {

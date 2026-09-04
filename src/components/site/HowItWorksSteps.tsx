@@ -1,8 +1,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 import {
-  ArrowDown,
-  ArrowRight,
   ClipboardCheck,
   Stethoscope,
   Truck,
@@ -14,6 +12,13 @@ import { SUPPORT_EMAIL } from "@/lib/contact-info";
 import { cn } from "@/lib/utils";
 
 export const HOW_IT_WORKS_STEPS_TOTAL = 3;
+
+/** Open chevron tip; place with translate(tip) rotate(endTangentDeg). */
+const CONNECTOR_ARROWHEAD = "M-6.5,-4 L0,0 L-6.5,4";
+/** End tangent of desktop Q (control→end): atan2(12, 28). */
+const DESKTOP_ARROW_ROTATE = 23.2;
+/** End tangent of mobile Q (control→end): atan2(28, 12). */
+const MOBILE_ARROW_ROTATE = 66.8;
 
 type Step = {
   icon: LucideIcon;
@@ -152,7 +157,7 @@ function StepConnector({
         ease: EASE_OUT,
       }}
     >
-      {/* Mobile: vertical curve */}
+      {/* Mobile: vertical curve; tip at (16,60), head rotated to end tangent */}
       <svg
         viewBox="0 0 32 64"
         className="h-16 w-8 md:hidden"
@@ -160,7 +165,7 @@ function StepConnector({
         focusable="false"
       >
         <motion.path
-          d="M16,4 Q4,32 16,60"
+          d="M16,4 Q4,32 14.2,55.5"
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
@@ -171,6 +176,22 @@ function StepConnector({
           transition={{
             duration: reduceMotion ? 0 : 0.6,
             delay: reduceMotion ? 0 : index * 0.15 + 0.35,
+            ease: EASE_OUT,
+          }}
+        />
+        <motion.path
+          d={CONNECTOR_ARROWHEAD}
+          transform={`translate(16 60) rotate(${MOBILE_ARROW_ROTATE})`}
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={reduceMotion ? false : { opacity: 0 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.25,
+            delay: reduceMotion ? 0 : index * 0.15 + 0.85,
             ease: EASE_OUT,
           }}
         />
@@ -185,9 +206,8 @@ function StepConnector({
           />
         )}
       </svg>
-      <ArrowDown className="absolute bottom-0 size-4 md:hidden" />
 
-      {/* Desktop: horizontal curve */}
+      {/* Desktop: arc; tip at (60,16), head rotated to end tangent */}
       <svg
         viewBox="0 0 64 32"
         className="hidden h-8 w-16 md:block"
@@ -195,7 +215,7 @@ function StepConnector({
         focusable="false"
       >
         <motion.path
-          d="M4,16 Q32,4 60,16"
+          d="M4,16 Q32,4 55.4,14.1"
           stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
@@ -206,6 +226,22 @@ function StepConnector({
           transition={{
             duration: reduceMotion ? 0 : 0.6,
             delay: reduceMotion ? 0 : index * 0.15 + 0.35,
+            ease: EASE_OUT,
+          }}
+        />
+        <motion.path
+          d={CONNECTOR_ARROWHEAD}
+          transform={`translate(60 16) rotate(${DESKTOP_ARROW_ROTATE})`}
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={reduceMotion ? false : { opacity: 0 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.25,
+            delay: reduceMotion ? 0 : index * 0.15 + 0.85,
             ease: EASE_OUT,
           }}
         />
@@ -220,7 +256,6 @@ function StepConnector({
           />
         )}
       </svg>
-      <ArrowRight className="absolute right-0 hidden size-4 md:block" />
     </motion.div>
   );
 }

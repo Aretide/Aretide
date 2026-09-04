@@ -1,0 +1,35 @@
+{
+  "id": "post-purchase-thank-you",
+  "label": "Post-purchase thank you $100",
+  "description": "Thank-you after a completed purchase, with support contact and a Google review offer. Not a clinical feeling check-in.",
+  "anchor": "enrolled_at",
+  "cta_url": "https://g.page/r/CUEUJWP1F6UjECE/review",
+  "cta_label": "Leave a Google review",
+  "ready": true,
+  "steps": [
+    {
+      "id": "thanks",
+      "delay": "0m",
+      "subject": "Free $100 off your next order!",
+      "body": [
+        "My name is <b>Matt Aertker</b>, and I work with Customer Success here at Beema Health.",
+        "I&#x27;m reaching out to thank you for your purchase and to offer you a <b>coupon</b> for the next month.",
+        "If you have any issues or questions, please don&#x27;t hesitate to reach out to me here at: <b>{support_email}</b>.",
+        "If you enjoyed your visit and would like a <b>{coupon_amount}</b> coupon for next month, please leave a Google review using the button below.",
+        "[[button:0]]",
+        "After we see the review, we will send the coupon."
+      ],
+      "buttons": [
+        {
+          "label": "Leave a Google review",
+          "url": "https://g.page/r/CUEUJWP1F6UjECE/review"
+        }
+      ],
+      "version": 2
+    }
+  ],
+  "placeholders": {
+    "coupon_amount": "$100"
+  },
+  "version": 2
+}

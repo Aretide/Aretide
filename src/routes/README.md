@@ -36,12 +36,11 @@ list is maintained in `public/sitemap.xml` and guarded by
 | Compounded Tirzepatide | `/tirzepatide` | Live |
 | Compounded Semaglutide | `/semaglutide` | Live |
 | TRT (Compounded Enclomiphene) | `/trt` | Live |
-| Compounded Hairloss Treatment | `/hairloss` | Live |
 | Compounded ED Treatment | `/ed` | Live |
 | Compounded NAD+ | `/nad-plus` | Live |
 | Compounded Sermorelin | `/sermorelin` | Live |
 | Sexual Health (hub) | `/sexual-health` | Live - footer Care group, category overview for `/ed` + `/trt` |
-| Hair (hub) | `/hair` | Live - footer Care group, category overview for `/hairloss` |
+| Hair Loss (hub) | `/hair-loss` | Live - footer Care group, category overview for `/oral-finasteride` (merged 2026-09-04 from the former `/hair` + `/hairloss`) |
 | Wellness (hub) | `/wellness` | Live - footer Care group, category overview for `/nad-plus` + `/sermorelin` |
 | How it works | `/how-it-works` | Live - in the Resources header/footer nav |
 | About | `/about` | Live - in the About header dropdown |

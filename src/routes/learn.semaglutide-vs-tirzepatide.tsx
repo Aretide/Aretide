@@ -10,7 +10,7 @@ import {
 import { trackPageViewed } from "@/lib/analytics";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
 } from "@/components/site/primitives";
@@ -713,13 +713,13 @@ function SemaVsTirzPage() {
           </ArticleSection>
 
           <div className="text-center">
-            <MagneticButton>
+            <HoverLiftButton>
               <Button asChild size="xl">
                 <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
                   {cta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>

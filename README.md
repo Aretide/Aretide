@@ -84,6 +84,7 @@ Full local dev guide (identical setup on every machine): **[docs/LOCAL-DEV.md](d
 | Deploy backend (Heroku vs AWS) | [backend/HOSTING.md](backend/HOSTING.md) |
 | Deploy frontend (GitHub Pages) | [docs/DEPLOY-FRONTEND.md](docs/DEPLOY-FRONTEND.md) |
 | Learn library (`/learn/`) | [docs/features/learn.md](docs/features/learn.md) |
+| Local patient email campaigns (encrypted, laptop-only) | [docs/features/patient-email-campaigns.md](docs/features/patient-email-campaigns.md) |
 | Restore removed marketing pages (pricing, nav, etc.) | [docs/archived-marketing-pages.md](docs/archived-marketing-pages.md) |
 
 ---
@@ -129,6 +130,12 @@ Beema Health/
 | File | Contents |
 |------|----------|
 | [docs/LOCAL-DEV.md](docs/LOCAL-DEV.md) | **Local dev with Docker** — prerequisites, first-time setup, daily commands, troubleshooting |
+
+### Local ops
+
+| File | Contents |
+|------|----------|
+| [docs/features/patient-email-campaigns.md](docs/features/patient-email-campaigns.md) | Encrypted patient mailer: campaign JSON (paragraph `body` arrays), dashboard dropdowns, last-step reset |
 
 ### Frontend (React / TanStack Start)
 

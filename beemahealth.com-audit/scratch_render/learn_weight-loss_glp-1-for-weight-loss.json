@@ -1,0 +1,93 @@
+{
+  "url": "https://beemahealth.com/learn/weight-loss/glp-1-for-weight-loss/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/><link rel=\"preload\" as=\"image\" href=\"https://static.legitscript.com/seals/51697885.png\"/><link rel=\"stylesheet\" href=\"/assets/styles-CyFOEV89.css\" data-precedence=\"default\"/><title>GLP-1 Drugs for Weight Loss: How Treatment Works</title><meta http-equiv=\"Content-Security-Policy\" content=\"default-src...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/>...",
+  "is_spa": false,
+  "extracted_text": "What GLP-1 is doing in the body\nGlucagon-like peptide-1 is released after meals. Receptor agonists used as medicines amplify that signal. The practical results people notice first are earlier fullness, fewer intrusive food thoughts, and slower stomach emptying. Those effects are why the class is used in medical weight loss, not because the drugs 'melt fat' in the way a cream claims to.\nThis page is educational, not a product landing page and not medical advice. Beema's commercial program pages f...",
+  "publication_date": "2026-08-24",
+  "accessibility_tree": null,
+  "headers": {
+    "Connection": "keep-alive",
+    "Content-Length": "19223",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "Last-Modified": "Tue, 25 Aug 2026 21:05:27 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "W/\"6a8e0397-1442d\"",
+    "expires": "Wed, 26 Aug 2026 18:04:33 GMT",
+    "Cache-Control": "max-age=600",
+    "Content-Encoding": "gzip",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "6270:3E94A5:E4BBDD:EEB6A7:6A8F2858",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 26 Aug 2026 17:54:33 GMT",
+    "Via": "1.1 varnish",
+    "X-Served-By": "cache-den-kden1300086-DEN",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1787766874.737039,VS0,VE73",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "a036e1c2d298940e071ca510a95ecca210f45c3e"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 4,
+    "processed_count": 4,
+    "total_bytes": 6776,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 966,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Country",
+          "MedicalOrganization"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 526,
+        "valid": true,
+        "types": [
+          "BreadcrumbList",
+          "ListItem"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 3,
+        "size_bytes": 1578,
+        "valid": true,
+        "types": [
+          "Article",
+          "CreativeWork",
+          "MedicalWebPage"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 4,
+        "size_bytes": 3706,
+        "valid": true,
+        "types": [
+          "Answer",
+          "FAQPage",
+          "Question"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

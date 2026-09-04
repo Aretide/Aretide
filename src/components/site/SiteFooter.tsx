@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Phone } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { Logo } from "@/components/brand/Logo";
-import { InfinityMotif } from "@/components/site/primitives";
+import { HeaderLogo } from "@/components/brand/Logo";
+import { HoverLiftButton, InfinityMotif } from "@/components/site/primitives";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import { FIRST_MONTH_PROMO_LINE } from "@/lib/marketing-copy";
 import { dualCompoundedShortPricingLine } from "@/lib/medication-pricing";
@@ -28,9 +30,19 @@ import { TRUST_SIGNALS } from "@/lib/trust-signals";
  * Care column is grouped by category (2026-08-27), each category's hub page
  * first followed by its specific medication pages - mirrors the header's
  * Weight Loss / Sexual Health / Hair dropdowns. Hub pages (`/weight-loss`,
- * `/sexual-health`, `/hair`) live only here in the footer, not in the
+ * `/sexual-health`, `/hair-loss`) live only here in the footer, not in the
  * header dropdowns - see SiteHeader.tsx. TRT, NAD+, Sermorelin, and the
  * Wellness hub are paused (2026-08-28) - see docs/features/treatment-pages.md.
+ *
+ * Money-page architecture (2026-09-03): unlike Weight Loss, the ED and Hair
+ * Loss rows deliberately do NOT also list every individual money page
+ * (Tadalafil, Sildenafil, ED Mints, Oral Finasteride) here - that would
+ * duplicate what the header's Sexual Health / Hair dropdowns already expose
+ * and bloat this column. `/ed` (overview page) and `/hair-loss` (hub -
+ * `/hair` and `/hairloss` merged into one page, 2026-09-04, neither had
+ * shipped to production) stay the footer entry point for that category; the
+ * header dropdown is where visitors reach the specific product pages
+ * directly.
  */
 const COLUMNS = [
   {
@@ -42,8 +54,7 @@ const COLUMNS = [
       { label: "GLP-1 Care", to: "/glp-1/" },
       { label: "Sexual Health", to: "/sexual-health/" },
       { label: "ED Treatment", to: "/ed/" },
-      { label: "Hair Loss Care", to: "/hair/" },
-      { label: "Hairloss Treatment", to: "/hairloss/" },
+      { label: "Hair Loss Care", to: "/hair-loss/" },
       // TRT, NAD+, Sermorelin, and the Wellness hub are paused (2026-08-28) -
       // not linked anywhere while inaccessible. See docs/features/treatment-pages.md.
       // { label: "Pricing", to: "/pricing/" }, // disabled - pricing model not finalized yet
@@ -86,14 +97,16 @@ const COLUMNS = [
 
 export function SiteFooter() {
   const cta = resolveCta(CTA_IDS.footer);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
   return (
     <footer className="bg-grad-ink relative overflow-hidden text-ink-foreground">
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       <InfinityMotif className="pointer-events-none absolute -right-16 -top-20 w-80 text-primary/10" />
       <div className="veya-container relative py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_repeat(4,minmax(0,1fr))]">
           <div className="max-w-sm">
             <span className="inline-flex rounded-lg bg-white px-3 py-2">
-              <Logo className="h-10" />
+              <HeaderLogo className="h-10" />
             </span>
             <p className="mt-4 text-sm leading-relaxed text-ink-foreground/70">
               Weight-loss care guided by independent medical professionals,
@@ -101,14 +114,15 @@ export function SiteFooter() {
               {dualCompoundedShortPricingLine()}), and support designed for
               success.
             </p>
-            <Link
-              to={cta.to}
-              search={cta.search}
-              onClick={cta.onClick}
-              className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary/90"
-            >
-              {cta.label}
-            </Link>
+            <HoverLiftButton className="mt-6 block">
+              <button
+                type="button"
+                onClick={() => setGetStartedOpen(true)}
+                className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary/90"
+              >
+                {cta.label}
+              </button>
+            </HoverLiftButton>
             <p className="mt-3 text-xs font-medium text-primary">
               Offer: {FIRST_MONTH_PROMO_LINE}
             </p>

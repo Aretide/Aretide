@@ -24,7 +24,7 @@ import {
   FloatingHexagons,
   HexBadge,
   HexMotif,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -166,7 +166,7 @@ function WeightLossPage() {
               ease: EASE_OUT,
             }}
           >
-            <MagneticButton>
+            <HoverLiftButton>
               <Button asChild size="xl">
                 <Link
                   to={heroCta.to}
@@ -176,7 +176,7 @@ function WeightLossPage() {
                   {heroCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </motion.div>
         </div>
       </Section>
@@ -284,11 +284,11 @@ function WeightLossPage() {
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
-              <MagneticButton>
+              <HoverLiftButton>
                 <Button asChild variant="outline">
                   <Link to="/safety/">Safety & eligibility</Link>
                 </Button>
-              </MagneticButton>
+              </HoverLiftButton>
               {/* Pricing page disabled - pricing model not finalized yet.
               <Button asChild variant="outline">
                 <Link to="/pricing/">See pricing</Link>
@@ -338,7 +338,7 @@ function WeightLossPage() {
             <p className="mx-auto mt-3 max-w-xl text-primary-foreground/85">
               Complete your medical intake online. No payment required to start.
             </p>
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
                 asChild
                 size="xl"
@@ -352,7 +352,7 @@ function WeightLossPage() {
                   {footerCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>

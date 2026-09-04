@@ -317,7 +317,11 @@ export function LearnHubView({ vertical }: { vertical: LearnVertical }) {
           <HubFaqs hub={hub} />
           <HubSources hub={hub} />
           {hub.productLive ? (
-            <LearnWeightLossCta />
+            <LearnWeightLossCta
+              {...(hub.liveCta
+                ? { ctaId: hub.liveCta.ctaId, headline: hub.liveCta.headline }
+                : {})}
+            />
           ) : (
             <SurfaceCard>
               <h2 className="text-lg font-semibold text-foreground">

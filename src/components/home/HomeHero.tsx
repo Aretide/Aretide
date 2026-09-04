@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   motion,
   useReducedMotion,
@@ -6,13 +6,14 @@ import {
   useTransform,
 } from "motion/react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, ClipboardCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
   FloatingHexagons,
   HexMotif,
-  MagneticButton,
+  HoverLiftButton,
 } from "@/components/site/primitives";
-import { FloatingLegitScriptSeal } from "@/components/home/FloatingLegitScriptSeal";
+import { LegitScriptSeal } from "@/components/site/LegitScriptSeal";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 import {
   EASE_OUT,
   LineReveal,
@@ -20,7 +21,6 @@ import {
   RotatingBadge,
 } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
-import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import { cn } from "@/lib/utils";
 import {
   FIRST_MONTH_PROMO_LINE,
@@ -30,19 +30,9 @@ import {
   dualCompoundedHomeHeroTeaser,
   dualCompoundedPromoShortPricingLine,
 } from "@/lib/medication-pricing";
-import { resolveVialImagery } from "@/lib/treatment-imagery";
 import heroImg from "@/assets/hero.jpg";
 
-const SEMA_VIAL = resolveVialImagery("semaglutide");
-
-const CHECKLIST_ITEMS = [
-  "Licensed USA physician network",
-  "Private & secure encrypted intake",
-  "USA 503A pharmacies",
-  dualCompoundedPromoShortPricingLine(),
-] as const;
-
-/** Hero badge rotation - reuses the same approved trust claims shown elsewhere on this page (checklist row, promo line) rather than inventing new copy. */
+/** Hero badge rotation - reuses the same approved trust claims shown elsewhere on this page (marquee ticker, promo line) rather than inventing new copy. */
 const HERO_BADGE_MESSAGES = [
   "GLP-1 weight-loss care",
   "Licensed USA physician network",
@@ -61,7 +51,7 @@ const MARQUEE_ITEMS = [
 ] as const;
 
 /**
- * Staggered fade-up entrance for the eyebrow/paragraph/CTA/checklist column.
+ * Staggered fade-up entrance for the eyebrow/paragraph/CTA column.
  * `delayChildren` is tuned to pick up roughly where the headline's masked
  * line reveals leave off, so the column cascades in right after the
  * headline rather than racing it. Durations collapse to 0 (and the initial
@@ -91,13 +81,12 @@ function useHeroColumnStagger(reduceMotion: boolean) {
 /**
  * Full-viewport cinematic hero for the homepage redesign. Two-column on
  * lg (headline column left, hexagon-clipped photography right), with a
- * scroll-linked parallax split between the columns for depth, a floating
- * medication vial bridging the seam as a third parallax plane, and a
+ * scroll-linked parallax split between the columns for depth, and a
  * full-width infinite marquee band anchored to its bottom edge.
  *
  * The lg min-height is deliberately `calc(100svh-4rem)` rather than a full
  * `100svh` - that headroom is what keeps the fixed site header from pushing
- * the checklist row and scroll cue below the fold on laptop-height windows
+ * the CTA row and scroll cue below the fold on laptop-height windows
  * (~1280x700 after browser chrome). Vertical rhythm (margin-top and
  * padding-y utilities) and the headline's fluid clamp() size are tuned
  * against that same budget. It's capped at 50rem (800px) via `min()` so it
@@ -115,12 +104,12 @@ function useHeroColumnStagger(reduceMotion: boolean) {
  * height, and it fades out (`marqueeOpacity`) over the first slice of hero
  * scroll so it doesn't linger fixed over content further down the page.
  * The content grid's bottom padding (`pb-20`/`pb-24`) reserves room so the
- * checklist row doesn't render underneath it on load.
+ * CTA row doesn't render underneath it on load.
  */
 export function HomeHero() {
   const reduceMotion = useReducedMotion();
   const { container, item } = useHeroColumnStagger(Boolean(reduceMotion));
-  const heroCta = resolveCta(CTA_IDS.home_hero);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
 
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -148,18 +137,6 @@ export function HomeHero() {
     [0, 1],
     [1, reduceMotion ? 1 : 1.06],
   );
-  // Third parallax plane for the floating vial: it spins and drifts at a
-  // different rate than either column as the hero scrolls out of view.
-  const vialSpin = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [-18, reduceMotion ? -18 : 24],
-  );
-  const vialDrift = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, reduceMotion ? 0 : -90],
-  );
   // The marquee is viewport-fixed (not tied to the hero section's own,
   // content-dependent height) so it's guaranteed visible on initial load
   // regardless of how tall the headline wraps at a given width. This fades
@@ -176,6 +153,7 @@ export function HomeHero() {
       ref={heroRef}
       className="relative overflow-hidden bg-grad-hero lg:min-h-[min(calc(100svh-4rem),50rem)]"
     >
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       <div
         aria-hidden
         className="bg-mesh-glow mesh-drift pointer-events-none absolute inset-0 z-0"
@@ -186,7 +164,7 @@ export function HomeHero() {
       />
       <FloatingHexagons className="z-0" />
 
-      <div className="veya-container relative z-10 grid min-h-0 items-center gap-10 py-10 pb-20 md:py-12 md:pb-24 lg:min-h-[min(calc(100svh-4rem),50rem)] lg:grid-cols-2 lg:gap-12 lg:py-14 lg:pb-24">
+      <div className="veya-container relative z-10 grid min-h-0 items-center gap-10 py-10 pb-20 md:py-12 md:pb-24 lg:min-h-[min(calc(100svh-4rem),50rem)] lg:grid-cols-2 lg:gap-16 lg:py-14 lg:pb-24 xl:gap-20">
         <motion.div
           className="relative z-10"
           initial="hidden"
@@ -203,27 +181,28 @@ export function HomeHero() {
           </motion.div>
 
           {/*
-              Mobile/stacked LegitScript seal - floats beside the headline.
-              Hidden once the two-column hero kicks in (lg), where the
-              image-column seal takes over so only one seal is ever visible.
+              Seal stays top-right; float (not a rigid 2/3+1/3 grid) so the
+              headline keeps most of the column width and only tucks beside
+              the seal for the first lines. A full-width 1/3 column had been
+              stretching the seal and forcing the LineReveal blocks into a
+              narrow stack.
             */}
-          <FloatingLegitScriptSeal
-            className="right-0 top-12 lg:hidden"
-            sealClassName="-rotate-6"
-          />
-
-          <h1 className="mt-4 pr-[6.75rem] text-[clamp(2rem,4.5vw,4rem)] font-bold leading-[1.1] tracking-tight text-foreground lg:pr-0">
-            <LineReveal delay={0}>Online care </LineReveal>
-            <LineReveal delay={0.1}>
-              {"that's "}
-              <span className="text-grad-brand">human</span>
-              {" and "}
-            </LineReveal>
-            <LineReveal delay={0.2}>
-              {"built for "}
-              <span className="text-grad-brand">success.</span>
-            </LineReveal>
-          </h1>
+          <div className="mt-3">
+            <LegitScriptSeal className="float-right ml-3 mb-1 w-[5.75rem] [&_img]:h-auto [&_img]:w-full sm:w-24" />
+            <h1 className="text-[clamp(2rem,4.5vw,4rem)] font-bold leading-[1.1] tracking-tight text-foreground">
+              <LineReveal delay={0}>Online care</LineReveal>
+              <LineReveal delay={0.1}>
+                {"that's "}
+                <span className="text-grad-brand">human</span>
+                {" and "}
+              </LineReveal>
+              <LineReveal delay={0.2}>
+                {"built for "}
+                <span className="text-grad-brand">success.</span>
+              </LineReveal>
+            </h1>
+            <div className="clear-both" />
+          </div>
 
           {/*
               LCP-critical: this is the largest text block painted on initial
@@ -236,47 +215,42 @@ export function HomeHero() {
               (same fix that worked for safety.tsx) so it paints as part of the
               server-rendered HTML/CSS with zero JS dependency.
             */}
-          <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground lg:max-w-2xl">
             USA physicians, licensed and certified USA 503A pharmacies,{" "}
-            {dualCompoundedHomeHeroTeaser()}. No bait-and-switch, no surprises,
-            and thoughtful medical care that doesn&apos;t stop at the first
-            prescription.
+            {dualCompoundedHomeHeroTeaser()}.
           </p>
 
           <motion.div
             variants={item}
             className="mt-6 flex flex-col items-start gap-3"
           >
-            <MagneticButton>
-              <Button asChild size="xl">
-                <Link
-                  to={heroCta.to}
-                  search={heroCta.search}
-                  onClick={heroCta.onClick}
-                >
-                  {heroCta.label} <ArrowRight />
-                </Link>
+            <HoverLiftButton>
+              <Button
+                type="button"
+                size="xl"
+                onClick={() => setGetStartedOpen(true)}
+              >
+                Get Started <ArrowRight />
               </Button>
-            </MagneticButton>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button asChild size="xl" variant="outline">
+            </HoverLiftButton>
+            <div className="flex flex-row flex-wrap gap-3">
+              <Button
+                asChild
+                size="xl"
+                variant="outline"
+                className="h-10 px-4 text-xs sm:h-14 sm:px-9 sm:text-base"
+              >
                 <Link to="/tirzepatide/">Tirzepatide pricing</Link>
               </Button>
-              <Button asChild size="xl" variant="outline">
+              <Button
+                asChild
+                size="xl"
+                variant="outline"
+                className="h-10 px-4 text-xs sm:h-14 sm:px-9 sm:text-base"
+              >
                 <Link to="/semaglutide/">Semaglutide pricing</Link>
               </Button>
             </div>
-          </motion.div>
-          <motion.div
-            variants={item}
-            className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted-foreground"
-          >
-            {CHECKLIST_ITEMS.map((label) => (
-              <span key={label} className="inline-flex items-center gap-2">
-                <CheckCircle2 className="size-4 text-accent-foreground" />{" "}
-                {label}
-              </span>
-            ))}
           </motion.div>
         </motion.div>
 
@@ -291,7 +265,7 @@ export function HomeHero() {
           }}
         >
           <motion.div
-            className="clip-hex relative aspect-[100/112] w-full overflow-hidden bg-ink lg:h-[min(62vh,480px)] lg:w-auto"
+            className="clip-hex relative aspect-[100/112] w-full overflow-hidden bg-ink lg:h-[min(62vh,520px)] lg:w-auto xl:h-[min(68vh,580px)]"
             style={reduceMotion ? undefined : { y: imageY, scale: imageScale }}
           >
             <img
@@ -314,137 +288,6 @@ export function HomeHero() {
                 From first contact to long-term success
               </p>
             </div>
-          </motion.div>
-
-          <motion.div
-            className="absolute -left-4 bottom-8 hidden sm:block md:-left-8"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: reduceMotion ? 0 : 0.6,
-              delay: reduceMotion ? 0 : 1.1,
-              ease: EASE_OUT,
-            }}
-          >
-            <motion.div
-              className="glass-panel flex items-center gap-2 rounded-2xl px-4 py-3 text-xs font-semibold text-foreground shadow-lift"
-              animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-              transition={
-                reduceMotion
-                  ? undefined
-                  : {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1.7,
-                    }
-              }
-            >
-              <CheckCircle2 className="size-4 shrink-0 text-accent-foreground" />
-              Licensed USA physician network
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            className="absolute -right-3 top-6 hidden sm:block md:-right-6"
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: reduceMotion ? 0 : 0.6,
-              delay: reduceMotion ? 0 : 1.3,
-              ease: EASE_OUT,
-            }}
-          >
-            <motion.div
-              className="glass-panel flex items-center gap-2 rounded-2xl px-4 py-3 text-xs font-semibold text-foreground shadow-lift"
-              animate={reduceMotion ? undefined : { y: [0, -9, 0] }}
-              transition={
-                reduceMotion
-                  ? undefined
-                  : {
-                      duration: 4.6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1.9,
-                    }
-              }
-            >
-              <ClipboardCheck className="size-4 shrink-0 text-accent-foreground" />
-              Self-paced online intake
-            </motion.div>
-          </motion.div>
-
-          {/*
-              Desktop-only LegitScript seal - top-left of the hexagon photo.
-              Paired with `lg:hidden` on the text-column seal so only one shows.
-            */}
-          <FloatingLegitScriptSeal
-            className="-left-2 top-4 hidden lg:-left-4 lg:top-6 lg:block"
-            sealClassName="-rotate-3"
-          />
-        </motion.div>
-
-        {/*
-            Floating medication vial - the "something moving" centerpiece.
-            Uses the same product photo as the treatment cards
-            (`resolveVialImagery().src`), so there is one vial image per
-            medication sitewide. It overlaps the seam between the two columns
-            and sits *behind* them (`z-0` here against `z-10` on both
-            columns), so headline and photo copy always read over the top of
-            it. Hidden below lg to avoid mobile clutter. Three nested motion
-            layers so each motion plane (entrance, scroll-linked spin/drift,
-            continuous levitation) composes independently instead of fighting
-            over the same props:
-              A. one-time fade/scale entrance + absolute centering
-              B. scroll-linked spin (-18deg to +24deg) and drift, tied to the
-                 same scrollYProgress as the two columns but at its own rate
-              C. a perpetual gentle levitation loop (y +-10, rotate +-4deg,
-                 6s mirrored ease-in-out), switched off under reduced motion
-          */}
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 z-0 hidden w-28 -translate-x-1/2 -translate-y-1/2 lg:block lg:w-32 xl:w-36"
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: reduceMotion ? 0 : 1,
-            delay: reduceMotion ? 0 : 1.4,
-            ease: EASE_OUT,
-          }}
-        >
-          <div
-            aria-hidden
-            className="absolute left-1/2 top-1/2 -z-10 size-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-2xl"
-          />
-          <motion.div
-            style={
-              reduceMotion ? undefined : { rotate: vialSpin, y: vialDrift }
-            }
-          >
-            <motion.div
-              className="glass-panel-clear rounded-3xl p-2 shadow-sm"
-              animate={
-                reduceMotion ? undefined : { y: [-10, 10], rotate: [-4, 4] }
-              }
-              transition={
-                reduceMotion
-                  ? undefined
-                  : {
-                      duration: 6,
-                      repeat: Infinity,
-                      repeatType: "mirror",
-                      ease: "easeInOut",
-                    }
-              }
-            >
-              <img
-                src={SEMA_VIAL.src}
-                alt={SEMA_VIAL.alt}
-                width={SEMA_VIAL.width}
-                height={SEMA_VIAL.height}
-                className="h-full w-full rounded-2xl object-cover drop-shadow-lg"
-              />
-            </motion.div>
           </motion.div>
         </motion.div>
       </div>

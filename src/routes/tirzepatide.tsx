@@ -17,7 +17,7 @@ import { trackPageViewed } from "@/lib/analytics";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
   FloatingHexagons,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -186,7 +186,7 @@ function TirzepatidePage() {
         <FloatingHexagons className="z-0" />
         <div className="relative z-10">
           <TreatmentBreadcrumb current="Compounded Tirzepatide" />
-          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
             <div>
               <SectionHeading
                 as="h1"
@@ -213,7 +213,7 @@ function TirzepatidePage() {
                   ease: EASE_OUT,
                 }}
               >
-                <MagneticButton>
+                <HoverLiftButton>
                   <Button asChild size="xl">
                     <Link
                       to={heroCta.to}
@@ -223,7 +223,7 @@ function TirzepatidePage() {
                       {heroCta.label} <ArrowRight />
                     </Link>
                   </Button>
-                </MagneticButton>
+                </HoverLiftButton>
                 <Button asChild size="xl" variant="outline">
                   <Link to="/tirzepatide/" hash="how-it-works">
                     How it works
@@ -515,7 +515,7 @@ function TirzepatidePage() {
               provider makes every clinical decision independently, prescribing
               is never guaranteed.
             </p>
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
                 asChild
                 size="xl"
@@ -529,7 +529,7 @@ function TirzepatidePage() {
                   {footerCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>

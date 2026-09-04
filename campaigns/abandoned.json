@@ -3,74 +3,163 @@
   "label": "Abandoned checkout",
   "description": "People who started a visit and did not finish checkout.",
   "anchor": "abandoned_at",
-  "cta_url": "https://hive.beemahealth.com",
+  "cta_url": "https://hive.beemahealth.com/?utm_source=beema_email&utm_medium=email&utm_campaign=abandoned_checkout",
   "cta_label": "Continue",
+  "ready": true,
+  "show_header": true,
+  "show_footer": true,
   "steps": [
-    {
-      "id": "10m",
-      "delay": "10m",
-      "subject": "Finish your Beema Health visit",
-      "body": "You started a visit with Beema Health a few minutes ago and it is still unfinished. If you are still interested in {interest}, complete your visit now:"
-    },
-    {
-      "id": "15m",
-      "delay": "15m",
-      "subject": "Your Beema Health visit is still open",
-      "body": "You started a visit about 15 minutes ago and have not finished it. If you are still interested in {interest}, continue here:"
-    },
-    {
-      "id": "30m",
-      "delay": "30m",
-      "subject": "Continue your Beema Health visit",
-      "body": "It has been about 30 minutes since you started your Beema Health visit. If you are still interested in {interest}, complete it today:"
-    },
-    {
-      "id": "45m",
-      "delay": "45m",
-      "subject": "Your Beema Health visit is waiting",
-      "body": "You started a visit less than an hour ago and it is still open. If you are still interested in {interest}, continue when you have a minute:"
-    },
     {
       "id": "1h",
       "delay": "1h",
-      "subject": "Finish your Beema Health visit",
-      "body": "We noticed that you started your visit with Beema Health but did not finish it. If you are still interested in {interest}, complete your visit today:"
+      "subject": "You're so close!",
+      "body": [
+        "Looks like you started a visit with Beema Health recently, but didn’t get a chance to finish. If you’d like to continue, you can pick up where you left off here:",
+        "[[button:0]]",
+        "If you have questions, just reply to this email.",
+        "Thanks,",
+        "Matt Aertker,",
+        "Customer Success at Beema Health"
+      ],
+      "greeting": "Hey {first_name},",
+      "buttons": [
+        {
+          "label": "Continue your visit",
+          "url": "https://hive.beemahealth.com/?utm_source=beema_email&utm_medium=email&utm_campaign=abandoned_checkout&utm_content=1hr_reminder",
+          "align": "center",
+          "bg": "#e5b01a",
+          "color": "#1a1a1a"
+        }
+      ],
+      "version": 7
     },
     {
       "id": "3h",
       "delay": "3h",
       "subject": "Your Beema Health visit is still open",
-      "body": "You started a visit with Beema Health earlier today and it is still unfinished. If you are still interested in {interest}, you can continue here:"
+      "body": [
+        "Just a quick reminder that you can continue your Beema Health visit whenever you’re ready. Your next step is waiting here:",
+        "[[button:0]]",
+        "If you have questions, just reply to this email.",
+        "Thanks,",
+        "Matt Aertker,",
+        "Customer Success at Beema Health"
+      ],
+      "greeting": "Hey {first_name},",
+      "buttons": [
+        {
+          "label": "Continue your visit",
+          "url": "https://hive.beemahealth.com/?utm_source=beema_email&utm_medium=email&utm_campaign=abandoned_checkout&utm_content=3hr_reminder",
+          "align": "center",
+          "bg": "#e5b01a",
+          "color": "#1a1a1a"
+        }
+      ],
+      "version": 7
     },
     {
       "id": "24h",
       "delay": "24h",
-      "subject": "Complete your Beema Health visit",
-      "body": "It has been about a day since you started your Beema Health visit. If you are still interested in {interest}, complete your visit today:"
-    },
-    {
-      "id": "48h",
-      "delay": "48h",
-      "subject": "Continue your Beema Health visit",
-      "body": "Your Beema Health visit is still unfinished. If you are still interested in {interest}, continue when you have a few minutes:"
+      "subject": "Want to pick up where you left off?",
+      "body": [
+        "You started a visit with Beema Health recently.",
+        "If you’re still interested in {interest}, you can continue right where you left off:",
+        "[[button:0]]",
+        "If you have questions, just reply to this email.",
+        "Thanks,",
+        "Matt Aertker,",
+        "Customer Success at Beema Health"
+      ],
+      "greeting": "Hey {first_name},",
+      "buttons": [
+        {
+          "label": "Continue your visit",
+          "url": "https://hive.beemahealth.com/?utm_source=beema_email&utm_medium=email&utm_campaign=abandoned_checkout&utm_content=24hr_reminder",
+          "align": "center",
+          "bg": "#e5b01a",
+          "color": "#1a1a1a"
+        }
+      ],
+      "version": 5
     },
     {
       "id": "72h",
       "delay": "72h",
-      "subject": "Your Beema Health visit is waiting",
-      "body": "Just a reminder that you started a visit with Beema Health and it is still open. If you are still interested in {interest}, complete it when you are ready:"
+      "subject": "Still thinking it over?",
+      "body": [
+        "It’s been a little bit since you started your Beema Health visit. If you’re still interested in {interest}, you can pick up where you left off here:",
+        "[[button:0]]",
+        "Thanks,",
+        "Matt Aertker,",
+        "Customer Success at Beema Health"
+      ],
+      "greeting": "Hey {first_name},",
+      "buttons": [
+        {
+          "label": "Continue your visit",
+          "url": "https://hive.beemahealth.com/?utm_source=beema_email&utm_medium=email&utm_campaign=abandoned_checkout&utm_content=72_hour_reminder",
+          "align": "center",
+          "bg": "#e5b01a",
+          "color": "#1a1a1a"
+        }
+      ],
+      "version": 5
     },
     {
       "id": "7d",
       "delay": "7d",
-      "subject": "A reminder to finish your Beema Health visit",
-      "body": "It has been a week since you started your visit. If you would still like to continue with Beema Health for {interest}, you can pick it back up here:"
+      "subject": "Still interested?",
+      "body": [
+        "It’s been a while since you started your visit with Beema Health.",
+        "If you’re still interested in {interest}, you can pick up right where you left off:",
+        "[[button:0]]",
+        "If you have any questions before continuing, just reply to this email. We’re happy to help!",
+        "Thanks,",
+        "Matt Aertker,",
+        "Customer Success at Beema Health"
+      ],
+      "greeting": "Hey {first_name},",
+      "buttons": [
+        {
+          "label": "Continue your visit",
+          "url": "https://hive.beemahealth.com/?utm_source=beema_email&utm_medium=email&utm_campaign=abandoned_checkout&utm_content=7_day_reminder",
+          "align": "center",
+          "bg": "#e5b01a",
+          "color": "#1a1a1a"
+        }
+      ],
+      "version": 6
     },
     {
       "id": "14d",
       "delay": "14d",
-      "subject": "Last reminder: finish your Beema Health visit",
-      "body": "This is our last reminder about the visit you started. If you would still like care for {interest}, you can continue here. If your plans have changed, you can ignore this email."
+      "subject": "Just one click away!",
+      "body": [
+        "This is our last reminder about the visit you started.",
+        "If you&#x27;re still interested in {interest}, you can continue here:<br>",
+        "[[button:0]]",
+        "If your plans have changed, no worries, you can ignore this email.",
+        "Thanks,",
+        "Matt Aertker,",
+        "Customer Success at Beema Health"
+      ],
+      "greeting": "Hey {first_name},",
+      "buttons": [
+        {
+          "label": "Continue",
+          "url": "https://hive.beemahealth.com/?utm_source=beema_email&utm_medium=email&utm_campaign=abandoned_checkout&utm_content=14_day_final_reminder",
+          "align": "center",
+          "bg": "#e5b01a",
+          "color": "#1a1a1a"
+        }
+      ],
+      "version": 9
     }
-  ]
+  ],
+  "schedule": {
+    "enabled": true,
+    "kind": "interval",
+    "every_minutes": 60
+  },
+  "version": 20
 }

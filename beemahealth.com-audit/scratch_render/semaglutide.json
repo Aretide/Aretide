@@ -1,0 +1,97 @@
+{
+  "url": "https://beemahealth.com/semaglutide/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/><link rel=\"preload\" as=\"image\" href=\"/assets/compounded-semaglutide-vial-B2uWDbuC.webp\" fetchPriority=\"high\"/><link rel=\"stylesheet\" href=\"/assets/styles-CyFOEV89.css\" data-precedence=\"default\"/><title>Compounded Semaglutide for Weight Loss | Beema Health</title><meta http-equiv=\"Content-Security-Po...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/>...",
+  "is_spa": false,
+  "extracted_text": "Compounded Semaglutide, personalized around you.\nBeema Health connects eligible adults with independent licensed providers for individualized medical weight-management care. Completing intake does not guarantee a prescription.\nExplore our pricing\n3 months\nFirst-month promo\nThen $199/mo for months 2 and 3 \u00b7 $497 total for 3 months\nOne-time promo code: sema-off100\n$100 off your first month on a 3-month plan. Redeemable once per patient. Not valid on a 1-month purchase.\nLarger multi-month savings o...",
+  "publication_date": "2026-07-31",
+  "accessibility_tree": null,
+  "headers": {
+    "Connection": "keep-alive",
+    "Content-Length": "24796",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "Last-Modified": "Tue, 25 Aug 2026 21:05:27 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "W/\"6a8e0397-1da0c\"",
+    "expires": "Wed, 26 Aug 2026 18:04:31 GMT",
+    "Cache-Control": "max-age=600",
+    "Content-Encoding": "gzip",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "D7D8:2EA651:E1B906:EBAB6F:6A8F2856",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 26 Aug 2026 17:54:31 GMT",
+    "Via": "1.1 varnish",
+    "X-Served-By": "cache-den-kden1300031-DEN",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1787766872.782029,VS0,VE90",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "1149c10100b2cdd63d44748610c6fe3843600480"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 4,
+    "processed_count": 4,
+    "total_bytes": 11630,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 966,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Country",
+          "MedicalOrganization"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 272,
+        "valid": true,
+        "types": [
+          "BreadcrumbList",
+          "ListItem"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 3,
+        "size_bytes": 8860,
+        "valid": true,
+        "types": [
+          "Answer",
+          "FAQPage",
+          "Question"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 4,
+        "size_bytes": 1532,
+        "valid": true,
+        "types": [
+          "Country",
+          "MedicalOrganization",
+          "Offer",
+          "Physician",
+          "PropertyValue",
+          "Service",
+          "UnitPriceSpecification"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

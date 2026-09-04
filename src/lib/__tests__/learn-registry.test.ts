@@ -58,6 +58,8 @@ describe("learnPath helpers", () => {
     expect(isLearnVertical("weight-loss")).toBe(true);
     expect(isLearnVertical("trt")).toBe(true);
     expect(isLearnVertical("hrt")).toBe(true);
+    expect(isLearnVertical("ed")).toBe(true);
+    expect(isLearnVertical("hairloss")).toBe(true);
     expect(isLearnVertical("peptides")).toBe(false);
     expect(isLearnVertical("resistance-training")).toBe(false);
   });
@@ -75,6 +77,10 @@ describe("learn registry glob", () => {
     expect(listDiscoveredKeys()).toContain("weight-loss/_glob-fixture");
     expect(listDiscoveredKeys()).toContain("trt/what-is-trt");
     expect(listDiscoveredKeys()).toContain("hrt/what-is-hrt");
+    expect(listDiscoveredKeys()).toContain("ed/tadalafil-dosing");
+    expect(listDiscoveredKeys()).toContain(
+      "hairloss/finasteride-for-hair-loss",
+    );
   });
 
   it("indexes the unpublished fixture but does not publish it", () => {
@@ -204,7 +210,13 @@ describe("learn copy has no em or en dashes", () => {
 
 describe("learn verticals", () => {
   it("locks the three vertical slugs", () => {
-    expect(LEARN_VERTICALS).toEqual(["weight-loss", "trt", "hrt"]);
+    expect(LEARN_VERTICALS).toEqual([
+      "weight-loss",
+      "trt",
+      "hrt",
+      "ed",
+      "hairloss",
+    ]);
   });
 });
 
@@ -213,7 +225,9 @@ describe("published learn inventory", () => {
     expect(listArticles("weight-loss")).toHaveLength(81);
     expect(listArticles("trt")).toHaveLength(1);
     expect(listArticles("hrt")).toHaveLength(1);
-    expect(listAllArticles()).toHaveLength(83);
+    expect(listArticles("ed")).toHaveLength(4);
+    expect(listArticles("hairloss")).toHaveLength(1);
+    expect(listAllArticles()).toHaveLength(88);
   });
 
   it("keeps slugs unique within and across verticals", () => {
@@ -256,13 +270,19 @@ describe("published learn inventory", () => {
     ).toBe(true);
   });
 
-  it("never attaches a weight-loss CTA to TRT or HRT articles", () => {
+  it("never attaches a weight-loss CTA to TRT, HRT, ED, or hairloss articles", () => {
     const trt = getArticle("trt", "what-is-trt");
     const hrt = getArticle("hrt", "what-is-hrt");
+    const ed = getArticle("ed", "tadalafil-dosing");
+    const hairloss = getArticle("hairloss", "finasteride-for-hair-loss");
     expect(trt?.ctaId).toBeUndefined();
     expect(hrt?.ctaId).toBeUndefined();
+    expect(ed?.ctaId).toBeUndefined();
+    expect(hairloss?.ctaId).toBeUndefined();
     expect(resolveLearnArticleCtaId(trt!)).toBeUndefined();
     expect(resolveLearnArticleCtaId(hrt!)).toBeUndefined();
+    expect(resolveLearnArticleCtaId(ed!)).toBeUndefined();
+    expect(resolveLearnArticleCtaId(hairloss!)).toBeUndefined();
     expect(
       resolveLearnArticleCtaId(getArticle("weight-loss", "travel-with-glp-1")!),
     ).toBe(CTA_IDS.learn_weight_loss);
@@ -274,13 +294,15 @@ describe("published learn inventory", () => {
     expect(paths.has("/learn/weight-loss/")).toBe(true);
     expect(paths.has("/learn/trt/")).toBe(true);
     expect(paths.has("/learn/hrt/")).toBe(true);
+    expect(paths.has("/learn/ed/")).toBe(true);
+    expect(paths.has("/learn/hairloss/")).toBe(true);
     for (const article of listAllArticles()) {
       expect(paths.has(learnPath(article.vertical, article.slug))).toBe(true);
     }
     expect([...paths].some((path) => path.includes("_glob-fixture"))).toBe(
       false,
     );
-    expect(getLearnSitemapEntries()).toHaveLength(91);
+    expect(getLearnSitemapEntries()).toHaveLength(98);
   });
 });
 

@@ -1,16 +1,24 @@
 import type { LearnFaq, LearnVertical } from "./types";
 import {
   COMPOUNDED_DISCLOSURE,
+  COMPOUNDED_ED_MINTS_REQUIRED,
+  GENERIC_SILDENAFIL_REQUIRED,
+  GENERIC_TADALAFIL_REQUIRED,
+} from "@/lib/compounded-disclosure";
+import {
   LEARN_FIFTY_STATE_SENTENCE,
   LEARN_USA_ONLY_SENTENCE,
   getGlp1OnlineWithBeemaFaq,
 } from "@/lib/learn-trust-copy";
+import { CTA_IDS, type CtaId } from "@/lib/cta-ids";
 
 export const LEARN_INDEX_DATE_MODIFIED = "2026-08-25" as const;
 export const LEARN_HUB_DATES = {
   "weight-loss": "2026-08-25",
   trt: "2026-08-25",
   hrt: "2026-08-25",
+  ed: "2026-09-03",
+  hairloss: "2026-09-03",
 } as const satisfies Record<LearnVertical, string>;
 
 export type LearnCluster = {
@@ -163,15 +171,15 @@ export const LEARN_INDEX_META = {
   title: "Learn | Beema Health",
   h1: "Educational guides, organized by topic",
   description:
-    "Cited educational hubs on GLP-1 weight-loss medicines, testosterone replacement, and menopausal hormone therapy. General information only, not medical advice.",
+    "Cited educational hubs on GLP-1 weight-loss medicines, ED treatment, hair loss (finasteride), testosterone replacement, and menopausal hormone therapy. Not medical advice.",
   ogDescription:
-    "Free, unsigned educational guides on weight-loss medicines and hormone topics. Not medical advice, and not a substitute for a licensed clinician.",
+    "Free, unsigned educational guides on weight-loss medicines, ED treatment, hair loss, and hormone topics. Not medical advice, and not a substitute for a licensed clinician.",
 } as const;
 
 export const LEARN_INDEX_INTRO = [
   "This library is for people who want to read before they talk to a clinician. Articles are unsigned educational pieces with citations. They are not a diagnosis, a prescription, or a promise of results.",
-  `Beema Health's live clinical offerings include online medical weight loss, TRT (compounded enclomiphene), hairloss treatment, ED treatment, NAD+, and sermorelin care. ${LEARN_USA_ONLY_SENTENCE} ${LEARN_FIFTY_STATE_SENTENCE} Providers review intake and, when clinically appropriate and legally available, may prescribe compounded semaglutide or compounded tirzepatide for weight loss. ${COMPOUNDED_DISCLOSURE} Completing intake does not guarantee a prescription.`,
-  "Testosterone replacement therapy (TRT) has its own educational hub describing the broader category of injectable, gel, and patch testosterone - Beema's own live TRT offering, compounded enclomiphene, works differently and has its own page. Menopausal hormone therapy (HRT) also has its own hub so that search topic has a home; that hub describes the medicine, not a Beema product you can start today.",
+  `Beema Health's live clinical offerings include online medical weight loss, ED treatment (tadalafil, sildenafil, and ED Mints), oral finasteride for hair loss, and TRT (compounded enclomiphene). ${LEARN_USA_ONLY_SENTENCE} ${LEARN_FIFTY_STATE_SENTENCE} Providers review intake and, when clinically appropriate and legally available, may prescribe compounded semaglutide or compounded tirzepatide for weight loss. ${COMPOUNDED_DISCLOSURE} Completing intake does not guarantee a prescription.`,
+  "ED treatment has its own educational hub covering how tadalafil and sildenafil work and how they're labeled to be dosed, alongside Beema's own compounded formulations. Hair loss has its own educational hub covering how finasteride works, its FDA-labeled dosing, and a realistic results timeline - unlike most other products described in this library, Beema's finasteride is the FDA-approved generic, not a compounded formulation. Testosterone replacement therapy (TRT) has its own educational hub describing the broader category of injectable, gel, and patch testosterone - Beema's own live TRT offering, compounded enclomiphene, works differently and has its own page. Menopausal hormone therapy (HRT) also has its own hub so that search topic has a home; that hub describes the medicine, not a Beema product you can start today.",
 ] as const;
 
 export const WEIGHT_LOSS_HUB_META = {
@@ -444,6 +452,177 @@ export const HRT_HUB_SOURCES = [
   },
 ] as const;
 
+export const ED_HUB_META = {
+  title: "ED Treatment Education | Beema Health Learn",
+  h1: "Erectile dysfunction treatment, explained",
+  eyebrow: "ED education",
+  description:
+    "Educational overview of tadalafil, sildenafil, and combination ED treatment: how they work, labeled dosing, and what Beema actually offers.",
+  ogDescription:
+    "Unsigned education on tadalafil and sildenafil dosing and how compounded ED combination formulations differ from single-ingredient tablets.",
+} as const;
+
+export const ED_HUB_SECTIONS = [
+  {
+    id: "how-to-use-this-hub",
+    heading: "How this hub is different from Beema's ED pages",
+    body: [
+      "Beema's commercial pages (Tadalafil, Sildenafil, and ED Mints) explain the live telehealth program, pricing, and how to start an online visit. This hub is the educational layer: how these medicines work, the labeled dosing ranges for each active ingredient, and how Beema's tadalafil and sildenafil (the FDA-approved generics of Cialis and Viagra) relate to ED Mints, a separate compounded combination formulation.",
+      "If you already know which formulation you want to learn about, go straight to the Tadalafil, Sildenafil, or ED Mints page. Stay here for background on dosing and how the two active ingredients work before you compare options.",
+    ],
+  },
+  {
+    id: "how-they-work",
+    heading: "How tadalafil and sildenafil work",
+    body: [
+      "Both tadalafil and sildenafil are PDE5 (phosphodiesterase type 5) inhibitors. They relax smooth muscle and increase blood flow to the penis, which can make it easier to get and keep an erection when a person is sexually stimulated. Neither drug causes arousal by itself; sexual stimulation is still required for either medicine to have an effect.",
+      "The two molecules differ mainly in onset and duration. Sildenafil (the active ingredient in Viagra) typically takes effect within about 30 to 60 minutes and lasts several hours, so it is usually taken as needed shortly before activity. Tadalafil (the active ingredient in Cialis) can remain effective for up to 36 hours per its FDA label, and is available either as an as-needed dose or as a low once-daily dose that does not require timing around activity.",
+    ],
+  },
+  {
+    id: "dosing-overview",
+    heading: "Labeled dosing, in plain language",
+    body: [
+      "Sildenafil is FDA-labeled in 25 mg, 50 mg, and 100 mg tablets, usually taken about an hour before activity and no more than once in 24 hours; the labeled starting dose for most patients is 50 mg. Tadalafil is FDA-labeled in 2.5 mg, 5 mg, 10 mg, and 20 mg tablets. The 10 mg and 20 mg strengths are typically used as needed before activity; the 2.5 mg and 5 mg strengths are typically used once daily at the same time each day, without regard to timing of sexual activity.",
+      "These are the labeled ranges for the FDA-approved single-ingredient products. A licensed provider decides the dose, if any, that may be appropriate for a specific patient - self-selecting or adjusting a dose without a provider is not a labeled use.",
+    ],
+  },
+  {
+    id: "combinations",
+    heading: "Combination and dissolve-under-the-tongue formulations",
+    body: [
+      "Some compounding pharmacies prepare formulations that combine tadalafil and sildenafil into a single dose, or add a third ingredient such as oxytocin, and deliver them as a tablet that dissolves under the tongue rather than being swallowed with water. These combination and dissolve-under-the-tongue formulations are not FDA-approved products - they are not sold as a single commercial product by any pharmaceutical manufacturer, and they should not be assumed identical in effect, strength, or safety profile to the single-ingredient tablets described above, even though they share active ingredients with them.",
+      "Oxytocin's role in erectile and sexual function has been studied mainly in animal models and small human studies, not in the large randomized trials that support tadalafil's and sildenafil's FDA labels. Beema does not claim oxytocin is proven to improve outcomes when added to a compounded formulation.",
+    ],
+  },
+  {
+    id: "what-beema-offers",
+    heading: "What Beema actually offers",
+    body: [
+      `Beema's live ED formulations are tadalafil (generic Cialis), sildenafil (generic Viagra), and ED Mints (two dissolve-under-the-tongue combination formulations). ${GENERIC_TADALAFIL_REQUIRED} ${GENERIC_SILDENAFIL_REQUIRED} ${COMPOUNDED_ED_MINTS_REQUIRED} A licensed provider reviews each patient's intake and independently decides which formulation and dose, if any, may be appropriate; completing intake does not guarantee a prescription.`,
+    ],
+  },
+] as const;
+
+export const ED_HUB_FAQS: readonly LearnFaq[] = [
+  {
+    question: "Is this the same as Beema's ED treatment pages?",
+    answer:
+      "No. The Tadalafil, Sildenafil, and ED Mints pages describe Beema's live telehealth service, cash-pay pricing, and how to start intake. This hub is educational: how the medicines work and how they're labeled to be dosed. Use both if you want background plus the actual offer.",
+  },
+  {
+    question:
+      "Is Beema's tadalafil or sildenafil the same as Cialis or Viagra?",
+    answer:
+      "Yes, for the single-ingredient tablets. Beema's tadalafil and sildenafil are the FDA-approved generic versions of Cialis and Viagra - the identical active ingredient, strength, and intended use as the brand-name products, dispensed by a licensed pharmacy, not a compounded formulation. ED Mints is different: it's a compounded combination formulation, not sold as a single commercial product by any manufacturer, and should not be assumed identical in effect to the single-ingredient tablets.",
+  },
+  {
+    question: "Can I choose my own dose from this article?",
+    answer:
+      "No. Prescription medications require a licensed provider. This hub describes labeled dosing ranges for education only; it cannot diagnose you, prescribe a dose, or guarantee a prescription.",
+  },
+  {
+    question: "Does Beema offer branded Viagra or Cialis?",
+    answer:
+      "Beema's tadalafil and sildenafil are the FDA-approved generic versions of Cialis and Viagra - not the branded, name-on-the-bottle product, but the identical generic drug a pharmacy would dispense for a Cialis or Viagra prescription. Beema also offers ED Mints, a separate compounded combination formulation, when a licensed provider decides it is appropriate and it is legally available.",
+  },
+];
+
+export const ED_HUB_SOURCES = [
+  {
+    label:
+      "CIALIS (tadalafil) tablets, FDA-approved prescribing information via DailyMed.",
+    href: "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ebddb745-81f9-4b25-8739-b2886032ed26",
+  },
+  {
+    label:
+      "VIAGRA (sildenafil citrate) tablets, FDA-approved prescribing information via DailyMed.",
+    href: "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4d60822d-1c9b-494d-adb3-20fe921d9c58",
+  },
+  {
+    label: "MedlinePlus. Tadalafil: drug information.",
+    href: "https://medlineplus.gov/druginfo/meds/a604008.html",
+  },
+  {
+    label: "MedlinePlus. Sildenafil: drug information.",
+    href: "https://medlineplus.gov/druginfo/meds/a699015.html",
+  },
+] as const;
+
+export const HAIRLOSS_HUB_META = {
+  title: "Hair Loss (Finasteride) Education | Beema Health Learn",
+  h1: "Finasteride for hair loss, explained",
+  eyebrow: "Hair loss education",
+  description:
+    "Educational overview of oral finasteride for male pattern hair loss: how it works, FDA-labeled dosing, timeline, and what Beema's finasteride offering is.",
+  ogDescription:
+    "Unsigned education on finasteride for hair loss, including labeled dosing, results timeline, and safety, plus what Beema's own offering is.",
+} as const;
+
+export const HAIRLOSS_HUB_SECTIONS = [
+  {
+    id: "how-to-use-this-hub",
+    heading: "How this hub is different from Beema's finasteride page",
+    body: [
+      "Beema's commercial oral finasteride page explains the live telehealth program, pricing, and how to start an online visit. This hub is the educational layer: how finasteride works on hair loss, its FDA-labeled dosing, and a realistic timeline for results.",
+      "If you already know you want to see whether treatment could be appropriate, the oral finasteride page is the right next click. Stay here when you want background first.",
+    ],
+  },
+  {
+    id: "what-it-treats",
+    heading: "What finasteride treats, and what it doesn't",
+    body: [
+      "Finasteride is FDA-approved to treat male pattern hair loss (androgenetic alopecia) in men, by blocking the enzyme that converts testosterone into dihydrotestosterone (DHT), the hormone most responsible for shrinking genetically susceptible hair follicles over time. It is not labeled for women, for men under 18, or for other causes of hair loss such as alopecia areata or telogen effluvium.",
+      "Finasteride is sold at two different doses for two different labeled uses: 1 mg for hair loss (brand name Propecia) and 5 mg for an enlarged prostate (brand name Proscar). They are not interchangeable, and this hub focuses on the 1 mg hair-loss dose.",
+    ],
+  },
+  {
+    id: "dosing-and-timeline",
+    heading: "Labeled dosing and a realistic results timeline",
+    body: [
+      "The FDA label calls for one 1 mg tablet once daily, with or without food. Benefit is not expected before about three months of continuous use, and response is typically assessed over roughly 12 months; if there's no improvement by then, the label notes further treatment probably won't help. Stopping the medication reverses its effect within about a year.",
+      "In the FDA label's clinical study summary, about 65 percent of men on finasteride showed increased hair growth at 12 months versus 37 percent on placebo, rising to about 80 percent versus 47 percent by 24 months. These are group averages from clinical trials, not a promise for any individual.",
+    ],
+  },
+  {
+    id: "what-beema-offers",
+    heading: "What Beema actually offers",
+    body: [
+      "Beema's live finasteride offering is the FDA-approved generic version of Propecia - the identical active ingredient, strength, and intended use as the brand-name product, dispensed by a licensed pharmacy. Unlike most other treatments in this learn library, it is not a compounded formulation. A licensed provider reviews each patient's intake and independently decides whether finasteride may be appropriate; completing intake does not guarantee a prescription.",
+    ],
+  },
+] as const;
+
+export const HAIRLOSS_HUB_FAQS: readonly LearnFaq[] = [
+  {
+    question: "Is this the same as Beema's oral finasteride page?",
+    answer:
+      "No. The oral finasteride page describes Beema's live telehealth service, cash-pay pricing, and how to start intake. This hub is educational: how finasteride works, its labeled dosing, and a realistic results timeline. Use both if you want background plus the actual offer.",
+  },
+  {
+    question: "Is compounded finasteride the same as what Beema offers?",
+    answer:
+      "Beema does not sell a compounded finasteride product. Beema's finasteride is the FDA-approved generic version of Propecia, dispensed by a licensed pharmacy at the labeled 1 mg dose - not a custom-compounded formulation.",
+  },
+  {
+    question: "Can I choose my own dose from this article?",
+    answer:
+      "No. Prescription medications require a licensed provider. This hub describes FDA-labeled dosing for education only; it cannot diagnose you, prescribe a dose, or guarantee a prescription.",
+  },
+];
+
+export const HAIRLOSS_HUB_SOURCES = [
+  {
+    label:
+      "PROPECIA (finasteride) 1 mg tablets, FDA-approved prescribing information via DailyMed.",
+    href: "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6f904709-65aa-44ce-b144-b4c8a0416e36",
+  },
+  {
+    label: "MedlinePlus. Finasteride: drug information.",
+    href: "https://medlineplus.gov/druginfo/meds/a698016.html",
+  },
+] as const;
+
 export type LearnHubCopy = {
   vertical: LearnVertical;
   meta: {
@@ -457,6 +636,8 @@ export type LearnHubCopy = {
   faqs: readonly LearnFaq[];
   sources: readonly { label: string; href: string }[];
   productLive: boolean;
+  /** Override the default (weight-loss) headline/CTA on the hub's live-offering banner. */
+  liveCta?: { headline: string; ctaId: CtaId };
 };
 
 export const LEARN_HUBS: Record<LearnVertical, LearnHubCopy> = {
@@ -483,5 +664,29 @@ export const LEARN_HUBS: Record<LearnVertical, LearnHubCopy> = {
     faqs: HRT_HUB_FAQS,
     sources: HRT_HUB_SOURCES,
     productLive: false,
+  },
+  ed: {
+    vertical: "ed",
+    meta: ED_HUB_META,
+    sections: ED_HUB_SECTIONS,
+    faqs: ED_HUB_FAQS,
+    sources: ED_HUB_SOURCES,
+    productLive: true,
+    liveCta: {
+      headline: "Beema's live offering includes compounded ED care",
+      ctaId: CTA_IDS.sexual_health_hero,
+    },
+  },
+  hairloss: {
+    vertical: "hairloss",
+    meta: HAIRLOSS_HUB_META,
+    sections: HAIRLOSS_HUB_SECTIONS,
+    faqs: HAIRLOSS_HUB_FAQS,
+    sources: HAIRLOSS_HUB_SOURCES,
+    productLive: true,
+    liveCta: {
+      headline: "Beema's live offering is FDA-approved generic finasteride",
+      ctaId: CTA_IDS.oral_finasteride_hero,
+    },
   },
 };

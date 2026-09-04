@@ -101,6 +101,16 @@ const VERTICAL_CARDS: Record<
       "Educational overview of menopausal hormone therapy. Beema does not offer HRT today.",
     status: "Education only",
   },
+  ed: {
+    description:
+      "Cited education on tadalafil, sildenafil, and compounded ED combination formulations - how they work, labeled dosing, and how Beema's compounded options differ. Beema's live clinical offering lives here.",
+    status: "Live product education",
+  },
+  hairloss: {
+    description:
+      "Cited education on finasteride for male pattern hair loss - how it works, FDA-labeled dosing, and a realistic results timeline. Beema's live clinical offering lives here.",
+    status: "Live product education",
+  },
 };
 
 export const Route = createFileRoute("/learn/")({

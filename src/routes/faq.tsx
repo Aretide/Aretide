@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { breadcrumbJsonLd, canonicalUrl, faqPageJsonLd } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
@@ -12,12 +12,13 @@ import { trackPageViewed } from "@/lib/analytics";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
   HexMotif,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
 } from "@/components/site/primitives";
 import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
   Accordion,
@@ -71,6 +72,7 @@ export const Route = createFileRoute("/faq")({
 
 function FaqPage() {
   const cta = resolveCta(CTA_IDS.faq);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
   useEffect(() => {
     trackPageViewed("faq");
   }, []);
@@ -92,6 +94,7 @@ function FaqPage() {
 
   return (
     <MarketingLayout>
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       <section className="relative overflow-hidden bg-grad-hero py-16 md:py-24">
         <div
           aria-hidden
@@ -171,13 +174,15 @@ function FaqPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <MagneticButton>
-              <Button asChild size="xl">
-                <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
-                  {cta.label} <ArrowRight />
-                </Link>
+            <HoverLiftButton>
+              <Button
+                type="button"
+                size="xl"
+                onClick={() => setGetStartedOpen(true)}
+              >
+                {cta.label} <ArrowRight />
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>

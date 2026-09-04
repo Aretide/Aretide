@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { canonicalUrl } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Clock, Mail, Phone, Star } from "lucide-react";
@@ -12,13 +12,14 @@ import { trackPageViewed } from "@/lib/analytics";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
   HexMotif,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
 } from "@/components/site/primitives";
 import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
   SUPPORT_EMAIL,
@@ -88,6 +89,7 @@ const CONTACT_OPTIONS = [
 
 function ContactPage() {
   const cta = resolveCta(CTA_IDS.contact);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
   useEffect(() => {
     trackPageViewed("contact");
   }, []);
@@ -108,6 +110,7 @@ function ContactPage() {
 
   return (
     <MarketingLayout>
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       <section className="relative overflow-hidden bg-grad-hero py-16 md:py-24">
         <div
           aria-hidden
@@ -224,18 +227,20 @@ function ContactPage() {
               Many common questions are answered on our FAQ and Safety pages.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <MagneticButton>
+              <HoverLiftButton>
                 <Button asChild variant="outline">
                   <Link to="/faq/">Read FAQ</Link>
                 </Button>
-              </MagneticButton>
-              <MagneticButton>
-                <Button asChild size="xl">
-                  <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
-                    {cta.label} <ArrowRight />
-                  </Link>
+              </HoverLiftButton>
+              <HoverLiftButton>
+                <Button
+                  type="button"
+                  size="xl"
+                  onClick={() => setGetStartedOpen(true)}
+                >
+                  {cta.label} <ArrowRight />
                 </Button>
-              </MagneticButton>
+              </HoverLiftButton>
             </div>
           </motion.div>
         </div>

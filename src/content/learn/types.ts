@@ -1,4 +1,10 @@
-export const LEARN_VERTICALS = ["weight-loss", "trt", "hrt"] as const;
+export const LEARN_VERTICALS = [
+  "weight-loss",
+  "trt",
+  "hrt",
+  "ed",
+  "hairloss",
+] as const;
 export type LearnVertical = (typeof LEARN_VERTICALS)[number];
 
 export type LearnSection = {
@@ -49,10 +55,14 @@ export const LEARN_VERTICAL_LABELS: Record<LearnVertical, string> = {
   "weight-loss": "Weight loss",
   trt: "TRT",
   hrt: "HRT",
+  ed: "ED",
+  hairloss: "Hair loss",
 };
 
 export const LEARN_VERTICAL_H1_LABELS: Record<LearnVertical, string> = {
   "weight-loss": "Weight loss",
   trt: "Testosterone replacement",
   hrt: "Hormone replacement",
+  ed: "Erectile dysfunction",
+  hairloss: "Hair loss",
 };

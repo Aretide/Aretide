@@ -1,0 +1,170 @@
+# Beema Health
+
+> Beema Health is a US telehealth medical weight-loss service, available in all 50 states. Licensed providers evaluate patients online and, when clinically appropriate, may prescribe compounded semaglutide or compounded tirzepatide with transparent cash pricing, US pharmacy fulfillment, and ongoing follow-up care. Compounded medications are not FDA-approved and are considered only when legally available and clinically appropriate.
+
+Key facts:
+
+- Care model: online intake → review by a licensed provider → prescription when clinically appropriate → home delivery from US pharmacies → ongoing check-ins and refill management. Completing intake does not guarantee a prescription.
+- Medications currently featured: compounded semaglutide and compounded tirzepatide. Compounded medications are not FDA-approved and are only offered when legally available and clinically appropriate. A prescription is never guaranteed.
+- Pricing is transparent cash-pay with no platform membership fee. Compounded semaglutide is $199 per month at the 1-month rate. Compounded tirzepatide is $297 per month at the 1-month rate, and new patients can instead start a 3-month starter pack at $597 total, which is $199 per month across starter doses 1 to 3. Prepaid multi-month plans lower the effective monthly rate, and a one-time $100 promo code applies to 3, 6, and 12-month plans only, never to a 1-month purchase. Current plan tables live on the medication pages and are the authoritative source: https://beemahealth.com/semaglutide/ and https://beemahealth.com/tirzepatide/. Shipping and labs, when applicable, are shown separately.
+- Privacy: patient information is handled under HIPAA-compliant practices. See the privacy policy for details.
+- Primary pages for citation: /semaglutide/ and /tirzepatide/ for medication-specific care, pricing, eligibility, and FAQ; /glp-1/ for the nationwide GLP-1 overview; /glp-1-houston/ for Houston and Texas.
+- Service area: all 50 US states via telehealth. Beema Health serves patients located in the United States only. It is not an international service. There is no physical clinic to visit. Houston and Texas pages describe telehealth availability for residents of those areas, not an in-person location.
+- Programs currently live: medical weight loss only, using compounded semaglutide and compounded tirzepatide. Education about testosterone replacement and menopausal hormone therapy exists on the site, but those are not purchasable Beema programs today and the site says so on each page.
+
+## Main pages
+
+- [Home](https://beemahealth.com/): what Beema Health is and how care works
+- [Compounded Tirzepatide](https://beemahealth.com/tirzepatide/): tirzepatide-specific care, pricing, eligibility, and FAQ
+- [Compounded Semaglutide](https://beemahealth.com/semaglutide/): semaglutide-specific care, pricing, eligibility, and FAQ
+- [GLP-1 care](https://beemahealth.com/glp-1/): nationwide cash-pay GLP-1 overview, how care works, and get-started intake
+- [GLP-1 care in Houston](https://beemahealth.com/glp-1-houston/): Houston-focused cash-pay GLP-1 overview, how care works, and get-started intake
+- [Weight-loss treatments](https://beemahealth.com/weight-loss/): overview of the medication lineup and who each is for
+- [Recipe collection](https://beemahealth.com/recipes/): 13 practical recipes organized around gradually adding fiber, smaller portions, and protein-rich eating
+- [Pear-Chia Oatmeal with Cinnamon Cottage Cream](https://beemahealth.com/recipes/pear-chia-oatmeal-cinnamon-cottage-cream/)
+- [Smoky Red Lentil & Carrot Soup](https://beemahealth.com/recipes/smoky-red-lentil-carrot-soup/)
+- [Turkey & Black Bean Stuffed Sweet Potatoes](https://beemahealth.com/recipes/turkey-black-bean-stuffed-sweet-potatoes/)
+- [Apple-Blackberry Oat-Bran Breakfast Bake](https://beemahealth.com/recipes/apple-blackberry-oat-bran-breakfast-bake/)
+- [Roasted Pepper, Egg & Feta Mini Frittatas](https://beemahealth.com/recipes/roasted-pepper-egg-feta-mini-frittatas/)
+- [Lemon-Herb Chicken Hummus Cucumber Boats](https://beemahealth.com/recipes/lemon-herb-chicken-hummus-cucumber-boats/)
+- [Miso-Ginger Turkey Rice Cup](https://beemahealth.com/recipes/miso-ginger-turkey-rice-cup/)
+- [Vanilla-Lemon Ricotta Berry Bowl](https://beemahealth.com/recipes/vanilla-lemon-ricotta-berry-bowl/)
+- [Herbed Turkey & Cottage Cheese Breakfast Scramble](https://beemahealth.com/recipes/herbed-turkey-cottage-cheese-breakfast-scramble/)
+- [Charred Lemon Chicken Quinoa Bowl](https://beemahealth.com/recipes/charred-lemon-chicken-quinoa-bowl/)
+- [Mustard-Rosemary Pork Tenderloin with White Bean Mash](https://beemahealth.com/recipes/mustard-rosemary-pork-tenderloin-white-bean-mash/)
+- [Smoky Turkey Taco-Stuffed Peppers](https://beemahealth.com/recipes/smoky-turkey-taco-stuffed-peppers/)
+- [Chicken and Beef Fajitas](https://beemahealth.com/recipes/chicken-and-beef-fajitas/)
+- [How it works](https://beemahealth.com/how-it-works/): step-by-step telehealth care, from intake to prescription delivery
+- [Safety](https://beemahealth.com/safety/): side effects, contraindications, and clinical safeguards
+- [FAQ](https://beemahealth.com/faq/): common questions about pricing, eligibility, medications, shipping, and refills
+- [Learn](https://beemahealth.com/learn/): educational hubs on weight-loss medicines, TRT, and HRT
+- [GLP-1 education for weight loss](https://beemahealth.com/learn/weight-loss/): educational hub on GLP-1 medicines, online care, and related topics
+- [TRT education](https://beemahealth.com/learn/trt/): educational overview of testosterone replacement; Beema does not offer TRT today
+- [HRT education](https://beemahealth.com/learn/hrt/): educational overview of menopausal hormone therapy; Beema does not offer HRT today
+- [What is TRT?](https://beemahealth.com/learn/trt/what-is-trt/)
+- [What is menopausal hormone therapy?](https://beemahealth.com/learn/hrt/what-is-hrt/)
+- [Traditional vs. GLP-1 weight loss](https://beemahealth.com/learn/initial-research/): evidence-based comparison of lifestyle and GLP-1-assisted approaches
+- [Resistance training for muscle](https://beemahealth.com/learn/resistance-training/): evidence-based guide to weekly volume, effort, protein, and creatine for maintaining and building muscle
+- [Rest intervals between sets](https://beemahealth.com/learn/rest-intervals/): evidence-based guide to rest between sets for muscle, strength, and power
+- [About](https://beemahealth.com/about/): company and clinical approach
+- [Contact](https://beemahealth.com/contact/): support channels
+
+## Common questions, and the page that answers each
+
+- [How GLP-1 medicines work for weight loss](https://beemahealth.com/learn/weight-loss/glp-1-for-weight-loss/): mechanism, labeled uses, and trial-scale results
+- [Best GLP-1 for weight loss](https://beemahealth.com/learn/weight-loss/best-glp-1-for-weight-loss/): why there is no single best option, and how clinicians compare them
+- [Semaglutide for weight loss](https://beemahealth.com/learn/weight-loss/semaglutide-weight-loss/): STEP trial results, dose differences from diabetes brands, and safety
+- [What a GLP-1 weight-loss program includes](https://beemahealth.com/learn/weight-loss/glp-1-weight-loss-program/): follow-up, titration, and supplies, not a one-time vial
+- [What a GLP-1 doctor reviews before prescribing](https://beemahealth.com/learn/weight-loss/glp-1-doctor/): history checks, contraindications, and follow-up
+- [Online GLP-1 care](https://beemahealth.com/learn/weight-loss/online-glp-1/): what lawful telehealth prescribing looks like, and what it is not
+- [Tirzepatide online](https://beemahealth.com/learn/weight-loss/tirzepatide-online/): clinician review plus a licensed pharmacy, and dual-agonist basics
+- [GLP-1 cost](https://beemahealth.com/learn/weight-loss/glp-1-cost/): how cash-pay telehealth pricing is structured
+- [GLP-1 side effects](https://beemahealth.com/learn/weight-loss/glp-1-side-effects/): common reactions versus signs that need urgent care
+- [GLP-1 telehealth in Texas](https://beemahealth.com/learn/weight-loss/glp-1-in-texas/): Chapter 111 telemedicine and statewide access
+- [GLP-1 telehealth for Houston](https://beemahealth.com/learn/weight-loss/glp-1-in-houston/): who online care fits in the Houston area
+- [Semaglutide access in Texas](https://beemahealth.com/learn/weight-loss/semaglutide-in-texas/): licensed telehealth versus unverified research vials
+- [Semaglutide in Houston](https://beemahealth.com/learn/weight-loss/semaglutide-in-houston/): how Houston adults are evaluated online, and what heat changes
+- [Tirzepatide in Texas](https://beemahealth.com/learn/weight-loss/tirzepatide-in-texas/): Chapter 111 access, dual-agonist basics, and storage in Texas heat
+- [GLP-1 near me](https://beemahealth.com/learn/weight-loss/glp-1-near-me/): why licensure matters more than distance, and what still happens locally
+- [Tirzepatide in Houston](https://beemahealth.com/learn/weight-loss/tirzepatide-in-houston/): Houston telehealth access for tirzepatide without a clinic visit
+- [Semaglutide vs tirzepatide](https://beemahealth.com/learn/semaglutide-vs-tirzepatide/): trial data and cost compared
+
+## Published learn articles
+
+Every published `/learn/` article, including the ones above. Trailing slashes match the sitemap.
+
+- [ashwagandha and weight loss](https://beemahealth.com/learn/weight-loss/ashwagandha-and-weight-loss/)
+- [berberine and semaglutide](https://beemahealth.com/learn/weight-loss/berberine-and-semaglutide/)
+- [best GLP-1 for weight loss](https://beemahealth.com/learn/weight-loss/best-glp-1-for-weight-loss/)
+- [cagrisema](https://beemahealth.com/learn/weight-loss/cagrisema/)
+- [exercise on GLP-1](https://beemahealth.com/learn/weight-loss/exercise-on-glp-1/)
+- [foods to avoid on tirzepatide](https://beemahealth.com/learn/weight-loss/foods-to-avoid-on-tirzepatide/)
+- [GLP-1 acne](https://beemahealth.com/learn/weight-loss/glp-1-acne/)
+- [GLP-1 age limit](https://beemahealth.com/learn/weight-loss/glp-1-age-limit/)
+- [GLP-1 and alcohol](https://beemahealth.com/learn/weight-loss/glp-1-and-alcohol/)
+- [GLP-1 and antidepressants](https://beemahealth.com/learn/weight-loss/glp-1-and-antidepressants/)
+- [GLP-1 and periods](https://beemahealth.com/learn/weight-loss/glp-1-and-periods/)
+- [GLP-1 and thyroid](https://beemahealth.com/learn/weight-loss/glp-1-and-thyroid/)
+- [GLP-1 before surgery](https://beemahealth.com/learn/weight-loss/glp-1-before-surgery/)
+- [GLP-1 bloating](https://beemahealth.com/learn/weight-loss/glp-1-bloating/)
+- [GLP-1 body aches](https://beemahealth.com/learn/weight-loss/glp-1-body-aches/)
+- [GLP-1 constipation](https://beemahealth.com/learn/weight-loss/glp-1-constipation/)
+- [GLP-1 cost](https://beemahealth.com/learn/weight-loss/glp-1-cost/)
+- [GLP-1 diet](https://beemahealth.com/learn/weight-loss/glp-1-diet/)
+- [GLP-1 dizziness](https://beemahealth.com/learn/weight-loss/glp-1-dizziness/)
+- [GLP-1 doctor](https://beemahealth.com/learn/weight-loss/glp-1-doctor/)
+- [GLP-1 dosing](https://beemahealth.com/learn/weight-loss/glp-1-dosing/)
+- [GLP-1 fatigue](https://beemahealth.com/learn/weight-loss/glp-1-fatigue/)
+- [GLP-1 for older adults](https://beemahealth.com/learn/weight-loss/glp-1-for-older-adults/)
+- [GLP-1 for weight loss](https://beemahealth.com/learn/weight-loss/glp-1-for-weight-loss/)
+- [GLP-1 hair loss](https://beemahealth.com/learn/weight-loss/glp-1-hair-loss/)
+- [GLP-1 in Houston](https://beemahealth.com/learn/weight-loss/glp-1-in-houston/)
+- [GLP-1 in Texas](https://beemahealth.com/learn/weight-loss/glp-1-in-texas/)
+- [GLP-1 injection-site reactions](https://beemahealth.com/learn/weight-loss/glp-1-injection-site-reactions/)
+- [GLP-1 maintenance dose](https://beemahealth.com/learn/weight-loss/glp-1-maintenance-dose/)
+- [GLP-1 nausea](https://beemahealth.com/learn/weight-loss/glp-1-nausea/)
+- [GLP-1 near me](https://beemahealth.com/learn/weight-loss/glp-1-near-me/)
+- [GLP-1 postpartum](https://beemahealth.com/learn/weight-loss/glp-1-postpartum/)
+- [GLP-1 side effects](https://beemahealth.com/learn/weight-loss/glp-1-side-effects/)
+- [GLP-1 urinary changes](https://beemahealth.com/learn/weight-loss/glp-1-urinary-changes/)
+- [GLP-1 weight-loss program](https://beemahealth.com/learn/weight-loss/glp-1-weight-loss-program/)
+- [GLP-1 while breastfeeding](https://beemahealth.com/learn/weight-loss/glp-1-while-breastfeeding/)
+- [mazdutide](https://beemahealth.com/learn/weight-loss/mazdutide/)
+- [metformin for weight loss](https://beemahealth.com/learn/weight-loss/metformin-for-weight-loss/)
+- [microdosing GLP-1](https://beemahealth.com/learn/weight-loss/microdosing-glp-1/)
+- [Mounjaro](https://beemahealth.com/learn/weight-loss/mounjaro/)
+- [natural appetite suppressants](https://beemahealth.com/learn/weight-loss/natural-appetite-suppressants/)
+- [not losing weight on semaglutide](https://beemahealth.com/learn/weight-loss/not-losing-weight-on-semaglutide/)
+- [not losing weight on tirzepatide](https://beemahealth.com/learn/weight-loss/not-losing-weight-on-tirzepatide/)
+- [online GLP-1](https://beemahealth.com/learn/weight-loss/online-glp-1/)
+- [orforglipron vs semaglutide](https://beemahealth.com/learn/weight-loss/orforglipron-vs-semaglutide/)
+- [orforglipron](https://beemahealth.com/learn/weight-loss/orforglipron/)
+- [Ozempic](https://beemahealth.com/learn/weight-loss/ozempic/)
+- [rebound weight gain after GLP-1](https://beemahealth.com/learn/weight-loss/rebound-weight-gain-after-glp-1/)
+- [retatrutide vs Ozempic](https://beemahealth.com/learn/weight-loss/retatrutide-vs-ozempic/)
+- [retatrutide vs semaglutide](https://beemahealth.com/learn/weight-loss/retatrutide-vs-semaglutide/)
+- [retatrutide](https://beemahealth.com/learn/weight-loss/retatrutide/)
+- [Saxenda](https://beemahealth.com/learn/weight-loss/saxenda/)
+- [semaglutide in Houston](https://beemahealth.com/learn/weight-loss/semaglutide-in-houston/)
+- [semaglutide in Texas](https://beemahealth.com/learn/weight-loss/semaglutide-in-texas/)
+- [semaglutide for weight loss](https://beemahealth.com/learn/weight-loss/semaglutide-weight-loss/)
+- [sermorelin](https://beemahealth.com/learn/weight-loss/sermorelin/)
+- [still hungry on GLP-1](https://beemahealth.com/learn/weight-loss/still-hungry-on-glp-1/)
+- [stopping GLP-1](https://beemahealth.com/learn/weight-loss/stopping-glp-1/)
+- [stopping Mounjaro](https://beemahealth.com/learn/weight-loss/stopping-mounjaro/)
+- [stopping tirzepatide](https://beemahealth.com/learn/weight-loss/stopping-tirzepatide/)
+- [sweating and weight loss](https://beemahealth.com/learn/weight-loss/sweating-and-weight-loss/)
+- [switching from Wegovy to Zepbound](https://beemahealth.com/learn/weight-loss/switching-from-wegovy-to-zepbound/)
+- [switching from Zepbound to Wegovy](https://beemahealth.com/learn/weight-loss/switching-from-zepbound-to-wegovy/)
+- [switching GLP-1 medications](https://beemahealth.com/learn/weight-loss/switching-glp-1-medications/)
+- [tesamorelin](https://beemahealth.com/learn/weight-loss/tesamorelin/)
+- [tirzepatide in Houston](https://beemahealth.com/learn/weight-loss/tirzepatide-in-houston/)
+- [tirzepatide in Texas](https://beemahealth.com/learn/weight-loss/tirzepatide-in-texas/)
+- [tirzepatide online](https://beemahealth.com/learn/weight-loss/tirzepatide-online/)
+- [travel with GLP-1](https://beemahealth.com/learn/weight-loss/travel-with-glp-1/)
+- [travel with Wegovy](https://beemahealth.com/learn/weight-loss/travel-with-wegovy/)
+- [travel with Zepbound](https://beemahealth.com/learn/weight-loss/travel-with-zepbound/)
+- [water intake on GLP-1](https://beemahealth.com/learn/weight-loss/water-intake-on-glp-1/)
+- [Wegovy dosing](https://beemahealth.com/learn/weight-loss/wegovy-dosing/)
+- [Wegovy low dose](https://beemahealth.com/learn/weight-loss/wegovy-low-dose/)
+- [Wegovy pill](https://beemahealth.com/learn/weight-loss/wegovy-pill/)
+- [Wegovy while breastfeeding](https://beemahealth.com/learn/weight-loss/wegovy-while-breastfeeding/)
+- [Wegovy](https://beemahealth.com/learn/weight-loss/wegovy/)
+- [weight-loss plateau on GLP-1](https://beemahealth.com/learn/weight-loss/weight-loss-plateau-on-glp-1/)
+- [Zepbound dosing](https://beemahealth.com/learn/weight-loss/zepbound-dosing/)
+- [Zepbound while breastfeeding](https://beemahealth.com/learn/weight-loss/zepbound-while-breastfeeding/)
+- [Zepbound](https://beemahealth.com/learn/weight-loss/zepbound/)
+- [What is TRT?](https://beemahealth.com/learn/trt/what-is-trt/)
+- [What is menopausal hormone therapy?](https://beemahealth.com/learn/hrt/what-is-hrt/)
+
+The full library is also indexed at https://beemahealth.com/learn/weight-loss/ and every published page is listed in https://beemahealth.com/sitemap.xml.
+
+## Policies
+
+- [Privacy policy](https://beemahealth.com/legal/privacy/)
+- [Terms of service](https://beemahealth.com/legal/terms/)
+- [Refund policy](https://beemahealth.com/legal/refund/)
+- [Shipping policy](https://beemahealth.com/legal/shipping/)
+- [Physician code of conduct](https://beemahealth.com/legal/physician-code-of-conduct/)
+- [HIPAA privacy policy](https://beemahealth.com/legal/hipaa/)
+- [Telehealth consent](https://beemahealth.com/legal/telehealth-consent/)

@@ -2,17 +2,10 @@ import {
   useEffect,
   useRef,
   type CSSProperties,
-  type MouseEvent as ReactMouseEvent,
   type ReactNode,
   type SVGProps,
 } from "react";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-} from "motion/react";
+import { motion, useReducedMotion, useScroll } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export function Eyebrow({
@@ -347,49 +340,23 @@ export function FloatingHexagons({
 }
 
 /**
- * Wraps a button/link so it eases toward the cursor within a small radius
- * (a "magnetic" hover, common on premium marketing sites) on top of the
- * usual hover/tap scale. Pointer tracking and the scale feedback are two
- * independent reduced-motion opt-outs: under reduced motion neither runs
- * and children render inert.
+ * Wraps a button/link with a plain raise-up hover: lifts and scales
+ * slightly on hover, settles on tap. No cursor tracking. Disabled entirely
+ * under reduced motion.
  */
-export function MagneticButton({
+export function HoverLiftButton({
   children,
   className,
-  strength = 0.3,
 }: {
   children: ReactNode;
   className?: string;
-  /** Fraction of the cursor's offset from center to follow (0–1). */
-  strength?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 300, damping: 20, mass: 0.4 });
-  const springY = useSpring(y, { stiffness: 300, damping: 20, mass: 0.4 });
-
-  function handleMouseMove(event: ReactMouseEvent<HTMLDivElement>) {
-    if (reduceMotion || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    x.set((event.clientX - (rect.left + rect.width / 2)) * strength);
-    y.set((event.clientY - (rect.top + rect.height / 2)) * strength);
-  }
-
-  function handleMouseLeave() {
-    x.set(0);
-    y.set(0);
-  }
 
   return (
     <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={reduceMotion ? undefined : { x: springX, y: springY }}
-      whileHover={reduceMotion ? undefined : { scale: 1.04 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.96 }}
+      whileHover={reduceMotion ? undefined : { y: -4, scale: 1.02 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.97 }}
       transition={{ duration: 0.15 }}
       className={cn("inline-block", className)}
     >

@@ -1,0 +1,97 @@
+{
+  "url": "https://beemahealth.com/tirzepatide/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/><link rel=\"preload\" as=\"image\" href=\"/assets/compounded-tirzepatide-vial-BsI_wSHy.webp\" fetchPriority=\"high\"/><link rel=\"stylesheet\" href=\"/assets/styles-CyFOEV89.css\" data-precedence=\"default\"/><title>Compounded Tirzepatide for Weight Loss | Beema Health</title><meta http-equiv=\"Content-Security-Po...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/>...",
+  "is_spa": false,
+  "extracted_text": "Compounded Tirzepatide, guided by licensed medical professionals.\nBeema Health connects eligible adults with independent licensed providers for personalized medical weight-management care. Completing intake does not guarantee a prescription.\nExplore our pricing\n3-month starter pack\nNew patients\ndoses 1 \u2192 2 \u2192 3 (2.5mg \u2192 5mg \u2192 7.5mg). Typically one-time for brand-new patients beginning tirzepatide. To be presented this starter price, mark that you are new to GLP-1 when asked during intake. Checkou...",
+  "publication_date": "2026-07-31",
+  "accessibility_tree": null,
+  "headers": {
+    "Connection": "keep-alive",
+    "Content-Length": "24561",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "Last-Modified": "Tue, 25 Aug 2026 21:05:27 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "W/\"6a8e0397-1da6e\"",
+    "expires": "Wed, 26 Aug 2026 18:04:32 GMT",
+    "Cache-Control": "max-age=600",
+    "Content-Encoding": "gzip",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "6A2E:F92F6:E3ACED:EDA910:6A8F2856",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 26 Aug 2026 17:54:32 GMT",
+    "Via": "1.1 varnish",
+    "X-Served-By": "cache-den-kden1300097-DEN",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1787766872.451321,VS0,VE74",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "9e7b466db16a0880da9f65b675119d50b94b2afb"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 4,
+    "processed_count": 4,
+    "total_bytes": 12278,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 966,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Country",
+          "MedicalOrganization"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 272,
+        "valid": true,
+        "types": [
+          "BreadcrumbList",
+          "ListItem"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 3,
+        "size_bytes": 9577,
+        "valid": true,
+        "types": [
+          "Answer",
+          "FAQPage",
+          "Question"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 4,
+        "size_bytes": 1463,
+        "valid": true,
+        "types": [
+          "Country",
+          "MedicalOrganization",
+          "Offer",
+          "Physician",
+          "PropertyValue",
+          "Service",
+          "UnitPriceSpecification"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

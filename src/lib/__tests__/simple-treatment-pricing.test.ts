@@ -12,6 +12,7 @@ import {
   SERMORELIN_PRICING,
   TRT_PRICING,
   formatSimpleStartingAt,
+  simplePerDaySentence,
   simplePricingSentence,
 } from "../simple-treatment-pricing";
 
@@ -57,15 +58,32 @@ describe("simple-treatment-pricing", () => {
     expect(HAIRLOSS_WOMENS_COMPOUND_PRICING.quarterly).toBeUndefined();
   });
 
-  it("tadalafil and sildenafil share the same landed-cost-derived price", () => {
-    expect(ED_SILDENAFIL_PRICING).toEqual(ED_TADALAFIL_PRICING);
+  it("prices tadalafil and sildenafil independently", () => {
+    // Repriced 2026-09-03 (per Matt): $49.67/mo and $43/mo respectively - no
+    // longer sharing a single landed-cost-derived price.
+    expect(ED_TADALAFIL_PRICING.monthlyUsd).toBe(49.67);
+    expect(ED_SILDENAFIL_PRICING.monthlyUsd).toBe(43);
+    expect(ED_SILDENAFIL_PRICING).not.toEqual(ED_TADALAFIL_PRICING);
   });
 
-  it("formatSimpleStartingAt renders whole-dollar monthly rates without cents", () => {
+  it("formatSimpleStartingAt renders the current monthly rates", () => {
     expect(formatSimpleStartingAt(TRT_PRICING)).toBe("$169/mo");
     expect(formatSimpleStartingAt(NAD_PRICING)).toBe("$149/mo");
     expect(formatSimpleStartingAt(SERMORELIN_PRICING)).toBe("$199/mo");
-    expect(formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)).toBe("$35/mo");
+    expect(formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)).toBe(
+      "$29.67/mo",
+    );
+    expect(formatSimpleStartingAt(ED_TADALAFIL_PRICING)).toBe("$49.67/mo");
+    expect(formatSimpleStartingAt(ED_SILDENAFIL_PRICING)).toBe("$43/mo");
+  });
+
+  it("simplePerDaySentence only fires when the monthly rate clears $1/day", () => {
+    expect(simplePerDaySentence(HAIRLOSS_FINASTERIDE_PRICING)).toBe(
+      "Less than $1 a day.",
+    );
+    expect(simplePerDaySentence(ED_TADALAFIL_PRICING)).toBeUndefined();
+    expect(simplePerDaySentence(ED_SILDENAFIL_PRICING)).toBeUndefined();
+    expect(simplePerDaySentence(TRT_PRICING)).toBeUndefined();
   });
 
   it("simplePricingSentence never mentions a promo code or starter pack", () => {

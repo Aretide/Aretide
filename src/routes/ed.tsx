@@ -15,7 +15,7 @@ import {
 import { trackPageViewed } from "@/lib/analytics";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -31,43 +31,42 @@ import {
 import { HowItWorksSteps } from "@/components/site/HowItWorksSteps";
 import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
-import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
-  ED_COMBO_PRICING,
   ED_SILDENAFIL_PRICING,
+  ED_TADALAFIL_PER_PILL_USD,
   ED_TADALAFIL_PRICING,
+  formatPerPillStartingAt,
   formatSimpleStartingAt,
-  simplePricingSentence,
 } from "@/lib/simple-treatment-pricing";
 import { patientQuestionsGuidance } from "@/lib/marketing-copy";
 import { SUPPORT_EMAIL } from "@/lib/contact-info";
 import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
-const TITLE = "Compounded ED Treatment Online | Beema Health";
-const DESCRIPTION = `Compounded tadalafil, sildenafil, and a combination formulation, reviewed by licensed providers. Nationwide telehealth care from ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}. Prescribing is never guaranteed.`;
+const TITLE = "Generic ED Treatment Online | Beema Health";
+const DESCRIPTION = `Tadalafil (generic Cialis) and sildenafil (generic Viagra), reviewed by licensed providers. Nationwide telehealth care from ${formatPerPillStartingAt(ED_TADALAFIL_PER_PILL_USD)}. Prescribing is never guaranteed.`;
 const SERVICE_DESCRIPTION =
-  "Nationwide telehealth service connecting eligible adult men with independent licensed providers for compounded ED formulation evaluation and ongoing care. Completing intake does not guarantee a prescription.";
+  "Nationwide telehealth service connecting eligible adult men with independent licensed providers for ED medication evaluation and ongoing care. Completing intake does not guarantee a prescription.";
 
 const FAQ_ITEMS: TreatmentFaqItem[] = [
   {
-    q: "What's the difference between Tadalafil, Sildenafil, and the Combo?",
-    a: "Tadalafil and sildenafil are each single-ingredient compounded formulations. The Combo formulation combines both active ingredients into one dose, a combination not sold as a single commercial product. All three are prepared by a licensed compounding pharmacy specifically for you. Your licensed provider reviews your intake and recommends which option, dose, and formulation may be appropriate for your case; prescribing any of them is never guaranteed.",
+    q: "What's the difference between Tadalafil and Sildenafil?",
+    a: "Tadalafil and sildenafil are the FDA-approved generic versions of Cialis and Viagra - they work similarly but differ in how quickly they take effect and how long they last. Your licensed provider reviews your intake and recommends which option and dose may be appropriate for your case; prescribing either is never guaranteed. Looking for a dissolve-under-the-tongue combination formulation instead? See ED Mints, a separate compounded product.",
   },
   {
-    q: "Is compounded ED treatment the same as generic Viagra or Cialis?",
-    a: "No. Beema's compounded formulations are not FDA-approved and are not the same product as any FDA-approved branded or generic medication, even when they share an active ingredient. They're prepared individually by a licensed compounding pharmacy, often at a personalized dose or as a combination not available as a single commercial product, and should not be assumed identical in formulation, strength, or effect to any commercially available drug.",
+    q: "Is Beema's ED treatment the same as generic Viagra or Cialis?",
+    a: "Yes, for tadalafil and sildenafil. Beema's tadalafil and sildenafil are the FDA-approved generic versions of Cialis and Viagra - the identical active ingredient, strength, and intended use as the brand-name products, dispensed by a licensed pharmacy, not a compounded formulation. ED Mints is different: a compounded combination formulation, not sold as a single commercial product by any manufacturer.",
   },
   {
     q: "How does online ED care through Beema work?",
-    a: "Care starts with creating a secure account and completing a medical intake covering your health history, current medications, and goals, at your own pace. A licensed provider reviews your intake and independently decides whether a compounded formulation may be appropriate for you; prescribing is never guaranteed. Beema Health's clinical provider network is led by Dr. Sean Arora, MD, though the clinician assigned to your case may vary by state licensure and availability.",
+    a: "Care starts with creating a secure account and completing a medical intake covering your health history, current medications, and goals, at your own pace. A licensed provider reviews your intake and independently decides whether tadalafil or sildenafil may be appropriate for you; prescribing is never guaranteed. Beema Health's clinical provider network is led by Dr. Sean Arora, MD, though the clinician assigned to your case may vary by state licensure and availability.",
   },
   {
     q: "How much does ED treatment cost through Beema?",
-    a: `${simplePricingSentence("Compounded tadalafil or sildenafil through Beema", ED_TADALAFIL_PRICING)} The Combo formulation is ${simplePricingSentence("compounded tadalafil + sildenafil through Beema", ED_COMBO_PRICING).replace(/^C/, "c")} All three cover your provider consultation, prescription formulation, and expedited shipping. Questions about your plan? ${patientQuestionsGuidance()}`,
+    a: `Tadalafil is ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)} and sildenafil is ${formatSimpleStartingAt(ED_SILDENAFIL_PRICING)}, each billed monthly with a lower-cost quarterly option. Both cover your provider consultation, medication, and expedited shipping. Questions about your plan? ${patientQuestionsGuidance()}`,
   },
   {
     q: "Does Beema serve patients nationwide?",
-    a: "Yes, Beema Health is available to patients in all 50 U.S. states. Whether a specific compounded formulation is available to you still depends on your state's rules around compounded medications and pharmacy fulfillment in your area, and eligibility is always an individual clinical decision made by a licensed provider after reviewing your health history and current medications, including cardiovascular history.",
+    a: "Yes, Beema Health is available to patients in all 50 U.S. states. Eligibility is always an individual clinical decision made by a licensed provider after reviewing your health history and current medications, including cardiovascular history.",
   },
 ];
 
@@ -105,7 +104,7 @@ export const Route = createFileRoute("/ed")({
         children: JSON.stringify(
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
-            { name: "Compounded ED Treatment", path: "/ed" },
+            { name: "Generic ED Treatment", path: "/ed" },
           ]),
         ),
       },
@@ -117,7 +116,7 @@ export const Route = createFileRoute("/ed")({
         type: "application/ld+json",
         children: JSON.stringify(
           serviceJsonLd({
-            name: "Compounded ED Telehealth Care",
+            name: "Generic ED Telehealth Care",
             description: SERVICE_DESCRIPTION,
             path: "/ed",
             serviceType: "Erectile dysfunction treatment telehealth service",
@@ -136,8 +135,6 @@ export const Route = createFileRoute("/ed")({
 });
 
 function EdPage() {
-  const heroCta = resolveCta(CTA_IDS.ed_hero);
-  const footerCta = resolveCta(CTA_IDS.ed_footer);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -156,8 +153,8 @@ function EdPage() {
           className="bg-grain pointer-events-none absolute inset-0 z-0 text-foreground/[0.035]"
         />
         <div className="relative z-10">
-          <TreatmentBreadcrumb current="Compounded ED Treatment" />
-          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          <TreatmentBreadcrumb current="Generic ED Treatment" />
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
             <div>
               <SectionHeading
                 as="h1"
@@ -165,9 +162,9 @@ function EdPage() {
                 eyebrow="Nationwide telehealth ED care"
                 title={
                   <>
-                    <LineReveal>Compounded ED Treatment, </LineReveal>
+                    <LineReveal>Generic ED Treatment, </LineReveal>
                     <LineReveal delay={0.1}>
-                      discreet and personalized.
+                      discreet and FDA-approved.
                     </LineReveal>
                   </>
                 }
@@ -184,17 +181,13 @@ function EdPage() {
                   ease: EASE_OUT,
                 }}
               >
-                <MagneticButton>
+                <HoverLiftButton>
                   <Button asChild size="xl">
-                    <Link
-                      to={heroCta.to}
-                      search={heroCta.search}
-                      onClick={heroCta.onClick}
-                    >
-                      {heroCta.label} <ArrowRight />
+                    <Link to="/ed/" hash="pricing">
+                      Compare formulations <ArrowRight />
                     </Link>
                   </Button>
-                </MagneticButton>
+                </HoverLiftButton>
                 <Button asChild size="xl" variant="outline">
                   <Link to="/ed/" hash="how-it-works">
                     How it works
@@ -202,7 +195,7 @@ function EdPage() {
                 </Button>
               </motion.div>
               <p className="mt-6 max-w-md text-2xl font-bold text-foreground">
-                From {formatSimpleStartingAt(ED_TADALAFIL_PRICING)}
+                From {formatPerPillStartingAt(ED_TADALAFIL_PER_PILL_USD)}
               </p>
               <p className="mt-2 max-w-md text-xs leading-relaxed text-muted-foreground">
                 Medication eligibility, formulation, and availability are
@@ -219,7 +212,7 @@ function EdPage() {
               }}
               className="mx-auto w-full max-w-sm"
             >
-              <TreatmentHeroArt icon={Pill} label="Compounded ED Treatment" />
+              <TreatmentHeroArt icon={Pill} label="Generic ED Treatment" />
               <TreatmentIncludedDropdown
                 items={WHATS_INCLUDED}
                 className="mt-6 w-full"
@@ -232,7 +225,7 @@ function EdPage() {
       <Section className="pt-0">
         <SectionHeading
           align="left"
-          title="What is compounded ED treatment?"
+          title="What is generic ED treatment?"
           className="mx-0 max-w-2xl"
         />
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
@@ -244,19 +237,22 @@ function EdPage() {
             work.
           </p>
           <p>
-            Beema offers three compounded options: single-ingredient tadalafil,
-            single-ingredient sildenafil, and a Combo formulation that combines
-            both active ingredients into one dose - a combination not sold as a
-            single commercial product. All three are prepared by a licensed
-            compounding pharmacy specifically for you.
+            Beema offers two options: tadalafil and sildenafil, the FDA-approved
+            generic versions of Cialis and Viagra - the identical active
+            ingredients, strengths, and intended uses as the brand-name
+            products, dispensed by a licensed pharmacy, not compounded
+            formulations. Looking for a dissolve-under-the-tongue combination
+            formulation instead? See{" "}
+            <Link to="/ed-mints/" className="text-primary underline">
+              ED Mints
+            </Link>
+            , a separate compounded product.
           </p>
           <p>
-            These formulations are not FDA-approved and are not the same product
-            as any FDA-approved branded or generic medication, even when they
-            share an active ingredient. They're considered only when legally
-            available and clinically appropriate. Which option, if any, may be
-            appropriate for you is a decision your licensed provider makes
-            individually.
+            Which option, if any, may be appropriate for you is a decision your
+            licensed provider makes individually, based on your health history
+            and current medications. Completing intake does not guarantee a
+            prescription.
           </p>
           <Button asChild variant="outline" size="sm">
             <Link to="/ed/" hash="faq">
@@ -280,18 +276,16 @@ function EdPage() {
           description="Your provider decides which formulation, if any, is clinically appropriate - this is a starting point, not a self-selected order."
           className="mx-0 max-w-2xl"
         />
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
           <SimpleTreatmentPricingCard
             label="tadalafil"
             pricing={ED_TADALAFIL_PRICING}
+            cta={{ label: "Explore Tadalafil", to: "/tadalafil/" }}
           />
           <SimpleTreatmentPricingCard
             label="sildenafil"
             pricing={ED_SILDENAFIL_PRICING}
-          />
-          <SimpleTreatmentPricingCard
-            label="the tadalafil + sildenafil combo"
-            pricing={ED_COMBO_PRICING}
+            cta={{ label: "Explore Sildenafil", to: "/sildenafil/" }}
           />
         </div>
         <div className="mt-8">
@@ -334,11 +328,11 @@ function EdPage() {
                   Prescription medical care
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  These formulations are prescription products and aren't
+                  These medications are prescription products and aren't
                   appropriate for everyone, including people on certain nitrate
                   medications or with certain cardiovascular conditions. They
-                  are compounded, not FDA-approved, and considered only when
-                  legally available and clinically appropriate.
+                  are the FDA-approved generic versions of Cialis and Viagra,
+                  dispensed by a licensed pharmacy.
                 </p>
               </div>
             </div>
@@ -411,28 +405,37 @@ function EdPage() {
           />
           <div className="relative z-10">
             <h2 className="text-3xl font-bold">
-              <LineReveal>Start with your medical intake.</LineReveal>
+              <LineReveal>Ready to get started?</LineReveal>
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-primary-foreground/85">
-              Save your progress and finish at your own pace. A licensed
-              provider makes every clinical decision independently, prescribing
-              is never guaranteed.
+              Pick a formulation to see full pricing and start your medical
+              intake. A licensed provider makes every clinical decision
+              independently, prescribing is never guaranteed.
             </p>
-            <MagneticButton className="mt-8">
-              <Button
-                asChild
-                size="xl"
-                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-              >
-                <Link
-                  to={footerCta.to}
-                  search={footerCta.search}
-                  onClick={footerCta.onClick}
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <HoverLiftButton>
+                <Button
+                  asChild
+                  size="xl"
+                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
                 >
-                  {footerCta.label} <ArrowRight />
-                </Link>
-              </Button>
-            </MagneticButton>
+                  <Link to="/tadalafil/">
+                    Explore Tadalafil <ArrowRight />
+                  </Link>
+                </Button>
+              </HoverLiftButton>
+              <HoverLiftButton>
+                <Button
+                  asChild
+                  size="xl"
+                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                >
+                  <Link to="/sildenafil/">
+                    Explore Sildenafil <ArrowRight />
+                  </Link>
+                </Button>
+              </HoverLiftButton>
+            </div>
           </div>
         </div>
       </Section>

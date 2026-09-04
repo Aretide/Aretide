@@ -14,7 +14,7 @@ import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
   FloatingHexagons,
   HexBadge,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -30,13 +30,14 @@ import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
   HAIRLOSS_FINASTERIDE_PRICING,
   formatSimpleStartingAt,
+  simplePerDaySentence,
 } from "@/lib/simple-treatment-pricing";
 import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
 const TITLE = "Hair Loss Treatment | Beema Health";
 const DESCRIPTION = `Compounded hair loss treatment, reviewed by licensed providers in all 50 states. Oral and topical formulations from ${formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)}. Prescribing is never guaranteed.`;
 
-export const Route = createFileRoute("/hair")({
+export const Route = createFileRoute("/hair-loss")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -44,19 +45,19 @@ export const Route = createFileRoute("/hair")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: canonicalUrl("/hair") },
+      { property: "og:url", content: canonicalUrl("/hair-loss") },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
     ],
-    links: [{ rel: "canonical", href: canonicalUrl("/hair") }],
+    links: [{ rel: "canonical", href: canonicalUrl("/hair-loss") }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify(
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
-            { name: "Hair", path: "/hair" },
+            { name: "Hair Loss", path: "/hair-loss" },
           ]),
         ),
       },
@@ -67,30 +68,35 @@ export const Route = createFileRoute("/hair")({
             name: "Hair Loss Telehealth Program",
             description:
               "Telehealth hair loss program from Beema Health. Licensed providers review every patient and may prescribe compounded oral or topical hairloss formulations when clinically appropriate; these compounded medications are not FDA-approved, and prescribing is never guaranteed.",
-            path: "/hair",
+            path: "/hair-loss",
             serviceType: "Hair loss telehealth program",
           }),
         ),
       },
     ],
   }),
-  component: HairPage,
+  component: HairLossPage,
 });
 
 /**
- * One card pointing at /hairloss, which itself now lists all 6 Men/Women
- * SKUs (2026-08-28) - this hub stays a single-card pointer rather than
- * duplicating that whole catalog here. Add future non-hairloss hair
- * products as their own lineup entries when they ship.
+ * Single hub page for the hair-loss category (2026-09-04) - merges what used
+ * to be two separate, competing pages: `/hair` (this hub) and `/hairloss`
+ * (a broader 6-SKU overview/FAQ page). Neither had shipped to production, so
+ * there was no SEO equity to preserve on either URL - they're combined here
+ * rather than one redirecting to the other. Mirrors `/weight-loss` and
+ * `/sexual-health`: a category overview linking straight to the dedicated
+ * money page for each live product, not a deep FAQ page itself. Add future
+ * non-finasteride hair products as their own lineup entries when they ship.
  */
 const LINEUP: CategoryLineupItem[] = [
   {
-    id: "hairloss",
-    name: "Compounded Hairloss Treatment",
-    form: "For men and women, your provider decides",
+    id: "oral-finasteride",
+    name: "Oral Finasteride",
+    form: "For men, once daily",
     pricing: HAIRLOSS_FINASTERIDE_PRICING,
     icon: Droplet,
-    to: "/hairloss/",
+    to: "/oral-finasteride/",
+    perDayNote: simplePerDaySentence(HAIRLOSS_FINASTERIDE_PRICING),
   },
 ];
 
@@ -112,13 +118,13 @@ const BENEFITS = [
   },
 ];
 
-function HairPage() {
+function HairLossPage() {
   const heroCta = resolveCta(CTA_IDS.hair_hero);
   const footerCta = resolveCta(CTA_IDS.hair_footer);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    trackPageViewed("hair");
+    trackPageViewed("hair_loss");
   }, []);
 
   return (
@@ -135,7 +141,7 @@ function HairPage() {
         <FloatingHexagons className="z-0" />
         <div className="relative z-10">
           <div className="mb-6 flex justify-center">
-            <TreatmentBreadcrumb current="Hair" />
+            <TreatmentBreadcrumb current="Hair Loss" />
           </div>
           <SectionHeading
             as="h1"
@@ -158,7 +164,7 @@ function HairPage() {
               ease: EASE_OUT,
             }}
           >
-            <MagneticButton>
+            <HoverLiftButton>
               <Button asChild size="xl">
                 <Link
                   to={heroCta.to}
@@ -168,7 +174,7 @@ function HairPage() {
                   {heroCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </motion.div>
         </div>
       </Section>
@@ -278,11 +284,11 @@ function HairPage() {
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
-              <MagneticButton>
+              <HoverLiftButton>
                 <Button asChild variant="outline">
                   <Link to="/safety/">Safety & eligibility</Link>
                 </Button>
-              </MagneticButton>
+              </HoverLiftButton>
             </div>
           </SurfaceCard>
         </motion.div>
@@ -303,7 +309,7 @@ function HairPage() {
               every clinical decision independently, prescribing is never
               guaranteed.
             </p>
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
                 asChild
                 size="xl"
@@ -317,11 +323,11 @@ function HairPage() {
                   {footerCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>
-      <MoneyPageGuides path="/hair/" />
+      <MoneyPageGuides path="/hair-loss/" />
     </MarketingLayout>
   );
 }

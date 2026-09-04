@@ -10,7 +10,7 @@ import {
 import { trackPageViewed } from "@/lib/analytics";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
 } from "@/components/site/primitives";
@@ -1235,13 +1235,13 @@ function InitialResearchPage() {
               Ready to explore whether care may be appropriate for you?
             </p>
             <div className="mt-4">
-              <MagneticButton>
+              <HoverLiftButton>
                 <Button asChild size="xl">
                   <Link to={cta.to} search={cta.search}>
                     {cta.label} <ArrowRight />
                   </Link>
                 </Button>
-              </MagneticButton>
+              </HoverLiftButton>
             </div>
             <p className="mt-4 text-xs text-muted-foreground">
               See also{" "}

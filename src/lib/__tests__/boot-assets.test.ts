@@ -48,6 +48,14 @@ describe("boot image prefetch", () => {
     expect(criticalBootImageUrls("/tirzepatide/")).toEqual([
       resolveVialImagery("tirzepatide").src,
     ]);
+    expect(criticalBootImageUrls("/ed-mints")).toEqual([
+      expect.stringContaining("ed-mints"),
+    ]);
+    expect(bootImagePreloadLinks("/ed-mints/")[0]).toMatchObject({
+      rel: "preload",
+      as: "image",
+      fetchPriority: "high",
+    });
     expect(criticalBootImageUrls("/weight-loss")).toEqual([]);
     expect(warmupBootImageUrls("/weight-loss")).toEqual([
       resolveVialImagery("semaglutide").src,

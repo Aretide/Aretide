@@ -21,7 +21,7 @@ import { trackPageViewed } from "@/lib/analytics";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
   FloatingHexagons,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -73,7 +73,7 @@ const FAQ_ITEMS: TreatmentFaqItem[] = [
   },
   {
     q: "How much does semaglutide cost through Beema?",
-    a: `${compoundedMonthlyPricingSentence("Compounded semaglutide through Beema", COMPOUNDED_SEMAGLUTIDE_PRICING)} That listed rate is all-inclusive cash-pay pricing with no platform membership fee: it covers your provider consultation and ongoing doctor care, prescription medication, supplies like alcohol pads and syringes, and expedited shipping. Dose adjustments within compounded semaglutide do not change the monthly price. Questions about promo codes or plan length? ${patientQuestionsGuidance()}`,
+    a: `${compoundedMonthlyPricingSentence("Compounded semaglutide through Beema", COMPOUNDED_SEMAGLUTIDE_PRICING)} That listed rate is all-inclusive cash-pay pricing with no platform membership fee: our low cost fee covers your provider consul covers your provider consultation and ongoing doctor care, prescription medication, supplies like alcohol pads and syringes, and expedited shipping. Dose adjustments within compounded semaglutide do not change the monthly price. Questions about promo codes or plan length? ${patientQuestionsGuidance()}`,
   },
   {
     q: "Does Beema serve patients nationwide?",
@@ -190,7 +190,7 @@ function SemaglutidePage() {
         <FloatingHexagons className="z-0" />
         <div className="relative z-10">
           <TreatmentBreadcrumb current="Compounded Semaglutide" />
-          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
             <div>
               <SectionHeading
                 as="h1"
@@ -217,7 +217,7 @@ function SemaglutidePage() {
                   ease: EASE_OUT,
                 }}
               >
-                <MagneticButton>
+                <HoverLiftButton>
                   <Button asChild size="xl">
                     <Link
                       to={heroCta.to}
@@ -227,7 +227,7 @@ function SemaglutidePage() {
                       {heroCta.label} <ArrowRight />
                     </Link>
                   </Button>
-                </MagneticButton>
+                </HoverLiftButton>
                 <Button asChild size="xl" variant="outline">
                   <Link to="/semaglutide/" hash="how-it-works">
                     How it works
@@ -514,7 +514,7 @@ function SemaglutidePage() {
               provider makes every clinical decision independently, prescribing
               is never guaranteed.
             </p>
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
                 asChild
                 size="xl"
@@ -528,7 +528,7 @@ function SemaglutidePage() {
                   {footerCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>

@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import { HexMotif, MagneticButton } from "@/components/site/primitives";
+import { HexMotif, HoverLiftButton } from "@/components/site/primitives";
 import { LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
   FIRST_MONTH_PROMO_LINE,
@@ -15,8 +16,10 @@ import {
  */
 export function FinalCTASection() {
   const cta = resolveCta(CTA_IDS.home_mid);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
   return (
     <section className="pb-16 md:pb-24">
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       <div className="veya-container">
         <div className="relative overflow-hidden rounded-4xl bg-primary px-6 py-16 text-center text-primary-foreground md:px-12 md:py-24">
           <div
@@ -36,18 +39,17 @@ export function FinalCTASection() {
               No payment required to start, and no prescription is guaranteed.
             </p>
 
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
-                asChild
+                type="button"
                 size="xl"
                 className="bg-ink text-ink-foreground hover:bg-ink/85"
+                onClick={() => setGetStartedOpen(true)}
               >
-                <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
-                  {cta.label}
-                  <ArrowRight className="size-4" />
-                </Link>
+                {cta.label}
+                <ArrowRight className="size-4" />
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
             <p className="mt-4 text-sm font-semibold text-primary-foreground">
               Offer: {FIRST_MONTH_PROMO_LINE}
             </p>

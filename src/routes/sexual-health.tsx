@@ -14,7 +14,7 @@ import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
   FloatingHexagons,
   HexBadge,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -28,7 +28,7 @@ import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
-  ED_COMBO_PRICING,
+  ED_MINTS_RDT_PRICING,
   ED_SILDENAFIL_PRICING,
   ED_TADALAFIL_PRICING,
   formatSimpleStartingAt,
@@ -36,7 +36,7 @@ import {
 import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
 
 const TITLE = "Sexual Health Treatment | Beema Health";
-const DESCRIPTION = `Compounded ED care, reviewed by licensed providers in all 50 states. From ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}. Prescribing is never guaranteed.`;
+const DESCRIPTION = `Tadalafil (generic Cialis), sildenafil (generic Viagra), and compounded ED Mints, reviewed by licensed providers in all 50 states. From ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}. Prescribing is never guaranteed.`;
 
 export const Route = createFileRoute("/sexual-health")({
   head: () => ({
@@ -68,7 +68,7 @@ export const Route = createFileRoute("/sexual-health")({
           serviceJsonLd({
             name: "Sexual Health Telehealth Program",
             description:
-              "Telehealth sexual health program from Beema Health. Licensed providers review every patient and may prescribe compounded ED formulations when clinically appropriate; these compounded medications are not FDA-approved, and prescribing is never guaranteed.",
+              "Telehealth sexual health program from Beema Health. Licensed providers review every patient and may prescribe tadalafil, sildenafil (the FDA-approved generic versions of Cialis and Viagra), or ED Mints (a compounded combination formulation) when clinically appropriate; prescribing is never guaranteed.",
             path: "/sexual-health",
             serviceType: "Sexual health telehealth program",
           }),
@@ -84,6 +84,11 @@ export const Route = createFileRoute("/sexual-health")({
  * ED-only until it returns. When it does, it goes back here as its own
  * lineup entry, not folded into the ED page - see
  * docs/features/treatment-pages.md.
+ *
+ * "ED Mints" (2026-09-03) links to its own comparison page, /ed-mints, not
+ * /ed - it's 2 dissolve-under-the-tongue combo products, each with its own
+ * Bask intake, priced identically, so ED_MINTS_RDT_PRICING is used here as
+ * the representative "starting at" price for the card.
  */
 const LINEUP: CategoryLineupItem[] = [
   {
@@ -92,7 +97,7 @@ const LINEUP: CategoryLineupItem[] = [
     form: "Oral, taken as needed or daily",
     pricing: ED_TADALAFIL_PRICING,
     icon: Pill,
-    to: "/ed/",
+    to: "/tadalafil/",
   },
   {
     id: "ed-sildenafil",
@@ -100,15 +105,15 @@ const LINEUP: CategoryLineupItem[] = [
     form: "Oral, taken as needed",
     pricing: ED_SILDENAFIL_PRICING,
     icon: Pill,
-    to: "/ed/",
+    to: "/sildenafil/",
   },
   {
-    id: "ed-combo",
-    name: "Tadalafil + Sildenafil Combo",
-    form: "Oral, taken as needed",
-    pricing: ED_COMBO_PRICING,
+    id: "ed-mints",
+    name: "ED Mints",
+    form: "Dissolves under the tongue, no water needed",
+    pricing: ED_MINTS_RDT_PRICING,
     icon: Pill,
-    to: "/ed/",
+    to: "/ed-mints/",
   },
 ];
 
@@ -120,13 +125,13 @@ const BENEFITS = [
   },
   {
     icon: HeartPulse,
-    title: "Three formulations, one intake",
-    text: "Tadalafil, sildenafil, and a combined formulation. Your provider reviews your intake and recommends which, if any, may be appropriate.",
+    title: "Multiple formulations",
+    text: "Tadalafil, sildenafil, and ED Mints, a dissolve-under-the-tongue combination. Your provider reviews your intake and recommends which, if any, may be appropriate.",
   },
   {
     icon: Pill,
-    title: "Compounded, not FDA-approved",
-    text: "Formulations are prepared by a licensed compounding pharmacy and considered only when legally available and clinically appropriate.",
+    title: "Tadalafil (Generic Cialis®) & Sildenafil (Generic Viagra®)",
+    text: "Tadalafil and sildenafil are the FDA-approved generic versions of Cialis and Viagra. ED Mints is a separate compounded combination formulation, considered only when legally available and clinically appropriate.",
   },
 ];
 
@@ -164,7 +169,7 @@ function SexualHealthPage() {
                 <LineReveal delay={0.1}>licensed providers</LineReveal>
               </>
             }
-            description={`Beema Health offers compounded ED treatment, from ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}. Compounded medications are not FDA-approved.`}
+            description={`Beema Health offers tadalafil (generic Cialis), sildenafil (generic Viagra), and compounded ED Mints, from ${formatSimpleStartingAt(ED_TADALAFIL_PRICING)}.`}
           />
           <motion.div
             className="mt-10 text-center"
@@ -176,7 +181,7 @@ function SexualHealthPage() {
               ease: EASE_OUT,
             }}
           >
-            <MagneticButton>
+            <HoverLiftButton>
               <Button asChild size="xl">
                 <Link
                   to={heroCta.to}
@@ -186,7 +191,7 @@ function SexualHealthPage() {
                   {heroCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </motion.div>
         </div>
       </Section>
@@ -299,11 +304,11 @@ function SexualHealthPage() {
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
-              <MagneticButton>
+              <HoverLiftButton>
                 <Button asChild variant="outline">
                   <Link to="/safety/">Safety & eligibility</Link>
                 </Button>
-              </MagneticButton>
+              </HoverLiftButton>
             </div>
           </SurfaceCard>
         </motion.div>
@@ -324,7 +329,7 @@ function SexualHealthPage() {
               every clinical decision independently, prescribing is never
               guaranteed.
             </p>
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
                 asChild
                 size="xl"
@@ -338,7 +343,7 @@ function SexualHealthPage() {
                   {footerCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>

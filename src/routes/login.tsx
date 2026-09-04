@@ -1,4 +1,4 @@
-import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { loginMfa, loginUser } from "@/lib/api/client";
 import { storeLoginCredentials } from "@/lib/credential-storage";
@@ -12,7 +12,7 @@ import {
   inputCls,
 } from "@/components/quiz/quiz-primitives";
 import { Button } from "@/components/ui/button";
-import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 
 /**
  * In-house login retired - real patient login is the Hive portal
@@ -56,7 +56,6 @@ async function finishLogin(
 }
 
 function LoginPage() {
-  const loginPromptCta = resolveCta(CTA_IDS.login_prompt);
   const { redirect } = Route.useSearch();
   const { setSession } = useAuth();
   const emailRef = useRef<HTMLInputElement>(null);
@@ -66,6 +65,7 @@ function LoginPage() {
   const [mfaChallengeId, setMfaChallengeId] = useState<string | null>(null);
   const [mfaCode, setMfaCode] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
 
   function readCredentials() {
     return {
@@ -119,6 +119,7 @@ function LoginPage() {
 
   return (
     <FlowLayout progress={0}>
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       <QuizShell
         label="Login"
         title={mfaChallengeId ? "Verify your sign-in" : "Welcome back"}
@@ -212,14 +213,13 @@ function LoginPage() {
         </form>
         <p className="mt-4 text-center text-sm text-muted-foreground">
           New patient?{" "}
-          <Link
-            to={loginPromptCta.to}
-            search={loginPromptCta.search}
-            onClick={loginPromptCta.onClick}
+          <button
+            type="button"
+            onClick={() => setGetStartedOpen(true)}
             className="text-primary underline"
           >
             Start your intake
-          </Link>
+          </button>
         </p>
       </QuizShell>
     </FlowLayout>

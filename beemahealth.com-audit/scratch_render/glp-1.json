@@ -1,0 +1,96 @@
+{
+  "url": "https://beemahealth.com/glp-1/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/><link rel=\"preload\" as=\"image\" href=\"https://static.legitscript.com/seals/51697885.png\"/><link rel=\"stylesheet\" href=\"/assets/styles-CyFOEV89.css\" data-precedence=\"default\"/><title>Online GLP-1 Weight Loss | Beema Health</title><meta http-equiv=\"Content-Security-Policy\" content=\"default-src &#x27;se...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/>...",
+  "is_spa": false,
+  "extracted_text": "GLP-1 weight-loss options\nProvider-reviewed telehealth care with transparent cash pricing: Semaglutide $99 first month on a 3-month plan then $199/mo (code sema-off100), Tirzepatide 3-month starter pack from $199/mo - see each medication page for full plan details. Compounded semaglutide is not FDA-approved and is considered only when legally available and clinically appropriate. Compounded tirzepatide is not FDA-approved and is considered only when legally available and clinically appropriate. ...",
+  "publication_date": "2026-08-16",
+  "accessibility_tree": null,
+  "headers": {
+    "Connection": "keep-alive",
+    "Content-Length": "20802",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "x-origin-cache": "HIT",
+    "Last-Modified": "Tue, 25 Aug 2026 21:05:27 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "W/\"6a8e0397-1ac27\"",
+    "expires": "Wed, 26 Aug 2026 18:04:33 GMT",
+    "Cache-Control": "max-age=600",
+    "Content-Encoding": "gzip",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "0E54:1D06D4:D9F9DF:E3EE3D:6A8F2858",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 26 Aug 2026 17:54:33 GMT",
+    "Via": "1.1 varnish",
+    "X-Served-By": "cache-den-kden1300038-DEN",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1787766873.099290,VS0,VE65",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "0205304df2b92f9b4fb184e276ab0f00231dcee7"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 4,
+    "processed_count": 4,
+    "total_bytes": 7377,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 966,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Country",
+          "MedicalOrganization"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 254,
+        "valid": true,
+        "types": [
+          "BreadcrumbList",
+          "ListItem"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 3,
+        "size_bytes": 4986,
+        "valid": true,
+        "types": [
+          "Answer",
+          "FAQPage",
+          "Question"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 4,
+        "size_bytes": 1171,
+        "valid": true,
+        "types": [
+          "Country",
+          "MedicalOrganization",
+          "Physician",
+          "PropertyValue",
+          "Service"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

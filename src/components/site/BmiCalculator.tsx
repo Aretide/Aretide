@@ -2,7 +2,7 @@ import { useId, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import { MagneticButton, SurfaceCard } from "@/components/site/primitives";
+import { HoverLiftButton, SurfaceCard } from "@/components/site/primitives";
 import { Button } from "@/components/ui/button";
 import { EASE_OUT } from "@/components/home/home-motion";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
@@ -294,7 +294,7 @@ export function BmiCalculator({
                     ? `Based on your BMI, compounded ${medicationLabel} through Beema Health may be worth exploring with a licensed provider.`
                     : "Based on your BMI, GLP-1 care through Beema Health may be worth exploring with a licensed provider."}
                 </p>
-                <MagneticButton className="mt-4 block">
+                <HoverLiftButton className="mt-4 block">
                   <Button
                     asChild
                     size="lg"
@@ -304,7 +304,7 @@ export function BmiCalculator({
                       {cta.label} <ArrowRight />
                     </Link>
                   </Button>
-                </MagneticButton>
+                </HoverLiftButton>
               </div>
             )}
           </div>

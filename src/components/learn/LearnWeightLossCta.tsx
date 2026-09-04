@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { MagneticButton } from "@/components/site/primitives";
+import { HoverLiftButton } from "@/components/site/primitives";
 import { Button } from "@/components/ui/button";
 import { CTA_IDS, resolveCta, type CtaId } from "@/lib/cta-ids";
 import {
@@ -12,15 +12,16 @@ import { LegitScriptSeal } from "@/components/site/LegitScriptSeal";
 
 export function LearnWeightLossCta({
   ctaId = CTA_IDS.learn_weight_loss,
+  headline = "Beema's live offering is medical weight-loss care",
 }: {
   ctaId?: CtaId;
+  /** Override for non-weight-loss verticals (e.g. the ED hub). */
+  headline?: string;
 }) {
   const cta = resolveCta(ctaId);
   return (
     <div className="rounded-3xl border border-primary/30 bg-primary-soft/40 px-6 py-8 text-center">
-      <h2 className="text-xl font-semibold text-foreground">
-        Beema&apos;s live offering is medical weight-loss care
-      </h2>
+      <h2 className="text-xl font-semibold text-foreground">{headline}</h2>
       <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
         {LEARN_CTA_TRUST_BODY}
       </p>
@@ -31,13 +32,13 @@ export function LearnWeightLossCta({
         <LegitScriptSeal />
       </div>
       <div className="mt-6">
-        <MagneticButton>
-          <Button asChild size="xl">
+        <HoverLiftButton>
+          <Button asChild size="xl" className="whitespace-normal text-center">
             <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
-              {cta.label} <ArrowRight />
+              {cta.label} <ArrowRight className="shrink-0" />
             </Link>
           </Button>
-        </MagneticButton>
+        </HoverLiftButton>
       </div>
     </div>
   );

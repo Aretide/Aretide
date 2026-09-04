@@ -12,6 +12,10 @@
 
 import beemaMark from "@/assets/beema-mark.png";
 import heroImg from "@/assets/hero.jpg";
+import edMintsOdtPhoto from "@/assets/treatments/ed-mints-sildenafil-tadalafil-oxytocin-odt.webp";
+import sildenafilPhoto from "@/assets/treatments/sildenafil-oral-tablets-bottle.webp";
+import tadalafilPhoto from "@/assets/treatments/tadalafil-oral-tablets-bottle.webp";
+import finasteridePhoto from "@/assets/treatments/finasteride-oral-tablets-bottle.webp";
 import { LEGITSCRIPT_SEAL_SRC } from "@/lib/legitscript";
 import { resolveVialImagery } from "@/lib/treatment-imagery";
 
@@ -55,6 +59,14 @@ export function criticalBootImageUrls(pathname: string): string[] {
       return [vialSrc("semaglutide")];
     case "/tirzepatide":
       return [vialSrc("tirzepatide")];
+    case "/ed-mints":
+      return [edMintsOdtPhoto];
+    case "/sildenafil":
+      return [sildenafilPhoto];
+    case "/tadalafil":
+      return [tadalafilPhoto];
+    case "/oral-finasteride":
+      return [finasteridePhoto];
     default:
       return [];
   }

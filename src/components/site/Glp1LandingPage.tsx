@@ -14,7 +14,7 @@ import {
   FloatingHexagons,
   HexBadge,
   HexMotif,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -91,7 +91,7 @@ export function Glp1LandingPage({ market }: { market: Glp1Market }) {
               ease: EASE_OUT,
             }}
           >
-            <MagneticButton>
+            <HoverLiftButton>
               <Button asChild size="xl">
                 <Link
                   to={heroCta.to}
@@ -101,7 +101,7 @@ export function Glp1LandingPage({ market }: { market: Glp1Market }) {
                   {heroCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
             <Button asChild size="xl" variant="outline">
               <Link to={copy.linkPath} hash="how-it-works">
                 How care works
@@ -229,7 +229,7 @@ export function Glp1LandingPage({ market }: { market: Glp1Market }) {
                 ))}
               </ul>
               <div className="mt-6 flex flex-wrap gap-3">
-                <MagneticButton>
+                <HoverLiftButton>
                   <Button asChild>
                     <Link
                       to={midCta.to}
@@ -239,7 +239,7 @@ export function Glp1LandingPage({ market }: { market: Glp1Market }) {
                       {midCta.label} <ArrowRight />
                     </Link>
                   </Button>
-                </MagneticButton>
+                </HoverLiftButton>
                 <Button asChild variant="outline">
                   <Link to="/safety/">Safety & eligibility</Link>
                 </Button>
@@ -283,7 +283,7 @@ export function Glp1LandingPage({ market }: { market: Glp1Market }) {
             <p className="mx-auto mt-3 max-w-xl text-primary-foreground/85">
               {copy.footerCtaBody}
             </p>
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
                 asChild
                 size="xl"
@@ -297,7 +297,7 @@ export function Glp1LandingPage({ market }: { market: Glp1Market }) {
                   {footerCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>

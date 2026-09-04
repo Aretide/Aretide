@@ -183,7 +183,7 @@ function RecipesPage() {
                   .getElementById("browse-recipes")
                   ?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="rounded-3xl border border-border bg-card p-6 text-left shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="cursor-pointer rounded-3xl border border-border bg-card p-6 text-left shadow-soft transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-accent-foreground">
                 {getRecipesByCategory(key).length} recipes
@@ -463,7 +463,7 @@ function FilterButton({
       aria-pressed={active}
       onClick={onClick}
       className={cn(
-        "min-h-12 rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "min-h-12 cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         active
           ? "border-foreground bg-foreground text-background"
           : "border-border bg-card text-muted-foreground hover:border-foreground/30 hover:text-foreground",

@@ -52,6 +52,21 @@ class Patient:
 
 
 @dataclass(frozen=True)
+class SendRecord:
+    id: str
+    patient_id: str
+    first_name: str
+    email: str
+    campaign_id: str
+    campaign_label: str
+    step_id: str
+    subject: str
+    sent_at: datetime
+    campaign_version: int = 1
+    step_version: int = 1
+
+
+@dataclass(frozen=True)
 class PlannedSend:
     patient: Patient
     campaign: Campaign
@@ -232,9 +247,111 @@ def load_patients(path: Path, key: bytes | None) -> list[Patient]:
     return patients
 
 
-def save_patients(path: Path, patients: Sequence[Patient], key: bytes) -> None:
+def send_to_row(record: SendRecord, key: bytes) -> dict[str, Any]:
+    return {
+        "id": record.id,
+        "patient_id": record.patient_id,
+        "name_enc": encrypt_text(record.first_name, key),
+        "email_enc": encrypt_text(record.email, key),
+        "campaign_id": record.campaign_id,
+        "campaign_label": record.campaign_label,
+        "step_id": record.step_id,
+        "subject_enc": encrypt_text(record.subject, key),
+        "sent_at": record.sent_at.isoformat(),
+        "campaign_version": record.campaign_version,
+        "step_version": record.step_version,
+    }
+
+
+def send_from_row(row: Mapping[str, Any], key: bytes | None) -> SendRecord:
+    if key is None:
+        first_name = LOCKED
+        email = LOCKED
+        subject = LOCKED
+    else:
+        first_name = decrypt_text(str(row.get("name_enc") or ""), key) if row.get("name_enc") else LOCKED
+        email = decrypt_text(str(row.get("email_enc") or ""), key) if row.get("email_enc") else LOCKED
+        subject = decrypt_text(str(row.get("subject_enc") or ""), key) if row.get("subject_enc") else str(row.get("subject") or "")
+    return SendRecord(
+        id=str(row.get("id") or uuid.uuid4().hex[:12]),
+        patient_id=str(row.get("patient_id") or ""),
+        first_name=first_name,
+        email=email,
+        campaign_id=str(row.get("campaign_id") or ""),
+        campaign_label=str(row.get("campaign_label") or ""),
+        step_id=str(row.get("step_id") or ""),
+        subject=subject,
+        sent_at=parse_time(row.get("sent_at")) or datetime.now(tz=DENVER),
+        campaign_version=int(row.get("campaign_version") or 1),
+        step_version=int(row.get("step_version") or 1),
+    )
+
+
+def load_send_log(path: Path, key: bytes | None) -> list[SendRecord]:
+    target = path if path.is_file() else None
+    if target is None:
+        return []
+    payload = json.loads(target.read_text(encoding="utf-8"))
+    rows = payload.get("sends") or []
+    if not isinstance(rows, list):
+        return []
+    return [send_from_row(row, key) for row in rows if isinstance(row, dict)]
+
+
+def append_send(
+    sends: list[SendRecord],
+    *,
+    patient: Patient,
+    campaign: Campaign,
+    step_id: str,
+    subject: str,
+    now: datetime,
+    campaign_version: int = 1,
+    step_version: int = 1,
+) -> SendRecord:
+    record = SendRecord(
+        id=uuid.uuid4().hex[:12],
+        patient_id=patient.id,
+        first_name=patient.first_name,
+        email=patient.email,
+        campaign_id=campaign.id,
+        campaign_label=campaign.label,
+        step_id=step_id,
+        subject=subject,
+        sent_at=now,
+        campaign_version=campaign_version,
+        step_version=step_version,
+    )
+    sends.append(record)
+    return record
+
+
+def serialize_send(record: SendRecord, *, reveal: bool) -> dict[str, Any]:
+    return {
+        "id": record.id,
+        "patient_id": record.patient_id,
+        "first_name": record.first_name if reveal else LOCKED,
+        "email": record.email if reveal else LOCKED,
+        "campaign_id": record.campaign_id,
+        "campaign_label": record.campaign_label,
+        "step_id": record.step_id,
+        "subject": record.subject if reveal else LOCKED,
+        "sent_at": record.sent_at.isoformat(),
+        "campaign_version": record.campaign_version,
+        "step_version": record.step_version,
+    }
+
+
+def save_patients(
+    path: Path,
+    patients: Sequence[Patient],
+    key: bytes,
+    sends: Sequence[SendRecord] | None = None,
+) -> None:
+    log = list(sends) if sends is not None else load_send_log(path, key)
     payload = {
-        "version": 2,
+        "version": 3,
+        "sends": [send_to_row(record, key) for record in log],
         "patients": [patient_to_row(patient, key) for patient in patients],
     }
     atomic_write_json(path, payload)
@@ -260,23 +377,26 @@ def due_at_for(
     step: Any,
     state: CampaignState,
 ) -> datetime | None:
-    anchor = anchor_time(patient, campaign, state)
-    if anchor is None:
+    """When `step` becomes eligible to send.
+
+    Measured from the campaign's last send for this patient
+    (`last_sent_at`), or - if nothing has been sent yet - from the anchor
+    (`abandoned_at`, or `enrolled_at` for other campaigns). The step's `delay`
+    is added to that base, so editing "Last sent at" moves every later step
+    with it.
+    """
+    base = state.last_sent_at or anchor_time(patient, campaign, state)
+    if base is None:
         return None
-    from_anchor = anchor + step.delay
-    if state.last_sent_at is None or state.last_step is None:
-        return from_anchor
-    previous_step = campaign.step_by_id(state.last_step)
-    if previous_step is None:
-        return from_anchor
-    from_last = state.last_sent_at + (step.delay - previous_step.delay)
-    return max(from_anchor, from_last)
+    return base + step.delay
 
 
 def next_due_step(
     patient: Patient,
     campaign: Campaign,
     now: datetime,
+    *,
+    ignore_due: bool = False,
 ) -> tuple[Any, datetime] | None:
     state = patient.campaigns.get(campaign.id) or CampaignState()
     if not state.enrolled:
@@ -285,6 +405,8 @@ def next_due_step(
     if step is None:
         return None
     due = due_at_for(patient, campaign, step, state)
+    if ignore_due:
+        return step, (due or now)
     if due is None or now < due:
         return None
     return step, due
@@ -297,13 +419,14 @@ def plan_sends(
     *,
     patient_ids: Sequence[str] | None = None,
     force_to: str = "",
+    ignore_due: bool = False,
 ) -> list[PlannedSend]:
     wanted = set(patient_ids) if patient_ids else None
     planned: list[PlannedSend] = []
     for patient in patients:
         if wanted is not None and patient.id not in wanted:
             continue
-        due = next_due_step(patient, campaign, now)
+        due = next_due_step(patient, campaign, now, ignore_due=ignore_due)
         if due is None:
             continue
         step, when = due
@@ -369,6 +492,9 @@ def campaign_summary(patient: Patient, campaign: Campaign, now: datetime) -> dic
         wait_until = due.isoformat()
     if due is not None and now >= due:
         wait_until = None
+    seconds_until = None
+    if state.enrolled and nxt is not None and due is not None:
+        seconds_until = max(0, int((due - now).total_seconds()))
     return {
         "id": campaign.id,
         "label": campaign.label,
@@ -378,6 +504,63 @@ def campaign_summary(patient: Patient, campaign: Campaign, now: datetime) -> dic
         "next_step": nxt.id if nxt else None,
         "due_at": due.isoformat() if due else None,
         "due_now": due_now,
+        "seconds_until": seconds_until,
         "plan": plan,
         "wait_until": wait_until,
+        "ready": campaign.ready,
     }
+
+
+def remap_campaign_id(
+    patients: Sequence[Patient],
+    old_id: str,
+    new_id: str,
+) -> list[Patient]:
+    updated: list[Patient] = []
+    for patient in patients:
+        campaigns = dict(patient.campaigns)
+        if old_id not in campaigns:
+            updated.append(patient)
+            continue
+        old_state = campaigns.pop(old_id)
+        existing = campaigns.get(new_id)
+        if existing is None or not existing.enrolled:
+            campaigns[new_id] = old_state
+        updated.append(replace(patient, campaigns=campaigns))
+    return updated
+
+
+def reset_send_history(
+    path: Path,
+    patients: Sequence[Patient],
+    key: bytes,
+) -> list[Patient]:
+    reset: list[Patient] = []
+    for patient in patients:
+        campaigns = {
+            cid: replace(state, last_step=None, last_sent_at=None)
+            for cid, state in patient.campaigns.items()
+        }
+        reset.append(replace(patient, campaigns=campaigns))
+    save_patients(path, reset, key, sends=[])
+    return reset
+
+
+def reset_patient_progress(
+    path: Path,
+    patients: Sequence[Patient],
+    key: bytes,
+) -> list[Patient]:
+    reset: list[Patient] = []
+    for patient in patients:
+        campaigns = {
+            cid: replace(state, last_step=None, last_sent_at=None)
+            for cid, state in patient.campaigns.items()
+        }
+        reset.append(replace(patient, campaigns=campaigns))
+    save_patients(path, reset, key)  # sends=None keeps the existing log on disk
+    return reset
+
+
+def clear_send_log(path: Path, patients: Sequence[Patient], key: bytes) -> None:
+    save_patients(path, patients, key, sends=[])

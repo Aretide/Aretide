@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import {
   Eyebrow,
   InfinityMotif,
-  MagneticButton,
+  HoverLiftButton,
 } from "@/components/site/primitives";
 import { LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
@@ -43,7 +43,7 @@ export function MissionSection() {
               finish line, but a lifelong journey.
             </p>
 
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
                 asChild
                 size="lg"
@@ -55,7 +55,7 @@ export function MissionSection() {
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </div>

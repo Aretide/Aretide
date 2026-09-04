@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ComponentProps } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronDown, Hexagon, Phone } from "lucide-react";
-import { Logo } from "@/components/brand/Logo";
+import { Logo, HeaderLogo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { CircleRevealMenu } from "@/components/site/CircleRevealMenu";
 import { EASE_OUT } from "@/components/home/home-motion";
@@ -48,7 +48,13 @@ const WEIGHT_LOSS_ITEMS: NavItem[] = [
  * inside a live dropdown is confusing). When it returns, it goes back here
  * (same audience/purchase journey as ED) - see docs/features/
  * treatment-pages.md for the pause and the "don't call it TRT" naming rule.
- * ED is 3 separate products on one /ed page - see ed.tsx.
+ * Money-page architecture (2026-09-03): nav links go straight to each
+ * product's own dedicated landing page (tadalafil.tsx, sildenafil.tsx,
+ * ed-mints.tsx - each with its own confirmed Bask intake CTA), never through
+ * an intermediate page first. /ed stays live as a broader comparison/
+ * overview page (like /weight-loss) that links onward to these - it's
+ * reachable from the footer and in-page cross-links, not from this nav.
+ * See docs/features/treatment-pages.md.
  *
  * Sectioned For Men / For Women like Hair (2026-08-29), but only "For Men"
  * has items today - women's ED/sexual-health products are coming soon but
@@ -60,37 +66,51 @@ const SEXUAL_HEALTH_SECTIONS: NavSection[] = [
   {
     heading: "For Men",
     items: [
-      { label: "Tadalafil", to: "/ed/" },
-      { label: "Sildenafil", to: "/ed/" },
-      { label: "Tadalafil + Sildenafil Combo", to: "/ed/" },
+      { label: "Tadalafil", to: "/tadalafil/" },
+      { label: "Sildenafil", to: "/sildenafil/" },
+      { label: "ED Mints", to: "/ed-mints/" },
     ],
   },
 ];
 
 /**
  * Sectioned For Men / For Women, Good Life Meds style (screenshot ref in
- * conversation, 2026-08-28) - all 6 items live on the one /hairloss page,
- * organized into Men/Women sections there too. "Oral Minoxidil" is the same
- * product/page for both sexes and deliberately listed in both columns,
- * matching the reference site's own pattern.
+ * conversation, 2026-08-28) - all 6 items originally lived on the one
+ * /hairloss page, organized into Men/Women sections there too. "Oral
+ * Minoxidil" is the same product/page for both sexes and deliberately
+ * listed in both columns, matching the reference site's own pattern.
+ * /hairloss was merged into /hair-loss (the hub) on 2026-09-04 - see below.
+ *
+ * ONLY FINASTERIDE IS LAUNCHING (2026-09-03) - Oral Minoxidil, the men's
+ * Topical Spray, and the entire "For Women" section are commented out below,
+ * not deleted, pending a launch decision on those SKUs. Re-enable by
+ * uncommenting the items here AND adding matching entries to the `LINEUP`
+ * array in hair-loss.tsx. See docs/features/treatment-pages.md.
+ *
+ * Money-page architecture (2026-09-03): links straight to the dedicated
+ * oral-finasteride.tsx landing page (its own confirmed Bask intake CTA), not
+ * through /hair-loss first - /hair-loss stays live as the category hub,
+ * reachable from the footer, not this nav.
  */
 const HAIR_SECTIONS: NavSection[] = [
   {
     heading: "For Men",
     items: [
-      { label: "Oral Minoxidil", to: "/hairloss/" },
-      { label: "Finasteride", to: "/hairloss/" },
-      { label: "Topical Spray", to: "/hairloss/" },
+      // { label: "Oral Minoxidil", to: "/hair-loss/" }, // disabled pending launch decision (2026-09-03) - see comment above
+      { label: "Oral Finasteride", to: "/oral-finasteride/" },
+      // { label: "Topical Spray", to: "/hair-loss/" }, // disabled pending launch decision (2026-09-03) - see comment above
     ],
   },
-  {
-    heading: "For Women",
-    items: [
-      { label: "Oral Minoxidil", to: "/hairloss/" },
-      { label: "Oral Hair Compound", to: "/hairloss/" },
-      { label: "Topical Spray", to: "/hairloss/" },
-    ],
-  },
+  // "For Women" disabled pending launch decision (2026-09-03) - no women's
+  // hair loss product is launching yet; only men's finasteride is live.
+  // {
+  //   heading: "For Women",
+  //   items: [
+  //     { label: "Oral Minoxidil", to: "/hair-loss/" },
+  //     { label: "Oral Hair Compound", to: "/hair-loss/" },
+  //     { label: "Topical Spray", to: "/hair-loss/" },
+  //   ],
+  // },
 ];
 
 /**
@@ -216,7 +236,7 @@ function DesktopNav() {
       label: "Sexual Health",
       sections: SEXUAL_HEALTH_SECTIONS,
     },
-    { id: "hair", label: "Hair", sections: HAIR_SECTIONS },
+    { id: "hair", label: "Hair Loss", sections: HAIR_SECTIONS },
     { id: "more", label: "More", items: MORE_ITEMS },
   ] as const;
 
@@ -294,7 +314,7 @@ function DesktopNavDropdown({
         aria-controls={menuId}
         onClick={onToggle}
         className={cn(
-          "inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition-[color,background-color,opacity] duration-200 ease-out hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          "inline-flex cursor-pointer items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition-[color,background-color,opacity] duration-200 ease-out hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
           open
             ? "bg-muted text-foreground"
             : dimmed
@@ -434,7 +454,7 @@ function MobileNavDropdown({
         type="button"
         aria-expanded={expanded}
         onClick={() => setExpanded((e) => !e)}
-        className="flex w-full items-center justify-between rounded-xl px-1 py-2.5 text-xl font-semibold text-ink-foreground transition-colors hover:text-primary"
+        className="flex w-full cursor-pointer items-center justify-between rounded-xl px-1 py-2.5 text-xl font-semibold text-ink-foreground transition-colors hover:text-primary"
       >
         {label}
         <ChevronDown
@@ -558,7 +578,7 @@ function HexMenuButton({ className, ...props }: ComponentProps<"button">) {
     <button
       type="button"
       className={cn(
-        "relative flex size-11 shrink-0 items-center justify-center",
+        "group relative flex size-11 shrink-0 cursor-pointer items-center justify-center",
         "transition-opacity hover:opacity-90 active:opacity-80",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
@@ -573,7 +593,7 @@ function HexMenuButton({ className, ...props }: ComponentProps<"button">) {
       >
         <path
           d="M50 4L94 30V82L50 108L6 82V30L50 4Z"
-          className="fill-background stroke-primary"
+          className="fill-background stroke-primary transition-colors group-hover:fill-muted"
           strokeWidth="4"
           strokeLinejoin="round"
         />
@@ -605,7 +625,7 @@ export function SiteHeader() {
           className="hidden shrink-0 lg:block"
           aria-label="Beema Health home"
         >
-          <Logo className="h-9" />
+          <HeaderLogo className="h-9" />
         </Link>
 
         <DesktopNav />
@@ -637,7 +657,7 @@ export function SiteHeader() {
           >
             <div className="mb-2 mt-8 px-8">
               <span className="inline-flex rounded-lg bg-background px-3 py-2">
-                <Logo className="h-9" />
+                <HeaderLogo className="h-9" />
               </span>
             </div>
             <div className="flex flex-1 flex-col justify-center gap-1 px-8">
@@ -652,7 +672,7 @@ export function SiteHeader() {
                 onNavigate={() => setOpen(false)}
               />
               <MobileNavDropdown
-                label="Hair"
+                label="Hair Loss"
                 sections={HAIR_SECTIONS}
                 onNavigate={() => setOpen(false)}
               />

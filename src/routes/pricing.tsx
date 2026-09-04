@@ -167,7 +167,7 @@ function PricingPage() {
                   key={m.id}
                   onClick={() => setPath(m.id)}
                   className={cn(
-                    "flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm transition-colors",
+                    "flex cursor-pointer items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm transition-colors",
                     path === m.id
                       ? "border-primary bg-primary-soft/50 text-foreground"
                       : "border-border bg-background text-muted-foreground hover:bg-muted",
@@ -190,7 +190,7 @@ function PricingPage() {
                   key={s.id}
                   onClick={() => setShip(s.id)}
                   className={cn(
-                    "rounded-2xl border px-3 py-2 text-xs font-medium transition-colors",
+                    "cursor-pointer rounded-2xl border px-3 py-2 text-xs font-medium transition-colors",
                     ship === s.id
                       ? "border-primary bg-primary-soft/50 text-foreground"
                       : "border-border bg-background text-muted-foreground hover:bg-muted",

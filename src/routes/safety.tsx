@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   breadcrumbJsonLd,
   canonicalUrl,
@@ -17,7 +17,7 @@ import { trackPageViewed } from "@/lib/analytics";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
   Eyebrow,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -25,6 +25,7 @@ import {
 import { TreatmentBreadcrumb } from "@/components/site/TreatmentPageBlocks";
 import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
   SEAN_ARORA_PROVIDER,
@@ -95,6 +96,7 @@ function useCardMotion(reduceMotion: boolean, delay = 0) {
 
 function SafetyPage() {
   const cta = resolveCta(CTA_IDS.safety);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -102,6 +104,7 @@ function SafetyPage() {
   }, []);
   return (
     <MarketingLayout>
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       <Section className="bg-grad-hero relative overflow-hidden">
         <div
           aria-hidden
@@ -354,13 +357,15 @@ function SafetyPage() {
             ease: EASE_OUT,
           }}
         >
-          <MagneticButton>
-            <Button asChild size="xl">
-              <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
-                {cta.label} <ArrowRight />
-              </Link>
+          <HoverLiftButton>
+            <Button
+              type="button"
+              size="xl"
+              onClick={() => setGetStartedOpen(true)}
+            >
+              {cta.label} <ArrowRight />
             </Button>
-          </MagneticButton>
+          </HoverLiftButton>
         </motion.div>
       </Section>
     </MarketingLayout>

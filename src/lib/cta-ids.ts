@@ -28,10 +28,18 @@ export const CTA_IDS = {
   semaglutide_bmi: "semaglutide_bmi",
   trt_hero: "trt_hero",
   trt_footer: "trt_footer",
-  hairloss_hero: "hairloss_hero",
-  hairloss_footer: "hairloss_footer",
   ed_hero: "ed_hero",
   ed_footer: "ed_footer",
+  tadalafil_hero: "tadalafil_hero",
+  tadalafil_footer: "tadalafil_footer",
+  sildenafil_hero: "sildenafil_hero",
+  sildenafil_footer: "sildenafil_footer",
+  oral_finasteride_hero: "oral_finasteride_hero",
+  oral_finasteride_footer: "oral_finasteride_footer",
+  ed_mints_rdt_hero: "ed_mints_rdt_hero",
+  ed_mints_rdt_footer: "ed_mints_rdt_footer",
+  ed_mints_odt_hero: "ed_mints_odt_hero",
+  ed_mints_odt_footer: "ed_mints_odt_footer",
   nad_hero: "nad_hero",
   nad_footer: "nad_footer",
   sermorelin_hero: "sermorelin_hero",
@@ -127,12 +135,55 @@ const DEFAULT_CTA_TARGET: CtaTarget = {
  */
 const BASK_INTAKE_BASE = "https://q.beemahealth.com/start-online-visit";
 
-/** Per-CTA overrides for context-specific, compliant labels. */
+/**
+ * ED Mints (2026-09-03) - two distinct combo products on /ed-mints, each
+ * with its OWN confirmed Bask questionnaire flow, not /ed's shared intake.
+ * RDT = "Tadalafil + Sildenafil" (starts with tadalafil); ODT =
+ * "Sildenafil + Tadalafil + Oxytocin" (starts with sildenafil) - matches the
+ * ordering in MINT_OPTIONS in ed-mints.tsx.
+ */
+const ED_MINTS_RDT_INTAKE_URL =
+  "https://q.beemahealth.com/start-online-visit/edmint1";
+const ED_MINTS_ODT_INTAKE_URL =
+  "https://q.beemahealth.com/start-online-visit/edmint2";
+
+/**
+ * Confirmed production Bask questionnaire URLs (2026-09-03), replacing the
+ * earlier `${BASK_INTAKE_BASE}/{hairloss|ed}` guesses for these 3 products.
+ * Each dedicated money page (/tadalafil, /sildenafil, /oral-finasteride)
+ * routes its "Get Started" CTA straight here - see the money-page
+ * architecture note above CTA_OVERRIDES.
+ */
+const FINASTERIDE_INTAKE_URL =
+  "https://q.beemahealth.com/start-online-visit/finasteride";
+const TADALAFIL_INTAKE_URL =
+  "https://q.beemahealth.com/start-online-visit/tadalafil";
+const SILDENAFIL_INTAKE_URL =
+  "https://q.beemahealth.com/start-online-visit/sildenafil";
+
+/**
+ * Money-page architecture (2026-09-03): each product that has a confirmed
+ * Bask URL gets its own dedicated landing page (/tadalafil, /sildenafil,
+ * /oral-finasteride, /ed-mints, /tirzepatide, /semaglutide) whose CTA goes
+ * straight to that product's questionnaire - nav dropdowns link directly to
+ * these pages, never through an intermediate page first. `/ed`,
+ * `/sexual-health`, `/hair-loss`, and `/weight-loss` are overview/comparison
+ * pages one level up - they explain and compare, then link onward to the
+ * money page for the actual "Get Started" click. `ed_hero`/`ed_footer` stay
+ * defined below (unused by any live page now that `/ed` links onward instead
+ * of converting directly) so the entries aren't lost if that changes again.
+ * `hairloss_hero`/`hairloss_footer` (the old `/hairloss` overview page's
+ * unused CTAs) were removed 2026-09-04 when `/hairloss` was merged into
+ * `/hair-loss` - that page never shipped to production, so there was nothing
+ * to preserve. `hair_hero`/`hair_footer` below are `/hair-loss`'s hub CTAs,
+ * kept under their original `hair_*` id so funnel attribution stays stable.
+ */
 const CTA_OVERRIDES: Partial<Record<CtaId, CtaTarget>> = {
-  home_hero: {
-    label: "Get Started with Weight Loss",
-    to: DEFAULT_CTA_TARGET.to,
-  },
+  // home_hero has no override (2026-09-04): the hero button now opens
+  // GetStartedModal instead of linking straight to Bask, so `resolveCta`
+  // is only reached per-product inside the modal, and each product uses
+  // its own CtaId (tirzepatide_hero, tadalafil_hero, etc.) - see
+  // src/components/site/GetStartedModal.tsx and docs/features/homepage.md.
   recipes_hub: {
     label: "See if a GLP-1 treatment plan could be right for you",
     to: DEFAULT_CTA_TARGET.to,
@@ -147,13 +198,21 @@ const CTA_OVERRIDES: Partial<Record<CtaId, CtaTarget>> = {
   },
   trt_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/trt` },
   trt_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/trt` },
-  hairloss_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/hairloss` },
-  hairloss_footer: {
-    label: "Get Started",
-    to: `${BASK_INTAKE_BASE}/hairloss`,
-  },
   ed_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/ed` },
   ed_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/ed` },
+  tadalafil_hero: { label: "Get Started", to: TADALAFIL_INTAKE_URL },
+  tadalafil_footer: { label: "Get Started", to: TADALAFIL_INTAKE_URL },
+  sildenafil_hero: { label: "Get Started", to: SILDENAFIL_INTAKE_URL },
+  sildenafil_footer: { label: "Get Started", to: SILDENAFIL_INTAKE_URL },
+  oral_finasteride_hero: { label: "Get Started", to: FINASTERIDE_INTAKE_URL },
+  oral_finasteride_footer: {
+    label: "Get Started",
+    to: FINASTERIDE_INTAKE_URL,
+  },
+  ed_mints_rdt_hero: { label: "Get Started", to: ED_MINTS_RDT_INTAKE_URL },
+  ed_mints_rdt_footer: { label: "Get Started", to: ED_MINTS_RDT_INTAKE_URL },
+  ed_mints_odt_hero: { label: "Get Started", to: ED_MINTS_ODT_INTAKE_URL },
+  ed_mints_odt_footer: { label: "Get Started", to: ED_MINTS_ODT_INTAKE_URL },
   nad_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/nad` },
   nad_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/nad` },
   sermorelin_hero: {
@@ -165,20 +224,18 @@ const CTA_OVERRIDES: Partial<Record<CtaId, CtaTarget>> = {
     to: `${BASK_INTAKE_BASE}/sermorelin`,
   },
   /**
-   * Category hub pages (2026-08-27) mix 2 products each, so there's no
-   * single correct Bask intake path - these default to one product in the
-   * category rather than falling through to DEFAULT_CTA_TARGET (the
+   * Category hub pages (2026-08-27) mix multiple products each, so there's
+   * no single correct Bask intake path - these default to one product in
+   * the category rather than falling through to DEFAULT_CTA_TARGET (the
    * weight-loss intake), which would be actively wrong here, not just
-   * unverified. Pick is arbitrary and should be revisited once Bask
-   * confirms whether a category-level intake exists.
+   * unverified. Pick is arbitrary (now pointed at a confirmed URL instead of
+   * a guessed one, 2026-09-03) and should be revisited once Bask confirms
+   * whether a category-level intake exists.
    */
-  sexual_health_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/ed` },
-  sexual_health_footer: {
-    label: "Get Started",
-    to: `${BASK_INTAKE_BASE}/ed`,
-  },
-  hair_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/hairloss` },
-  hair_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/hairloss` },
+  sexual_health_hero: { label: "Get Started", to: TADALAFIL_INTAKE_URL },
+  sexual_health_footer: { label: "Get Started", to: TADALAFIL_INTAKE_URL },
+  hair_hero: { label: "Get Started", to: FINASTERIDE_INTAKE_URL },
+  hair_footer: { label: "Get Started", to: FINASTERIDE_INTAKE_URL },
   wellness_hero: { label: "Get Started", to: `${BASK_INTAKE_BASE}/nad` },
   wellness_footer: { label: "Get Started", to: `${BASK_INTAKE_BASE}/nad` },
 };

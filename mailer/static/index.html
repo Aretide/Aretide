@@ -4,135 +4,210 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Beema Health mailer</title>
-  <style>
-    :root {
-      --ink: #1a1a1a;
-      --muted: #5c5c5c;
-      --line: #e6e6e6;
-      --paper: #fffdf8;
-      --card: #ffffff;
-      --honey: #e5b01a;
-      --honey-ink: #1a1a1a;
-      --ok: #1f7a4d;
-      --wait: #8a5a12;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font: 16px/1.5 "Avenir Next", "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: var(--paper);
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid var(--line);
-      background: var(--card);
-    }
-    header h1 { font-size: 1.1rem; margin: 0; }
-    header p { margin: 0; color: var(--muted); font-size: 0.9rem; }
-    main {
-      display: grid;
-      grid-template-columns: 1.3fr 0.9fr;
-      min-height: calc(100vh - 72px);
-    }
-    section { padding: 1.25rem 1.5rem; }
-    .board { border-right: 1px solid var(--line); overflow: auto; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 0.65rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-    th { font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
-    tr { cursor: pointer; }
-    tr:hover { background: #fff8e6; }
-    tr.active { background: #fff1c4; }
-    .chip {
-      display: inline-block;
-      margin: 0 0.2rem 0.2rem 0;
-      padding: 0.1rem 0.45rem;
-      border-radius: 999px;
-      background: #f3f1ea;
-      font-size: 0.75rem;
-    }
-    .chip.due { background: #e8f6ee; color: var(--ok); }
-    .chip.wait { background: #fff3d6; color: var(--wait); }
-    button, select, input, textarea {
-      font: inherit;
-    }
-    button {
-      min-height: 44px;
-      padding: 0.5rem 0.9rem;
-      border: 0;
-      border-radius: 8px;
-      background: var(--honey);
-      color: var(--honey-ink);
-      font-weight: 700;
-      cursor: pointer;
-    }
-    button.secondary { background: #eeeae2; }
-    button.danger { background: #1a1a1a; color: #fff; }
-    label { display: block; margin: 0.75rem 0 0.25rem; font-size: 0.9rem; }
-    input, select, textarea {
-      width: 100%;
-      min-height: 44px;
-      padding: 0.5rem 0.7rem;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-    .row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
-    .checks label { display: flex; align-items: center; gap: 0.5rem; min-height: 44px; }
-    .checks input { width: auto; min-height: 20px; }
-    h2 { font-size: 1rem; margin: 0 0 0.75rem; }
-    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
-    .muted { color: var(--muted); font-size: 0.9rem; }
-    .status { font-size: 0.85rem; }
-  </style>
+  <link rel="stylesheet" href="/static/dashboard.css">
 </head>
 <body>
+  <div id="prod-banner" hidden>PRODUCTION - real patients. Emails sent from here go to real people.<button type="button" id="prod-banner-close" aria-label="Hide the production banner" title="Hide (still in Prod)">&times;</button></div>
   <header>
     <div>
       <h1>Beema Health mailer</h1>
       <p id="unlock">Loading…</p>
+      <p id="mode-note" class="muted"></p>
     </div>
     <div class="row">
+      <label for="mode-select" style="margin:0;">Mode</label>
+      <select id="mode-select">
+        <option value="dev">Dev - test patients</option>
+        <option value="prod">Prod - real patients</option>
+      </select>
+      <button type="button" id="open-send">Send a campaign</button>
+      <button type="button" id="open-campaigns">Campaigns</button>
+      <button type="button" class="secondary" id="open-ready">Ready for prod</button>
+      <button type="button" class="secondary" id="open-add">Add patient</button>
       <button class="secondary" id="refresh">Refresh</button>
-      <button id="open-add">Add patient</button>
     </div>
   </header>
   <main>
     <section class="board">
-      <h2>Patients</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Campaigns</th>
-          </tr>
-        </thead>
-        <tbody id="rows"></tbody>
-      </table>
-    </section>
-    <section>
-      <div class="panel" id="detail">
-        <h2>Select a patient</h2>
-        <p class="muted">Assign campaigns, see last step / last sent, and send one person or a whole campaign.</p>
+      <div class="row board-tabs" style="margin-top:0;">
+        <button type="button" class="tab-button active" data-board-tab="patients">Patients</button>
+        <button type="button" class="tab-button" data-board-tab="sends">Sent emails</button>
+        <button type="button" class="danger" id="clear-data" hidden>Clear data</button>
       </div>
-      <div class="panel">
+      <div id="patients-view">
+        <div class="row" style="margin-top:0.5rem;align-items:center;">
+          <strong id="patient-total-count"></strong>
+          <label for="patient-filter-campaign" class="muted" style="margin:0;">Filter by campaign</label>
+          <select id="patient-filter-campaign" style="max-width:16rem;">
+            <option value="">All campaigns</option>
+          </select>
+          <span class="muted" id="patient-filter-count"></span>
+        </div>
+        <div class="row" style="margin-top:0.15rem;align-items:center;">
+          <span class="muted" id="automation-countdown">Automation: loading...</span>
+          <button type="button" class="secondary" id="toggle-automation" hidden></button>
+          <button type="button" class="secondary" id="preview-automation">Preview automation</button>
+          <button type="button" class="secondary" id="run-automation">Run automation now</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Campaigns</th>
+              <th>Time to next step</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div id="sends-view" hidden>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Campaign</th>
+              <th>When</th>
+            </tr>
+          </thead>
+          <tbody id="sent-rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="sheet-overlay" id="sheet-send" hidden>
+    <div class="sheet">
+      <div class="sheet-head">
         <h2>Send a campaign</h2>
+        <button type="button" class="sheet-close" data-close="sheet-send">&times;</button>
+      </div>
+      <div class="sheet-body send-box">
         <label for="campaign">Campaign</label>
         <select id="campaign"></select>
         <div class="row">
-          <button class="secondary" id="plan-all">Show due list</button>
-          <button id="send-all">Send due emails</button>
+          <button class="secondary" type="button" id="plan-all">Show due list</button>
+          <button type="button" id="send-all">Send due emails</button>
         </div>
         <p class="muted" id="plan-note"></p>
       </div>
-      <div class="panel" id="add-panel" hidden>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="sheet-patient" hidden>
+    <div class="sheet sheet-fullscreen">
+      <div class="sheet-head">
+        <h2>Edit patient</h2>
+        <button type="button" class="sheet-close" data-close="sheet-patient">&times;</button>
+      </div>
+      <div class="sheet-body" id="detail"></div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="sheet-view-email" hidden>
+    <div class="sheet sheet-fullscreen">
+      <div class="sheet-head">
+        <h2 id="view-email-title">Sent email</h2>
+        <button type="button" class="sheet-close" data-close="sheet-view-email">&times;</button>
+      </div>
+      <div class="sheet-body" id="view-email-body"></div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="sheet-automation-preview" hidden>
+    <div class="sheet sheet-fullscreen">
+      <div class="sheet-head">
+        <h2>Preview automation</h2>
+        <button type="button" class="sheet-close" data-close="sheet-automation-preview">&times;</button>
+      </div>
+      <div class="sheet-body" id="automation-preview-body"></div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="sheet-pick-patient" hidden>
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2>Choose a patient</h2>
+        <button type="button" class="sheet-close" data-close="sheet-pick-patient">&times;</button>
+      </div>
+      <div class="sheet-body">
+        <div id="pick-patient-list"></div>
+        <div class="row" style="justify-content:flex-end;">
+          <button type="button" id="pick-patient-continue" disabled>Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="sheet-campaigns-list" hidden>
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2>Campaigns</h2>
+        <div class="row">
+          <button type="button" id="new-campaign">New campaign</button>
+          <button type="button" class="sheet-close" data-close="sheet-campaigns-list">&times;</button>
+        </div>
+      </div>
+      <div class="sheet-body">
+        <p class="muted">Every save keeps the previous version - nothing is overwritten.</p>
+        <div id="campaigns-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="sheet-campaign-editor" hidden>
+    <div class="sheet sheet-fullscreen">
+      <div class="sheet-head">
+        <div class="row">
+          <button type="button" class="secondary" id="campaign-editor-back">Back</button>
+          <h2 id="campaign-editor-title">Campaign</h2>
+        </div>
+        <div class="row">
+          <button type="button" id="campaign-editor-save">Save campaign</button>
+          <button type="button" class="secondary" id="campaign-editor-duplicate">Duplicate</button>
+          <button type="button" class="danger" id="campaign-editor-delete">Delete</button>
+          <button type="button" class="sheet-close" data-close="sheet-campaign-editor">&times;</button>
+        </div>
+      </div>
+      <div class="tabs" id="campaign-editor-tabs">
+        <button type="button" class="tab-button active" data-tab="details">Details</button>
+        <button type="button" class="tab-button" data-tab="placeholders">Placeholders</button>
+        <button type="button" class="tab-button" data-tab="steps">Steps</button>
+        <button type="button" class="tab-button" data-tab="automation">Automation</button>
+        <button type="button" class="tab-button" data-tab="history">History</button>
+      </div>
+      <div class="sheet-body" id="campaign-editor-body"></div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="sheet-ready" hidden>
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2>Ready for prod</h2>
+        <div class="row">
+          <button type="button" id="save-ready">Save</button>
+          <button type="button" class="sheet-close" data-close="sheet-ready">&times;</button>
+        </div>
+      </div>
+      <div class="sheet-body">
+        <div id="ready-list"></div>
+        <hr style="border:none;border-top:1px solid var(--line);margin:1rem 0;">
+        <button class="danger" type="button" id="clear-send-history">Clear send history</button>
+        <p class="muted">Dev only. Wipes the send log and resets every patient's last
+          step on every campaign so drips can fire again. Cannot be undone.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet-overlay" id="sheet-add-patient" hidden>
+    <div class="sheet">
+      <div class="sheet-head">
         <h2>Add patient</h2>
+        <button type="button" class="sheet-close" data-close="sheet-add-patient">&times;</button>
+      </div>
+      <div class="sheet-body">
         <label for="first">First name</label>
         <input id="first">
         <label for="email">Email</label>
@@ -143,6 +218,12 @@
           <option value="lead">Lead</option>
           <option value="active">Active</option>
         </select>
+        <label for="interest">Interest</label>
+        <input id="interest" value="weight-loss care">
+        <label for="product">Product</label>
+        <input id="product" value="weight-loss">
+        <label for="cta">CTA URL</label>
+        <input id="cta" value="https://hive.beemahealth.com">
         <label for="abandoned">Abandoned at (optional, Denver)</label>
         <input id="abandoned" placeholder="2026-08-26 9:37">
         <div class="checks" id="add-campaigns"></div>
@@ -150,129 +231,59 @@
           <button id="save-patient">Save encrypted</button>
         </div>
       </div>
-    </section>
-  </main>
-  <script>
-    let state = { unlocked: false, patients: [], campaigns: [] };
-    let selected = null;
+    </div>
+  </div>
 
-    async function load() {
-      const res = await fetch("/api/state");
-      state = await res.json();
-      document.getElementById("unlock").textContent = state.unlocked
-        ? "PII unlocked. Names and emails are visible."
-        : "PII locked. Names and emails show as ***.";
-      const campaignSelect = document.getElementById("campaign");
-      campaignSelect.innerHTML = state.campaigns.map(c => `<option value="${c.id}">${c.label}</option>`).join("");
-      document.getElementById("add-campaigns").innerHTML = state.campaigns.map(c =>
-        `<label><input type="checkbox" value="${c.id}" ${c.id === "abandoned" ? "checked" : ""}> ${c.label}</label>`
-      ).join("");
-      renderRows();
-      if (selected) renderDetail(state.patients.find(p => p.id === selected) || null);
-    }
+  <div class="sheet-overlay" id="sheet-insert-button" hidden>
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2 id="insert-button-title">Insert button</h2>
+        <button type="button" class="sheet-close" data-close="sheet-insert-button">&times;</button>
+      </div>
+      <div class="sheet-body">
+        <label>Button text</label>
+        <input id="insert-button-label" placeholder="Leave a Google review">
+        <label>Link URL</label>
+        <input id="insert-button-url" placeholder="Leave blank to use the step's CTA link + utm_content">
+        <label>Alignment</label>
+        <select id="insert-button-align">
+          <option value="left">Left</option>
+          <option value="center" selected>Center</option>
+          <option value="right">Right</option>
+        </select>
+        <label>Background color</label>
+        <input type="color" id="insert-button-bg" value="#e5b01a">
+        <label>Text color</label>
+        <input type="color" id="insert-button-color" value="#1a1a1a">
+        <div class="row" style="justify-content:flex-end;">
+          <button type="button" id="insert-button-confirm">Insert</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    function renderRows() {
-      document.getElementById("rows").innerHTML = state.patients.map(p => {
-        const chips = (p.campaigns || []).filter(c => c.enrolled).map(c => {
-          const cls = c.due_now ? "due" : "wait";
-          return `<span class="chip ${cls}">${c.label}: ${c.plan}</span>`;
-        }).join("") || "<span class='muted'>none</span>";
-        return `<tr data-id="${p.id}" class="${p.id === selected ? "active" : ""}">
-          <td>${p.first_name}</td><td>${p.email}</td><td>${p.status}</td><td>${chips}</td>
-        </tr>`;
-      }).join("");
-      document.querySelectorAll("tr[data-id]").forEach(row => {
-        row.addEventListener("click", () => {
-          selected = row.dataset.id;
-          renderRows();
-          renderDetail(state.patients.find(p => p.id === selected));
-        });
-      });
-    }
+  <div class="sheet-overlay" id="sheet-var-help" hidden>
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2 id="var-help-title">Variable</h2>
+        <button type="button" class="sheet-close" data-close="sheet-var-help">&times;</button>
+      </div>
+      <div class="sheet-body" id="var-help-body"></div>
+    </div>
+  </div>
 
-    function renderDetail(p) {
-      const el = document.getElementById("detail");
-      if (!p) {
-        el.innerHTML = "<h2>Select a patient</h2><p class='muted'>Assign campaigns and send.</p>";
-        return;
-      }
-      const boxes = (p.campaigns || []).map(c => `
-        <label><input type="checkbox" data-campaign="${c.id}" ${c.enrolled ? "checked" : ""}> ${c.label}
-          <span class="muted"> · last ${c.last_step || "—"} · ${c.plan}</span>
-        </label>`).join("");
-      el.innerHTML = `
-        <h2>${p.first_name}</h2>
-        <p class="status">${p.email} · ${p.status}</p>
-        <p class="muted">Abandoned: ${p.abandoned_at || "—"}</p>
-        <div class="checks">${boxes}</div>
-        <div class="row">
-          <button class="secondary" id="save-campaigns">Save campaigns</button>
-          <button id="send-one">Send this patient's due email</button>
-        </div>`;
-      document.getElementById("save-campaigns").onclick = saveCampaigns;
-      document.getElementById("send-one").onclick = () => send({ patient_ids: [p.id] });
-    }
-
-    async function saveCampaigns() {
-      const boxes = [...document.querySelectorAll("#detail [data-campaign]")];
-      const campaigns = {};
-      boxes.forEach(box => campaigns[box.dataset.campaign] = box.checked);
-      await fetch("/api/patients/" + selected + "/campaigns", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ campaigns })
-      });
-      await load();
-    }
-
-    async function send(extra) {
-      const campaign_id = document.getElementById("campaign").value;
-      const body = Object.assign({ campaign_id, dry_run: false, force_to: "" }, extra || {});
-      if (!confirm("Send now?")) return;
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-      });
-      const data = await res.json();
-      document.getElementById("plan-note").textContent = data.message || JSON.stringify(data.preview || data);
-      await load();
-    }
-
-    document.getElementById("refresh").onclick = load;
-    document.getElementById("open-add").onclick = () => {
-      document.getElementById("add-panel").hidden = false;
-    };
-    document.getElementById("save-patient").onclick = async () => {
-      const campaign_ids = [...document.querySelectorAll("#add-campaigns input:checked")].map(i => i.value);
-      await fetch("/api/patients", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          first_name: document.getElementById("first").value,
-          email: document.getElementById("email").value,
-          status: document.getElementById("status").value,
-          abandoned_at: document.getElementById("abandoned").value,
-          campaign_ids
-        })
-      });
-      document.getElementById("add-panel").hidden = true;
-      await load();
-    };
-    document.getElementById("plan-all").onclick = async () => {
-      const campaign_id = document.getElementById("campaign").value;
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ campaign_id, dry_run: true })
-      });
-      const data = await res.json();
-      document.getElementById("plan-note").textContent = (data.preview || []).map(p =>
-        `${p.name} · ${p.email} · ${p.step}`
-      ).join(" | ") || "Nobody is due.";
-    };
-    document.getElementById("send-all").onclick = () => send({});
-    load();
-  </script>
+  <div id="modal" hidden>
+    <div class="modal-card">
+      <div id="modal-spinner" class="spinner" hidden></div>
+      <p id="modal-text"></p>
+      <div class="row" id="modal-actions">
+        <button id="modal-ok">OK</button>
+        <button class="secondary" id="modal-alt" hidden>Alt</button>
+        <button class="secondary" id="modal-cancel" hidden>Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script src="/static/dashboard.js"></script>
+  <script src="/static/dashboard-editors.js"></script>
 </body>
 </html>

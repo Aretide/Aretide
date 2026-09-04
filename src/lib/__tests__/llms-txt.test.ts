@@ -126,15 +126,22 @@ describe("llms.txt", () => {
     expect(missing).toEqual([]);
   });
 
-  it("states the service area and that unlaunched/paused verticals are not for sale", () => {
-    // TRT, NAD+, and sermorelin paused 2026-08-28 (not selling them for now);
-    // HRT remains permanently education-only.
+  it("states the service area without explicitly flagging paused-but-returning verticals as unpurchasable", () => {
+    // TRT, NAD+, and sermorelin are paused 2026-08-28 (not selling them for
+    // now, expected to return) - llms.txt deliberately does not say so
+    // explicitly (2026-09-04, per Matt): an AI-crawled "not purchasable
+    // today" claim would still be citable after these lines relaunch.
+    // Omission (silently not listing them as live) is the guard, not a
+    // negative claim. HRT is different - docs/features/treatment-pages.md
+    // says it's permanently not a Beema program, so its "not offered" line
+    // in /learn/hrt/ stays untouched; this test only covers llms.txt.
     expect(llms).toMatch(/all 50 US states/i);
     expect(llms).toMatch(/United States only/i);
     expect(llms).toMatch(/not an international service/i);
     expect(llms).toMatch(/clinically appropriate/i);
     expect(llms).not.toMatch(/clinically indicated/i);
-    expect(llms).toMatch(/not purchasable Beema programs today/i);
+    expect(llms).not.toMatch(/not purchasable/i);
+    expect(llms).not.toMatch(/does not offer TRT/i);
   });
 
   it("uses no em or en dashes", () => {

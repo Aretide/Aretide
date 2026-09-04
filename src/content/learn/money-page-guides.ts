@@ -12,10 +12,10 @@ import { learnPath, type LearnVertical } from "@/content/learn/types";
  * the page targeting that query.
  *
  * Every entry lists the live Google Ads keywords it serves so the mapping can
- * be re-checked when the account changes. Weight-loss only for now: Beema
- * currently offers compounded semaglutide and compounded tirzepatide, and the
- * TRT, HRT, ED, hair-loss and peptide verticals are education-only until those
- * programs launch.
+ * be re-checked when the account changes. Weight-loss and ED money pages
+ * (added 2026-09-03: /tadalafil/, /sildenafil/, /ed-mints/) have guide sets;
+ * TRT, HRT, hair-loss, and peptide verticals remain education-only until
+ * those programs launch their own dedicated money pages.
  */
 export type MoneyPageGuideSet = {
   /** Program page path, trailing slash, matching the canonical. */
@@ -29,6 +29,7 @@ export type MoneyPageGuideSet = {
 };
 
 const wl = (slug: string) => ({ vertical: "weight-loss" as const, slug });
+const ed = (slug: string) => ({ vertical: "ed" as const, slug });
 
 export const MONEY_PAGE_GUIDES: readonly MoneyPageGuideSet[] = [
   {
@@ -132,6 +133,43 @@ export const MONEY_PAGE_GUIDES: readonly MoneyPageGuideSet[] = [
       wl("glp-1-cost"),
       wl("glp-1-side-effects"),
       wl("rebound-weight-gain-after-glp-1"),
+    ],
+  },
+  {
+    path: "/tadalafil/",
+    heading: "Tadalafil questions people ask before starting",
+    adKeywords: ["tadalafil dosage", "tadalafil online", "cialis dosage"],
+    articles: [
+      ed("tadalafil-dosing"),
+      ed("sildenafil-dosing"),
+      ed("tadalafil-sildenafil-combo"),
+      ed("sildenafil-tadalafil-oxytocin"),
+    ],
+  },
+  {
+    path: "/sildenafil/",
+    heading: "Sildenafil questions people ask before starting",
+    adKeywords: ["sildenafil dosage", "sildenafil online", "viagra dosage"],
+    articles: [
+      ed("sildenafil-dosing"),
+      ed("tadalafil-dosing"),
+      ed("tadalafil-sildenafil-combo"),
+      ed("sildenafil-tadalafil-oxytocin"),
+    ],
+  },
+  {
+    path: "/ed-mints/",
+    heading: "ED Mints questions people ask before starting",
+    adKeywords: [
+      "ed mints",
+      "dissolvable ed medication",
+      "tadalafil sildenafil combo",
+    ],
+    articles: [
+      ed("tadalafil-sildenafil-combo"),
+      ed("sildenafil-tadalafil-oxytocin"),
+      ed("tadalafil-dosing"),
+      ed("sildenafil-dosing"),
     ],
   },
 ];

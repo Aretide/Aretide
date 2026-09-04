@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, CheckCircle2, Droplet, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, HeartPulse } from "lucide-react";
 import {
   canonicalUrl,
   breadcrumbJsonLd,
@@ -13,9 +13,10 @@ import {
   SEAN_ARORA_PROVIDER,
 } from "@/lib/provider-info";
 import { trackPageViewed } from "@/lib/analytics";
+import { bootImagePreloadLinks } from "@/lib/boot-assets";
 import { MarketingLayout } from "@/components/site/MarketingLayout";
 import {
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -23,7 +24,6 @@ import {
 import {
   TreatmentBreadcrumb,
   TreatmentFaqSection,
-  TreatmentHeroArt,
   TreatmentIncludedDropdown,
   SimpleTreatmentPricingCard,
   type TreatmentFaqItem,
@@ -33,43 +33,45 @@ import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import {
-  HAIRLOSS_FINASTERIDE_PRICING,
-  HAIRLOSS_ORAL_MINOXIDIL_PRICING,
-  HAIRLOSS_TOPICAL_MEN_PRICING,
-  HAIRLOSS_TOPICAL_WOMEN_PRICING,
-  HAIRLOSS_WOMENS_COMPOUND_PRICING,
-  formatSimpleStartingAt,
+  ED_SILDENAFIL_PER_PILL_USD,
+  ED_SILDENAFIL_PRICING,
+  formatPerPillStartingAt,
   simplePricingSentence,
 } from "@/lib/simple-treatment-pricing";
 import { patientQuestionsGuidance } from "@/lib/marketing-copy";
 import { SUPPORT_EMAIL } from "@/lib/contact-info";
 import { MoneyPageGuides } from "@/components/learn/MoneyPageGuides";
+import sildenafilPhoto from "@/assets/treatments/sildenafil-oral-tablets-bottle.webp";
 
-const TITLE = "Compounded Hairloss Treatment | Beema Health";
-const DESCRIPTION = `Compounded hairloss formulations for men and women, reviewed by licensed providers. Nationwide telehealth care from ${formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)}. Prescribing is never guaranteed.`;
+const TITLE = "Sildenafil for ED Online | Beema Health";
+const DESCRIPTION = `Sildenafil, the FDA-approved generic version of Viagra, reviewed by licensed providers. Nationwide telehealth care from ${formatPerPillStartingAt(ED_SILDENAFIL_PER_PILL_USD)}. Prescribing is never guaranteed.`;
 const SERVICE_DESCRIPTION =
-  "Nationwide telehealth service connecting eligible adults with independent licensed providers for compounded hairloss formulation evaluation and ongoing care. Completing intake does not guarantee a prescription.";
+  "Nationwide telehealth service connecting eligible adult men with independent licensed providers for sildenafil evaluation and ongoing care. Completing intake does not guarantee a prescription.";
 
 const FAQ_ITEMS: TreatmentFaqItem[] = [
   {
-    q: "What's the difference between the men's and women's options?",
-    a: "Men and women can both be prescribed oral minoxidil. Beyond that, options differ: men have finasteride oral tablets and a topical spray formulated with finasteride; women have a separate oral compound formulation and a topical spray without finasteride (finasteride isn't appropriate for women who are or may become pregnant). All are compounded formulations prepared by a licensed compounding pharmacy, individualized to you rather than sold as a single fixed commercial product. Your licensed provider reviews your intake and recommends which formulation, if any, may be appropriate for your case; prescribing is never guaranteed.",
+    q: "What is sildenafil and how does it work?",
+    a: "Sildenafil works by relaxing blood vessels so more blood can flow to the penis, making it easier to get and keep an erection when you're sexually aroused. It doesn't cause arousal by itself - you still need to be sexually stimulated for it to work. Sildenafil typically takes effect within 30-60 minutes and lasts several hours, so it's usually taken as needed before sexual activity rather than daily.",
   },
   {
-    q: "Is compounded hairloss treatment FDA-approved?",
-    a: "No. These are compounded, individualized formulations, not FDA-approved products. Because they're prepared by a licensed compounding pharmacy specifically for you rather than manufactured and sold under a brand name, they should not be assumed identical to any FDA-approved commercial product. Beema only makes them available when legally permitted and when a licensed provider independently determines a formulation is clinically appropriate for you.",
+    q: "Is Beema's sildenafil the same as generic Viagra?",
+    a: "Yes. Beema's sildenafil is the FDA-approved generic version of Viagra - the identical active ingredient, strength, and intended use as the brand-name product, dispensed by a licensed pharmacy, not a compounded formulation.",
   },
   {
-    q: "How does online hairloss care through Beema work?",
-    a: "Care starts with creating a secure account and completing a medical intake covering your health history, hair loss pattern, and goals, at your own pace. A licensed provider reviews your intake and independently decides whether a compounded formulation may be appropriate for you; prescribing is never guaranteed. Beema Health's clinical provider network is led by Dr. Sean Arora, MD, though the clinician assigned to your case may vary by state licensure and availability.",
+    q: "Sildenafil or tadalafil - which is right for me?",
+    a: "Both work similarly but differ in how quickly they take effect and how long they last; your licensed provider reviews your intake and recommends which option and dose may be appropriate for your case. See Tadalafil for that option, or ED Mints for a dissolve-under-the-tongue combination formulation.",
   },
   {
-    q: "How much does hairloss treatment cost through Beema?",
-    a: `${simplePricingSentence("Compounded oral minoxidil through Beema", HAIRLOSS_ORAL_MINOXIDIL_PRICING)} Finasteride (men) is ${simplePricingSentence("compounded finasteride", HAIRLOSS_FINASTERIDE_PRICING).replace(/^C/, "c")} The women's oral compound is ${simplePricingSentence("the women's oral compound", HAIRLOSS_WOMENS_COMPOUND_PRICING).replace(/^T/, "t")} Topical sprays are ${simplePricingSentence("the men's topical spray", HAIRLOSS_TOPICAL_MEN_PRICING).replace(/^T/, "t")} and ${simplePricingSentence("the women's topical spray", HAIRLOSS_TOPICAL_WOMEN_PRICING).replace(/^T/, "t")} All prices cover your provider consultation, prescription formulation, and expedited shipping. Questions about your plan? ${patientQuestionsGuidance()}`,
+    q: "How does online ED care through Beema work?",
+    a: "Care starts with creating a secure account and completing a medical intake covering your health history, current medications, and goals, at your own pace. A licensed provider reviews your intake and independently decides whether sildenafil may be appropriate for you; prescribing is never guaranteed. Beema Health's clinical provider network is led by Dr. Sean Arora, MD, though the clinician assigned to your case may vary by state licensure and availability.",
+  },
+  {
+    q: "How much does sildenafil cost through Beema?",
+    a: `${simplePricingSentence("Sildenafil through Beema", ED_SILDENAFIL_PRICING)} Questions about your plan? ${patientQuestionsGuidance()}`,
   },
   {
     q: "Does Beema serve patients nationwide?",
-    a: "Yes, Beema Health is available to patients in all 50 U.S. states. Whether a specific compounded formulation is available to you still depends on your state's rules around compounded medications and pharmacy fulfillment in your area, and eligibility is always an individual clinical decision made by a licensed provider after reviewing your health history.",
+    a: "Yes, Beema Health is available to patients in all 50 U.S. states. Eligibility is always an individual clinical decision made by a licensed provider after reviewing your health history and current medications, including cardiovascular history.",
   },
 ];
 
@@ -82,12 +84,12 @@ const WHATS_INCLUDED = [
 ];
 
 const ELIGIBILITY_POINTS = [
-  "Adults 18 and older",
-  "Eligibility considers hair loss pattern, health history, and current medications",
-  "Final approval and formulation selection rests with a licensed provider",
+  "Adult men, 18 and older",
+  "Eligibility considers cardiovascular history and current medications",
+  "Final approval rests with a licensed provider",
 ];
 
-export const Route = createFileRoute("/hairloss")({
+export const Route = createFileRoute("/sildenafil")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -95,19 +97,22 @@ export const Route = createFileRoute("/hairloss")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: canonicalUrl("/hairloss") },
+      { property: "og:url", content: canonicalUrl("/sildenafil") },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
     ],
-    links: [{ rel: "canonical", href: canonicalUrl("/hairloss") }],
+    links: [
+      { rel: "canonical", href: canonicalUrl("/sildenafil") },
+      ...bootImagePreloadLinks("/sildenafil"),
+    ],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify(
           breadcrumbJsonLd([
             { name: "Home", path: "/" },
-            { name: "Compounded Hairloss Treatment", path: "/hairloss" },
+            { name: "Sildenafil", path: "/sildenafil" },
           ]),
         ),
       },
@@ -119,31 +124,31 @@ export const Route = createFileRoute("/hairloss")({
         type: "application/ld+json",
         children: JSON.stringify(
           serviceJsonLd({
-            name: "Compounded Hairloss Telehealth Care",
+            name: "Sildenafil Telehealth Care",
             description: SERVICE_DESCRIPTION,
-            path: "/hairloss",
-            serviceType: "Hairloss treatment telehealth service",
+            path: "/sildenafil",
+            serviceType: "Erectile dysfunction treatment telehealth service",
             reviewedByClinicalLead: false,
-            dateModified: "2026-08-29",
+            dateModified: "2026-09-03",
             offer: {
-              introPrice: HAIRLOSS_FINASTERIDE_PRICING.monthlyUsd,
-              recurringPrice: HAIRLOSS_FINASTERIDE_PRICING.monthlyUsd,
+              introPrice: ED_SILDENAFIL_PRICING.monthlyUsd,
+              recurringPrice: ED_SILDENAFIL_PRICING.monthlyUsd,
             },
           }),
         ),
       },
     ],
   }),
-  component: HairlossPage,
+  component: SildenafilPage,
 });
 
-function HairlossPage() {
-  const heroCta = resolveCta(CTA_IDS.hairloss_hero);
-  const footerCta = resolveCta(CTA_IDS.hairloss_footer);
+function SildenafilPage() {
+  const heroCta = resolveCta(CTA_IDS.sildenafil_hero);
+  const footerCta = resolveCta(CTA_IDS.sildenafil_footer);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    trackPageViewed("hairloss");
+    trackPageViewed("sildenafil");
   }, []);
 
   return (
@@ -158,20 +163,22 @@ function HairlossPage() {
           className="bg-grain pointer-events-none absolute inset-0 z-0 text-foreground/[0.035]"
         />
         <div className="relative z-10">
-          <TreatmentBreadcrumb current="Compounded Hairloss Treatment" />
-          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          <TreatmentBreadcrumb current="Sildenafil" />
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
             <div>
               <SectionHeading
                 as="h1"
                 align="left"
-                eyebrow="Nationwide telehealth hairloss care"
+                eyebrow="Nationwide telehealth ED care"
                 title={
                   <>
-                    <LineReveal>Compounded Hairloss Treatment, </LineReveal>
-                    <LineReveal delay={0.1}>for men and women.</LineReveal>
+                    <LineReveal>Sildenafil, </LineReveal>
+                    <LineReveal delay={0.1}>
+                      the generic Viagra&reg; tablet.
+                    </LineReveal>
                   </>
                 }
-                description="Beema Health connects eligible adults with independent licensed providers for individualized hairloss care. Completing intake does not guarantee a prescription."
+                description="Beema Health connects eligible adults with independent licensed providers for sildenafil care. Completing intake does not guarantee a prescription."
                 className="mx-0 max-w-xl text-left"
               />
               <motion.div
@@ -184,7 +191,7 @@ function HairlossPage() {
                   ease: EASE_OUT,
                 }}
               >
-                <MagneticButton>
+                <HoverLiftButton>
                   <Button asChild size="xl">
                     <Link
                       to={heroCta.to}
@@ -194,19 +201,19 @@ function HairlossPage() {
                       {heroCta.label} <ArrowRight />
                     </Link>
                   </Button>
-                </MagneticButton>
+                </HoverLiftButton>
                 <Button asChild size="xl" variant="outline">
-                  <Link to="/hairloss/" hash="how-it-works">
+                  <Link to="/sildenafil/" hash="how-it-works">
                     How it works
                   </Link>
                 </Button>
               </motion.div>
               <p className="mt-6 max-w-md text-2xl font-bold text-foreground">
-                From {formatSimpleStartingAt(HAIRLOSS_FINASTERIDE_PRICING)}
+                From {formatPerPillStartingAt(ED_SILDENAFIL_PER_PILL_USD)}
               </p>
               <p className="mt-2 max-w-md text-xs leading-relaxed text-muted-foreground">
-                Medication eligibility, formulation, and availability are
-                determined by a licensed provider and applicable law.
+                Medication eligibility and availability are determined by a
+                licensed provider and applicable law.
               </p>
             </div>
             <motion.div
@@ -219,10 +226,16 @@ function HairlossPage() {
               }}
               className="mx-auto w-full max-w-sm"
             >
-              <TreatmentHeroArt
-                icon={Droplet}
-                label="Compounded Hairloss Treatment"
-              />
+              <div className="relative aspect-square overflow-hidden rounded-4xl bg-primary-soft shadow-lift">
+                <img
+                  src={sildenafilPhoto}
+                  alt="Bottle of Beema Health sildenafil oral tablets, generic Viagra"
+                  width={720}
+                  height={900}
+                  fetchPriority="high"
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                />
+              </div>
               <TreatmentIncludedDropdown
                 items={WHATS_INCLUDED}
                 className="mt-6 w-full"
@@ -235,35 +248,41 @@ function HairlossPage() {
       <Section className="pt-0">
         <SectionHeading
           align="left"
-          title="What is compounded hairloss treatment?"
+          title="What is sildenafil?"
           className="mx-0 max-w-2xl"
         />
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
-            Hair loss medicines usually work in one of two ways: some increase
-            blood flow to your scalp, so hair follicles get more oxygen and
-            nutrients, and others block a hormone that can shrink hair follicles
-            over time. Depending on what your provider prescribes, these
-            medicines may help slow hair loss and support the hair you still
-            have.
+            Sildenafil works by relaxing blood vessels so more blood can flow to
+            the penis. That can make it easier to get and keep an erection when
+            you're sexually aroused. It doesn't cause arousal by itself - you
+            still need to be sexually stimulated for it to work. Sildenafil
+            typically takes effect within 30-60 minutes and lasts several hours,
+            so it's usually taken as needed before activity.
           </p>
           <p>
-            Beema offers compounded oral and topical formulations for both men
-            and women, prepared by a licensed compounding pharmacy specifically
-            for you - often combining multiple ingredients into one formulation
-            rather than sold as a single fixed commercial product. Men and women
-            are prescribed different formulations for some products, since some
-            ingredients (like finasteride) aren't appropriate for women who are
-            or may become pregnant.
+            Beema's sildenafil is the FDA-approved generic version of Viagra -
+            the identical active ingredient, strength, and intended use as the
+            brand-name product, dispensed by a licensed pharmacy, not a
+            compounded formulation. Looking for tadalafil instead? See{" "}
+            <Link to="/tadalafil/" className="text-primary underline">
+              Tadalafil
+            </Link>
+            . Looking for a dissolve-under-the-tongue combination formulation?
+            See{" "}
+            <Link to="/ed-mints/" className="text-primary underline">
+              ED Mints
+            </Link>
+            , a separate compounded product.
           </p>
           <p>
-            These formulations are not FDA-approved and are considered only when
-            legally available and clinically appropriate. Which formulation, if
-            any, may be appropriate for you is a decision your licensed provider
-            makes individually.
+            Whether sildenafil may be appropriate for you is a decision your
+            licensed provider makes individually, based on your health history
+            and current medications. Completing intake does not guarantee a
+            prescription.
           </p>
           <Button asChild variant="outline" size="sm">
-            <Link to="/hairloss/" hash="faq">
+            <Link to="/sildenafil/" hash="faq">
               View FAQ <ArrowRight className="size-4" />
             </Link>
           </Button>
@@ -273,63 +292,34 @@ function HairlossPage() {
       <HowItWorksSteps
         className="bg-muted/40"
         eyebrow="How it works"
-        title="How Beema's hairloss care works"
+        title="How Beema's sildenafil care works"
         showCareFollowUpNote
       />
 
       <Section id="pricing" className="pt-0">
         <SectionHeading
           align="left"
-          title="Choose your formulation"
-          description="Your provider decides which formulation, if any, is clinically appropriate - this is a starting point, not a self-selected order."
+          title="Transparent pricing"
+          description="Your provider decides whether sildenafil is clinically appropriate - this is a starting point, not a self-selected order."
           className="mx-0 max-w-2xl"
         />
-
-        <h3 className="mt-10 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
-          For Men
-        </h3>
-        <div className="mt-4 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 max-w-sm">
           <SimpleTreatmentPricingCard
-            label="oral minoxidil"
-            pricing={HAIRLOSS_ORAL_MINOXIDIL_PRICING}
-          />
-          <SimpleTreatmentPricingCard
-            label="finasteride"
-            pricing={HAIRLOSS_FINASTERIDE_PRICING}
-          />
-          <SimpleTreatmentPricingCard
-            label="the men's topical spray"
-            pricing={HAIRLOSS_TOPICAL_MEN_PRICING}
+            label="sildenafil"
+            title="Sildenafil (Generic Viagra®)"
+            badge="Rx"
+            pricing={ED_SILDENAFIL_PRICING}
           />
         </div>
-
-        <h3 className="mt-10 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
-          For Women
-        </h3>
-        <div className="mt-4 grid gap-6 md:grid-cols-3">
-          <SimpleTreatmentPricingCard
-            label="oral minoxidil"
-            pricing={HAIRLOSS_ORAL_MINOXIDIL_PRICING}
-          />
-          <SimpleTreatmentPricingCard
-            label="the women's oral compound"
-            pricing={HAIRLOSS_WOMENS_COMPOUND_PRICING}
-          />
-          <SimpleTreatmentPricingCard
-            label="the women's topical spray"
-            pricing={HAIRLOSS_TOPICAL_WOMEN_PRICING}
-          />
-        </div>
-
         <div className="mt-8">
           <SurfaceCard>
             <h3 className="text-lg font-semibold text-foreground">
               Who may be eligible
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Not everyone qualifies. Your provider weighs your hair loss
-              pattern, health history, current medications, and applicable state
-              law before making an independent decision.
+              Not everyone qualifies. Your provider weighs cardiovascular
+              history, current medications, and applicable state law before
+              making an independent decision.
             </p>
             <ul className="mt-5 grid gap-2 sm:grid-cols-3">
               {ELIGIBILITY_POINTS.map((t) => (
@@ -355,32 +345,34 @@ function HairlossPage() {
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           <SurfaceCard>
             <div className="flex gap-4">
-              <ShieldCheck className="size-6 shrink-0 text-accent-foreground" />
+              <HeartPulse className="size-6 shrink-0 text-accent-foreground" />
               <div>
                 <h3 className="text-base font-semibold text-foreground">
                   Prescription medical care
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  These formulations are prescription products and aren't
-                  appropriate for everyone. They are compounded, not
-                  FDA-approved, and considered only when legally available and
-                  clinically appropriate.
+                  This medication is a prescription product and isn't
+                  appropriate for everyone, including people on certain nitrate
+                  medications or with certain cardiovascular conditions. It is
+                  the FDA-approved generic version of Viagra, dispensed by a
+                  licensed pharmacy.
                 </p>
               </div>
             </div>
           </SurfaceCard>
           <SurfaceCard>
             <div className="flex gap-4">
-              <ShieldCheck className="size-6 shrink-0 text-accent-foreground" />
+              <HeartPulse className="size-6 shrink-0 text-accent-foreground" />
               <div>
                 <h3 className="text-base font-semibold text-foreground">
                   Talk to your provider
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   Include your full medical history, possible contraindications,
-                  side effects, and any medication interactions in your intake
-                  questionnaire. After you complete intake and pay, you can ask
-                  follow-up questions. Before then, email{" "}
+                  side effects, and any medication interactions, especially
+                  nitrates, in your intake questionnaire. After you complete
+                  intake and pay, you can ask follow-up questions. Before then,
+                  email{" "}
                   <a
                     href={`mailto:${SUPPORT_EMAIL}`}
                     className="text-primary underline"
@@ -443,7 +435,7 @@ function HairlossPage() {
               provider makes every clinical decision independently, prescribing
               is never guaranteed.
             </p>
-            <MagneticButton className="mt-8">
+            <HoverLiftButton className="mt-8">
               <Button
                 asChild
                 size="xl"
@@ -457,11 +449,11 @@ function HairlossPage() {
                   {footerCta.label} <ArrowRight />
                 </Link>
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
           </div>
         </div>
       </Section>
-      <MoneyPageGuides path="/hairloss/" />
+      <MoneyPageGuides path="/sildenafil/" />
     </MarketingLayout>
   );
 }

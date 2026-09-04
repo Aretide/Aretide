@@ -98,7 +98,7 @@ export function RecipeCard({
     <Link
       to={recipePath(recipe)}
       search={servings === undefined ? {} : { servings }}
-      className="group flex h-full min-w-0 max-w-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="group flex h-full min-w-0 max-w-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-soft transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       <RecipeImage
         recipe={recipe}

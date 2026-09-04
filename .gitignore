@@ -43,6 +43,11 @@ __pycache__/
 
 # Patient mailer (PHI - never commit)
 patients.json
+data/dev/patients.json
+data/prod/patients.json
+data/mode.txt
+data/scheduler.json
+data/scheduler.json.tmp
 abandoned_checkout.json
 abandoned_yk_challenge.bin
 abandoned_pii.wrap

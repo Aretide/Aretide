@@ -579,10 +579,10 @@ function RecipeQuantityPanel({
               type="button"
               aria-pressed={mode === option}
               onClick={() => changeMode(option)}
-              className={`min-h-12 rounded-full border px-4 py-2 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              className={`min-h-12 cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                 mode === option
                   ? "border-foreground bg-foreground text-background"
-                  : "border-border bg-background text-muted-foreground"
+                  : "border-border bg-background text-muted-foreground hover:border-foreground/30 hover:text-foreground"
               }`}
             >
               {option === "people" ? "People" : "Multiplier"}

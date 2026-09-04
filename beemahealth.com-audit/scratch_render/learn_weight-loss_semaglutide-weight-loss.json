@@ -1,0 +1,94 @@
+{
+  "url": "https://beemahealth.com/learn/weight-loss/semaglutide-weight-loss/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/><link rel=\"preload\" as=\"image\" href=\"https://static.legitscript.com/seals/51697885.png\"/><link rel=\"stylesheet\" href=\"/assets/styles-CyFOEV89.css\" data-precedence=\"default\"/><title>Semaglutide for Weight Loss: What Trials and Labels Show</title><meta http-equiv=\"Content-Security-Policy\" content=\"def...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/>...",
+  "is_spa": false,
+  "extracted_text": "STEP, SELECT, and what a mean percent is\nThe percentages below come from clinical trials of FDA-approved branded products. They do not describe compounded semaglutide or compounded tirzepatide, and they are not a promise of individual results. Semaglutide is a GLP-1 receptor agonist. STEP 1 is the obesity trial most people mean: branded semaglutide 2.4 mg weekly (Wegovy), 68 weeks, about 14.9% versus 2.4% placebo. STEP 5 extended the time window. SELECT asked a cardiovascular question in people ...",
+  "publication_date": "2026-08-24",
+  "accessibility_tree": null,
+  "headers": {
+    "Connection": "keep-alive",
+    "Content-Length": "18426",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "x-origin-cache": "HIT",
+    "Last-Modified": "Tue, 25 Aug 2026 21:05:27 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "W/\"6a8e0397-13373\"",
+    "expires": "Wed, 26 Aug 2026 18:04:34 GMT",
+    "Cache-Control": "max-age=600",
+    "Content-Encoding": "gzip",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "23F6:2ADE64:F4159E:FE0E4A:6A8F2858",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 26 Aug 2026 17:54:34 GMT",
+    "Via": "1.1 varnish",
+    "X-Served-By": "cache-den-kden1300031-DEN",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1787766874.339638,VS0,VE81",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "474907b291417001ad7039dfc35710ec5ad50011"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 4,
+    "processed_count": 4,
+    "total_bytes": 6250,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 966,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Country",
+          "MedicalOrganization"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 530,
+        "valid": true,
+        "types": [
+          "BreadcrumbList",
+          "ListItem"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 3,
+        "size_bytes": 1592,
+        "valid": true,
+        "types": [
+          "Article",
+          "CreativeWork",
+          "MedicalWebPage"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 4,
+        "size_bytes": 3162,
+        "valid": true,
+        "types": [
+          "Answer",
+          "FAQPage",
+          "Question"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

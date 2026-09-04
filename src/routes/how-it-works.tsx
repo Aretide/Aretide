@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   motion,
@@ -17,7 +17,7 @@ import {
   FloatingHexagons,
   HexMotif,
   InfinityMotif,
-  MagneticButton,
+  HoverLiftButton,
   Section,
   SectionHeading,
   SurfaceCard,
@@ -30,6 +30,7 @@ import { TreatmentBreadcrumb } from "@/components/site/TreatmentPageBlocks";
 import { EASE_OUT, LineReveal } from "@/components/home/home-motion";
 import { Button } from "@/components/ui/button";
 import { trackPageViewed } from "@/lib/analytics";
+import { GetStartedModal } from "@/components/site/GetStartedModal";
 import { CTA_IDS, resolveCta } from "@/lib/cta-ids";
 import { patientQuestionsGuidance } from "@/lib/marketing-copy";
 import { RECIPES } from "@/lib/recipes";
@@ -94,6 +95,7 @@ const AFTER = [
 
 function HowItWorksPage() {
   const cta = resolveCta(CTA_IDS.how_it_works);
+  const [getStartedOpen, setGetStartedOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -115,6 +117,7 @@ function HowItWorksPage() {
 
   return (
     <MarketingLayout>
+      <GetStartedModal open={getStartedOpen} onOpenChange={setGetStartedOpen} />
       <Section className="relative overflow-hidden bg-grad-hero">
         <div
           aria-hidden
@@ -267,13 +270,15 @@ function HowItWorksPage() {
           </div>
 
           <div className="mt-10 text-center">
-            <MagneticButton>
-              <Button asChild size="lg">
-                <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
-                  {cta.label} <ArrowRight />
-                </Link>
+            <HoverLiftButton>
+              <Button
+                type="button"
+                size="lg"
+                onClick={() => setGetStartedOpen(true)}
+              >
+                {cta.label} <ArrowRight />
               </Button>
-            </MagneticButton>
+            </HoverLiftButton>
             <p className="mx-auto mt-4 max-w-md text-xs leading-relaxed text-muted-foreground">
               A licensed provider makes every clinical decision independently,
               based on your intake and applicable state law. Completing intake

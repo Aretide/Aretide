@@ -1,0 +1,94 @@
+{
+  "url": "https://beemahealth.com/learn/weight-loss/glp-1-cost/",
+  "status_code": 200,
+  "content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/><link rel=\"preload\" as=\"image\" href=\"https://static.legitscript.com/seals/51697885.png\"/><link rel=\"stylesheet\" href=\"/assets/styles-CyFOEV89.css\" data-precedence=\"default\"/><title>GLP-1 Cost: Cash-Pay Telehealth Pricing, Explained Honestly</title><meta http-equiv=\"Content-Security-Policy\" content=\"...",
+  "raw_content": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"/assets/beema-mark-CpP1qudI.png\"/>...",
+  "is_spa": false,
+  "extracted_text": "Cash-pay means the number on the page is the number\nMany U.S. adults pay for incretin therapy without running it through an obesity-drug insurance benefit. Cash-pay telehealth programs bundle clinician time, medication, supplies, and shipping into a monthly or prepaid rate so you are not reconciling five invoices. That model is what Beema publishes. It is not a claim that insurance never covers GLP-1s somewhere else, and this page will not do insurance math.\nThis article is educational. The inte...",
+  "publication_date": "2026-08-24",
+  "accessibility_tree": null,
+  "headers": {
+    "Connection": "keep-alive",
+    "Content-Length": "18673",
+    "Server": "GitHub.com",
+    "Content-Type": "text/html; charset=utf-8",
+    "x-origin-cache": "HIT",
+    "Last-Modified": "Tue, 25 Aug 2026 21:05:27 GMT",
+    "Access-Control-Allow-Origin": "*",
+    "ETag": "W/\"6a8e0397-1492b\"",
+    "expires": "Wed, 26 Aug 2026 18:04:35 GMT",
+    "Cache-Control": "max-age=600",
+    "Content-Encoding": "gzip",
+    "x-proxy-cache": "MISS",
+    "X-GitHub-Request-Id": "BBA2:A147A:E84B6C:F24675:6A8F2856",
+    "x-github-edge-region": "iad",
+    "Accept-Ranges": "bytes",
+    "Age": "0",
+    "Date": "Wed, 26 Aug 2026 17:54:35 GMT",
+    "Via": "1.1 varnish",
+    "X-Served-By": "cache-den-kden1300067-DEN",
+    "X-Cache": "MISS",
+    "X-Cache-Hits": "0",
+    "X-Timer": "S1787766875.976405,VS0,VE64",
+    "Vary": "Accept-Encoding",
+    "X-Fastly-Request-ID": "e86a6553199df085bccaadadee30399077428967"
+  },
+  "redirect_chain": [],
+  "console_errors": [],
+  "render_diagnostics": [],
+  "render_engine": null,
+  "render_ms": null,
+  "mode_used": "raw",
+  "error": null,
+  "structured_data": {
+    "block_count": 4,
+    "processed_count": 4,
+    "total_bytes": 7135,
+    "truncated": false,
+    "blocks": [
+      {
+        "index": 1,
+        "size_bytes": 966,
+        "valid": true,
+        "types": [
+          "ContactPoint",
+          "Country",
+          "MedicalOrganization"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 2,
+        "size_bytes": 514,
+        "valid": true,
+        "types": [
+          "BreadcrumbList",
+          "ListItem"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 3,
+        "size_bytes": 1841,
+        "valid": true,
+        "types": [
+          "Article",
+          "CreativeWork",
+          "MedicalWebPage"
+        ],
+        "types_truncated": false
+      },
+      {
+        "index": 4,
+        "size_bytes": 3814,
+        "valid": true,
+        "types": [
+          "Answer",
+          "FAQPage",
+          "Question"
+        ],
+        "types_truncated": false
+      }
+    ]
+  }
+}

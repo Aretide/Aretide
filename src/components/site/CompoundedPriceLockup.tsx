@@ -112,7 +112,7 @@ function PricingDetailsButton({
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="relative z-10 inline-flex size-5 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="relative z-10 inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label={
             isTirz
               ? "How tirzepatide pricing works"
@@ -319,7 +319,7 @@ function PlanTab({
         onSelect();
       }}
       className={cn(
-        "min-h-11 rounded-xl px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "min-h-11 cursor-pointer rounded-xl px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         selected
           ? "bg-primary text-primary-foreground shadow-soft"
           : "bg-background/80 text-foreground ring-1 ring-border/70 hover:bg-muted",
@@ -541,10 +541,11 @@ function TirzValueTeaser({ className }: { className?: string }) {
           {formatUsd(tirz.monthlyUsd)}
         </span>{" "}
         → {formatUsd(m12.monthlyUsd)}/mo), or {formatUsd(m6.monthlyUsd)}/mo on 6
-        months. New patients can start with the Tirzepatide {starterPackTitle(pack)} at{" "}
-        {formatUsd(pack.totalUsd)} ({formatUsd(pack.monthlyEquivalentUsd)}/mo){" "}
-        for {pack.dosePathLabel}. {STARTER_PACK_INTAKE_HINT} Your provider
-        decides which option, if any, fits - prescribing is never guaranteed.
+        months. New patients can start with the Tirzepatide{" "}
+        {starterPackTitle(pack)} at {formatUsd(pack.totalUsd)} (
+        {formatUsd(pack.monthlyEquivalentUsd)}/mo) for {pack.dosePathLabel}.{" "}
+        {STARTER_PACK_INTAKE_HINT} Your provider decides which option, if any,
+        fits - prescribing is never guaranteed.
       </p>
       <Link
         to="/tirzepatide/"

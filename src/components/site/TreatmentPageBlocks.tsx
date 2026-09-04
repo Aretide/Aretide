@@ -24,6 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { HexBadge, HexMotif, SurfaceCard } from "@/components/site/primitives";
+import { Button } from "@/components/ui/button";
 import { CompoundedPriceLockup } from "@/components/site/CompoundedPriceLockup";
 import { cn } from "@/lib/utils";
 import {
@@ -378,12 +379,29 @@ export function TreatmentHeroArt({
  */
 export function SimpleTreatmentPricingCard({
   label,
+  title,
+  badge,
   pricing,
+  cta,
+  perDayNote,
   className,
 }: {
   /** e.g. "TRT", "hairloss", "ED" - used in the disclosure sentence. */
   label: string;
+  /** Optional visible product name/heading, e.g. "Finasteride (Generic Propecia®)" - for pages showing several distinctly-named products side by side. */
+  title?: string;
+  /** Optional short tag next to `title`, e.g. "Rx". Only rendered when `title` is also set. */
+  badge?: string;
   pricing: SimpleCompoundedPricing;
+  /** Optional per-product "Get Started" CTA, e.g. `resolveCta(CTA_IDS.ed_mints_rdt_hero)` - for pages where each product routes to its own Bask intake. */
+  cta?: {
+    label: string;
+    to: string;
+    search?: Record<string, string>;
+    onClick?: () => void;
+  };
+  /** Optional highlighted callout next to the price, e.g. `simplePerDaySentence(pricing)` - only pass a truthy value when the claim is actually true. */
+  perDayNote?: string;
   className?: string;
 }) {
   return (
@@ -393,6 +411,16 @@ export function SimpleTreatmentPricingCard({
         className,
       )}
     >
+      {title ? (
+        <div className="mb-4 flex items-center gap-2">
+          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+          {badge ? (
+            <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-foreground">
+              {badge}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
       <p className="text-xs font-semibold uppercase tracking-wide text-accent-foreground">
         Transparent pricing
       </p>
@@ -401,6 +429,11 @@ export function SimpleTreatmentPricingCard({
           {formatUsd(pricing.monthlyUsd)}
         </span>
         <span className="text-sm text-muted-foreground">/mo</span>
+        {perDayNote ? (
+          <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+            {perDayNote}
+          </span>
+        ) : null}
       </div>
       {pricing.quarterly ? (
         <p className="mt-2 text-sm text-muted-foreground">
@@ -425,6 +458,13 @@ export function SimpleTreatmentPricingCard({
         availability may vary based on clinical appropriateness, prescription,
         pharmacy fulfillment, and state requirements.
       </p>
+      {cta ? (
+        <Button asChild size="lg" className="mt-6 w-full sm:w-auto">
+          <Link to={cta.to} search={cta.search} onClick={cta.onClick}>
+            {cta.label} <ArrowRight className="size-4" />
+          </Link>
+        </Button>
+      ) : null}
     </SurfaceCard>
   );
 }
@@ -438,6 +478,8 @@ export type CategoryLineupItem = {
   icon: LucideIcon;
   /** Own indexable landing page for this specific medication. */
   to: string;
+  /** Optional highlighted tag next to the price, e.g. `simplePerDaySentence(pricing)` - only pass a truthy value when the claim is actually true. */
+  perDayNote?: string;
 };
 
 /**
@@ -477,8 +519,13 @@ export function SimpleCategoryLineup({
             <h3 className="text-xl font-bold text-foreground md:text-2xl">
               {item.name}
             </h3>
-            <p className="text-lg font-semibold text-foreground">
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-lg font-semibold text-foreground">
               {formatSimpleStartingAt(item.pricing)}
+              {item.perDayNote ? (
+                <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
+                  {item.perDayNote}
+                </span>
+              ) : null}
             </p>
             <p className="text-sm font-medium text-foreground/80">
               {item.form}

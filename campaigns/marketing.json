@@ -5,24 +5,55 @@
   "anchor": "enrolled_at",
   "cta_url": "https://beemahealth.com/weight-loss/",
   "cta_label": "Learn more",
+  "ready": false,
   "steps": [
     {
       "id": "day0",
       "delay": "0m",
       "subject": "Welcome to Beema Health",
-      "body": "Hi {first_name}, thanks for your interest in {interest}. When you are ready, you can start an online visit here:"
+      "greeting": "Hey {first_name},",
+      "body": [
+        "Thanks for your interest in {interest}. When you are ready, you can start an online visit here:",
+        "[[button:0]]"
+      ],
+      "buttons": [
+        {
+          "label": "Start an online visit",
+          "url": "https://beemahealth.com/weight-loss/"
+        }
+      ]
     },
     {
       "id": "day3",
       "delay": "3d",
       "subject": "How Beema Health care works",
-      "body": "A licensed clinician reviews your visit, then decides if treatment is appropriate. If you still want {interest}, you can start here:"
+      "greeting": "Hey {first_name},",
+      "body": [
+        "A licensed clinician reviews your visit, then decides if treatment is appropriate. If you still want {interest}, you can start here:",
+        "[[button:0]]"
+      ],
+      "buttons": [
+        {
+          "label": "Start an online visit",
+          "url": "https://beemahealth.com/weight-loss/"
+        }
+      ]
     },
     {
       "id": "day10",
       "delay": "10d",
       "subject": "Still considering weight-loss care?",
-      "body": "If now is a better time, you can start or continue your Beema Health visit for {interest}:"
+      "greeting": "Hey {first_name},",
+      "body": [
+        "If now is a better time, you can start or continue your Beema Health visit for {interest}:",
+        "[[button:0]]"
+      ],
+      "buttons": [
+        {
+          "label": "Start an online visit",
+          "url": "https://beemahealth.com/weight-loss/"
+        }
+      ]
     }
   ]
 }

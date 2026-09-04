@@ -91,15 +91,17 @@ describe("money page guides", () => {
     }
   });
 
-  it("keeps guide sets weight-loss only for now", () => {
-    // TRT, hairloss, ED, NAD+, and sermorelin launched 2026-08-27 with their
-    // own money pages (see src/routes/trt.tsx etc.), but this pass didn't
-    // configure MONEY_PAGE_GUIDES entries for them - no learn articles exist
-    // for those verticals yet to link. HRT remains unlaunched entirely.
-    const nonWeightLoss = MONEY_PAGE_GUIDES.flatMap((set) =>
-      set.articles.filter((a) => a.vertical !== "weight-loss"),
+  it("keeps guide sets to weight-loss and ed only for now", () => {
+    // Weight-loss guide sets shipped first; the ED vertical (tadalafil,
+    // sildenafil, ED Mints) got its own learn articles and MONEY_PAGE_GUIDES
+    // entries 2026-09-03. TRT, hairloss, NAD+, and sermorelin still have no
+    // learn articles for their money pages to link.
+    const other = MONEY_PAGE_GUIDES.flatMap((set) =>
+      set.articles.filter(
+        (a) => a.vertical !== "weight-loss" && a.vertical !== "ed",
+      ),
     );
-    expect(nonWeightLoss).toEqual([]);
+    expect(other).toEqual([]);
   });
 
   it("never links a program page to an unpublished article", () => {
