@@ -73,6 +73,13 @@ Disallow: /insurance
 Disallow: /switch
 Disallow: /the-comb
 
+# Paused product lines (2026-08-28) that also only 301 → home for now -
+# see docs/features/treatment-pages.md
+Disallow: /trt
+Disallow: /nad-plus
+Disallow: /sermorelin
+Disallow: /wellness
+
 # ---------------------------------------------------------------------------
 # Everyone else — no bot is sitewide-blocked; same standard path policy as above
 # ---------------------------------------------------------------------------
@@ -98,5 +105,9 @@ Disallow: /clinicians
 Disallow: /insurance
 Disallow: /switch
 Disallow: /the-comb
+Disallow: /trt
+Disallow: /nad-plus
+Disallow: /sermorelin
+Disallow: /wellness
 
 Sitemap: https://beemahealth.com/sitemap.xml

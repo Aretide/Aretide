@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2"
+  baseProfile="tiny-ps" viewBox="0 0 512 512">
+<title>Beema Health</title>
+<desc>Beema Health hexagonal bee mark</desc>
+<rect x="0" y="0" width="512" height="512" fill="#FFFFFF"/>
+<polygon fill="#FFFFFF" stroke="#E5B01A" stroke-width="28"
+  stroke-linejoin="miter"
+  points="256,72 416,164 416,348 256,440 96,348 96,164"/>
+<path fill="#1A1A1A"
+  d="M256,250 C320,260 332,328 256,410 C180,328 192,260 256,250 Z"/>
+<path fill="none" stroke="#E5B01A" stroke-width="12"
+  stroke-linecap="round" d="M220,294 Q256,310 292,294"/>
+<path fill="none" stroke="#E5B01A" stroke-width="12"
+  stroke-linecap="round" d="M226,324 Q256,340 286,322"/>
+<path fill="none" stroke="#E5B01A" stroke-width="12"
+  stroke-linecap="round" d="M234,354 Q256,368 278,354"/>
+<path fill="none" stroke="#E5B01A" stroke-width="20"
+  stroke-linecap="round" stroke-linejoin="round"
+  d="M150,228 C148,176 208,176 256,228 C304,278 364,278 364,228
+     C364,176 304,176 256,228 C208,278 148,278 148,228"/>
+<circle cx="256" cy="176" r="30" fill="#1A1A1A"/>
+<path fill="none" stroke="#1A1A1A" stroke-width="5"
+  stroke-linecap="round" d="M242,154 L226,118"/>
+<circle cx="226" cy="114" r="6" fill="#1A1A1A"/>
+<path fill="none" stroke="#1A1A1A" stroke-width="5"
+  stroke-linecap="round" d="M270,154 L286,118"/>
+<circle cx="286" cy="114" r="6" fill="#1A1A1A"/>
+</svg>
